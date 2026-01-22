@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>sdunlap | Stephen Dunlap</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="./assets/ouros-logo_black.svg"
+    />
+  </head>
+  <body>
+    <nav id="site-nav">
+      <ul>
+        <li>
+          <a href="#section_landing" class="home-logo split-text">sd</a>
+        </li>
+        <li>
+          <a href="#section_about">I.<span>&nbsp;About</span></a>
+        </li>
+        <li>
+          <a href="#section_files">II.<span>&nbsp;Portfolio</span></a>
+        </li>
+      </ul>
+      <a href="#section_landing" class="connect-btn split-text">Get in touch</a>
+    </nav>
+    <nav id="mobile-nav">
+      <a href="#section_landing" class="home-logo split-text">sd</a>
+      <div class="burger-menu">
+        <span class="bar top-bar"></span>
+        <span class="bar bottom-bar"></span>
+      </div>
+
+      <ul>
+        <li>
+          <a href="#section_about">About</a>
+        </li>
+        <li>
+          <a href="#section_files">Portfolio</a>
+        </li>
+      </ul>
+    </nav>
+    <a href="#" class="connect-btn mobile-contact-btn">Get in touch</a>
+    <section id="section_landing">
+      <h1>Landing section</h1>
+    </section>
+    <section id="section_about">
+      <h1>about section</h1>
+    </section>
+    <section id="section_files">
+      <h1>files section</h1>
+    </section>
+    <div class="footer"></div>
+    <!-- Modal: contact form -->
+    <div
+      id="contact-modal"
+      class="modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal-overlay" data-modal-close></div>
+      <div class="modal-panel" role="document" aria-labelledby="modal-title">
+        <button
+          class="modal-close"
+          data-modal-close
+          aria-label="Close contact form"
+        >
+          ×
+        </button>
+        <h2 id="modal-title">Get in touch</h2>
+        <!-- Success panel shown after successful submit -->
+        <div class="modal-success" hidden>
+          <h3>Thanks — message sent</h3>
+          <p>
+            I'll get back to you shortly. Close this message to continue
+            browsing.
+          </p>
+          <div class="modal-actions">
+            <button type="button" class="btn primary" data-modal-close>
+              Close
+            </button>
+          </div>
+        </div>
+
+        <form id="contact-form" action="#" method="post">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required />
+
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required />
+
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+
+          <div class="modal-actions">
+            <button type="submit" class="btn primary">Send</button>
+            <button type="button" class="btn" data-modal-close>Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="./js/nav.js"></script>
+    <script src="./js/gsap-init.js"></script>
+    <script src="./js/microinteraction.js"></script>
+    <script src="./js/forms.js"></script>
+  </body>
+</html>
