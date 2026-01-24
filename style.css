@@ -24,60 +24,7 @@ html {
 
   --white: #f8f7f2;
 }
-.outfit-100 {
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 100;
-  font-style: normal;
-}
-.outfit-200 {
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 200;
-  font-style: normal;
-}
-.outfit-300 {
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
-}
-.outfit-400 {
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-.outfit-500 {
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-}
-.outfit-600 {
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 600;
-  font-style: normal;
-}
-.outfit-700 {
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-}
-.outfit-800 {
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 800;
-  font-style: normal;
-}
-.outfit-900 {
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 900;
-  font-style: normal;
-}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -86,6 +33,11 @@ a {
 /* Section padding to accomodate for the side navigation */
 section {
   margin-left: 50px;
+}
+.section-container {
+  position: relative;
+  width: clamp(300px, 95%, 1400px);
+  margin: 0 auto;
 }
 
 body {
@@ -152,7 +104,7 @@ body {
   height: 50px;
   font-size: 20px;
   font-weight: 700;
-  color: var(--cream);
+  color: var(--glass);
   background-color: var(--off-black);
   border-right: solid 1px var(--grey);
   transition: all 0.3s ease;
@@ -189,7 +141,7 @@ body {
   height: 130px;
   writing-mode: vertical-lr;
   background-color: var(--off-black);
-  color: var(--cream);
+  color: var(--glass);
   border-right: solid 1px var(--grey);
   transition: all 0.2s ease;
 }
@@ -219,22 +171,6 @@ body {
 html {
   font-family: "Outfit", sans-serif;
   scroll-behavior: smooth;
-}
-:root {
-  --cream: #f0e7d5;
-  --navy: #212842;
-  --blood: #531613;
-  --forest: #043222;
-  --yellow-orange: #fea425;
-  --pale-yellow: #d4bc6e;
-  --coral: #f95c4b;
-
-  --off-black: #111111;
-  --text-black: #333333;
-  --grey: #6a6a6a;
-  --glass: #e8eded;
-
-  --white: #f8f7f2;
 }
 .outfit-100 {
   font-family: "Outfit", sans-serif;
@@ -343,7 +279,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: var(--white);
+  background-color: var(--glass);
   height: 100vh;
   width: 50px;
   border-right: solid 1px var(--grey);
@@ -402,7 +338,7 @@ body {
   height: 50px;
   font-size: 20px;
   font-weight: 700;
-  color: var(--cream);
+  color: var(--glass);
   background-color: var(--off-black);
   border-right: solid 1px var(--grey);
   transition: all 0.3s ease;
@@ -442,7 +378,7 @@ body {
   border: none;
   writing-mode: vertical-lr;
   background-color: var(--off-black);
-  color: var(--cream);
+  color: var(--glass);
   transition: all 0.2s ease;
 }
 #site-nav .connect-btn:hover {
@@ -452,21 +388,42 @@ body {
 .mobile-contact-btn {
   position: fixed;
   z-index: 9999;
-  bottom: 20px;
-  left: 20px;
-  width: 130px;
+  padding: 10px;
+  bottom: 30px;
+  left: 30px;
+  width: 40px;
   height: 40px;
   border-radius: 50vw;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 700;
-  color: var(--cream);
+  color: var(--glass);
   writing-mode: horizontal-tb;
-  background-color: var(--off-black);
+  background-color: var(--glass);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+.mobile-contact-btn img {
+  width: 30px;
+  height: 30px;
+  transition: all 0.2s ease;
+}
+.mobile-contact-btn span {
+  overflow: hidden;
+  opacity: 0;
+  color: var(--off-black);
+  width: 0;
+  transition: all 0.2s ease;
+}
+.mobile-contact-btn:hover > span {
+  width: auto;
+  opacity: 1;
+  margin-left: 10px;
 }
 .mobile-contact-btn:hover {
-  background-color: var(--coral);
+  width: auto;
+  padding: 0 15px;
 }
 @media (min-width: 601px) {
   .mobile-contact-btn {
@@ -493,7 +450,7 @@ body {
   padding: 8px 10px;
   border-radius: 3px;
   font-weight: 700;
-  color: var(--cream);
+  color: var(--glass);
   background-color: var(--off-black);
   transition: transform 0.1s ease;
 }
@@ -547,10 +504,46 @@ body {
 
 /*### LANDING SECTION #########################################*/
 #section_landing {
-  background-color: var(--white);
-  min-height: 800px;
-  height: 100vh;
+  background-color: var(--cream);
+  min-height: 440px;
+  padding: 20px 0 20px;
   position: relative;
+}
+@media (max-width: 600px) {
+  #section_landing {
+    padding-top: 60px;
+  }
+}
+.landing-container {
+  background-color: var(--white);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  min-height: 400px;
+}
+.message-box {
+  max-width: 1000px;
+  position: absolute;
+  padding: 0 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+}
+.message-box h1 {
+  color: var(--text-black);
+  margin-bottom: 20px;
+}
+.message-box h1 span {
+  color: var(--coral);
+}
+.message-box p {
+  color: var(--text-black);
+}
+.landing-name {
+  padding-bottom: 10px;
+  font-weight: 700;
+  color: var(--navy);
 }
 /*### LANDING ABOUT #########################################*/
 #section_about {
@@ -650,7 +643,9 @@ body {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   opacity: 0;
   transform: translateY(-6px) scale(0.98);
-  transition: opacity 220ms ease, transform 220ms ease;
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
   pointer-events: none;
   z-index: 10;
 }
@@ -689,5 +684,48 @@ body {
     display: inline-block;
     white-space: pre;
     will-change: transform, opacity;
+  }
+}
+
+@media (min-width: 1000px) {
+  h1 {
+    font-size: 48px;
+  }
+  h2 {
+    font-size: 36px;
+  }
+  h3 {
+    font-size: 24px;
+  }
+  p {
+    font-size: 18px;
+  }
+}
+@media (max-width: 999px) {
+  h1 {
+    font-size: 38px;
+  }
+  h2 {
+    font-size: 30px;
+  }
+  h3 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 16px;
+  }
+}
+@media (max-width: 600px) {
+  h1 {
+    font-size: 28px;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  p {
+    font-size: 14px;
   }
 }
