@@ -15,14 +15,16 @@ html {
   --forest: #043222;
   --yellow-orange: #fea425;
   --pale-yellow: #d4bc6e;
-  --coral: #f95c4b;
+  --coral: #9b0b28;
 
+  --black: #000000;
   --off-black: #111111;
   --text-black: #333333;
   --grey: #6a6a6a;
+  --platinum: #dddddd;
   --glass: #e8eded;
 
-  --white: #f8f7f2;
+  --white: #ffffff;
 }
 
 a {
@@ -36,7 +38,7 @@ section {
 }
 .section-container {
   position: relative;
-  width: clamp(300px, 95%, 1400px);
+  width: clamp(300px, 97.5%, 1400px);
   margin: 0 auto;
 }
 
@@ -89,64 +91,6 @@ body {
   #mobile-nav {
     display: none;
   }
-}
-
-#site-nav ul {
-  display: flex;
-  flex-direction: column;
-}
-#site-nav ul li {
-  list-style: none;
-  border-bottom: solid 1px var(--grey);
-}
-#site-nav ul li .home-logo {
-  writing-mode: horizontal-tb;
-  height: 50px;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--glass);
-  background-color: var(--off-black);
-  border-right: solid 1px var(--grey);
-  transition: all 0.3s ease;
-}
-#site-nav ul li .home-logo:hover {
-  font-size: 24px;
-}
-
-#site-nav ul li a {
-  writing-mode: vertical-lr;
-  color: var(--grey);
-  padding-inline: 10px;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 600;
-}
-#site-nav ul li a span {
-  height: 1px;
-  color: var(--navy);
-  overflow: hidden;
-}
-#site-nav .connect-btn {
-  position: absolute;
-  font-weight: 700;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  bottom: 0;
-  left: 0;
-  width: 50px;
-  height: 130px;
-  writing-mode: vertical-lr;
-  background-color: var(--off-black);
-  color: var(--glass);
-  border-right: solid 1px var(--grey);
-  transition: all 0.2s ease;
-}
-#site-nav .connect-btn:hover {
-  background-color: var(--coral);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -279,7 +223,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: var(--glass);
+  background-color: var(--white);
   height: 100vh;
   width: 50px;
   border-right: solid 1px var(--grey);
@@ -367,22 +311,38 @@ body {
   position: absolute;
   font-weight: 700;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   width: 40px;
-  height: 130px;
+  height: 40px;
+  padding-bottom: 10px;
   border-radius: 50vw;
   border: none;
   writing-mode: vertical-lr;
   background-color: var(--off-black);
   color: var(--glass);
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
+}
+#site-nav .connect-btn img {
+  width: 20px;
+  height: 20px;
+}
+#site-nav .connect-btn span {
+  overflow: hidden;
+  height: 0.01px;
+  opacity: 0;
+  transition: all 0.35s ease;
+}
+#site-nav .connect-btn:hover > span {
+  height: auto;
+  opacity: 1;
+  margin-bottom: 10px;
 }
 #site-nav .connect-btn:hover {
-  background-color: var(--coral);
+  height: 115px;
 }
 
 .mobile-contact-btn {
@@ -504,8 +464,9 @@ body {
 
 /*### LANDING SECTION #########################################*/
 #section_landing {
-  background-color: var(--cream);
+  background-color: var(--white);
   min-height: 440px;
+  height: 100vh;
   padding: 20px 0 20px;
   position: relative;
 }
@@ -515,51 +476,131 @@ body {
   }
 }
 .landing-container {
-  background-color: var(--white);
-  border-radius: 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 100%;
   position: relative;
-  min-height: 400px;
 }
 .message-box {
-  max-width: 1000px;
-  position: absolute;
-  padding: 0 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 0;
+  transform: translateY(-20%);
+  text-align: center;
+  position: relative;
+  z-index: 1000; /* keep banner text in front of following sections */
 }
 .message-box h1 {
+  letter-spacing: 10px;
+  color: var(--platinum);
+}
+.message-box .landing-name h3 {
+  font-weight: 400;
+  letter-spacing: 10px;
   color: var(--text-black);
-  margin-bottom: 20px;
 }
-.message-box h1 span {
-  color: var(--coral);
+.message-box .landing-title h1 {
+  margin-top: 40px;
+  font-size: 78px;
+  letter-spacing: normal;
+  font-weight: 800;
+  color: #f35626;
+  background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: hue 5s infinite linear;
 }
-.message-box p {
-  color: var(--text-black);
+@media (max-width: 1000px) {
+  .message-box .landing-title h1 {
+    font-size: 58px;
+  }
 }
-.landing-name {
-  padding-bottom: 10px;
-  font-weight: 700;
-  color: var(--navy);
+@media (max-width: 600px) {
+  .message-box .landing-title h1 {
+    font-size: 38px;
+  }
 }
-/*### LANDING ABOUT #########################################*/
+@-webkit-keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
+}
+/* Scroll-down mouse indicator */
+.scroll-down {
+  position: absolute; /* stick to the landing section */
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 24px;
+  width: 30px;
+  height: 50px;
+  border: 1px solid var(--grey);
+  border-radius: 22px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10px;
+  background: transparent;
+  z-index: 20; /* keep above landing content but not fixed to viewport */
+  pointer-events: none;
+}
+.scroll-down::before {
+  content: "";
+  width: 6px;
+  height: 10px;
+  background: var(--grey);
+  border-radius: 4px;
+  display: block;
+  animation: scroll-wheel 1.6s cubic-bezier(0.22, 0.9, 0.32, 1) infinite;
+}
+
+@keyframes scroll-wheel {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-down::before {
+    animation: none;
+  }
+}
+
+/*### ABOUT #########################################*/
 #section_about {
   background-color: var(--yellow-orange);
   height: 100vh;
   position: relative;
 }
-/*### LANDING FILES #########################################*/
+.about-message-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 600px;
+  text-align: center;
+  color: var(--off-black);
+}
+/*### FILES #########################################*/
 #section_files {
   background-color: var(--white);
   height: 100vh;
   position: relative;
 }
+/*### FOOTER #########################################*/
 .footer {
   height: 200px;
-  background-color: var(--navy);
+  background-color: var(--platinum);
 }
 
 /* Modal styles */

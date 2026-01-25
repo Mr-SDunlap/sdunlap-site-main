@@ -24,7 +24,12 @@
           <a href="#section_files">II.<span>&nbsp;Portfolio</span></a>
         </li>
       </ul>
-      <a href="#section_landing" class="connect-btn split-text">Get in touch</a>
+      <a href="#section_landing" class="connect-btn split-text"
+        ><span>Connect</span
+        ><img
+          src="./assets/message-icon-white-svg.svg"
+          alt="connect with Stephen"
+      /></a>
     </nav>
     <nav id="mobile-nav">
       <a href="#section_landing" class="home-logo split-text">sd</a>
@@ -53,22 +58,32 @@
     <section id="section_landing">
       <div class="section-container landing-container">
         <div class="message-box">
-          <h1>
-            Designing and building
-            <span>web experiences that actually work.</span>
-          </h1>
-          <div class="landing-name"><h3>Stephen Dunlap</h3></div>
+          <h1 class="site-name">SDUNLAP</h1>
+          <div class="landing-name"><h3>STEPHEN DUNLAP</h3></div>
+          <div class="landing-title">
+            <h1>
+              Designing and building<br />web experiences that actually work
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-down"></div>
+    </section>
+    <section id="section_about">
+      <div class="section-container about-container">
+        <div class="about-message-box">
+          <h1>SDUNLAP</h1>
+          <h3>STEPHEN DUNLAP</h3>
+        </div>
+        <div class="about-summary">
           <p>
-            Front-End Designer focused on usability, accessibility and scaling
-            web experiences. I work at the intersection of design, UX and
-            implementation, turning complex requirements into clear, usable
+            Front-End Designer focused on usability, accessibility, and scalable
+            web experiences. I work at the intersection of design, UX, and
+            implementation—turning complex requirements into clear, usable
             interfaces.
           </p>
         </div>
       </div>
-    </section>
-    <section id="section_about">
-      <div class="section-container"><h1>about section</h1></div>
     </section>
     <section id="section_files">
       <div class="section-container"><h1>files section</h1></div>
@@ -91,7 +106,7 @@
         >
           ×
         </button>
-        <h2 id="modal-title">Get in touch</h2>
+        <h2 id="modal-title">Connect</h2>
         <!-- Success panel shown after successful submit -->
         <div class="modal-success" hidden>
           <h3>Thanks — message sent</h3>
@@ -125,6 +140,8 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrambleTextPlugin.min.js"></script>
+    <script src="./js/gsap-scrolling.js"></script>
     <script src="./js/nav.js"></script>
     <script src="./js/gsap-init.js"></script>
     <script src="./js/microinteraction.js"></script>
