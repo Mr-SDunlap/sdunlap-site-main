@@ -28,7 +28,7 @@ if (header && landing) {
   const headerTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: header,
-      start: "-70px",
+      start: "-150px",
       endTrigger: "#section_about",
       end: "50% top",
       scrub: true,
@@ -49,23 +49,38 @@ if (header && landing) {
       duration: 0.7,
     });
 }
+// Home image pinning //////////////////////////////////////////////////////
+const homeImage = document.querySelector(".photo-container");
+if (homeImage) {
+  gsap.timeline({
+    scrollTrigger: {
+      trigger: homeImage,
+      start: "top 100px",
+      endTrigger: "#section_about",
+      end: "50% top",
+      pin: true,
+      pinSpacing: false,
+      invalidateOnRefresh: true,
+    },
+  });
+}
+
 // About section animations ////////////////////////////////////////////////
 const aboutSection = document.querySelector("#section_about");
 const aboutSummary = document.querySelector(".about-summary");
 const aboutSummaryPara = document.querySelector(".about-summary p");
 
 if (aboutSummaryPara) {
-  gsap.set(aboutSummaryPara, { opacity: 0, y: 24 });
+  gsap.set(aboutSummaryPara, { opacity: 0, y: -30 });
   gsap.to(aboutSummaryPara, {
     opacity: 1,
-    y: 0,
+    y: -50,
     ease: "none",
     scrollTrigger: {
       trigger: aboutSummary,
-      start: "top 10%",
+      start: "top 31%",
       end: "top",
       toggleActions: "play none none reverse",
-      markers: true,
       invalidateOnRefresh: true,
     },
   });
@@ -74,7 +89,7 @@ if (aboutSummaryPara) {
 const aboutTimeline = gsap.timeline({
   scrollTrigger: {
     trigger: aboutSummary,
-    start: "top 180px",
+    start: "top 30%",
     endTrigger: aboutSection,
     end: "bottom 50%",
     pin: true,

@@ -481,27 +481,22 @@ body {
 }
 .landing-title {
   position: absolute;
-  top: 40%;
-  text-align: center;
+  top: 60%;
+  left: 0%;
   position: relative;
   z-index: 1000; /* keep banner text in front of following sections */
 }
 .name-header-container {
   position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  left: 0%;
   width: fit-content;
   z-index: 1000;
-  padding: 0 20px;
 }
 
 .name-header-container h1 {
   letter-spacing: 10px;
   color: var(--platinum);
-}
-.name-header-container h1 .is-active {
-  transform: translateX(-50%);
 }
 .name-header-container .landing-name h3 {
   font-weight: 400;
@@ -509,8 +504,7 @@ body {
   color: var(--text-black);
 }
 .landing-title h1 {
-  margin-top: 40px;
-  font-size: 78px;
+  font-size: 38px;
   letter-spacing: normal;
   font-weight: 800;
   color: #f35626;
@@ -598,11 +592,68 @@ body {
 .about-summary {
   position: absolute;
   z-index: 1000;
-  top: 0;
+  top: 10%;
   left: 0%;
-  padding-left: 20px;
   max-width: 50%;
   color: var(--off-black);
+}
+/* photo section */
+.photo-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 2.5%;
+  width: 500px;
+  aspect-ratio: 5/8;
+}
+.photo-container img {
+  border: solid 3px var(--white);
+}
+.photo-container .sd-face {
+  position: absolute;
+  z-index: 15;
+  top: 5.5%;
+  left: 5%;
+  width: auto;
+  height: 45%;
+  object-fit: cover;
+}
+.photo-container .sd-wrist {
+  position: absolute;
+  z-index: 15;
+  bottom: 9%;
+  right: 3%;
+  width: auto;
+  height: 20%;
+  object-fit: cover;
+}
+.photo-container .sd-shoulder {
+  position: absolute;
+  z-index: 15;
+  top: 21%;
+  right: 9%;
+  width: auto;
+  height: 40%;
+  object-fit: cover;
+}
+.photo-container .sd-couch {
+  position: absolute;
+  z-index: 15;
+  bottom: -3%;
+  left: 20%;
+  width: auto;
+  height: 27%;
+  object-fit: cover;
+}
+.photo-container .sd-background {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 50%;
+  transform: translateX(-40%);
+  width: auto;
+  height: 100%;
+  object-fit: cover;
 }
 /*### FILES #########################################*/
 #section_files {
