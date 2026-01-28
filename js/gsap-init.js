@@ -18,7 +18,7 @@ window.addEventListener("DOMContentLoaded", function () {
   // Target the primary text group inside the landing section
   // exclude .landing-title so we can give it a separate, slightly longer delay
   const landingTextTargets = document.querySelectorAll(
-    "#section_landing .message-box > *:not(.landing-title)",
+    "#section_landing .name-header-container > *:not(.landing-title)",
   );
   // intro animation parameters (reuse delay so scramble can start simultaneously)
   const introDelay = 0.12;

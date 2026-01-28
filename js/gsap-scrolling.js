@@ -1,31 +1,85 @@
-// Fade the landing title down and out while scrolling
-window.addEventListener("DOMContentLoaded", function () {
-  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined")
-    return;
-  gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
-  const title = document.querySelector(".landing-title h1");
-  if (!title) return;
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduced) return;
+// Large message scroll animation ////////////////////////////////////////////////
+const landingTitle = document.querySelector(".landing-title");
+if (landingTitle) {
+  gsap.to(landingTitle, {
+    opacity: 0,
+    y: 150,
+    ease: "none",
+    scrollTrigger: {
+      trigger: "#section_landing",
+      start: "top top",
+      end: "+=500",
+      scrub: true,
+      invalidateOnRefresh: true,
+    },
+  });
+}
+// Large message scroll animation end ////////////////////////////////////////////////
 
-  // delay in milliseconds before the ScrollTrigger is created
-  const initDelay = 0; // adjust this value to delay the start (ms)
+const header = document.querySelector(".name-header-container");
+const landing = document.querySelector(".landing-container");
 
-  setTimeout(() => {
-    gsap.to(title, {
-      opacity: 0,
-      y: 150,
+if (header && landing) {
+  const getDeltaX = () =>
+    landing.getBoundingClientRect().left - header.getBoundingClientRect().left;
+
+  const headerTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: header,
+      start: "-70px",
+      endTrigger: "#section_about",
+      end: "50% top",
+      scrub: true,
+      pin: true,
+      pinSpacing: false,
+      invalidateOnRefresh: true,
+    },
+  });
+
+  headerTimeline
+    .to(header, {
+      x: () => getDeltaX(),
       ease: "none",
-      scrollTrigger: {
-        trigger: "#section_landing",
-        start: "top top",
-        end: "+=300",
-        scrub: true,
-        invalidateOnRefresh: true,
-      },
+      duration: 0.1,
+    })
+    .to(header, {
+      ease: "none",
+      duration: 0.7,
     });
-  }, initDelay);
-});
+}
+// About section animations ////////////////////////////////////////////////
+const aboutSection = document.querySelector("#section_about");
+const aboutSummary = document.querySelector(".about-summary");
+const aboutSummaryPara = document.querySelector(".about-summary p");
 
-// Scroll triggered name animation to about section
+if (aboutSummaryPara) {
+  gsap.set(aboutSummaryPara, { opacity: 0, y: 24 });
+  gsap.to(aboutSummaryPara, {
+    opacity: 1,
+    y: 0,
+    ease: "none",
+    scrollTrigger: {
+      trigger: aboutSummary,
+      start: "top 10%",
+      end: "top",
+      toggleActions: "play none none reverse",
+      markers: true,
+      invalidateOnRefresh: true,
+    },
+  });
+}
+
+const aboutTimeline = gsap.timeline({
+  scrollTrigger: {
+    trigger: aboutSummary,
+    start: "top 180px",
+    endTrigger: aboutSection,
+    end: "bottom 50%",
+    pin: true,
+    pinSpacing: false,
+    scrub: true,
+    invalidateOnRefresh: true,
+  },
+});

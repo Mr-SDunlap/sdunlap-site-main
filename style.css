@@ -476,29 +476,39 @@ body {
   }
 }
 .landing-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100%;
   position: relative;
 }
-.message-box {
-  transform: translateY(-20%);
+.landing-title {
+  position: absolute;
+  top: 40%;
   text-align: center;
   position: relative;
   z-index: 1000; /* keep banner text in front of following sections */
 }
-.message-box h1 {
+.name-header-container {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;
+  z-index: 1000;
+  padding: 0 20px;
+}
+
+.name-header-container h1 {
   letter-spacing: 10px;
   color: var(--platinum);
 }
-.message-box .landing-name h3 {
+.name-header-container h1 .is-active {
+  transform: translateX(-50%);
+}
+.name-header-container .landing-name h3 {
   font-weight: 400;
   letter-spacing: 10px;
   color: var(--text-black);
 }
-.message-box .landing-title h1 {
+.landing-title h1 {
   margin-top: 40px;
   font-size: 78px;
   letter-spacing: normal;
@@ -510,12 +520,12 @@ body {
   -webkit-animation: hue 5s infinite linear;
 }
 @media (max-width: 1000px) {
-  .message-box .landing-title h1 {
+  .landing-title h1 {
     font-size: 58px;
   }
 }
 @media (max-width: 600px) {
-  .message-box .landing-title h1 {
+  .landing-title h1 {
     font-size: 38px;
   }
 }
@@ -578,17 +588,20 @@ body {
 
 /*### ABOUT #########################################*/
 #section_about {
-  background-color: var(--yellow-orange);
   height: 100vh;
   position: relative;
 }
-.about-message-box {
+.about-container {
+  position: relative;
+  height: 100%;
+}
+.about-summary {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 600px;
-  text-align: center;
+  z-index: 1000;
+  top: 0;
+  left: 0%;
+  padding-left: 20px;
+  max-width: 50%;
   color: var(--off-black);
 }
 /*### FILES #########################################*/
