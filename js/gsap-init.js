@@ -122,7 +122,7 @@ window.addEventListener("DOMContentLoaded", function () {
       scrollTrigger: {
         trigger: "#section_landing",
         start: "bottom bottom",
-        end: "bottom top",
+        end: "bottom 70%",
         scrub: true,
       },
     });

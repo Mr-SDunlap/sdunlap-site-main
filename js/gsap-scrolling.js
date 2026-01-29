@@ -5,13 +5,13 @@ const landingTitle = document.querySelector(".landing-title");
 if (landingTitle) {
   gsap.to(landingTitle, {
     opacity: 0,
-    y: 150,
+    y: 50,
     ease: "none",
     scrollTrigger: {
       trigger: "#section_landing",
       start: "top top",
-      end: "+=500",
-      scrub: true,
+      end: "+=300",
+      toggleActions: "play none none reverse",
       invalidateOnRefresh: true,
     },
   });
@@ -71,14 +71,14 @@ const aboutSummary = document.querySelector(".about-summary");
 const aboutSummaryPara = document.querySelector(".about-summary p");
 
 if (aboutSummaryPara) {
-  gsap.set(aboutSummaryPara, { opacity: 0, y: -30 });
+  gsap.set(aboutSummaryPara, { opacity: 0, y: -130 });
   gsap.to(aboutSummaryPara, {
     opacity: 1,
-    y: -50,
+    y: -135,
     ease: "none",
     scrollTrigger: {
       trigger: aboutSummary,
-      start: "top 31%",
+      start: "top 20%",
       end: "top",
       toggleActions: "play none none reverse",
       invalidateOnRefresh: true,

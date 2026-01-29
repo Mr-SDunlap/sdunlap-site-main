@@ -15,14 +15,14 @@ html {
   --forest: #043222;
   --yellow-orange: #fea425;
   --pale-yellow: #d4bc6e;
-  --coral: #9b0b28;
+  --coral: #724860;
 
   --black: #000000;
   --off-black: #111111;
   --text-black: #333333;
   --grey: #6a6a6a;
   --platinum: #dddddd;
-  --glass: #e8eded;
+  --glass: #f8f8f5;
 
   --white: #ffffff;
 }
@@ -481,7 +481,7 @@ body {
 }
 .landing-title {
   position: absolute;
-  top: 60%;
+  top: 70%;
   left: 0%;
   position: relative;
   z-index: 1000; /* keep banner text in front of following sections */
@@ -592,14 +592,92 @@ body {
 .about-summary {
   position: absolute;
   z-index: 1000;
-  top: 10%;
+  top: -30%;
   left: 0%;
   max-width: 50%;
   color: var(--off-black);
 }
+
+.about-container .journey {
+  position: absolute;
+  z-index: 1000;
+  top: 0%;
+  left: 0%;
+  width: 50%;
+}
+.journey ul li {
+  list-style: none;
+  padding: 20px;
+  position: relative;
+  background-color: var(--white);
+  border: solid 1px var(--platinum);
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); */
+  cursor: pointer;
+}
+.journey ul li:last-child {
+  margin-top: 40px;
+}
+.color-pop {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: var(--yellow-orange);
+  background-color: -webkit-linear-gradient(92deg, #f35626, #feab3a);
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: hue 5s infinite linear;
+}
+.accordion-arrow {
+  position: absolute;
+  top: 45px;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid var(--coral);
+  transition: transform 0.3s ease;
+}
+.journey .experience > li.is-active .accordion-arrow {
+  transform: translateY(-50%) rotate(180deg);
+}
+.journey ul li:hover > .accordion-arrow {
+  transform: scale(1.05);
+}
+.journey ul li h3 {
+  color: var(--coral);
+  letter-spacing: 1px;
+}
+.journey ul li h3 span {
+  color: var(--grey);
+  font-weight: 400;
+  font-size: 20px;
+}
+.journey ul li p {
+  color: var(--text-black);
+  font-size: 18px;
+  letter-spacing: 3px;
+}
+.journey .work-bullets {
+  padding-inline: 20px;
+  overflow: hidden;
+  height: 0px;
+}
+#section_about .journey .work-bullets li {
+  border: none;
+  margin-top: 1.5rem;
+  padding: 0;
+  list-style: disc;
+  color: var(--text-black);
+  font-size: 18px;
+}
+
 /* photo section */
 .photo-container {
   position: absolute;
+  z-index: 1000;
   top: 50%;
   transform: translateY(-50%);
   right: 2.5%;
