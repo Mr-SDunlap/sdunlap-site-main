@@ -28,7 +28,7 @@ if (header && landing) {
   const headerTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: header,
-      start: "-150px",
+      start: "-60px",
       endTrigger: "#section_about",
       end: "50% top",
       scrub: true,
@@ -55,7 +55,7 @@ if (homeImage) {
   gsap.timeline({
     scrollTrigger: {
       trigger: homeImage,
-      start: "top 100px",
+      start: "top 60px",
       endTrigger: "#section_about",
       end: "50% top",
       pin: true,
@@ -71,14 +71,14 @@ const aboutSummary = document.querySelector(".about-summary");
 const aboutSummaryPara = document.querySelector(".about-summary p");
 
 if (aboutSummaryPara) {
-  gsap.set(aboutSummaryPara, { opacity: 0, y: -130 });
+  gsap.set(aboutSummaryPara, { opacity: 0, y: 20 });
   gsap.to(aboutSummaryPara, {
     opacity: 1,
-    y: -135,
+    y: 0,
     ease: "none",
     scrollTrigger: {
       trigger: aboutSummary,
-      start: "top 20%",
+      start: "-10%",
       end: "top",
       toggleActions: "play none none reverse",
       invalidateOnRefresh: true,
@@ -89,7 +89,7 @@ if (aboutSummaryPara) {
 const aboutTimeline = gsap.timeline({
   scrollTrigger: {
     trigger: aboutSummary,
-    start: "top 30%",
+    start: "-180px",
     endTrigger: aboutSection,
     end: "bottom 50%",
     pin: true,
@@ -98,3 +98,22 @@ const aboutTimeline = gsap.timeline({
     invalidateOnRefresh: true,
   },
 });
+
+// about section my approach ////////////////////////////////////////////////
+const myApproach = document.querySelector(".my-approach");
+if (myApproach) {
+  gsap.set(myApproach, { opacity: 0, y: 20 });
+  gsap.to(myApproach, {
+    opacity: 1,
+    y: 0,
+    ease: "none",
+    scrollTrigger: {
+      trigger: myApproach,
+      start: "top 80%",
+      end: "bottom 50%",
+      toggleActions: "play none none reverse",
+      invalidateOnRefresh: true,
+      markers: true,
+    },
+  });
+}
