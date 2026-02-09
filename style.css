@@ -483,7 +483,7 @@ body {
   background-color: var(--white);
   min-height: 440px;
   height: 100vh;
-  padding: 20px 0 20px;
+  padding: 20px 0 20px 50px;
   position: relative;
 }
 @media (max-width: 600px) {
@@ -609,18 +609,19 @@ body {
 }
 .about-container {
   position: relative;
-  color: var(--manilla);
+  color: var(--glass);
   height: 100%;
 
   & .about-title {
     font-size: 48px;
     font-weight: 700;
     margin-block: 40px;
+    color: var(--manilla);
   }
 }
 .about-split {
   display: flex;
-  gap: 40px;
+  gap: 20px;
   justify-content: center;
 }
 .about-profile {
@@ -629,14 +630,20 @@ body {
   flex: 1;
   align-items: center;
   border-right: solid 1px var(--grey);
-  padding-inline: 20px;
+
+  & .about-header {
+    align-self: flex-start;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
   & img {
-    width: 150px;
+    width: 100px;
     height: auto;
     border-radius: 50vw;
     object-fit: cover;
     border: 4px solid var(--white);
-    margin-bottom: 20px;
   }
   & .about-name {
     font-size: 24px;
@@ -656,14 +663,14 @@ body {
     font-size: 14px;
     font-weight: 300;
     color: var(--grey);
-    margin-bottom: 40px;
   }
   & .description {
     font-size: 18px;
-    color: var(--cream);
+    color: var(--glass);
     font-weight: 300;
     line-height: 1.6;
-    font-weight: 400;
+    font-weight: 300;
+    padding-right: 20px;
   }
   & .resume-download {
     font-family: "Outfit", sans-serif;
@@ -688,11 +695,83 @@ body {
   & h2 {
     margin-bottom: 40px;
   }
-  & p {
+  & .about-snippet {
     font-size: 18px;
-    color: var(--cream);
+    color: var(--glass);
     line-height: 1.6;
-    font-weight: 400;
+    font-weight: 300;
+    margin-bottom: 60px;
+  }
+  & .subheader {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  & .about-what_title {
+    position: relative;
+    line-height: 1.6;
+    font-size: 48px;
+    text-align: center;
+    color: var(--manilla);
+  }
+  & .img-container {
+    width: clamp(300px, 100%, 800px);
+    height: 350px;
+    position: relative;
+    margin-block: 40px 60px;
+  }
+}
+.color-shift {
+  color: var(--orange);
+  font-weight: 800;
+  display: inline-block;
+  animation: hue 3s linear infinite;
+}
+
+@keyframes hue {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.lumen-ad {
+  position: absolute;
+  z-index: 1;
+  bottom: 10px;
+  left: 0px;
+  width: 40%;
+  height: auto;
+  border: solid 10px var(--white);
+  box-shadow: 0 0 15px var(--dark-coffee);
+}
+.lumen-homepage {
+  position: absolute;
+  bottom: 0px;
+  left: 10%;
+  width: 90%;
+  height: 350px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 0.5rem;
+  border: solid 2px var(--platinum);
+}
+
+.understanding {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-block: 40px;
+
+  & li {
+    list-style: none;
+    background: linear-gradient(180deg, #f97717, #ed5901);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 36px;
+    font-weight: 800;
   }
 }
 /*### FILES #########################################*/
@@ -876,6 +955,16 @@ body {
   border-color: var(--navy);
 }
 
+/* Chin */
+.chin {
+  position: absolute;
+  bottom: 0px;
+  left: 0%;
+  width: 100%;
+  height: 100px;
+  background-color: var(--dark-coffee);
+  border-top: solid 5px var(--orange);
+}
 @media (prefers-reduced-motion: reduce) {
   .modal-overlay,
   .modal-panel {
@@ -902,6 +991,7 @@ body {
   }
   p {
     font-size: 18px;
+    line-height: 1.6;
   }
 }
 @media (max-width: 999px) {
