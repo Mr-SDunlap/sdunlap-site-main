@@ -1,5 +1,30 @@
+const randomBetween = (min, max) => Math.random() * (max - min) + min;
+
+const initBackgroundRain = () => {
+  const lines = document.querySelectorAll(".background-lines span");
+  if (!lines.length) return;
+
+  lines.forEach((span, index) => {
+    const duration = randomBetween(6, 12);
+    const offset = randomBetween(0, duration);
+    const delay = -(offset + index * 0.35);
+
+    span.style.setProperty("--rain-duration", `${duration.toFixed(2)}s`);
+    span.style.setProperty("--rain-delay", `${delay.toFixed(2)}s`);
+    span.style.setProperty("--rain-anim", "rain");
+  });
+};
+
 // Animate the .work-bullets height with GSAP when a top-level journey item is clicked.
 window.addEventListener("DOMContentLoaded", () => {
+  const prefersReduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (!prefersReduced) {
+    initBackgroundRain();
+  }
+
   if (!window.gsap) return;
 
   document.querySelectorAll(".journey .experience > li").forEach((item) => {
