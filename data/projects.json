@@ -1,0 +1,36 @@
+{
+  "projects": [
+    {
+      "projectName": "Lumen Product Finder",
+      "toolsUsed": ["XD", "Illustrator"],
+      "role": "Visual Designer",
+      "description": "Enterprise level site search and UI built through collaboration with the Lumen UX team for user-centric design. ",
+      "outcome": "Improved usability and shipped a production-ready interface.",
+      "link": "https://google.com"
+    },
+    {
+      "projectName": "AI Interactive Framework",
+      "toolsUsed": ["XD", "ION Interactive", "HTML", "CSS"],
+      "role": "Visual Designer, Developer",
+      "description": "Enterprise level site search and UI built through collaboration with the Lumen UX team for user-centric design. ",
+      "outcome": "Improved usability and shipped a production-ready interface.",
+      "link": "https://google.com"
+    },
+    {
+      "projectName": "Cloud 2.0 Infographic",
+      "toolsUsed": [
+        "XD",
+        "Illustrator",
+        "Adobe After Effects",
+        "Photoshop",
+        "HTML",
+        "CSS",
+        "Javascript"
+      ],
+      "role": "Visual Designer",
+      "description": "Enterprise level site search and UI built through collaboration with the Lumen UX team for user-centric design. ",
+      "outcome": "Improved usability and shipped a production-ready interface.",
+      "link": "https://google.com"
+    }
+  ]
+}

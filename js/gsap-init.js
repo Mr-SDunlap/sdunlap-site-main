@@ -111,20 +111,4 @@ window.addEventListener("DOMContentLoaded", function () {
       });
     }
   }
-
-  // Fade out the scroll indicator as the user scrolls toward the about section
-  const scrollIndicator = document.querySelector(".scroll-down");
-  if (scrollIndicator && typeof ScrollTrigger !== "undefined") {
-    gsap.to(scrollIndicator, {
-      opacity: 0,
-      y: -10,
-      ease: "none",
-      scrollTrigger: {
-        trigger: "#section_landing",
-        start: "bottom bottom",
-        end: "bottom 70%",
-        scrub: true,
-      },
-    });
-  }
 });

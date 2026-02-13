@@ -28,11 +28,12 @@
     <script src="./js/gsap-init.js" defer></script>
     <script src="./js/microinteraction.js" defer></script>
     <script src="./js/forms.js" defer></script>
+    <script src="./js/projects.js" defer></script>
     <script src="./js/app.js" defer></script>
   </head>
   <body>
     <!-- background effect -->
-     <div class="background-lines">
+    <div class="background-lines">
       <span></span>
       <span></span>
       <span></span>
@@ -50,28 +51,27 @@
       <span></span>
       <span></span>
       <span></span>
-     </div>
-       <div class="background-effect">
-       </div>
+    </div>
+    <div class="background-effect"></div>
     <nav id="site-nav">
       <ul>
         <li>
           <a href="#section_landing" class="home-logo split-text">sd</a>
         </li>
         <li>
-          <a href="#section_about">I.<span>&nbsp;About</span></a>
+          <a href="#section_files">I.<span>&nbsp;Projects</span></a>
         </li>
         <li>
-          <a href="#section_featured">II.<span>&nbsp;Featured</span></a>
+          <a href="#section_featured">II.<span>&nbsp;Case&nbsp;Study</span></a>
         </li>
         <li>
-          <a href="#section_files">III.<span>&nbsp;Portfolio</span></a>
+          <a href="#section_about">III.<span>&nbsp;About</span></a>
         </li>
       </ul>
       <a href="#section_landing" class="connect-btn split-text"
         ><span>Connect</span
         ><img
-          src="./assets/message-icon-white-svg.svg"
+          src="./assets/icons/icons8-chat-bubble-30.png"
           alt="connect with Stephen"
       /></a>
     </nav>
@@ -104,174 +104,34 @@
           <h1 class="site-name">SDUNLAP</h1>
           <div class="landing-name"><h3>Stephen Dunlap</h3></div>
           <h1 class="home-message">
-            I create bold, expressive and intuitive digital experiences 
+            I translate complex requirements into clear, usable digital
+            experiences with measureable business impact.
           </h1>
+          <div class="landing-btns">
+            <a class="landing-work-btn primary-btn" href="#section_files"
+              >Explore Projects</a
+            >
+            <button class="landing-contact-btn secondary-btn connect-btn">
+              Connect
+            </button>
+          </div>
         </div>
       </div>
-      <div class="scroll-down"></div>
-      
     </section>
-    <section id="section_about">
-      <div class="section-container about-container">
-        <div class="animated-banner">
-          <span class="marquee-1"
-            >About About About About About About About About About About About
-            About About About About About About About About About About About
-            About About About About About About About About About About About
-            About</span
-          >
-          <span class="marquee-2"
-            >About About About About About About About About About About About
-            About About About About About About About About About About About
-            About About About About About About About About About About About
-            About</span
-          >
+    <section id="section_files">
+      <div class="section-container files-container">
+        <div class="title-container">
+          <h1>Projects</h1>
+          <p>Explore a curated selection of work.</p>
         </div>
-        <h1 class="about-title">Who Am I?</h1>
-        <div class="about-split">
-          
-          <div class="about-profile">
-            
-            <div class="profile-container">
-              <div class="section-divider">
-                <span></span>
-                <span></span>
-              </div>
-<div class="about-header">
-              <img
-                src="./assets/headshot-about.webp"
-                alt="Stephen Dunlap headshot"
-              />
-              <div class="name-tag">
-                <div class="about-name">Stephen Dunlap</div>
-                <div class="about-position">Front-End Designer</div>
-                <div class="pronouns">He - Him - His</div>
-              </div>
-            </div>
-
-            <div class="description">
-              I’m someone who likes building things: ideas, interfaces, meals,
-              and the occasional 3D-printed object. I enjoy reading, cooking,
-              biking, photography, philosophy, and any kind of creative process
-              that lets me explore structure and form. I earned my BA in
-              Architecture & Innovative Design in 2019, which shaped how I think
-              about systems, space, and intentional design. Since then, I’ve
-              migrated into the world of digital design and computer science,
-              drawn to the overlap of planning, structure, and building in both
-              physical and virtual spaces.
-            </div>
-<button
-              class="resume-download"
-              href="./assets/Stephen_Dunlap_Resume.pdf"
-              download="Stephen_Dunlap_Resume"
-              alt="Download Stephen Dunlap's resume"
-            >
-              Download resume
-            </button>
-            </div>
-            
-            
+        <div class="project-information">
+          <div class="project-name">Name: <span class="name-fill"></span></div>
+          <div class="project-role">Role: <span class="role-fill"></span></div>
+          <div class="project-tools">
+            Tools used: <span class="tools-fill"></span>
           </div>
-          <div class="about-what">
-            <div class="what-i-do_container">
-              <h2>What I Do</h2>
-              <p class="about-snippet">
-                I design and build web experiences that focus on usability,
-                accessibility, and real-world implementation. My work sits
-                between UX, visual design, and front-end execution, helping turn
-                complex requirements into clear, usable interfaces.
-              </p>
-            </div>
-
-            <h1 class="about-what_title">UX & Planning</h1>
-            <p class="subheader">
-              I start by understanding the problem, the user’s context, and the
-              constraints of the system before moving into design.
-            </p>
-
-            <h4>My UX process focuses on:</h4>
-            <ul class="understanding">
-              <li>
-                clarifying <span class="highlight">requirements and goals</span>
-              </li>
-              <li>
-                supporting user flows and
-                <span class="highlight">information hierarchy</span>
-              </li>
-              <li>
-                collaborating with UX partners on
-                <span class="highlight">testing and validation</span>
-              </li>
-              <li>
-                aligning stakeholders early to
-                <span class="highlight">reduce confusion</span>
-              </li>
-            </ul>
-            <p>
-              I don’t run user testing directly, but I work closely with UX
-              teams to iterate on designs based on feedback and real-world use.
-            </p>
-            <img
-              src="./assets/ux-spec.jpg"
-              alt="Design specification example from Lumen Technologies"
-            />
-            <h3 class="about-what_title">Design & Creative Direction</h3>
-            <p class="subheader">
-              Once structure is in place, I translate wireframes into finished
-              designs that reflect both brand identity and user intent.
-            </p>
-            <h4>This includes:</h4>
-            <ul class="understanding">
-              <li>
-                applying visual systems and
-                <span class="highlight">creative direction</span>
-              </li>
-              <li>
-                designing layouts, typography, and
-                <span class="highlight">interface elements</span>
-              </li>
-              <li>
-                creating supporting art and
-                <span class="highlight">visual assets</span>
-              </li>
-              <li>
-                thinking through motion and
-                <span class="highlight">interaction</span> as part of the
-                experience
-              </li>
-            </ul>
-            <p>
-              I try to keep clarity at the center of everything. Visual design
-              should support usability, not compete with it.
-            </p>
-            <img
-              src="./assets/ux-spec.jpg"
-              alt="Design specification example from Lumen Technologies"
-            />
-            <h1 class="about-what_title">Front-End & Implementation</h1>
-            <p class="subheader">
-              As a Front-End Designer, I focus on bridging design and
-              development.
-            </p>
-            <h4>I'm comfortable working with:</h4>
-            <ul class="understanding">
-              <li><span class="highlight">HTML, CSS/SASS, and JavaScript</span> fundamentals</li>
-              <li>
-                no-code and low-code platforms for <span class="highlight">interactive experiences</span>
-              </li>
-              <li><span class="highlight">collaborating with engineers</span> on production builds</span></li>
-              <li>
-                launching sites with <span class="highlight">accessibility, performance, and SEO</span> in mind
-              </li>
-            </ul>
-            <p>
-              I design with implementation in mind so ideas translate cleanly
-              into real, maintainable experiences.
-            </p>
-            <img
-              src="./assets/ux-spec.jpg"
-              alt="Design specification example from Lumen Technologies"
-            />
+          <div class="project-description">
+            Description: <span class="description-fill"></span>
           </div>
         </div>
       </div>
@@ -279,8 +139,8 @@
     <section id="section_featured">
       <div class="section-container"><h1>featured section</h1></div>
     </section>
-    <section id="section_files">
-      <div class="section-container"><h1>files section</h1></div>
+    <section id="section_about">
+      <div class="section-container about-container"></div>
     </section>
     <div class="footer">
       <div class="footer_container">
