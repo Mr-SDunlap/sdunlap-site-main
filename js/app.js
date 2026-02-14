@@ -7,7 +7,8 @@ const initBackgroundRain = () => {
   lines.forEach((span, index) => {
     const duration = randomBetween(6, 12);
     const offset = randomBetween(0, duration);
-    const delay = -(offset + index * 0.35);
+    const stagger = randomBetween(0.08, 0.25) * index;
+    const delay = -(offset + stagger);
 
     span.style.setProperty("--rain-duration", `${duration.toFixed(2)}s`);
     span.style.setProperty("--rain-delay", `${delay.toFixed(2)}s`);
@@ -15,7 +16,6 @@ const initBackgroundRain = () => {
   });
 };
 
-// Animate the .work-bullets height with GSAP when a top-level journey item is clicked.
 window.addEventListener("DOMContentLoaded", () => {
   const prefersReduced = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
@@ -24,36 +24,4 @@ window.addEventListener("DOMContentLoaded", () => {
   if (!prefersReduced) {
     initBackgroundRain();
   }
-
-  if (!window.gsap) return;
-
-  document.querySelectorAll(".journey .experience > li").forEach((item) => {
-    const bullets = item.querySelector(".work-bullets");
-    if (!bullets) return;
-
-    item.addEventListener("click", () => {
-      const isOpen = bullets.classList.contains("is-active");
-
-      if (isOpen) {
-        gsap.to(bullets, {
-          height: 0,
-          duration: 0.35,
-          ease: "power2.inOut",
-          onComplete: () => {
-            bullets.classList.remove("is-active");
-            item.classList.remove("is-active");
-          },
-        });
-        return;
-      }
-
-      bullets.classList.add("is-active");
-      item.classList.add("is-active");
-      gsap.fromTo(
-        bullets,
-        { height: 0 },
-        { height: "auto", duration: 0.35, ease: "power2.inOut" }
-      );
-    });
-  });
 });
