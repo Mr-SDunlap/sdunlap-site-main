@@ -7,45 +7,50 @@ window.addEventListener("DOMContentLoaded", function () {
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Pin the banner during the scroll through the about section
-  const banner = document.querySelector(".animated-banner");
+  // Common Section References
   const aboutSection = document.querySelector("#section_about");
+  const portfolioSection = document.querySelector("#section_files");
 
-  if (!banner || !aboutSection) return;
+  // 1. Pin the project information (Portfolio)
+  const projectContainer = document.querySelector(".project-information");
 
-  ScrollTrigger.create({
-    trigger: banner,
-    start: "top top",
-    endTrigger: aboutSection,
-    end: "bottom bottom",
-    pin: true,
-    anticipatePin: 1,
-    pinSpacing: false,
-  });
+  if (projectContainer && portfolioSection) {
+    ScrollTrigger.create({
+      trigger: projectContainer,
+      start: "top 10%",
+      endTrigger: portfolioSection,
+      end: "bottom 50%", // Keep original timing
+      pin: true,
+      anticipatePin: 1,
+      pinSpacing: false,
+    });
+  }
 
-  //Pin the section title during scroll through the section
+  // 2. Pin the section title (About)
   const aboutTitle = document.querySelector("#section_about .about-title");
-  if (!aboutTitle) return;
 
-  ScrollTrigger.create({
-    trigger: aboutTitle,
-    start: "top 60px",
-    endTrigger: aboutSection,
-    end: "bottom bottom",
-    pin: true,
-    pinSpacing: false,
-  });
+  if (aboutTitle && aboutSection) {
+    ScrollTrigger.create({
+      trigger: aboutTitle,
+      start: "top 60px",
+      endTrigger: aboutSection,
+      end: "bottom bottom",
+      pin: true,
+      pinSpacing: false,
+    });
+  }
 
-  //Pin the profile section during scroll through the section
+  // 3. Pin the profile section (About)
   const profileSection = document.querySelector(".profile-container");
-  if (!profileSection) return;
 
-  ScrollTrigger.create({
-    trigger: profileSection,
-    start: "top 160px",
-    endTrigger: aboutSection,
-    end: "bottom bottom",
-    pin: true,
-    pinSpacing: false,
-  });
+  if (profileSection && aboutSection) {
+    ScrollTrigger.create({
+      trigger: profileSection,
+      start: "top 160px",
+      endTrigger: aboutSection,
+      end: "bottom bottom",
+      pin: true,
+      pinSpacing: false,
+    });
+  }
 });

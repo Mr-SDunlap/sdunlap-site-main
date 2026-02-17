@@ -2,19 +2,31 @@
   "projects": [
     {
       "projectName": "Lumen Product Finder",
-      "toolsUsed": ["XD", "Illustrator"],
+      "toolsUsed": [
+        "XD",
+        "Illustrator"
+      ],
       "role": "Visual Designer",
-      "description": "Enterprise level site search and UI built through collaboration with the Lumen UX team for user-centric design. ",
+      "description": "Enterprise level site search and UI built through collaboration with the Lumen UX team for user-centric design.",
       "outcome": "Improved usability and shipped a production-ready interface.",
-      "link": "https://google.com"
+      "button": "Explore",
+      "link": "https://google.com",
+      "image": "./assets/main-photo/photo-of-stephen.webp"
     },
     {
       "projectName": "AI Interactive Framework",
-      "toolsUsed": ["XD", "ION Interactive", "HTML", "CSS"],
+      "toolsUsed": [
+        "XD",
+        "ION Interactive",
+        "HTML",
+        "CSS"
+      ],
       "role": "Visual Designer, Developer",
-      "description": "Enterprise level site search and UI built through collaboration with the Lumen UX team for user-centric design. ",
-      "outcome": "Improved usability and shipped a production-ready interface.",
-      "link": "https://google.com"
+      "description": "Interactive framework designed to showcase AI capabilities with a focus on user engagement and data visualization.",
+      "outcome": "Increased user engagement by 40%.",
+      "button": "Explore",
+      "link": "https://google.com",
+      "image": "./assets/main-photo/photo-of-stephen.webp"
     },
     {
       "projectName": "Cloud 2.0 Infographic",
@@ -28,9 +40,11 @@
         "Javascript"
       ],
       "role": "Visual Designer",
-      "description": "Enterprise level site search and UI built through collaboration with the Lumen UX team for user-centric design. ",
-      "outcome": "Improved usability and shipped a production-ready interface.",
-      "link": "https://google.com"
+      "description": "Complex infographic simplifying Cloud 2.0 concepts for C-level executives and stakeholders.",
+      "outcome": "Adopted as primary sales material for Q3.",
+      "button": "Explore",
+      "link": "https://google.com",
+      "image": "./assets/main-photo/photo-of-stephen.webp"
     }
   ]
 }
