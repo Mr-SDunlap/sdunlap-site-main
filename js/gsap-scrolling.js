@@ -69,10 +69,10 @@ window.addEventListener("DOMContentLoaded", function () {
       maxHeight: "none",
       scrollTrigger: {
         trigger: pin,
-        start: "center center",
-        end: "+=100%",
+        start: "top top",
+        end: "+=1600",
         pin: pin,
-        pinSpacing: false,
+        pinSpacing: true,
         scrub: true,
         markers: true,
       },
