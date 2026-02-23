@@ -53,4 +53,29 @@ window.addEventListener("DOMContentLoaded", function () {
       pinSpacing: false,
     });
   }
+
+  // 4. Pin the archive background (Archive)
+  const pin = document.querySelector(".archive-pin");
+  const bg = document.querySelector(".archive-background");
+
+  gsap.fromTo(
+    bg,
+    { width: "40vw", height: "50vh", borderRadius: "20px" },
+    {
+      width: "100vw",
+      height: "100vh",
+      borderRadius: "0px",
+      maxWidth: "none",
+      maxHeight: "none",
+      scrollTrigger: {
+        trigger: pin,
+        start: "center center",
+        end: "+=100%",
+        pin: pin,
+        pinSpacing: false,
+        scrub: true,
+        markers: true,
+      },
+    },
+  );
 });
