@@ -70,7 +70,7 @@ window.addEventListener("DOMContentLoaded", function () {
       scrollTrigger: {
         trigger: pin,
         start: "top top",
-        end: "+=1600",
+        end: "bottom",
         pin: pin,
         pinSpacing: true,
         scrub: true,
