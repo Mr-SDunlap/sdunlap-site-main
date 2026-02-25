@@ -28,7 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
     archiveBg,
     { width: "50vw", height: "50vh" },
     {
-      width: "100%",
+      width: "100vw",
       height: "100vh",
       maxWidth: "none",
       maxHeight: "none",

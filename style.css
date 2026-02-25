@@ -51,10 +51,6 @@ a {
   color: inherit;
 }
 
-section {
-  padding-left: 70px;
-}
-
 @media (max-width: 600px) {
   section {
     padding-left: 0px;
