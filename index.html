@@ -23,6 +23,7 @@
     <script src="./js/gsap-init.js" defer></script>
     <script src="./js/forms.js" defer></script>
     <script src="./js/gsap-portfolio.js" defer></script>
+    <script src="./js/projects.js" defer></script>
     <script src="./js/app.js" defer></script>
     <script src="./js/process-horizontal-scroll.js" defer></script>
   </head>
@@ -116,13 +117,6 @@
     </section>
     <section id="section_files">
       <div class="archive-pin">
-        <div class="archive-nav">
-          <a href="#project-one" class="p1">01</a>
-          <span></span>
-          <a href="#project-two" class="p2">02</a>
-          <span></span>
-          <a href="#project-three" class="p3">03</a>
-        </div>
         <div class="archive-background"></div>
       </div>
       <div class="content-container">
@@ -132,9 +126,17 @@
             A curated collection of assignments and projects I wish to preserve.
           </p>
         </div>
-        <div id="project-one" class="project-one"></div>
-        <div id="project-two" class="project-two"></div>
-        <div id="project-three" class="project-three"></div>
+        <div class="project-container">
+          <a class="project" href="#">
+            <div class="project-bg-image"></div>
+            <div class="info-box">
+              <span class="project-number"></span>
+              <h3 class="project-name"></h3>
+              <p class="project-description"></p>
+              <ul class="tools-used"></ul>
+            </div>
+          </a>
+        </div>
       </div>
     </section>
     <!-- <section id="section_featured">
