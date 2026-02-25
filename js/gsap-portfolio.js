@@ -8,16 +8,19 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const archivePin = document.querySelector(".archive-pin");
   const archiveBg = document.querySelector(".archive-background");
+  const contentContainer = document.querySelector(".content-container");
 
-  if (!archivePin || !archiveBg) return;
+  if (!archivePin || !archiveBg || !contentContainer) return;
 
   const tl = gsap.timeline({
     scrollTrigger: {
+      id: "archiveExpand",
       trigger: archivePin,
       start: "top top",
-      end: "+=100%", // adjust to taste
+      endTrigger: contentContainer,
+      end: "bottom bottom", // stay pinned until the content ends
       pin: archivePin,
-      pinSpacing: true,
+      pinSpacing: false,
       scrub: true,
       anticipatePin: 1,
       invalidateOnRefresh: true,
@@ -30,9 +33,11 @@ window.addEventListener("DOMContentLoaded", () => {
     {
       width: "100vw",
       height: "100vh",
-      maxWidth: "none",
-      maxHeight: "none",
       ease: "power2.out",
+      duration: 0.2,
     },
   );
+
+  // Hold the pinned state for the remaining scroll until content ends
+  tl.to({}, { duration: 1 });
 });
