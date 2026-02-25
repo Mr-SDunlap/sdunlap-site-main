@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", () => {
     scrollTrigger: {
       trigger: archivePin,
       start: "top top",
-      end: "+=150%", // adjust to taste
+      end: "+=100%", // adjust to taste
       pin: archivePin,
       pinSpacing: true,
       scrub: true,
@@ -28,7 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
     archiveBg,
     { width: "50vw", height: "50vh" },
     {
-      width: "100vw",
+      width: "100%",
       height: "100vh",
       maxWidth: "none",
       maxHeight: "none",

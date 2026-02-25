@@ -9,6 +9,7 @@
   const processSection = document.querySelector("#section_featured");
   const wrapper = document.querySelector(".process-wrapper");
   const cards = document.querySelectorAll(".process-card");
+  const archivePin = document.querySelector(".archive-pin");
 
   if (!processSection || !wrapper || !cards.length) return;
 
@@ -18,10 +19,12 @@
     xPercent: -totalScroll,
     ease: "none",
     scrollTrigger: {
-      trigger: processSection,
-      start: "top top",
+      trigger: archivePin || processSection,
+      start: "bottom top",
       end: `+=${cards.length * 100}%`, // Scroll distance based on number of cards
-      pin: true,
+      pin: processSection, // pin the Process section itself
+      pinSpacing: true,
+      markers: true,
       scrub: 1,
       // snap: 1 / (cards.length - 1), // Optional: snap to each card
       invalidateOnRefresh: true,
