@@ -15,7 +15,7 @@
       "description": "Complex infographic simplifying Cloud 2.0 concepts for C-level executives and stakeholders.",
       "outcome": "Adopted as primary sales material for Q3.",
       "button": "Explore",
-      "link": "https://google.com",
+      "link": "./archive/cloud-2-infographic.html",
       "image": "/",
       "number": "Project 01"
     },
@@ -26,7 +26,7 @@
       "description": "Interactive framework designed to showcase AI capabilities with a focus on user engagement and data visualization.",
       "outcome": "Increased user engagement by 40%.",
       "button": "Explore",
-      "link": "https://google.com",
+      "link": "./archive/ai-framework.html",
       "image": "./assets/main-photo/photo-of-stephen.webp",
       "number": "Project 02"
     },
@@ -37,7 +37,7 @@
       "description": "Enterprise level site search and UI built through collaboration with the Lumen UX team for user-centric design.",
       "outcome": "Improved usability and shipped a production-ready interface.",
       "button": "Explore",
-      "link": "https://google.com",
+      "link": "./archive/product-finder.html",
       "image": "./assets/main-photo/photo-of-stephen.webp",
       "number": "Project 03"
     }

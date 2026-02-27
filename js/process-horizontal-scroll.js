@@ -19,11 +19,11 @@
     xPercent: -totalScroll,
     ease: "none",
     scrollTrigger: {
-      trigger: archivePin || processSection,
-      start: "bottom top",
+      trigger: processSection,
+      start: "top top",
       end: `+=${cards.length * 100}%`, // Scroll distance based on number of cards
       pin: processSection, // pin the Process section itself
-      pinSpacing: true,
+      pinSpacing: false,
       markers: true,
       scrub: 1,
       // snap: 1 / (cards.length - 1), // Optional: snap to each card
@@ -48,6 +48,7 @@
           containerAnimation: gsap.getById("processTween"), // Note: need to assign ID if using containerAnimation, simplified below
           start: "left center",
           toggleActions: "play reverse play reverse",
+          pinSpacing: false,
         },
       });
     }

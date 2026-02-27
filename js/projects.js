@@ -15,7 +15,12 @@ window.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then((data) => {
-      const projects = Array.isArray(data?.projects) ? data.projects : [];
+      // Support both { projects: [...] } and bare [ ... ] JSON shapes
+      const projects = Array.isArray(data?.projects)
+        ? data.projects
+        : Array.isArray(data)
+        ? data
+        : [];
       if (!projects.length) return;
 
       projects.forEach((project, index) => {
@@ -31,6 +36,36 @@ window.addEventListener("DOMContentLoaded", () => {
         if (numberEl) {
           const fallbackNumber = String(index + 1).padStart(2, "0");
           numberEl.textContent = project.number || fallbackNumber;
+        }
+        // The card itself is the anchor (.project); set href on it.
+        let linkEl = card.matches(".project")
+          ? card
+          : card.querySelector(".project");
+        if (!linkEl && card.closest) linkEl = card.closest(".project");
+        if (linkEl) {
+          // Accept several possible fields for the link, fallback to slug->archive path
+          const url =
+            project.link ||
+            project.href ||
+            project.url ||
+            project.page ||
+            (project.slug ? `archive/${project.slug}.html` : "#");
+          linkEl.setAttribute("href", url);
+          // Debugging aid (remove if noisy)
+          // console.debug("Set project href", project.projectName, url);
+          // Open external links in a new tab for safety
+          if (/^https?:\/\//i.test(url)) {
+            linkEl.setAttribute("target", "_blank");
+            linkEl.setAttribute("rel", "noopener noreferrer");
+          } else {
+            linkEl.removeAttribute("target");
+            linkEl.removeAttribute("rel");
+          }
+          // Helpful label for accessibility
+          const label = project.projectName
+            ? `Open ${project.projectName}`
+            : "Open project";
+          linkEl.setAttribute("aria-label", label);
         }
 
         const descriptionEl = card.querySelector(".project-description");

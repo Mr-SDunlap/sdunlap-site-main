@@ -17,15 +17,10 @@ window.addEventListener("DOMContentLoaded", () => {
     scrollTrigger: {
       id: "archiveExpand",
       trigger: archivePin,
-      start: "top top",
-      // Use the section as the endTrigger so transforms on .content-container
-      // don't shorten the calculated end point.
+      start: "top 50%",
       endTrigger: archiveSection,
-      end: "bottom bottom", // stay pinned until the section content ends
-      pin: archivePin,
-      pinSpacing: false,
+      end: "bottom bottom",
       scrub: true,
-      anticipatePin: 1,
       invalidateOnRefresh: true,
       markers: true,
     },
@@ -38,7 +33,7 @@ window.addEventListener("DOMContentLoaded", () => {
       width: "100vw",
       height: "100vh",
       ease: "power2.out",
-      duration: 0.2,
+      duration: 0.5,
     },
   );
 
