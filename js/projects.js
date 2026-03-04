@@ -7,6 +7,16 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const template = existingCards[0];
 
+  // Simple slugify to build dynamic page links consistently
+  const slugify = (s) =>
+    (s || "")
+      .toString()
+      .trim()
+      .toLowerCase()
+      .replace(/&/g, " and ")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
   fetch("./data/projects.json")
     .then((response) => {
       if (!response.ok) {
@@ -19,8 +29,8 @@ window.addEventListener("DOMContentLoaded", () => {
       const projects = Array.isArray(data?.projects)
         ? data.projects
         : Array.isArray(data)
-        ? data
-        : [];
+          ? data
+          : [];
       if (!projects.length) return;
 
       projects.forEach((project, index) => {
@@ -43,24 +53,18 @@ window.addEventListener("DOMContentLoaded", () => {
           : card.querySelector(".project");
         if (!linkEl && card.closest) linkEl = card.closest(".project");
         if (linkEl) {
-          // Accept several possible fields for the link, fallback to slug->archive path
-          const url =
-            project.link ||
-            project.href ||
-            project.url ||
-            project.page ||
-            (project.slug ? `archive/${project.slug}.html` : "#");
+          // Route all projects to the dynamic page using a derived slug
+          const slug =
+            project.slug || slugify(project.projectName || project.name || "");
+          const url = slug
+            ? `archive/dynamic-project-page.html?slug=${encodeURIComponent(slug)}`
+            : "#";
           linkEl.setAttribute("href", url);
           // Debugging aid (remove if noisy)
           // console.debug("Set project href", project.projectName, url);
-          // Open external links in a new tab for safety
-          if (/^https?:\/\//i.test(url)) {
-            linkEl.setAttribute("target", "_blank");
-            linkEl.setAttribute("rel", "noopener noreferrer");
-          } else {
-            linkEl.removeAttribute("target");
-            linkEl.removeAttribute("rel");
-          }
+          // Dynamic internal links should not open in a new tab
+          linkEl.removeAttribute("target");
+          linkEl.removeAttribute("rel");
           // Helpful label for accessibility
           const label = project.projectName
             ? `Open ${project.projectName}`
@@ -107,9 +111,7 @@ window.addEventListener("DOMContentLoaded", () => {
       }
 
       if (typeof gsap !== "undefined") {
-        const cards = container.querySelectorAll(
-          ":scope > .project:not(:first-child)",
-        );
+        const cards = container.querySelectorAll(":scope > .project");
 
         cards.forEach((card) => {
           if (card.dataset.gsapHover === "true") return;
@@ -144,6 +146,16 @@ window.addEventListener("DOMContentLoaded", () => {
             });
           });
         });
+      }
+
+      // Ensure GSAP ScrollTrigger recalculates pin spacing after dynamic content
+      // is injected; without this, the archive pin may end too early and hide
+      // content that follows (e.g., the footer).
+      if (
+        window.ScrollTrigger &&
+        typeof window.ScrollTrigger.refresh === "function"
+      ) {
+        window.ScrollTrigger.refresh();
       }
     })
     .catch((error) => {

@@ -50,7 +50,6 @@ a {
   text-decoration: none;
   color: inherit;
 }
-
 @media (max-width: 600px) {
   section {
     padding-left: 0px;
@@ -170,6 +169,15 @@ a {
 body {
   position: relative;
   overflow-x: hidden;
+}
+
+/* Ensure GSAP ScrollTrigger markers are visible above fixed UI */
+.gsap-marker-start,
+.gsap-marker-end,
+.gsap-marker-scroller-start,
+.gsap-marker-scroller-end {
+  z-index: 2147483646 !important;
+  pointer-events: none;
 }
 
 /* Navigation styles ==================*/
@@ -727,6 +735,7 @@ body {
   position: relative;
   padding-bottom: 20px;
   z-index: 10;
+  background-color: var(--dark-coffee);
 }
 
 .section-divider {
@@ -1014,15 +1023,10 @@ body {
     position: relative;
     width: 100%;
     min-height: 100vh; /* ensure it occupies viewport height in flow */
+    overflow: hidden; /* contain project grid while pinned/animating */
   }
 
   & .archive-background {
-    position: absolute;
-    top: 0%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50vw;
-    height: 50vh;
     background-image: linear-gradient(
       to bottom,
       rgba(199, 202, 213, 0.25),
@@ -1034,21 +1038,22 @@ body {
     width: clamp(300px, 90%, 1400px);
     margin: 0 auto;
     position: absolute;
-    top: 50%;
+    top: 0%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 50%);
     padding-bottom: 20px;
     z-index: 1;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    border: solid 1px var(--grey);
   }
   .archive_title-box {
     text-align: center;
     z-index: 1;
+    padding-bottom: 40px;
   }
   .archive-title {
-    padding-top: 40px;
     font-size: 75px;
     font-weight: 700;
     color: var(--dark-coffee);
@@ -1058,6 +1063,7 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px;
+    grid-auto-rows: minmax(220px, auto);
     height: 100vh;
     max-height: 700px;
 
@@ -1066,14 +1072,16 @@ body {
       align-content: flex-end;
 
       &:nth-child(1) {
-        grid-column: span 2;
-        grid-row: span 2;
+        grid-column: 1 / span 2;
+        grid-row: 1 / span 3;
       }
       &:nth-child(2) {
-        grid-column: span 2;
+        grid-column: 3 / span 2;
+        grid-row: 5 / span 3;
       }
       &:nth-child(3) {
-        grid-column: span 2;
+        grid-column: 1 / span 2;
+        grid-row: 9 / span 3;
       }
     }
   }
@@ -1148,7 +1156,7 @@ body {
       }
     }
   }
-  .project-container > .project:not(:first-child) {
+  .project-container > .project {
     & .project-description {
       height: 0;
       opacity: 0;
@@ -1158,219 +1166,6 @@ body {
       height: 0;
       opacity: 0;
       overflow: hidden;
-    }
-  }
-  /*### FOOTER #########################################*/
-  .footer {
-    position: relative;
-    height: 200px;
-    background-color: var(--platinum);
-    margin-left: 50px;
-    z-index: 100;
-  }
-
-  @media (max-width: 600px) {
-    .footer {
-      margin-left: 0;
-    }
-  }
-
-  .footer_container {
-    position: relative;
-    width: clamp(300px, 97.5%, 1400px);
-    margin: 0 auto;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .footer_container ul {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-  }
-
-  .footer_container ul a {
-    text-decoration: underline;
-  }
-
-  /* SECTION BANNER */
-  .animated-banner {
-    z-index: 1000;
-    margin: 0 auto;
-    white-space: nowrap;
-    overflow: hidden;
-    background-color: var(--manilla);
-    border-radius: 50vw;
-
-    & .marquee-1 {
-      display: inline-block;
-      animation: marquee 20s linear infinite;
-      font-weight: 700;
-      color: var(--navy);
-      font-size: 14px;
-      font-weight: 400;
-    }
-
-    & .marquee-2 {
-      display: inline-block;
-      animation-delay: 10s;
-      animation: marquee 20s linear infinite;
-      color: var(--navy);
-      font-size: 14px;
-      font-weight: 400;
-    }
-  }
-
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-
-    to {
-      transform: translateX(-100%);
-    }
-  }
-
-  /* Modal styles */
-  .modal {
-    position: fixed;
-    inset: 0;
-    display: none;
-    /* toggled via JS */
-    align-items: center;
-    justify-content: center;
-    z-index: 2147483650;
-  }
-
-  .modal[aria-hidden="false"] {
-    display: flex;
-  }
-
-  .modal-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.56);
-    backdrop-filter: blur(3px);
-    opacity: 0;
-  }
-
-  .modal-panel {
-    position: relative;
-    background: var(--white);
-    color: var(--off-black);
-    width: min(720px, 92vw);
-    max-width: 720px;
-    padding: 28px;
-    border-radius: 8px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-    transform: scale(0.98);
-    opacity: 0;
-  }
-
-  .modal-close {
-    position: absolute;
-    right: 12px;
-    top: 8px;
-    background: transparent;
-    border: none;
-    font-size: 22px;
-    cursor: pointer;
-  }
-
-  .modal-panel h2 {
-    margin: 0 0 12px 0;
-  }
-
-  .modal-panel form {
-    display: grid;
-    gap: 8px;
-  }
-
-  .modal-panel label {
-    font-size: 13px;
-    color: var(--grey);
-  }
-
-  .modal-panel input,
-  .modal-panel textarea {
-    width: 100%;
-    padding: 8px 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-  }
-
-  .modal-panel textarea {
-    /* Prevent users from resizing the message box */
-    resize: none;
-    /* sensible default height with scroll when content overflows */
-    min-height: 120px;
-    max-height: 320px;
-    overflow: auto;
-  }
-
-  /* Success toast inside modal */
-  .form-toast {
-    position: absolute;
-    right: 16px;
-    top: 12px;
-    background: var(--forest);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 13px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    opacity: 0;
-    transform: translateY(-6px) scale(0.98);
-    transition:
-      opacity 220ms ease,
-      transform 220ms ease;
-    pointer-events: none;
-    z-index: 10;
-  }
-
-  .form-toast.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    pointer-events: auto;
-  }
-
-  .modal-actions {
-    display: flex;
-    gap: 8px;
-    justify-content: flex-end;
-    margin-top: 8px;
-  }
-
-  .btn {
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    background: transparent;
-    cursor: pointer;
-  }
-
-  .btn.primary {
-    background: var(--navy);
-    color: white;
-    border-color: var(--navy);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .modal-overlay,
-    .modal-panel {
-      transition: none !important;
-    }
-
-    /* Split text chars used by microinteraction.js */
-    .modal-overlay .split-char,
-    .modal-panel .split-char {
-      display: inline-block;
-      white-space: pre;
-      will-change: transform, opacity;
     }
   }
 
@@ -1427,5 +1222,193 @@ body {
     p {
       font-size: 14px;
     }
+  }
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  /* toggled via JS */
+  align-items: center;
+  justify-content: center;
+  z-index: 2147483650;
+}
+
+.modal[aria-hidden="false"] {
+  display: flex;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.56);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+}
+
+.modal-panel {
+  position: relative;
+  background: var(--white);
+  color: var(--off-black);
+  width: min(720px, 92vw);
+  max-width: 720px;
+  padding: 28px;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  transform: scale(0.98);
+  opacity: 0;
+}
+
+.modal-close {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.modal-panel h2 {
+  margin: 0 0 12px 0;
+}
+
+.modal-panel form {
+  display: grid;
+  gap: 8px;
+}
+
+.modal-panel label {
+  font-size: 13px;
+  color: var(--grey);
+}
+
+.modal-panel input,
+.modal-panel textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.modal-panel textarea {
+  /* Prevent users from resizing the message box */
+  resize: none;
+  /* sensible default height with scroll when content overflows */
+  min-height: 120px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+/* Success toast inside modal */
+.form-toast {
+  position: absolute;
+  right: 16px;
+  top: 12px;
+  background: var(--forest);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transform: translateY(-6px) scale(0.98);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.form-toast.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.btn {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: var(--navy);
+  color: white;
+  border-color: var(--navy);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-overlay,
+  .modal-panel {
+    transition: none !important;
+  }
+
+  /* Split text chars used by microinteraction.js */
+  .modal-overlay .split-char,
+  .modal-panel .split-char {
+    display: inline-block;
+    white-space: pre;
+    will-change: transform, opacity;
+  }
+}
+
+/*### FOOTER #########################################*/
+/* Semantic footer styles (for pages that use <footer>) */
+.footer {
+  background-color: var(--dark-coffee);
+  position: relative;
+  padding-block: 40px;
+  padding-left: 70px;
+  z-index: 10;
+
+  .site-links {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-inline: 20px;
+
+    h4 {
+      color: var(--orange);
+      font-weight: 500;
+      font-size: 24px;
+      padding-bottom: 10px;
+    }
+    li {
+      list-style: none;
+    }
+
+    a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 300;
+      transition: color 0.25s ease;
+
+      &:hover {
+        color: var(--orange);
+      }
+    }
+  }
+
+  p {
+    color: var(--white);
+    text-align: center;
+    font-weight: 300;
+  }
+}
+@media (max-width: 600px) {
+  .footer {
+    padding-left: 0;
   }
 }

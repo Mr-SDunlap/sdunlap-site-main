@@ -9,6 +9,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const archivePin = document.querySelector(".archive-pin");
   const archiveBg = document.querySelector(".archive-background");
   const contentContainer = document.querySelector(".content-container");
+  const projectContainer = document.querySelector(".project-container");
   const archiveSection = document.querySelector("#section_files");
 
   if (!archivePin || !archiveBg || !contentContainer || !archiveSection) return;
@@ -40,14 +41,13 @@ window.addEventListener("DOMContentLoaded", () => {
       position: "absolute",
       top: "50%",
       left: "50%",
-      width: "50%",
-      height: "50%",
+      width: "50vw",
+      height: "50vh",
       transform: "translate(-50%, -50%)",
     },
     {
-      width: "100%",
-      height: "100%",
-      transform: "translate(-100%, -50%)",
+      width: "100vw",
+      height: "100vh",
       ease: "power2.out",
       duration: 0.25,
     },
@@ -80,6 +80,51 @@ window.addEventListener("DOMContentLoaded", () => {
     anticipatePin: 1,
     animation: innerTL,
   });
+
+  // Simple: each project fades in when it comes into view
+  const projects = document.querySelectorAll(".project");
+  const addReveal = (card) => {
+    if (!card || card.dataset.fadeInit === "1") return;
+    card.dataset.fadeInit = "1";
+
+    // If the archive doesn't have inner overflow, keep cards visible
+    if (getContentOverflow() <= 0) {
+      gsap.set(card, { autoAlpha: 1 });
+      return;
+    }
+
+    gsap.set(card, { autoAlpha: 0 });
+    ScrollTrigger.create({
+      trigger: card,
+      start: "top 90%",
+      containerAnimation: innerTL,
+      once: true,
+      markers: true,
+      onEnter: () =>
+        gsap.to(card, { autoAlpha: 1, duration: 0.35, ease: "power1.out" }),
+    });
+  };
+
+  projects.forEach(addReveal);
+
+  // Watch for dynamically added project cards from projects.js
+  if (projectContainer) {
+    const mo = new MutationObserver((mutations) => {
+      mutations.forEach((m) => {
+        m.addedNodes.forEach((node) => {
+          if (node.nodeType !== 1) return;
+          if (node.matches && node.matches(".project")) addReveal(node);
+          else if (node.querySelectorAll)
+            node.querySelectorAll(".project").forEach(addReveal);
+        });
+      });
+      // Wire up any newly-added cards
+      projectContainer.querySelectorAll(".project").forEach(addReveal);
+      ScrollTrigger.refresh();
+    });
+    mo.observe(projectContainer, { childList: true, subtree: true });
+  }
+
   // Keep ScrollTrigger measurements accurate as content/viewport changes
   const resync = () => ScrollTrigger.refresh();
   window.addEventListener("load", () => resync(), { once: true });
