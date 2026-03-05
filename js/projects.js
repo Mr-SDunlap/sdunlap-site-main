@@ -102,6 +102,14 @@ window.addEventListener("DOMContentLoaded", () => {
             });
           }
         }
+
+        // Attach reveal direction class: odd (1-based) -> left, even -> right
+        const target = linkEl || card;
+        if (target) {
+          target.classList.remove("reveal-left", "reveal-right");
+          const isOdd = (index % 2) === 0; // index 0 -> 1st (odd)
+          target.classList.add(isOdd ? "reveal-left" : "reveal-right");
+        }
       });
 
       if (existingCards.length > projects.length) {
@@ -146,6 +154,11 @@ window.addEventListener("DOMContentLoaded", () => {
             });
           });
         });
+      }
+
+      // Wire up reveal animations for newly added cards
+      if (window.RevealFx && typeof window.RevealFx.refresh === "function") {
+        window.RevealFx.refresh();
       }
 
       // Ensure GSAP ScrollTrigger recalculates pin spacing after dynamic content

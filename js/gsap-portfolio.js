@@ -49,7 +49,7 @@ window.addEventListener("DOMContentLoaded", () => {
       height: "100%",
       transform: "translate(-100%, -50%)",
       ease: "power2.out",
-      duration: 0.25,
+      duration: 0.1,
     },
     0,
   );
