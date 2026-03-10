@@ -25,9 +25,9 @@ window.addEventListener("DOMContentLoaded", () => {
   };
 
   const computeArchiveHold = () => {
-    const viewport = window.innerHeight || 0;
-    // Hold for at least one viewport, but extend by actual container overflow
-    return Math.max(viewport, getContentOverflow());
+    // Most accurate: pin exactly for the content overflow
+    // so there's no trailing space beyond what the content requires.
+    return getContentOverflow();
   };
 
   // Build an inner timeline that the ScrollTrigger will drive.
@@ -37,9 +37,6 @@ window.addEventListener("DOMContentLoaded", () => {
   innerTL.fromTo(
     archiveBg,
     {
-      position: "absolute",
-      top: "50%",
-      left: "50%",
       width: "50%",
       height: "50%",
       transform: "translate(-50%, -50%)",
@@ -47,7 +44,7 @@ window.addEventListener("DOMContentLoaded", () => {
     {
       width: "100%",
       height: "100%",
-      transform: "translate(-100%, -50%)",
+      //   transform: "translate(-100%, -50%)",
       ease: "power2.out",
       duration: 0.1,
     },
@@ -74,6 +71,7 @@ window.addEventListener("DOMContentLoaded", () => {
     start: "top top",
     end: () => `+=${computeArchiveHold()}`,
     pin: archivePin,
+    // Reserve space so the next section starts after the pin.
     pinSpacing: true,
     scrub: true,
     invalidateOnRefresh: true,

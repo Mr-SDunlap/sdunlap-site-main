@@ -88,6 +88,18 @@
     setHTML(".design-subheader", project.design || "");
     setHTML(".outcome-subheader", project.outcome || "");
 
+    // Section titles populated from JSON (supports dashed keys)
+    // .design-title-text <= project["design-title"] (fallbacks to empty)
+    setHTML(".ux-title-text", project["ux-title"] || project.uxTitle || "");
+    setHTML(
+      ".design-title-text",
+      project["design-title"] || project.designTitle || "",
+    );
+    setHTML(
+      ".outcome-title-text",
+      project["outcome-title"] || project.outcomeTitle || "",
+    );
+
     // Previous / Next links
     const i = project.index;
     const prev = enhanced[(i - 1 + enhanced.length) % enhanced.length];

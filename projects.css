@@ -13,6 +13,7 @@
   --ruby: #841a1a;
   --navy: #08273b;
   --orange: #ff611a;
+  --orange-a: 255, 99, 26;
   --pale-yellow: #d4bc6e;
   --manilla: #f4dbb3;
 
@@ -113,6 +114,8 @@ body {
 .outcome {
   width: clamp(275px, 90%, 1400px);
   margin: 0 auto;
+  font-size: 1.3rem;
+  line-height: 1.6;
 }
 
 .ux,
@@ -124,17 +127,24 @@ body {
 .ux-title,
 .design-title,
 .outcome-title {
-  font-weight: 600;
-  font-size: 36px;
-  color: var(--dark-coffee);
+  font-weight: 800;
+  font-size: 10rem;
+  color: rgba(var(--orange-a), 0.5);
   padding-bottom: 20px;
+}
+.ux-title-text,
+.design-title-text,
+.outcome-title-text {
+  font-weight: 500;
+  font-size: 2rem;
+  padding-bottom: 40px;
 }
 
 .ux-subheader,
 .design-subheader,
 .outcome-subheader {
   font-weight: 300;
-  font-size: 18px;
+  font-size: 24px;
   line-height: 1.6;
   color: var(--text-black);
 }
