@@ -95,7 +95,80 @@ html {
   font-family: "Outfit", sans-serif;
 }
 body {
-  margin: 0;
+  padding-left: 60px;
+}
+
+/* === Custom Cursor (invert on hover) ===================== */
+/* Enabled via body.custom-cursor-enabled class from js/cursor.js */
+@media (hover: hover) and (pointer: fine) {
+  body.custom-cursor-enabled {
+    cursor: none;
+    /* confine mix-blend effects to the page content */
+    isolation: isolate;
+  }
+
+  .cursor-invert {
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    z-index: 9999;
+    /* Position driven via CSS variables for snappy updates */
+    --cursor-scale: 1;
+    --cursor-press: 1;
+    --cx: 0px;
+    --cy: 0px;
+    transform: translate(var(--cx), var(--cy));
+    /* No transform transition on the mover for immediate tracking */
+    transition: opacity 0.15s ease;
+    will-change: transform;
+  }
+  .cursor-invert.hidden {
+    opacity: 0;
+  }
+  .cursor-invert.click {
+    --cursor-press: 0.85;
+  }
+
+  /* Enlarge over interactive elements */
+  .cursor-invert.interactive {
+    --cursor-scale: 1.6;
+  }
+
+  /* Visual circle lives on a child pseudo-element so only scale eases */
+  .cursor-invert::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--cursor-size, 36px);
+    height: var(--cursor-size, 36px);
+    border-radius: 50%;
+    pointer-events: none;
+    background: #ffffff;
+    mix-blend-mode: difference; /* white ⊕ difference == invert */
+    transform: translate(-50%, -50%)
+      scale(calc(var(--cursor-scale, 1) * var(--cursor-press, 1)));
+    transition: transform 250ms ease; /* 250ms enlarge/shrink */
+  }
+
+  /* Where supported, use backdrop-filter for precise inversion */
+  @supports (
+    (-webkit-backdrop-filter: invert(1)) or (backdrop-filter: invert(1))
+  ) {
+    .cursor-invert::before {
+      mix-blend-mode: normal;
+      background: rgba(255, 255, 255, 0);
+      -webkit-backdrop-filter: invert(1);
+      backdrop-filter: invert(1);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-invert {
+    transition: none;
+  }
 }
 
 .outfit-100 {
@@ -189,10 +262,9 @@ body {
   background: var(--black);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(5px);
-  height: 95vh;
+  height: 100vh;
   width: 60px;
   z-index: 9999;
-  border-radius: 0 0.3rem 0.3rem 0;
   overflow: hidden;
 }
 
@@ -426,8 +498,8 @@ body {
 .background-lines {
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: 60px;
+  width: calc(100% - 60px);
   height: 100%;
   display: grid;
   grid-template-columns: repeat(17, 1fr);
@@ -733,83 +805,142 @@ body {
   height: 100vh;
   position: relative;
   z-index: 10;
-  /* background-image: linear-gradient(
-    45deg,
-    rgba(19, 25, 30, 1) 55%,
-    rgba(35, 46, 54, 1) 100%
-  ); */
+  background-color: var(--dark-coffee);
 }
 .about-title {
-  position: absolute;
-  top: 0;
-  left: 0;
   font-size: 10rem;
+  transform: translateY(-30px);
   font-weight: 700;
-  color: rgba(30, 37, 44, 0.25);
+  color: rgba(64, 81, 98, 0.25);
 }
 .about-container {
   position: relative;
-  width: clamp(300px, 90%, 1400px);
+  width: clamp(300px, 90%, 1440px);
   margin: 0 auto;
   height: 100%;
   & .about-bio {
-    width: clamp(300px, 60%, 700px);
     font-weight: 300;
     font-size: 24px;
     line-height: 1.6;
     color: var(--text-black);
   }
   h3 {
-    color: var(--orange);
-    font-size: 36px;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    color: var(--navy);
+    font-size: 48px;
     padding-bottom: 20px;
   }
 }
 .about-text {
-  position: absolute;
-  left: 0;
-  top: 30%;
-}
-.image-cover {
-  position: absolute;
-  top: 80%;
-  right: 0;
-  width: clamp(300px, 60%, 700px);
-  height: 30%;
-  transform: translateY(-50%);
-  z-index: 0;
-  /* Visual effect handled by ::before so buttons stay legible */
-  position: absolute;
+  position: relative;
+  z-index: 10;
+  width: clamp(300px, 100%, 850px);
+  transform: translateY(-30px);
 
-  & button {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border: none;
+  & .about-bio {
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 300;
+    padding-bottom: 20px;
+  }
+
+  & .meet-me-btn {
     padding: 10px 20px;
+    border-radius: 0.3rem;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
+  }
+  & .about-connect {
+    padding: 10px 20px;
+    border-radius: 0.3rem;
+    font-size: 16px;
+    font-weight: 500;
   }
 }
-.image-cover::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  /* Slight transparency so inverted backdrop is visible */
-  background-color: rgba(255, 98, 14, 0.589);
-  /* Invert what's behind this element (overlapped parts of the image) */
-  /* -webkit-backdrop-filter: invert(100%); */
-  /* backdrop-filter: invert(100%); */
-  pointer-events: none;
+.about-buttons {
+  display: flex;
+  gap: 20px;
 }
+
+.about-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-top: 80px;
+
+  & .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-left: 2px solid var(--orange);
+    padding-left: 15px;
+  }
+  & .stat-number {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--orange);
+  }
+  & .stat-label {
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--text-black);
+  }
+}
+.top-name,
+.bottom-name {
+  font-size: clamp(3rem, 80vw, 8rem);
+  font-weight: 800;
+  position: absolute;
+  bottom: 5%;
+  left: 80%;
+  transform: translateX(-50%);
+  font-family: "Arial Black", sans-serif;
+  text-align: center;
+  line-height: 1;
+}
+.top-name {
+  z-index: 5;
+  color: white;
+  text-shadow:
+    -2px -2px 0 #ffffff,
+    2px -2px 0 #ffffff,
+    -2px 2px 0 #ffffff,
+    2px 2px 0 #ffffff;
+}
+@supports ((text-stroke: 2px black) or (-webkit-text-stroke: 2px black)) {
+  .top-name {
+    color: transparent;
+    -webkit-text-stroke: 2px white;
+    text-stroke: 2px black;
+    text-shadow: none;
+  }
+}
+.bottom-name {
+  z-index: 0;
+  color: var(--orange);
+}
+
 .profile-image {
   position: absolute;
   bottom: 0;
-  right: 10%;
-  width: clamp(200px, 30%, 400px);
+  left: 80%;
+  transform: translateX(-50%);
+  width: clamp(200px, 50%, 500px);
   height: auto;
   z-index: 1;
+}
+.profile-image::after {
+  content: "hello";
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  width: 50%;
+  aspect-ratio: 1/1;
+  border-radius: 50vw;
+  background-color: var(--orange);
 }
 /* Scope blending to the about block so fallbacks don't affect the whole page */
 .about-container {
@@ -1250,7 +1381,6 @@ body {
   );
   position: relative;
   padding-block: 40px;
-  padding-left: 70px;
   z-index: 10;
 
   .site-links {
@@ -1288,6 +1418,8 @@ body {
     font-weight: 300;
     border-top: 1px solid var(--orange);
     padding-top: 30px;
+    display: inline-block;
+    margin: 0 auto;
   }
 }
 @media (max-width: 600px) {
