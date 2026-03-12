@@ -19,7 +19,7 @@ html {
   --ruby: #841a1a;
   --navy: #08273b;
   --orange: #ff611a;
-  --pale-yellow: #d4bc6e;
+  --pale-yellow: #fbda6b;
   --manilla: #f4dbb3;
 
   --grey: #8a9396;
@@ -96,6 +96,20 @@ html {
 }
 body {
   padding-left: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+@media (max-width: 1000px) {
+  body {
+    gap: 80px;
+  }
+}
+@media (max-width: 600px) {
+  body {
+    padding-left: 0;
+    gap: 40px;
+  }
 }
 
 /* === Custom Cursor (invert on hover) ===================== */
@@ -536,6 +550,12 @@ body {
     transition: all 0.2s ease;
   }
 }
+@media (max-width: 600px) {
+  .background-lines {
+    left: 0;
+    width: 100%;
+  }
+}
 
 @keyframes rain {
   0% {
@@ -802,16 +822,21 @@ body {
 
 /*### ABOUT #########################################*/
 #section_about {
-  height: 100vh;
   position: relative;
   z-index: 10;
-  background-color: var(--dark-coffee);
 }
 .about-title {
-  font-size: 10rem;
-  transform: translateY(-30px);
+  font-size: 125px;
+  transform: translateY(10px);
   font-weight: 700;
-  color: rgba(64, 81, 98, 0.25);
+  color: rgba(64, 81, 98, 0.15);
+
+  @media (max-width: 1000px) {
+    font-size: 85px;
+  }
+  @media (max-width: 600px) {
+    font-size: 60px;
+  }
 }
 .about-container {
   position: relative;
@@ -824,20 +849,18 @@ body {
     line-height: 1.6;
     color: var(--text-black);
   }
-  h3 {
-    position: absolute;
-    top: 100px;
-    left: 0;
-    color: var(--navy);
-    font-size: 48px;
-    padding-bottom: 20px;
-  }
 }
 .about-text {
   position: relative;
   z-index: 10;
   width: clamp(300px, 100%, 850px);
   transform: translateY(-30px);
+
+  & h3 {
+    color: var(--orange);
+    font-size: 48px;
+    padding-bottom: 20px;
+  }
 
   & .about-bio {
     font-size: 18px;
@@ -851,6 +874,8 @@ body {
     border-radius: 0.3rem;
     font-size: 16px;
     font-weight: 500;
+    background-color: var(--dark-coffee);
+    color: var(--white);
   }
   & .about-connect {
     padding: 10px 20px;
@@ -862,6 +887,12 @@ body {
 .about-buttons {
   display: flex;
   gap: 20px;
+}
+@media (max-width: 600px) {
+  .about-buttons {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 
 .about-stats {
@@ -890,6 +921,7 @@ body {
 }
 .top-name,
 .bottom-name {
+  display: none;
   font-size: clamp(3rem, 80vw, 8rem);
   font-weight: 800;
   position: absolute;
@@ -923,6 +955,7 @@ body {
 }
 
 .profile-image {
+  display: none;
   position: absolute;
   bottom: 0;
   left: 80%;
@@ -1019,33 +1052,10 @@ body {
   min-height: 100vh;
   position: relative;
 
-  & .archive-pin {
-    position: relative;
-    width: 100%;
-    min-height: 100vh; /* ensure it occupies viewport height in flow */
-    overflow: hidden; /* contain project grid while pinned/animating */
-  }
-
-  & .archive-background {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-image: linear-gradient(
-      to bottom,
-      rgba(199, 202, 213, 0.25),
-      rgba(19, 25, 30, 0.75)
-    );
-    z-index: 0;
-  }
   .content-container {
     width: clamp(300px, 90%, 1400px);
+    height: auto;
     margin: 0 auto;
-    position: absolute;
-    top: 0%;
-    left: 50%;
-    transform: translate(-50%, 15%);
-    padding-bottom: 20px;
     z-index: 1;
     display: flex;
     flex-direction: column;
@@ -1054,7 +1064,7 @@ body {
   .archive_title-box {
     text-align: center;
     z-index: 1;
-    padding-bottom: 100px;
+    padding-bottom: 40px;
   }
   .archive-title {
     font-size: 75px;
@@ -1067,10 +1077,9 @@ body {
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px;
     grid-auto-rows: minmax(220px, auto);
-    height: 100vh;
-    max-height: 700px;
-
-    & .project {
+  }
+  @media (min-width: 600px) {
+    .project {
       background-color: var(--white);
       align-content: flex-end;
 
@@ -1092,7 +1101,6 @@ body {
     .project-container {
       grid-template-columns: 1fr;
       height: auto;
-      max-height: none;
     }
 
     .project-container > .project {
@@ -1110,7 +1118,8 @@ body {
     gap: 5px;
     position: relative;
     z-index: 1;
-    background-color: rgba(199, 202, 213, 0.5);
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
   }
   .project {
     position: relative;
@@ -1140,12 +1149,12 @@ body {
       font-size: 28px;
       font-weight: 600;
       line-height: 1.6;
-      color: var(--off-black);
+      color: var(--white);
     }
     & .project-description {
       font-size: 18px;
       font-weight: 300;
-      color: var(--off-black);
+      color: var(--white);
       line-height: 1.4;
       padding-bottom: 10px;
     }
@@ -1158,7 +1167,7 @@ body {
         font-size: 14px;
         color: var(--dark-coffee);
         padding: 4px 8px;
-        background-color: var(--white);
+        background-color: var(--pale-yellow);
         border-radius: 50vw;
       }
     }
@@ -1374,33 +1383,43 @@ body {
 /*### FOOTER #########################################*/
 /* Semantic footer styles (for pages that use <footer>) */
 .footer {
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     45deg,
     rgba(19, 25, 30, 1) 55%,
     rgba(35, 46, 54, 1) 100%
-  );
+  ); */
+  background-color: var(--dark-coffee);
   position: relative;
   padding-block: 40px;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .site-links {
     display: flex;
     justify-content: space-between;
-    gap: 20px;
+    gap: 100px;
     padding-inline: 20px;
     padding-bottom: 30px;
+    align-self: flex-end;
 
-    h4 {
+    & ul {
+      padding-left: 15px;
+      border-left: solid 1px var(--orange);
+    }
+
+    & h4 {
       color: var(--orange);
       font-weight: 500;
       font-size: 24px;
       padding-bottom: 10px;
     }
-    li {
+    & li {
       list-style: none;
     }
 
-    a {
+    & a {
       color: var(--white);
       text-decoration: none;
       font-weight: 300;
@@ -1416,10 +1435,10 @@ body {
     color: var(--white);
     text-align: center;
     font-weight: 300;
-    border-top: 1px solid var(--orange);
-    padding-top: 30px;
-    display: inline-block;
-    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.25);
+    padding: 20px;
+    border-radius: 1rem;
+    margin: 0 15px;
   }
 }
 @media (max-width: 600px) {
