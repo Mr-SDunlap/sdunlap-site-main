@@ -28,6 +28,56 @@
     if (el && url) el.style.backgroundImage = `url("${url}")`;
   }
 
+  function escapeHtml(s) {
+    if (s == null) return "";
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  // Resolve asset paths for pages inside /archive so that values like
+  // "assets/..." or "./assets/..." point to the root-level assets folder.
+  function resolveAsset(url) {
+    if (!url) return "";
+    const s = String(url).trim();
+    // Absolute or protocol-relative URLs
+    if (/^(?:https?:)?\/\//.test(s)) return s;
+    // Root-relative URL already fine
+    if (s.startsWith("/")) return s;
+    // Strip a leading ./ so we can normalize consistently
+    const cleaned = s.startsWith("./") ? s.slice(2) : s;
+    // The dynamic page lives at /archive, so go up one level
+      return `../${cleaned}`;
+  }
+
+  function normalizeClassToken(v) {
+    return String(v || "")
+      .trim()
+      .replace(/^[.#\s]+/g, "")
+      .replace(/[^a-zA-Z0-9_-]+/g, "-");
+  }
+
+  function parseUXPlanning(planning) {
+    const out = { sectionTitle: "", buttonOne: null, buttonTwo: null };
+    if (Array.isArray(planning)) {
+      planning.forEach((entry) => {
+        if (entry && typeof entry === "object") {
+          if ("section-title" in entry) out.sectionTitle = entry["section-title"] || "";
+          if ("button-one" in entry && Array.isArray(entry["button-one"])) {
+            out.buttonOne = entry["button-one"][0] || null;
+          }
+          if ("button-two" in entry && Array.isArray(entry["button-two"])) {
+            out.buttonTwo = entry["button-two"][0] || null;
+          }
+        }
+      });
+    }
+    return out;
+  }
+
   async function load() {
     const params = new URLSearchParams(location.search);
     const wantedSlug =
@@ -78,15 +128,180 @@
     document.title = project.projectName
       ? `${project.projectName} — SDUNLAP`
       : document.title;
+    // Support both old and new hero markup
+    // Hero section header (e.g., "Project 01") from JSON
+    setText(
+      ".hero-container h4",
+      project.number || (typeof project.index === "number"
+        ? `Project ${String(project.index + 1).padStart(2, "0")}`
+        : "")
+    );
     setText(".project-title", project.projectName);
+    setText(".project-name", project.projectName);
     setText(".project-description", project.description || "");
+    setText(".project-summary", project.summary || project.description || "");
+    // Legacy detail summary block fallback
     setText(".summary", project.outcome || project.role || "");
-    setBg(".hero-container .bg-image", project.image);
+    // Hero image (src/alt) inside the hero container
+    const heroImg = document.querySelector(".hero-container img");
+    if (heroImg) {
+      const imgSrc = project.heroImage || project.image || "";
+      heroImg.src = resolveAsset(imgSrc);
+      heroImg.alt =
+        project["heroImage-alt"] ||
+        (project.projectName ? `${project.projectName} hero image` : "");
+    }
+
+    // Optional hero caption under the image
+    const captionEl = document.querySelector(
+      ".hero-container .image-container figcaption, .hero-container .image-container caption",
+    );
+    if (captionEl) {
+      const baseCaption =
+        project.heroImageCaption || project["heroImage-alt"] || "";
+      const extraCaption = project.caption || "";
+      const caption = [baseCaption, extraCaption].filter(Boolean).join(" — ");
+      captionEl.textContent = caption;
+    }
+
+    // Tools used list inside the hero area
+    const toolsList = document.querySelector(".hero-container .tools-used");
+    if (toolsList) {
+      toolsList.textContent = "";
+      if (Array.isArray(project.toolsUsed)) {
+        project.toolsUsed.forEach((tool) => {
+          const li = document.createElement("li");
+          li.textContent = tool;
+          toolsList.appendChild(li);
+        });
+      }
+    }
 
     // Optional sections if you extend JSON later
     setHTML(".ux-subheader", project.ux || "");
     setHTML(".design-subheader", project.design || "");
     setHTML(".outcome-subheader", project.outcome || "");
+
+    // Tool-kit list rendering (name, purpose, icon class)
+    const toolList = document.querySelector(".tool-kit .tool-list");
+    if (toolList) {
+      toolList.textContent = ""; // clear any sample item
+      const tk = project["tool-kit"]; // object: { name: [purpose, class] }
+      if (tk && typeof tk === "object" && !Array.isArray(tk)) {
+        Object.entries(tk).forEach(([name, arr]) => {
+          const purpose = Array.isArray(arr) ? String(arr[0] || "") : "";
+          const extraClass = Array.isArray(arr) ? normalizeClassToken(arr[1]) : "";
+
+          const li = document.createElement("li");
+          li.className = "tool";
+
+          const imgDiv = document.createElement("div");
+          imgDiv.className = "tool-img";
+          if (extraClass) imgDiv.classList.add(extraClass);
+
+          const desc = document.createElement("div");
+          desc.className = "tool-desc";
+
+          const nameDiv = document.createElement("div");
+          nameDiv.className = "tool-name";
+          nameDiv.textContent = name;
+
+          const purposeDiv = document.createElement("div");
+          purposeDiv.className = "tool-purpose";
+          purposeDiv.textContent = purpose;
+
+          desc.appendChild(nameDiv);
+          desc.appendChild(purposeDiv);
+          li.appendChild(imgDiv);
+          li.appendChild(desc);
+          toolList.appendChild(li);
+        });
+      }
+    }
+
+    // UX & Planning section (title, description, button-one, image and image title)
+    const uxPlan = parseUXPlanning(project["ux-planning"]);
+    if (uxPlan.sectionTitle) {
+      setText(".ux-planning .ux-text h2", uxPlan.sectionTitle);
+    }
+    if (uxPlan.buttonOne) {
+      // Paragraph description
+      setText(".ux-planning .ux-text p", uxPlan.buttonOne.description || "");
+
+      // First button label while preserving the icon div
+      const btnOne = document.querySelector(
+        ".ux-planning .ux-btn-container .link-btn:first-child",
+      );
+      if (btnOne) {
+        // Remove existing text nodes, keep icon wrapper(s)
+        Array.from(btnOne.childNodes).forEach((n) => {
+          if (n.nodeType === 3) btnOne.removeChild(n);
+        });
+        btnOne.appendChild(
+          document.createTextNode(" " + (uxPlan.buttonOne.button || "")),
+        );
+      }
+
+      // Image + title
+      const uxImg = document.querySelector(".ux-planning .ux-image img");
+      if (uxImg) {
+        uxImg.src = resolveAsset(uxPlan.buttonOne.img || "");
+        uxImg.alt = uxPlan.buttonOne["img-title"] || uxPlan.buttonOne.button || uxImg.alt;
+      }
+      setText(
+        ".ux-planning .ux-image h4",
+        uxPlan.buttonOne["img-title"] || uxPlan.buttonOne.button || "",
+      );
+
+      // Second button label (if present)
+      const btnTwo = document.querySelector(
+        ".ux-planning .ux-btn-container .link-btn:nth-child(2)",
+      );
+      if (btnTwo && uxPlan.buttonTwo) {
+        Array.from(btnTwo.childNodes).forEach((n) => {
+          if (n.nodeType === 3) btnTwo.removeChild(n);
+        });
+        btnTwo.appendChild(
+          document.createTextNode(" " + (uxPlan.buttonTwo.button || "")),
+        );
+      }
+
+      // Interaction: clicking buttons swaps content
+      const updateUx = (item) => {
+        if (!item) return;
+        setText(".ux-planning .ux-text p", item.description || "");
+        const img = document.querySelector(".ux-planning .ux-image img");
+        if (img) {
+          img.src = resolveAsset(item.img || "");
+          img.alt = item["img-title"] || item.button || img.alt;
+        }
+        setText(
+          ".ux-planning .ux-image h4",
+          item["img-title"] || item.button || "",
+        );
+      };
+
+      const allBtns = document.querySelectorAll(
+        ".ux-planning .ux-btn-container .link-btn",
+      );
+      const setActive = (el) => {
+        allBtns.forEach((b) => b.classList.remove("active-btn"));
+        if (el) el.classList.add("active-btn");
+      };
+
+      if (btnOne) {
+        btnOne.addEventListener("click", () => {
+          updateUx(uxPlan.buttonOne);
+          setActive(btnOne);
+        });
+      }
+      if (btnTwo && uxPlan.buttonTwo) {
+        btnTwo.addEventListener("click", () => {
+          updateUx(uxPlan.buttonTwo);
+          setActive(btnTwo);
+        });
+      }
+    }
 
     // Section titles populated from JSON (supports dashed keys)
     // .design-title-text <= project["design-title"] (fallbacks to empty)
@@ -99,6 +314,120 @@
       ".outcome-title-text",
       project["outcome-title"] || project.outcomeTitle || "",
     );
+
+    // Right-hand info panel (Client, Role, Tools, Status, Link)
+    // Prefer project.info array if present; fall back to top-level fields.
+    const infoMap = {};
+    if (Array.isArray(project.info)) {
+      project.info.forEach((entry) => {
+        if (entry && typeof entry === "object") {
+          const [k, v] = Object.entries(entry)[0] || [];
+          if (k) infoMap[k] = v;
+        }
+      });
+    }
+
+    const client = infoMap.client ?? project.client ?? "";
+    const role = infoMap.role ?? project.role ?? "";
+    const tools = infoMap.tools ?? project.toolsUsed ?? [];
+    const status = infoMap.status ?? project.status ?? "";
+    const linkVal = infoMap.link ?? project.liveLink ?? project.link ?? "";
+
+    setText(".info-client", client);
+    setText(".info-role", role);
+    if (Array.isArray(tools)) {
+      setText(".info-tools", tools.join(" · "));
+    } else {
+      setText(".info-tools", String(tools || ""));
+    }
+    setText(".info-status", status);
+
+    // Render link as an anchor if available
+    const linkEl = document.querySelector(".info-link");
+    if (linkEl) {
+      if (linkVal) {
+        const href = resolveAsset(linkVal);
+        let label = href;
+        try {
+          const u = new URL(href, location.href);
+          label = u.hostname.replace(/^www\./, "");
+        } catch (_) {
+          // keep href as label
+        }
+        linkEl.innerHTML = `<a href="${escapeHtml(href)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`;
+      } else {
+        linkEl.textContent = "";
+      }
+    }
+
+    // Build dynamic in-page navigation for sections
+    (function buildProjectNav() {
+      const sections = [
+        {
+          sel: ".hero-container",
+          id: "section_overview",
+          label:
+            "Overview" || document.querySelector(".hero-container h4")?.textContent,
+        },
+        {
+          sel: ".tool-kit",
+          id: "section_toolkit",
+          label: "Tool Kit",
+        },
+        {
+          sel: ".ux-planning",
+          id: "section_ux",
+          label:
+            document.querySelector(".ux-planning .ux-text h2")?.textContent ||
+            "UX & Planning",
+        },
+        {
+          sel: ".visual-design",
+          id: "section_visual",
+          label:
+            (document.querySelector(".visual-design h4")?.textContent || "Visual Design")
+              .replace(/^\s*\d+\s*\/?\s*/g, "")
+              .trim(),
+        },
+        { sel: ".outcome", id: "section_outcome", label: "Outcome" },
+        {
+          sel: ".additional-projects",
+          id: "section_more",
+          label: "Explore",
+        },
+      ].filter((s) => document.querySelector(s.sel));
+
+      const ul = document.querySelector("#site-nav ul");
+      if (!ul || !sections.length) return;
+
+      // Clear any existing items and rebuild
+      ul.textContent = "";
+
+      // Brand/home anchor -> first section
+      const homeLi = document.createElement("li");
+      const homeA = document.createElement("a");
+      homeA.className = "home-logo split-text";
+      homeA.href = `#${sections[0].id}`;
+      homeA.textContent = "sd";
+      homeLi.appendChild(homeA);
+      ul.appendChild(homeLi);
+
+      // Ensure IDs and add links
+      sections.forEach((s) => {
+        const sec = document.querySelector(s.sel);
+        if (!sec) return;
+        sec.id = s.id;
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = `#${s.id}`;
+        const span = document.createElement("span");
+        span.textContent = s.label;
+        a.appendChild(span);
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+      // Smooth scrolling is handled globally in CSS (html { scroll-behavior: smooth; })
+    })();
 
     // Previous / Next links
     const i = project.index;

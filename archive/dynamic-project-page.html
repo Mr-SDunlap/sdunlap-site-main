@@ -4,57 +4,169 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../projects.css" />
+    <link rel="stylesheet" href="../style.css" />
 
     <title class="page-title"></title>
 
-    <script src="./js/nav.js" defer></script>
+    <script src="../js/nav.js" defer></script>
+    <script src="../js/dynamic-projects.js" defer></script>
   </head>
   <body>
+    <nav id="site-nav">
+      <ul>
+        <li>
+          <a href="#section_landing" class="home-logo split-text">sd</a>
+        </li>
+        <li>
+          <a href="#section_files">I.<span>&nbsp;The&nbsp;Archive</span></a>
+        </li>
+        <!-- <li>
+          <a href="#section_featured">II.<span>&nbsp;The&nbsp;Process</span></a>
+        </li> -->
+        <li>
+          <a href="#section_about">III.<span>&nbsp;The&nbsp;Profile</span></a>
+        </li>
+      </ul>
+      <a href="#section_landing" class="connect-btn split-text"
+        ><span>Connect</span
+        ><img
+          src="./assets/icons/icons8-chat-bubble-30.png"
+          alt="connect with Stephen"
+      /></a>
+    </nav>
+    <nav id="mobile-nav">
+      <a href="#section_landing" class="home-logo split-text">sd</a>
+      <div class="burger-menu">
+        <span class="bar top-bar"></span>
+        <span class="bar middle-bar"></span>
+        <span class="bar bottom-bar"></span>
+      </div>
+
+      <ul>
+        <li>
+          <a href="#section_files">Archive</a>
+        </li>
+        <!-- <li>
+          <a href="#section_featured">Process</a>
+        </li> -->
+        <li>
+          <a href="#section_about">Story</a>
+        </li>
+      </ul>
+    </nav>
     <section class="hero-container">
-      <div class="hero-text-container">
-        <h1 class="project-title"></h1>
-        <p class="project-description"></p>
+      <h4></h4>
+      <div class="hero-container_inner">
+        <div class="hero-text">
+          <h1 class="project-name"></h1>
+          <h3 class="project-summary"></h3>
+        </div>
+        <div class="hero-image">
+          <figure class="image-container">
+            <img src="" alt="" />
+            <figcaption class="hero-caption"></figcaption>
+          </figure>
+        </div>
       </div>
     </section>
-    <section class="project-summary">
-      <p class="summary"></p>
+    <section class="tool-kit">
+      <h4>01 / Tool kit</h4>
+      <span class="section-line"></span>
+      <ul class="tool-list">
+        <li class="tool">
+          <div class="tool-img"></div>
+          <div class="tool-desc">
+            <div class="tool-name"></div>
+            <div class="tool-purpose"></div>
+          </div>
+        </li>
+      </ul>
     </section>
-    <section class="ux">
+    <section class="ux-planning">
+      <h4>02 / UX & Planning</h4>
+      <span class="section-line"></span>
       <div class="ux-container">
-        <div class="ux-left left">
-          <div class="ux-header">
-            <div class="ux-title">01</div>
-            <div class="ux-title-text"></div>
-            <div class="ux-subheader"></div>
+        <div class="ux-text">
+          <h2>Section title</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Necessitatibus totam dolore doloribus eaque assumenda modi
+            consectetur, exercitationem, commodi quos labore ipsa dolorum, earum
+            natus? Ipsum nihil ad minima atque voluptates.
+          </p>
+          <div class="ux-btn-container">
+            <button class="link-btn active-btn">
+              <div>
+                <span></span>
+                <span></span>
+              </div>
+              First button
+            </button>
+            <button class="link-btn">
+              <div>
+                <span></span>
+                <span></span>
+              </div>
+              Second button
+            </button>
           </div>
         </div>
-        <div class="ux-right right"></div>
+        <div class="ux-image">
+          <h4>button text</h4>
+          <img src="" alt="" />
+        </div>
       </div>
     </section>
-    <section class="design">
-      <div class="design-container">
-        <div class="design-left left">
-          <div class="design-header">
-            <div class="design-title">02</div>
-            <div class="design-title-text"></div>
-            <div class="design-subheader"></div>
-          </div>
+    <section class="visual-design">
+      <h4>03 / Visual Design</h4>
+      <span class="section-line"></span>
+      <div class="vd-container">
+        <div class="vd-text">
+          <h2>Section title</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius,
+            aperiam odit! Rerum dicta labore tenetur exercitationem dignissimos
+            hic? Earum, aperiam!
+          </p>
         </div>
-        <div class="design-right right"></div>
+        <div class="vd-image">
+          <img class="ct-icon" src="../assets/icons/paint-palette.png" alt="" />
+          <h3>Color Theory</h3>
+          <ul class="color-list">
+            <li class="lmn-red"></li>
+            <li class="lmn-light-teal"></li>
+            <li class="lmn-teal"></li>
+            <li class="lmn-orange"></li>
+          </ul>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita
+            sit veniam consequuntur praesentium. Facilis, sequi!
+          </p>
+        </div>
       </div>
     </section>
-    <section class="outcome">
-      <div class="outcome-container">
-        <div class="outcome-left left"></div>
-        <div class="outcome-right right">
-          <div class="outcome-header">
-            <div class="outcome-title">03</div>
-            <div class="outcome-title-text"></div>
-            <div class="outcome-subheader"></div>
-          </div>
+    <section class="implementation">
+      <h4>04 / Implementation</h4>
+      <span class="section-line"></span>
+      <div class="implementation-container">
+        <div class="implementation-text">
+          <h2>Outcome</h2>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente,
+            tempora nostrum suscipit laudantium provident recusandae.
+          </p>
+          <button class="link-out-btn">
+            View Live
+            <div class="arrow">
+              <span class="left-tic tic"></span>
+              <span class="right-tic tic"></span>
+              <span class="line"></span>
+            </div>
+          </button>
         </div>
+        <div class="implementation-img"></div>
       </div>
-      <div class="outcome-final-image"></div>
+      <div class="final-img"></div>
     </section>
     <section class="additional-projects">
       <h2 class="additional-projects-title">Explore Other Projects</h2>
@@ -99,5 +211,4 @@
       </p>
     </footer>
   </body>
-  <script src="../js/dynamic-projects.js" defer></script>
 </html>

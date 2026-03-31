@@ -107,7 +107,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const target = linkEl || card;
         if (target) {
           target.classList.remove("reveal-left", "reveal-right");
-          const isOdd = (index % 2) === 0; // index 0 -> 1st (odd)
+          const isOdd = index % 2 === 0; // index 0 -> 1st (odd)
           target.classList.add(isOdd ? "reveal-left" : "reveal-right");
         }
       });
