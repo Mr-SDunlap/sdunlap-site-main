@@ -25,6 +25,8 @@
     <!-- <script src="./js/gsap-portfolio.js" defer></script> -->
     <script src="./js/cursor.js" defer></script>
     <script src="./js/projects.js" defer></script>
+    <!-- Pinned horizontal scroll for Archive (projects) -->
+    <script src="./js/archive-horizontal-scroll.js" defer></script>
     <script src="./js/app.js" defer></script>
     <script src="./js/smooth-scroll.js" defer></script>
     <!-- <script src="./js/process-horizontal-scroll.js" defer></script> -->
@@ -116,8 +118,10 @@
     <section id="section_files">
       <div class="content-container">
         <div class="archive_title-box">
-          <h1 class="archive-title fade-in-up">The Archive (3)</h1>
-          <p class="archive-subhead fade-in-up">
+          <h1 class="archive-title">
+            The_Archive<br /><span>/Curated selection of work</span>
+          </h1>
+          <p class="archive-subhead">
             A curated collection of assignments and projects I wish to preserve.
           </p>
         </div>
@@ -169,10 +173,9 @@
     </section> -->
     <section id="section_about">
       <div class="section-container about-container">
-        <h1 class="about-title">The Profile</h1>
         <div class="about-box">
           <div class="about-text">
-            <h3>Who Am I?</h3>
+            <h1 class="about-title">The_Profile<br /><span>/Who Am I</span></h1>
             <p class="about-bio">
               I’m a Front-End Designer who works across design and
               implementation, building digital experiences that are clear,
@@ -182,12 +185,6 @@
               information easier to understand while ensuring the final product
               works cleanly in production.
             </p>
-            <div class="about-buttons">
-              <a href="/" class="meet-me-btn primary-btn">Meet Me</a>
-              <a href="" class="connect-btn secondary-btn about-connect"
-                >Connect</a
-              >
-            </div>
             <div class="about-stats">
               <div class="stat">
                 <span class="stat-number">5+</span>
@@ -202,14 +199,51 @@
                 <span class="stat-label">Interactive Experiences Created</span>
               </div>
             </div>
+            <div class="about-buttons">
+              <div class="banner">
+                <h2>Learn More</h2>
+                <p>
+                  Please feel free to reach out for your next web project or
+                  learn a little more about myself.
+                </p>
+              </div>
+              <div class="btn-box">
+                <button class="link-out-btn connect-btn">
+                  Connect
+                  <div class="arrow">
+                    <span class="left-tic tic"></span>
+                    <span class="right-tic tic"></span>
+                    <span class="line"></span>
+                  </div>
+                </button>
+              </div>
+            </div>
           </div>
-          <span class="top-name">STEPHEN<br />DUNLAP</span>
-          <img
-            class="profile-image"
-            src="./assets/main-photo/Stephen_seattle_bg-removed.png"
-            alt="Photo of Stephen Dunlap Afro-American male with locs and techware aesthetic"
-          />
-          <span class="bottom-name">STEPHEN<br />DUNLAP</span>
+          <div class="profile">
+            <div class="p_img-container">
+              <span class="img-box"> Stephen Dunlap </span>
+            </div>
+            <div class="core-competencies">
+              <h4 class="comp-title"><span></span>Core_Competencies</h4>
+              <ul class="competencies">
+                <li>
+                  <p>01</p>
+                  <h4>System Architecture</h4>
+                  <p>Short description of said competency</p>
+                </li>
+                <li>
+                  <p>02</p>
+                  <h4>Design Infrastructure</h4>
+                  <p>Short description of said competency</p>
+                </li>
+                <li>
+                  <p>03</p>
+                  <h4>Front-end Engineering</h4>
+                  <p>Short description of said competency</p>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>
