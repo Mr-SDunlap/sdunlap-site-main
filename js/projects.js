@@ -118,44 +118,6 @@ window.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      if (typeof gsap !== "undefined") {
-        const cards = container.querySelectorAll(":scope > .project");
-
-        cards.forEach((card) => {
-          if (card.dataset.gsapHover === "true") return;
-          card.dataset.gsapHover = "true";
-
-          const targets = [
-            card.querySelector(".project-description"),
-            card.querySelector(".tools-used"),
-          ].filter(Boolean);
-
-          if (!targets.length) return;
-
-          gsap.set(targets, { height: 0, opacity: 0, overflow: "hidden" });
-
-          card.addEventListener("mouseenter", () => {
-            gsap.to(targets, {
-              height: "auto",
-              opacity: 1,
-              duration: 0.3,
-              ease: "power2.out",
-              overwrite: true,
-            });
-          });
-
-          card.addEventListener("mouseleave", () => {
-            gsap.to(targets, {
-              height: 0,
-              opacity: 0,
-              duration: 0.25,
-              ease: "power2.in",
-              overwrite: true,
-            });
-          });
-        });
-      }
-
       // Wire up reveal animations for newly added cards
       if (window.RevealFx && typeof window.RevealFx.refresh === "function") {
         window.RevealFx.refresh();

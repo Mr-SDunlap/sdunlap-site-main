@@ -25,8 +25,8 @@
 
     const build = () => {
       // Kill any existing instance so rebuilds are clean
-      const existing = ScrollTrigger.getById &&
-        ScrollTrigger.getById("archive-horizontal");
+      const existing =
+        ScrollTrigger.getById && ScrollTrigger.getById("archive-horizontal");
       if (existing) existing.kill();
 
       if (container._archiveTween) {
@@ -54,6 +54,7 @@
           start: "top top",
           end: () => "+=" + (container.scrollWidth - container.clientWidth),
           pin: true,
+          pinSpacing: true,
           anticipatePin: 1,
           scrub: 0.25,
           invalidateOnRefresh: true,
