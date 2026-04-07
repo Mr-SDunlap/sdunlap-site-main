@@ -1,0 +1,9 @@
+{
+  "figma": ["Visual Prototyping", ".s-fimga"],
+  "HTML": ["Markup Language", ".s-html"],
+  "CSS": ["Styling Language", ".s-css"],
+  "JavaScript": ["Programming Language", ".s-js"],
+  "Adobe After Effects": ["Motion Graphics & Animation", ".s-aee"],
+  "Adobe Photoshop": ["Raster Graphics Editing", ".s-photo"],
+  "Adobe Illustrator": ["Vector Graphics Design", "s.illustrator"]
+}

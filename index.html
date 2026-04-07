@@ -1,220 +1,344 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>SDUNLAP | Stephen Dunlap</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="./assets/ouros-logo_black.svg"
+    />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
-  <title>SDUNLAP | Stephen Dunlap</title>
-  <link rel="icon" type="image/svg+xml" href="./assets/ouros-logo_black.svg" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+      defer
+    ></script>
+    <script src="./js/nav.js" defer></script>
+    <script src="./js/gsap-init.js" defer></script>
+    <script src="./js/forms.js" defer></script>
+    <!-- <script src="./js/gsap-portfolio.js" defer></script> -->
+    <script src="./js/cursor.js" defer></script>
+    <script src="./js/projects.js" defer></script>
+    <!-- Pinned horizontal scroll for Archive (projects) -->
+    <script src="./js/archive-horizontal-scroll.js" defer></script>
+    <script src="./js/app.js" defer></script>
+    <script src="./js/smooth-scroll.js" defer></script>
+    <!-- <script src="./js/process-horizontal-scroll.js" defer></script> -->
+  </head>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-  <script src="./js/gsap-scrolling.js" defer></script>
-  <script src="./js/nav.js" defer></script>
-  <script src="./js/gsap-init.js" defer></script>
-  <script src="./js/microinteraction.js" defer></script>
-  <script src="./js/forms.js" defer></script>
-  <script src="./js/gsap-portfolio.js" defer></script>
-  <script src="./js/app.js" defer></script>
-  <script src="./js/process-horizontal-scroll.js" defer></script>
-</head>
+  <body>
+    <nav id="site-nav">
+      <ul>
+        <li>
+          <a href="#section_landing" class="home-logo split-text">S_</a>
+        </li>
+        <li>
+          <a href="#section_files">I.<span>&nbsp;The&nbsp;Archive</span></a>
+        </li>
+        <!-- <li>
+          <a href="#section_featured">II.<span>&nbsp;The&nbsp;Process</span></a>
+        </li> -->
+        <li>
+          <a href="#section_about">II.<span>&nbsp;The&nbsp;Profile</span></a>
+        </li>
+      </ul>
+      <a href="#section_landing" class="connect-btn split-text"
+        ><span>Connect</span
+        ><img
+          src="./assets/icons/icons8-chat-bubble-30.png"
+          alt="connect with Stephen"
+      /></a>
+    </nav>
+    <nav id="mobile-nav">
+      <a href="#section_landing" class="home-logo split-text">sd</a>
+      <div class="burger-menu">
+        <span class="bar top-bar"></span>
+        <span class="bar middle-bar"></span>
+        <span class="bar bottom-bar"></span>
+      </div>
 
-<body>
-  <!-- background effect -->
-  <div class="background-lines">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <div class="background-effect"></div>
-  <!--
-<nav id="site-nav">
-    <ul>
-      <li>
-        <a href="#section_landing" class="home-logo split-text">sd</a>
-      </li>
-      <li>
-        <a href="#section_files">I.<span>&nbsp;The&nbsp;Archive</span></a>
-      </li>
-      <li>
-        <a href="#section_featured">II.<span>&nbsp;The&nbsp;Process</span></a>
-      </li>
-      <li>
-        <a href="#section_about">III.<span>&nbsp;The&nbsp;Profile</span></a>
-      </li>
-    </ul>
-    <a href="#section_landing" class="connect-btn split-text"><span>Connect</span><img
-        src="./assets/icons/icons8-chat-bubble-30.png" alt="connect with Stephen" /></a>
-  </nav>
-  <nav id="mobile-nav">
-    <a href="#section_landing" class="home-logo split-text">sd</a>
-    <div class="burger-menu">
-      <span class="bar top-bar"></span>
-      <span class="bar bottom-bar"></span>
-    </div>
-
-    <ul>
-      <li>
-        <a href="#section_files">Archive</a>
-      </li>
-      <li>
-        <a href="#section_featured">Process</a>
-      </li>
-      <li>
-        <a href="#section_about">Story</a>
-      </li>
-    </ul>
-  </nav>
--->
-  <!-- Sections of the site -->
-  <section id="section_landing">
-    <div class="section-container landing-container">
-      <div class="name-header-container">
-        <h1 class="site-name">SDUNLAP</h1>
-        <div class="landing-name">
-          <h3>Stephen Dunlap</h3>
+      <ul>
+        <li>
+          <a href="#section_files">Archive</a>
+        </li>
+        <!-- <li>
+          <a href="#section_featured">Process</a>
+        </li> -->
+        <li>
+          <a href="#section_about">Story</a>
+        </li>
+      </ul>
+    </nav>
+    <!-- Sections of the site -->
+    <section id="section_landing">
+      <div class="section-container landing-container">
+        <div class="name-header-container">
+          <div class="status">
+            <span class="status-dot"></span>
+            <p>system status:</p>
+            <p>Developing</p>
+          </div>
+          <h1 class="site-name">STEPHEN_DUNLAP</h1>
+          <div class="landing-name">
+            <h3>/Portfolio</h3>
+          </div>
+          <div class="home-message">
+            <p class="main-message">
+              Translating complex requirements into digital experiences with
+              measureable business impact.
+            </p>
+            <div class="notes">
+              <div class="note">
+                <h4>Build Identification</h4>
+                <p>v1.0.0-developing phase</p>
+              </div>
+              <div class="note">
+                <h4>Primary Protocol</h4>
+                <p>Functional Minimalism</p>
+              </div>
+            </div>
+          </div>
+          <div class="landing-btns">
+            <a class="landing-work-btn primary-btn" href="#section_files"
+              >The Archive</a
+            >
+            <a class="landing-about-btn secondary-btn" href="#section_about">
+              The Profile
+            </a>
+          </div>
         </div>
-        <h1 class="home-message">
-          Site coming soon
-        </h1>
-        <div class="landing-btns">
-          <a class="landing-work-btn primary-btn" href="#section_files">The Archive</a>
-          <a class="landing-about-btn secondary-btn" href="#section_about">
-            The Profile
+      </div>
+    </section>
+    <section id="section_files">
+      <div class="content-container">
+        <div class="archive_title-box">
+          <h1 class="archive-title">
+            The_Archive<br /><span>/Selected works</span>
+          </h1>
+        </div>
+        <div class="project-container">
+          <a class="project" href="">
+            <div class="project-status">
+              <div class="status-indicator">Active</div>
+              <span class="date">01.19.24</span>
+            </div>
+            <div class="project-bg-image"></div>
+            <div class="info-box">
+              <h3 class="project-name"></h3>
+              <p class="project-description"></p>
+            </div>
           </a>
         </div>
       </div>
-    </div>
-  </section>
-  <!--
-  <section id="section_files">
-    <div class="section-container files-container">
-      <div class="portfolio-wrapper">
-        <div class="project-visuals">
-          <div class="image-wrapper">
-            <img src="./assets/main-photo/photo-of-stephen.webp" alt="Project Preview"
-              class="project-image-placeholder">
-          </div>
+    </section>
+    <!-- <section id="section_featured">
+      <div class="process-wrapper">
+        <div class="process-card">
+          <h2>Discovery</h2>
+          <p>
+            Understanding the core problem through research and user interviews.
+          </p>
+          <span class="process-number">01</span>
         </div>
-        <div class="project-content">
-          <div class="title-container">
-            <h1>Portfolio</h1>
-            <p>Explore a curated selection of work.</p>
-          </div>
-          <div class="project-information">
-            <div class="project-name label">Name: <span class="name-fill project-fill"></span></div>
-            <div class="project-role label">Role: <span class="role-fill project-fill"></span></div>
-            <div class="project-tools label">
-              Tools used: <ul class="tools-list"></ul>
+        <div class="process-card">
+          <h2>Define</h2>
+          <p>Synthesizing insights to pinpoint the exact challenge to solve.</p>
+          <span class="process-number">02</span>
+        </div>
+        <div class="process-card">
+          <h2>Design</h2>
+          <p>
+            Iterating on visual solutions and prototypes to find the best fit.
+          </p>
+          <span class="process-number">03</span>
+        </div>
+        <div class="process-card">
+          <h2>Deliver</h2>
+          <p>Refining the final product and ensuring seamless handoff.</p>
+          <span class="process-number">04</span>
+        </div>
+        <div class="process-card">
+          <h2>Digest</h2>
+          <p>Collect data to support all levels of business.</p>
+          <span class="process-number">05</span>
+        </div>
+      </div>
+    </section> -->
+    <section id="section_about">
+      <div class="section-container about-container">
+        <div class="about-box">
+          <div class="about-text">
+            <h1 class="about-title">The_Profile<br /><span>/Who Am I</span></h1>
+            <p class="about-bio">
+              I’m a Front-End Designer who works across design and
+              implementation, building digital experiences that are clear,
+              structured, and built to last. My work spans everything from
+              marketing campaigns and landing pages to email and interactive web
+              experiences. I focus on creating systems that make complex
+              information easier to understand while ensuring the final product
+              works cleanly in production.
+            </p>
+            <div class="about-stats">
+              <div class="stat">
+                <span class="stat-number">5+</span>
+                <span class="stat-label">Years of Experience</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Pages Designed</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">20+</span>
+                <span class="stat-label">Interactive Experiences Created</span>
+              </div>
             </div>
-            <div class="project-link-container">
-              <a href="#" target="_blank" class="primary-btn"></a>
+            <div class="about-buttons">
+              <div class="banner">
+                <h2>Learn More</h2>
+                <p>
+                  Please feel free to reach out for your next web project or
+                  learn a little more about myself.
+                </p>
+              </div>
+              <div class="btn-box">
+                <button class="link-out-btn connect-btn">
+                  Connect
+                  <div class="arrow">
+                    <span class="left-tic tic"></span>
+                    <span class="right-tic tic"></span>
+                    <span class="line"></span>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="profile">
+            <div class="p_img-container">
+              <span class="img-box"></span>
+            </div>
+            <div class="core-competencies">
+              <h4 class="comp-title"><span></span>Core_Competencies</h4>
+              <ul class="competencies">
+                <li>
+                  <div class="li-box">
+                    <p class="comp-num">01</p>
+                  </div>
+                  <div class="li-box">
+                    <h4>System Architecture</h4>
+                    <p>Short description of said competency</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="li-box">
+                    <p class="comp-num">02</p>
+                  </div>
+                  <div class="li-box">
+                    <h4>Design Infrastructure</h4>
+                    <p>Short description of said competency</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="li-box">
+                    <p class="comp-num">03</p>
+                  </div>
+                  <div class="li-box">
+                    <h4>Front-end Engineering</h4>
+                    <p>Short description of said competency</p>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-  <section id="section_featured">
-    <div class="process-wrapper">
-      <div class="process-card">
-        <h2>Discovery</h2>
-        <p>Understanding the core problem through research and user interviews.</p>
-        <span class="process-number">01</span>
-      </div>
-      <div class="process-card">
-        <h2>Define</h2>
-        <p>Synthesizing insights to pinpoint the exact challenge to solve.</p>
-        <span class="process-number">02</span>
-      </div>
-      <div class="process-card">
-        <h2>Design</h2>
-        <p>Iterating on visual solutions and prototypes to find the best fit.</p>
-        <span class="process-number">03</span>
-      </div>
-      <div class="process-card">
-        <h2>Deliver</h2>
-        <p>Refining the final product and ensuring seamless handoff.</p>
-        <span class="process-number">04</span>
-      </div>
-      <div class="process-card">
-        <h2>Digest</h2>
-        <p>Collect data to support all levels of business.</p>
-        <span class="process-number">05</span>
-      </div>
-    </div>
-  </section>
-  <section id="section_about">
-    <div class="section-container about-container">
-      <h1>The Profile</h1>
-    </div>
-  </section>
-  <div class="footer">
-    <div class="footer_container">
-      <p>© 2026 Stephen Dunlap - Front-End Designer</p>
-      <ul>
-        <li><a href="#section_about" class="footer-link">About</a></li>
-        <li><a href="#section_featured" class="footer-link">Featured</a></li>
-        <li><a href="#section_files" class="footer-link">Portfolio</a></li>
-      </ul>
-    </div>
-  </div>
--->
-  <!-- Modal: contact form -->
-  <!--
-  <div id="contact-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="modal-overlay" data-modal-close></div>
-    <div class="modal-panel" role="document" aria-labelledby="modal-title">
-      <button class="modal-close" data-modal-close aria-label="Close contact form">
-        ×
-      </button>
-      <h2 id="modal-title">Connect</h2>
-      <div class="modal-success" hidden>
-        <h3>Thanks — message sent</h3>
-        <p>
-          I'll get back to you shortly. Close this message to continue
-          browsing.
-        </p>
-        <div class="modal-actions">
-          <button type="button" class="btn primary" data-modal-close>
-            Close
-          </button>
+    </section>
+    <section class="footer">
+      <div class="footer-container">
+        <p>&copy;2026 sdunlap</p>
+        <div class="site-links">
+          <ul class="main-links">
+            <h4>Navigation</h4>
+            <li><a href="#section_landing">Homepage</a></li>
+            <li><a href="" class="connect-btn">Connect</a></li>
+          </ul>
+          <ul class="project-links">
+            <h4>Projects</h4>
+            <li>
+              <a
+                href="http://127.0.0.1:5500/archive/dynamic-project-page.html?slug=cloud-2-0-infographic"
+                >Cloud 2.0 Infographic</a
+              >
+            </li>
+            <li>
+              <a
+                href="http://127.0.0.1:5500/archive/dynamic-project-page.html?slug=ai-interactive-framework"
+                >AI Interactive Framework</a
+              >
+            </li>
+            <li>
+              <a
+                href="http://127.0.0.1:5500/archive/dynamic-project-page.html?slug=product-finder"
+                >Product Finder</a
+              >
+            </li>
+          </ul>
         </div>
       </div>
-
-      <form id="contact-form" action="#" method="post">
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text" required />
-
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required />
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
-
-        <div class="modal-actions">
-          <button type="submit" class="btn primary">Send</button>
-          <button type="button" class="btn" data-modal-close>Cancel</button>
+    </section>
+    <!-- Modal: contact form -->
+    <div
+      id="contact-modal"
+      class="modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal-overlay" data-modal-close></div>
+      <div class="modal-panel" role="document" aria-labelledby="modal-title">
+        <button
+          class="modal-close"
+          data-modal-close
+          aria-label="Close contact form"
+        >
+          ×
+        </button>
+        <h2 id="modal-title">Connect</h2>
+        <!-- Success panel shown after successful submit -->
+        <div class="modal-success" hidden>
+          <h3>Thanks — message sent</h3>
+          <p>
+            I'll get back to you shortly. Close this message to continue
+            browsing.
+          </p>
+          <div class="modal-actions">
+            <button type="button" class="btn primary" data-modal-close>
+              Close
+            </button>
+          </div>
         </div>
-      </form>
-    </div>
-  </div> 
--->
-</body>
 
+        <form id="contact-form" action="#" method="post">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required />
+
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required />
+
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+
+          <div class="modal-actions">
+            <button type="submit" class="btn primary">Send</button>
+            <button type="button" class="btn" data-modal-close>Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>

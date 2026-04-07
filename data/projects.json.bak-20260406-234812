@@ -127,6 +127,15 @@
       "ux": "My approach centered on reducing cognitive load while preserving technical credibility. The experience establishes urgency first by highlighting exponential data growth and architectural strain, then transitions into a direct visual comparison between Cloud 1.0 and Cloud 2.0 so viewers can see the transformation before analyzing it. Information is layered progressively, moving from high-level context to supporting projections and finally architectural diagrams, ensuring clarity for decision-makers while maintaining depth for technical stakeholders.",
       "design": "The design emphasizes contrast, hierarchy, and scale to reinforce the narrative of evolution. Centralized versus distributed architectures are positioned as visual opposites, supported by geographic mapping and network diagrams that make infrastructure expansion tangible and intuitive. Key growth metrics act as visual anchors within the scroll, creating rhythm and reinforcing urgency, while the overall visual language remains controlled, technical, and purposeful to communicate authority without overwhelming the viewer.",
       "outcome": "The final piece distilled a complex architectural transition into a fast, shareable format that strengthened Cloud 2.0 thought leadership and aligned business and technical audiences around a shared understanding of network evolution. By clearly articulating why legacy systems fall short and what the future state requires, the infographic positioned the organization as a forward-looking enabler of AI-scale infrastructure and created a strong foundation for deeper strategic engagement."
+    },
+    {
+      "figma": ["Visual Prototyping", ".s-fimga"],
+      "HTML": ["Markup Language", ".s-html"],
+      "CSS": ["Styling Language", ".s-css"],
+      "JavaScript": ["Programming Language", ".s-js"],
+      "Adobe After Effects": ["Motion Graphics & Animation", ".s-aee"],
+      "Adobe Photoshop": ["Raster Graphics Editing", ".s-photo"],
+      "Adobe Illustrator": ["Vector Graphics Design", "s.illustrator"]
     }
   ]
 }
