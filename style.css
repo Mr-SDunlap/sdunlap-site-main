@@ -649,7 +649,7 @@ body {
   & .status-dot {
     width: 8px;
     height: 8px;
-    background-color: var(--success-green);
+    background-color: var(--yellow-orange);
     border-radius: 50vw;
   }
   & p {
