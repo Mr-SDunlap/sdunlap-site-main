@@ -71,9 +71,20 @@
     );
 
     // Optional: disable on inputs/textareas so caret remains visible
+    const isModalOpen = () => {
+      const m = document.getElementById("contact-modal");
+      return !!(m && m.getAttribute("aria-hidden") === "false");
+    };
+
     document.addEventListener(
       "pointerover",
       (e) => {
+        // If the contact modal is open, disable custom cursor entirely
+        if (isModalOpen()) {
+          document.body.classList.remove("custom-cursor-enabled");
+          el.classList.add("hidden");
+          return;
+        }
         const tag = (e.target?.tagName || "").toLowerCase();
         if (tag === "input" || tag === "textarea") {
           document.body.classList.remove("custom-cursor-enabled");
@@ -84,6 +95,22 @@
       },
       { passive: true },
     );
+
+    // Keep cursor disabled while modal attribute toggles (open/close)
+    const modalEl = document.getElementById("contact-modal");
+    if (modalEl && typeof MutationObserver !== "undefined") {
+      const syncWithModal = () => {
+        if (modalEl.getAttribute("aria-hidden") === "false") {
+          document.body.classList.remove("custom-cursor-enabled");
+          el.classList.add("hidden");
+        }
+      };
+      syncWithModal();
+      new MutationObserver(syncWithModal).observe(modalEl, {
+        attributes: true,
+        attributeFilter: ["aria-hidden"],
+      });
+    }
     return true;
   };
 

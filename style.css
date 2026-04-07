@@ -60,7 +60,7 @@ a {
 
 .section-container {
   position: relative;
-  width: clamp(300px, 97.5%, 1400px);
+  width: clamp(300px, 97.5%, 1600px);
   margin: 0 auto;
 }
 
@@ -698,7 +698,7 @@ body {
   font-weight: 500;
   line-height: 1.4;
   text-align: center;
-  width: clamp(300px, 90%, 1400px);
+  width: clamp(300px, 90%, 1600px);
   display: flex;
   justify-content: space-between;
 }
@@ -813,7 +813,7 @@ body {
 }
 .about-container {
   position: relative;
-  width: clamp(300px, 90%, 1440px);
+  width: clamp(300px, 90%, 1600px);
   margin: 0 auto;
   height: 100%;
   & .about-bio {
@@ -894,13 +894,13 @@ body {
     padding-left: 10px;
   }
   & .stat-number {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 500;
     font-family: "Space Grotesk";
     color: var(--dark-coffee);
   }
   & .stat-label {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 300;
     color: var(--grey);
   }
@@ -984,7 +984,7 @@ body {
   position: relative;
 
   .content-container {
-    width: clamp(300px, 90%, 1400px);
+    width: clamp(300px, 90%, 1600px);
     height: auto;
     margin: 0 auto;
     z-index: 1;
@@ -1001,7 +1001,7 @@ body {
     font-size: 36px;
     font-weight: 500;
     line-height: 1;
-    color: var(--dark-coffee);
+    color: var(--white);
     text-transform: uppercase;
     padding-bottom: 20px;
 
@@ -1015,27 +1015,23 @@ body {
     display: flex;
   }
   .info-box {
-    align-self: flex-start;
-    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-    z-index: 100;
-    background-color: var(--platinum);
   }
   .project {
     position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    width: clamp(300px, 100%, 600px);
+    width: clamp(300px, 100%, 70vw);
+    min-height: 600px;
     height: 70vh;
 
     & .project-status {
       width: 100%;
-      padding: 20px;
+      padding: 10px;
       background-color: var(--platinum);
       display: flex;
       justify-content: space-between;
@@ -1046,30 +1042,32 @@ body {
         background-color: var(--dark-coffee);
         padding: 5px;
         color: var(--white);
+        font-size: 14px;
         font-weight: 300;
       }
       & .date {
+        font-size: 14px;
         font-weight: 300;
       }
     }
     & .project-bg-image {
       width: 100%;
-      aspect-ratio: 1/0.75;
+      aspect-ratio: 1/0.6;
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
-      filter: grayscale(1);
+      /* filter: grayscale(1); */
     }
     & .project-name {
-      font-size: 36px;
+      font-size: 40px;
       font-weight: 700;
       line-height: 1.6;
-      color: var(--dark-coffee);
+      color: var(--white);
     }
     & .project-description {
       font-size: 18px;
       font-weight: 300;
-      color: var(--dark-white);
+      color: var(--white);
       line-height: 1.4;
       padding-bottom: 10px;
     }
@@ -1306,19 +1304,20 @@ body {
   background-color: var(--secondary-grey);
 }
 .footer-container {
-  width: clamp(300px, 90%, 1400px);
+  width: clamp(300px, 90%, 1600px);
   margin: 0 auto;
   position: relative;
   padding-block: 40px;
   z-index: 10;
   display: flex;
+  flex-direction: column-reverse;
+  gap: 40px;
   align-items: center;
   justify-content: space-between;
   .site-links {
     display: flex;
     justify-content: space-between;
     gap: 100px;
-    align-self: flex-end;
 
     & h4 {
       color: var(--text-black);
@@ -1377,7 +1376,7 @@ body {
   z-index: 0;
 }
 .name-header-container {
-  max-width: 1200px;
+  max-width: 1600px;
 }
 .name-header-container .site-name {
   letter-spacing: 0.06em;
@@ -1392,16 +1391,17 @@ body {
   font-size: clamp(1.125rem, 2.2vw, 1.375rem);
   font-weight: 300;
   line-height: 1.6;
-  width: clamp(300px, 90%, 1400px);
+  width: clamp(300px, 90%, 1600px);
   text-align: left;
 
   & .main-message {
-    width: clamp(270px, 100%, 600px);
+    width: clamp(270px, 100%, 1000px);
   }
   & .notes {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    min-width: 250px;
   }
   & .note {
     & h4 {
@@ -1422,7 +1422,7 @@ body {
 
 /* Archive: 3‑column cards with ambient glow and grayscale reveal */
 #section_files {
-  background-color: var(--surface-low, #f4f3f8);
+  background-color: var(--dark-coffee);
   padding-block: 40px;
 }
 #section_files .archive_title-box {
@@ -1452,14 +1452,12 @@ body {
 .about-container .about-bio {
   font-family: "Outfit";
   font-weight: 300;
-  font-size: 1rem;
-  line-height: 1.75;
   color: var(--on-surface, #1a1b1f);
 }
 .about-text {
   display: flex;
   flex-direction: column;
-  width: clamp(300px, 100%, 1000px);
+  width: clamp(300px, 100%, 1300px);
 }
 .about-box {
   display: flex;
@@ -1490,10 +1488,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: solid 1px var(--pale-yellow);
-    color: var(--pale-yellow);
-    font-weight: 300;
-    font-family: "Outfit";
+    border: solid 3px var(--white);
   }
   &:hover {
     filter: grayscale(0);
@@ -1506,8 +1501,8 @@ body {
 
   & .comp-title {
     font-family: "Space Grotesk";
-    font-size: 14px;
-    font-weight: 300;
+    font-size: 20px;
+    font-weight: 500;
     color: var(--dark-coffee);
   }
 
@@ -1516,7 +1511,7 @@ body {
     align-items: center;
     gap: 5px;
     font-family: "Space Grotesk";
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     color: var(--dark-coffee);
     & span {
@@ -1561,7 +1556,7 @@ body {
     & p {
       font-family: "Outfit";
       font-weight: 300;
-      font-size: 16px;
+      font-size: 18px;
       color: var(--grey);
     }
   }
