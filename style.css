@@ -1018,7 +1018,9 @@ body {
     position: absolute;
     left: 0;
     bottom: 0;
+    width: 100%;
     padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
   }
   .project {
     position: relative;
@@ -1475,7 +1477,7 @@ body {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  filter: grayscale(1);
+  /* filter: grayscale(1); */
   position: relative;
   transition: all 250ms ease;
   flex: 1;

@@ -1,0 +1,141 @@
+{
+  "projects": [
+    {
+      "projectName": "Cloud 2.0 Infographic",
+      "toolsUsed": [
+        "XD",
+        "Illustrator",
+        "Adobe\u00a0After\u00a0Effects",
+        "Photoshop",
+        "HTML",
+        "CSS",
+        "Javascript"
+      ],
+      "info": [
+        { "role": "Visual Designer - Developer" },
+        { "client": "Lumen Technologies" },
+        {
+          "tools": [
+            "XD",
+            "Illustrator",
+            "Adobe\u00a0After\u00a0Effects",
+            "Photoshop",
+            "HTML",
+            "CSS",
+            "Javascript"
+          ]
+        },
+        { "status": "live" },
+        { "link": "https://interact.lumen.com/cloud2-network-evolution" }
+      ],
+      "tool-kit": {
+        "figma": ["Visual Prototyping", ".s-figma"],
+        "HTML": ["Markup Language", ".s-html"],
+        "CSS": ["Styling Language", ".s-css"],
+        "JavaScript": ["Programming Language", ".s-js"],
+        "After Effects": ["Motion Graphics", ".s-aee"],
+        "Photoshop": ["Raster Graphics", ".s-photo"],
+        "Illustrator": ["Vector Graphics", "s-illustrator"],
+        "ION Interactive": ["Interactive CMS", "s-ion"]
+      },
+      "ux-planning": [
+        { "section-title": "Interactivity" },
+        {
+          "button-one": [
+            {
+              "button": "Cloud 1.0",
+              "description": "Cloud 1.0 architecture cannot meet Cloud 2.0 demands because it lacks high-capacity optical support and creates bottlenecks as data center density increases. It also leads to inefficient connectivity, limits scalability to regional architectures, and concentrates advantages among a small set of data center providers. We decided to use an animated gif to depict this.",
+              "img": "assets/project-images/cloud-infographic/cloud-diagram-1-final.gif",
+              "img-title": "Cloud 1.0 architecture"
+            }
+          ]
+        },
+        {
+          "button-two": [
+            {
+              "button": "Cloud 2.0",
+              "description": "With the inclusion of regional support we opted to include user interaction alongside the animated gif, allowing the user to toggle each reference point.",
+              "img": "assets/project-images/cloud-infographic/cloud-diagram-2-final.gif",
+              "img-title": "Cloud 2.0 architecture"
+            }
+          ]
+        }
+      ],
+      "role": "Visual Designer - Developer",
+      "description": "Complex infographic simplifying Cloud 2.0 concepts for C-level executives and stakeholders.",
+      "button": "Explore",
+      "link": "./archive/cloud-2-infographic.html",
+      "image": "./assets/project-images/cloud-infographic/iMac-mock_cloud-2.jpg",
+      "caption": "Cloud 2.0 infographic page",
+      "number": "Project showcase 01",
+      "client": "Lumen Technologies",
+      "status": "live",
+      "team": "Two designers including myself as lead - Copy Team",
+      "liveLink": "https://interact.lumen.com/cloud2-network-evolution",
+      "summary": "Cloud 2.0 Network Evolution translates a fundamental shift in enterprise infrastructure into a clear, visual narrative. As AI workloads and data demand scale beyond the limits of legacy architecture, centralized Cloud 1.0 networks can no longer sustain performance, flexibility, or growth. This infographic communicates why that shift is happening and how distributed, high-capacity, intelligent connectivity defines the next era of infrastructure, making a complex technical transformation accessible to both executive and technical audiences.",
+      "ux-title": "The Approach",
+      "ux": "My approach centered on reducing cognitive load while preserving technical credibility. The experience establishes urgency first by highlighting exponential data growth and architectural strain, then transitions into a direct visual comparison between Cloud 1.0 and Cloud 2.0 so viewers can see the transformation before analyzing it. Information is layered progressively, moving from high-level context to supporting projections and finally architectural diagrams, ensuring clarity for decision-makers while maintaining depth for technical stakeholders.",
+      "design-title": "The Design",
+      "design": "The design emphasizes contrast, hierarchy, and scale to reinforce the narrative of evolution. Centralized versus distributed architectures are positioned as visual opposites, supported by geographic mapping and network diagrams that make infrastructure expansion tangible and intuitive. Key growth metrics act as visual anchors within the scroll, creating rhythm and reinforcing urgency, while the overall visual language remains controlled, technical, and purposeful to communicate authority without overwhelming the viewer.",
+      "outcome-title": "The Outcome",
+      "outcome": "The final piece distilled a complex architectural transition into a fast, shareable format that strengthened Cloud 2.0 thought leadership and aligned business and technical audiences around a shared understanding of network evolution. By clearly articulating why legacy systems fall short and what the future state requires, the infographic positioned the organization as a forward-looking enabler of AI-scale infrastructure and created a strong foundation for deeper strategic engagement.",
+      "heroImage": "assets/project-images/cloud-infographic/ipad_cloud-infograph_square.jpg",
+      "heroImage-alt": "Cloud 2.0 infographic landing page on display of laptop."
+    },
+    {
+      "projectName": "AI Interactive Framework",
+      "toolsUsed": ["XD", "ION\u00a0Interactive", "HTML", "CSS"],
+      "tool-kit": {
+        "figma": ["Visual Prototyping", ".s-figma"],
+        "HTML": ["Markup Language", ".s-html"],
+        "CSS": ["Styling Language", ".s-css"],
+        "JavaScript": ["Programming Language", ".s-js"],
+        "Adobe After Effects": ["Motion Graphics & Animation", ".s-aee"],
+        "Adobe Photoshop": ["Raster Graphics Editing", ".s-photo"],
+        "Adobe Illustrator": ["Vector Graphics Design", "s.illustrator"]
+      },
+      "role": "Visual Designer, Developer",
+      "description": "Interactive framework designed to showcase AI capabilities with a focus on user engagement and data visualization.",
+      "button": "Explore",
+      "link": "./archive/ai-framework.html",
+      "image": "./assets/project-images/ai-framework/iphone-16_ai-framework.jpg",
+      "number": "Project 02",
+      "summary": "Cloud 2.0 Network Evolution translates a fundamental shift in enterprise infrastructure into a clear, visual narrative. As AI workloads and data demand scale beyond the limits of legacy architecture, centralized Cloud 1.0 networks can no longer sustain performance, flexibility, or growth. This infographic communicates why that shift is happening and how distributed, high-capacity, intelligent connectivity defines the next era of infrastructure, making a complex technical transformation accessible to both executive and technical audiences.",
+      "ux": "My approach centered on reducing cognitive load while preserving technical credibility. The experience establishes urgency first by highlighting exponential data growth and architectural strain, then transitions into a direct visual comparison between Cloud 1.0 and Cloud 2.0 so viewers can see the transformation before analyzing it. Information is layered progressively, moving from high-level context to supporting projections and finally architectural diagrams, ensuring clarity for decision-makers while maintaining depth for technical stakeholders.",
+      "design": "The design emphasizes contrast, hierarchy, and scale to reinforce the narrative of evolution. Centralized versus distributed architectures are positioned as visual opposites, supported by geographic mapping and network diagrams that make infrastructure expansion tangible and intuitive. Key growth metrics act as visual anchors within the scroll, creating rhythm and reinforcing urgency, while the overall visual language remains controlled, technical, and purposeful to communicate authority without overwhelming the viewer.",
+      "outcome": "The final piece distilled a complex architectural transition into a fast, shareable format that strengthened Cloud 2.0 thought leadership and aligned business and technical audiences around a shared understanding of network evolution. By clearly articulating why legacy systems fall short and what the future state requires, the infographic positioned the organization as a forward-looking enabler of AI-scale infrastructure and created a strong foundation for deeper strategic engagement."
+    },
+    {
+      "projectName": "Lumen Product Finder",
+      "toolsUsed": ["XD", "Illustrator"],
+      "tool-kit": {
+        "figma": ["Visual Prototyping", ".s-figma"],
+        "HTML": ["Markup Language", ".s-html"],
+        "CSS": ["Styling Language", ".s-css"],
+        "JavaScript": ["Programming Language", ".s-js"],
+        "Adobe After Effects": ["Motion Graphics & Animation", ".s-aee"],
+        "Adobe Photoshop": ["Raster Graphics Editing", ".s-photo"],
+        "Adobe Illustrator": ["Vector Graphics Design", "s.illustrator"]
+      },
+      "role": "Visual Designer",
+      "description": "Enterprise level site search and UI built through collaboration with the Lumen UX team for user-centric design.",
+      "button": "Explore",
+      "link": "./archive/product-finder.html",
+      "image": "./assets/project-images/product-finder/inhand-ipad_product-finder.jpg",
+      "number": "Project 03",
+      "summary": "Cloud 2.0 Network Evolution translates a fundamental shift in enterprise infrastructure into a clear, visual narrative. As AI workloads and data demand scale beyond the limits of legacy architecture, centralized Cloud 1.0 networks can no longer sustain performance, flexibility, or growth. This infographic communicates why that shift is happening and how distributed, high-capacity, intelligent connectivity defines the next era of infrastructure, making a complex technical transformation accessible to both executive and technical audiences.",
+      "ux": "My approach centered on reducing cognitive load while preserving technical credibility. The experience establishes urgency first by highlighting exponential data growth and architectural strain, then transitions into a direct visual comparison between Cloud 1.0 and Cloud 2.0 so viewers can see the transformation before analyzing it. Information is layered progressively, moving from high-level context to supporting projections and finally architectural diagrams, ensuring clarity for decision-makers while maintaining depth for technical stakeholders.",
+      "design": "The design emphasizes contrast, hierarchy, and scale to reinforce the narrative of evolution. Centralized versus distributed architectures are positioned as visual opposites, supported by geographic mapping and network diagrams that make infrastructure expansion tangible and intuitive. Key growth metrics act as visual anchors within the scroll, creating rhythm and reinforcing urgency, while the overall visual language remains controlled, technical, and purposeful to communicate authority without overwhelming the viewer.",
+      "outcome": "The final piece distilled a complex architectural transition into a fast, shareable format that strengthened Cloud 2.0 thought leadership and aligned business and technical audiences around a shared understanding of network evolution. By clearly articulating why legacy systems fall short and what the future state requires, the infographic positioned the organization as a forward-looking enabler of AI-scale infrastructure and created a strong foundation for deeper strategic engagement."
+    },
+    {
+      "figma": ["Visual Prototyping", ".s-fimga"],
+      "HTML": ["Markup Language", ".s-html"],
+      "CSS": ["Styling Language", ".s-css"],
+      "JavaScript": ["Programming Language", ".s-js"],
+      "Adobe After Effects": ["Motion Graphics & Animation", ".s-aee"],
+      "Adobe Photoshop": ["Raster Graphics Editing", ".s-photo"],
+      "Adobe Illustrator": ["Vector Graphics Design", "s.illustrator"]
+    }
+  ]
+}

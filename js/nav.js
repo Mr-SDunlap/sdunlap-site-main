@@ -12,6 +12,28 @@
     el.style.height = prev;
     return h;
   };
+  // Radio-style activation: only one nav item open at a time.
+  const ITEMS = [];
+  function setActiveNav(current) {
+    ITEMS.forEach(({ a: link, tl }) => {
+      const isCurrent = link === current;
+      link._isSectionActive = isCurrent;
+      if (isCurrent) {
+        tl.play();
+        link.setAttribute("aria-current", "true");
+      } else {
+        if (!link._isPointerInside && !link._isKeyboardFocused) tl.reverse();
+        link.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  // Decide ScrollTrigger start/end per-section so the span expansion
+  // aligns with current layout (hero, pinned archive, about, dynamic pages).
+    // Single threshold for all sections: open when section top hits 30%.
+  const triggerSettingsFor = (id) => ({ start: "top 30%", end: "bottom 30%" });
+
+
   ANCH.forEach((a) => {
     const s = a.querySelector("span");
     if (!s) return;
@@ -32,9 +54,10 @@
           height: () =>
             (parseInt(getComputedStyle(a).height, 10) || 0) + measure(s),
         },
-        0
+        0,
       )
       .to(s, { height: () => measure(s), opacity: 1 }, 0);
+    ITEMS.push({ a, tl });
     a._isPointerInside = a._isKeyboardFocused = a._isSectionActive = false;
     a.addEventListener("mouseenter", () => {
       a._isPointerInside = true;
@@ -57,31 +80,15 @@
     const id = href.slice(1);
     const target = document.getElementById(id);
     if (!target) return;
+    const cfg = triggerSettingsFor(id);
     ScrollTrigger.create({
       trigger: target,
-      start: "top center",
-      end: "bottom center",
+      start: cfg.start,
+      end: cfg.end,
+      anticipatePin: cfg.anticipatePin || 0,
       invalidateOnRefresh: true,
-      onEnter: () => {
-        a._isSectionActive = true;
-        tl.play();
-        a.setAttribute("aria-current", "true");
-      },
-      onEnterBack: () => {
-        a._isSectionActive = true;
-        tl.play();
-        a.setAttribute("aria-current", "true");
-      },
-      onLeave: () => {
-        a._isSectionActive = false;
-        tl.reverse();
-        a.removeAttribute("aria-current");
-      },
-      onLeaveBack: () => {
-        a._isSectionActive = false;
-        tl.reverse();
-        a.removeAttribute("aria-current");
-      },
+      onEnter: () => setActiveNav(a),
+      onEnterBack: () => setActiveNav(a),
     });
   });
 })();
