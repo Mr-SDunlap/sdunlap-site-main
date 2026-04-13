@@ -39,28 +39,30 @@
         "ION Interactive": ["Interactive CMS", "s-ion"]
       },
       "ux-planning": [
-        { "section-title": "Interactivity" },
+        { "section-title": "The Task" },
         {
           "button-one": [
             {
-              "button": "Cloud 1.0",
-              "description": "Cloud 1.0 architecture cannot meet Cloud 2.0 demands because it lacks high-capacity optical support and creates bottlenecks as data center density increases. It also leads to inefficient connectivity, limits scalability to regional architectures, and concentrates advantages among a small set of data center providers. We decided to use an animated gif to depict this.",
-              "img": "assets/project-images/cloud-infographic/cloud-diagram-1-final.gif",
-              "img-title": "Cloud 1.0 architecture"
+              "button": "Constraints",
+              "description": "When this project came in, the challenge was clear from the start. The information was highly confidential, with full visibility limited until the SLT delivered their presentation. That meant we were working with only fragments, asking precise, almost clinical questions to extract just enough clarity to move forward. Every detail had to be intentional. We weren’t just gathering information, we were piecing together a narrative under constraints. The goal was to take something tightly guarded and turn it into an infographic that not only explained the message clearly, but built anticipation and got people genuinely excited for what was coming next.",
+              "img": "assets/project-images/cloud-infographic/infographic-wire.jpg",
+              "img-title": "Wireframing"
             }
           ]
         },
         {
           "button-two": [
             {
-              "button": "Cloud 2.0",
-              "description": "With the inclusion of regional support we opted to include user interaction alongside the animated gif, allowing the user to toggle each reference point.",
-              "img": "assets/project-images/cloud-infographic/cloud-diagram-2-final.gif",
+              "button": "Approach",
+              "description": "I worked closely with the copywriting team to reshape the content into a clear, compelling narrative, while collaborating with designers to develop animated ads and supporting page assets. Throughout the process, I partnered with the creative director to make sure everything we produced stayed aligned with what SLT had in mind, despite the limited visibility we were working with. That alignment allowed us to stay on schedule and keep momentum. From there, I focused on pushing the experience further by creating an interactive way to showcase the before and after states, giving the story a more tangible and engaging impact.",
+              "img": "assets/project-images/cloud-infographic/infographic-wire.jpg",
               "img-title": "Cloud 2.0 architecture"
             }
           ]
         }
       ],
+      "color-theory": "Lumen Technologies uses a balanced color system that mixes warm, high-energy tones like coral and orange with cooler hues like teal and aqua to show both innovation and reliability. The warm colors grab attention and signal action and responsiveness, while the cooler tones create a sense of trust, clarity, and technical depth. Along with gradients that suggest movement and change, the palette reflects modern tech systems that are stable at the core but always evolving.",
+      "color-list": ["lmn-red", "lmn-light-teal", "lmn-teal", "lmn-orange"],
       "role": "Visual Designer - Developer",
       "description": "Complex infographic simplifying Cloud 2.0 concepts for C-level executives and stakeholders.",
       "button": "Explore",
@@ -72,7 +74,7 @@
       "status": "live",
       "team": "Two designers including myself as lead - Copy Team",
       "liveLink": "https://interact.lumen.com/cloud2-network-evolution",
-      "summary": "Cloud 2.0 Network Evolution translates a fundamental shift in enterprise infrastructure into a clear, visual narrative. As AI workloads and data demand scale beyond the limits of legacy architecture, centralized Cloud 1.0 networks can no longer sustain performance, flexibility, or growth. This infographic communicates why that shift is happening and how distributed, high-capacity, intelligent connectivity defines the next era of infrastructure, making a complex technical transformation accessible to both executive and technical audiences.",
+      "summary": "This infographic communicates why that shift is happening and how distributed, high-capacity, intelligent connectivity defines the next era of infrastructure, making a complex technical transformation accessible to both executive and technical audiences.",
       "ux-title": "The Approach",
       "ux": "My approach centered on reducing cognitive load while preserving technical credibility. The experience establishes urgency first by highlighting exponential data growth and architectural strain, then transitions into a direct visual comparison between Cloud 1.0 and Cloud 2.0 so viewers can see the transformation before analyzing it. Information is layered progressively, moving from high-level context to supporting projections and finally architectural diagrams, ensuring clarity for decision-makers while maintaining depth for technical stakeholders.",
       "design-title": "The Design",
@@ -98,6 +100,7 @@
       "description": "Interactive framework designed to showcase AI capabilities with a focus on user engagement and data visualization.",
       "button": "Explore",
       "link": "./archive/ai-framework.html",
+      "liveLink": "https://interact.lumen.com/ai-framework",
       "image": "./assets/project-images/ai-framework/iphone-16_ai-framework.jpg",
       "number": "Project 02",
       "summary": "Cloud 2.0 Network Evolution translates a fundamental shift in enterprise infrastructure into a clear, visual narrative. As AI workloads and data demand scale beyond the limits of legacy architecture, centralized Cloud 1.0 networks can no longer sustain performance, flexibility, or growth. This infographic communicates why that shift is happening and how distributed, high-capacity, intelligent connectivity defines the next era of infrastructure, making a complex technical transformation accessible to both executive and technical audiences.",

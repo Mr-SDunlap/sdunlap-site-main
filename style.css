@@ -9,7 +9,8 @@
 
 html {
   font-family: "Outfit", sans-serif;
-  scroll-behavior: smooth;
+  /* Disable CSS smooth scroll to avoid jank with GSAP ScrollTrigger on mobile */
+  scroll-behavior: auto;
 }
 
 :root {
@@ -1679,27 +1680,31 @@ body {
 }
 
 /* === Archive Pin + Horizontal Scroll (GSAP) ============================ */
-/* Hide overflow during pin; GSAP controls horizontal movement */
-#section_files {
-  overflow: hidden;
-}
-#section_files .project-container {
-  scroll-snap-type: none;
-  scrollbar-width: none; /* Firefox */
-}
-#section_files .project-container::-webkit-scrollbar {
-  display: none; /* WebKit */
-}
-#section_files .project {
-  flex: 0 0 auto; /* keep cards in a single row */
+/* Only apply pin-specific overrides on larger viewports to avoid mobile jank */
+@media (min-width: 901px) {
+  /* Hide overflow during pin; GSAP controls horizontal movement */
+  #section_files {
+    overflow: hidden;
+  }
+  #section_files .project-container {
+    scroll-snap-type: none;
+    scrollbar-width: none; /* Firefox */
+  }
+  #section_files .project-container::-webkit-scrollbar {
+    display: none; /* WebKit */
+  }
+  #section_files .project {
+    flex: 0 0 auto; /* keep cards in a single row */
+  }
 }
 
-/* Ensure cards fit within the viewport on small screens */
+/* Ensure cards fit within the viewport on small screens (native scroll) */
 @media (max-width: 900px) {
   #section_files .project {
     width: min(86vw, 560px);
   }
   #section_files .project-container {
     gap: 16px;
+    overflow-x: auto;
   }
 }

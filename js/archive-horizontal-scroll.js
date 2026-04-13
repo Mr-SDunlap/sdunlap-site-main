@@ -19,11 +19,31 @@
     ).matches;
     if (prefersReduced) return;
 
+    const mq = window.matchMedia("(min-width: 901px)");
+
     const section = document.querySelector("#section_files");
     const container = section && section.querySelector(".project-container");
     if (!section || !container) return;
 
     const build = () => {
+      // Only enable the pinned horizontal scroll on larger viewports
+      if (!mq.matches) {
+        const existing =
+          ScrollTrigger.getById && ScrollTrigger.getById("archive-horizontal");
+        if (existing) existing.kill();
+        if (container._archiveTween) {
+          container._archiveTween.kill();
+          container._archiveTween = null;
+        }
+        // Clean up inline styles so native scrolling can take over
+        container.style.removeProperty("transform");
+        container.style.willChange = "";
+        if (window.ScrollTrigger && ScrollTrigger.refresh) {
+          ScrollTrigger.refresh();
+        }
+        return; // do not set up pin on small screens
+      }
+
       // Kill any existing instance so rebuilds are clean
       const existing =
         ScrollTrigger.getById && ScrollTrigger.getById("archive-horizontal");
@@ -86,10 +106,19 @@
         ScrollTrigger.refresh();
       }
     });
-    window.addEventListener("resize", () => {
+    const onResize = () => {
+      build();
       if (window.ScrollTrigger && ScrollTrigger.refresh) {
         ScrollTrigger.refresh();
       }
-    });
+    };
+    // Rebuild when the media query flips between mobile/desktop
+    if (typeof mq.addEventListener === "function") {
+      mq.addEventListener("change", onResize);
+    } else if (typeof mq.addListener === "function") {
+      // Safari fallback
+      mq.addListener(onResize);
+    }
+    window.addEventListener("resize", onResize);
   }
 })();

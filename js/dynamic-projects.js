@@ -266,19 +266,54 @@
         );
       }
 
-      // Interaction: clicking buttons swaps content
+      // Interaction: clicking buttons swaps content with a brief animation
+      const TRANSITION_MS = 220;
+      const animateSwap = (el, apply) => {
+        if (!el) {
+          if (typeof apply === "function") apply();
+          return;
+        }
+        let done = false;
+        const onEnd = () => {
+          if (done) return;
+          done = true;
+          el.removeEventListener("transitionend", onEnd);
+          if (typeof apply === "function") apply();
+          el.classList.remove("is-exiting");
+          el.classList.add("is-entering");
+          requestAnimationFrame(() => {
+            // Force reflow so the enter transition plays
+            el.getBoundingClientRect();
+            el.classList.remove("is-entering");
+          });
+        };
+        el.addEventListener("transitionend", onEnd);
+        el.classList.add("is-exiting");
+        // Fallback in case transitionend doesn’t fire
+        setTimeout(onEnd, TRANSITION_MS + 60);
+      };
+
       const updateUx = (item) => {
         if (!item) return;
-        setText(".ux-planning .ux-text p", item.description || "");
-        const img = document.querySelector(".ux-planning .ux-image img");
-        if (img) {
-          img.src = resolveAsset(item.img || "");
-          img.alt = item["img-title"] || item.button || img.alt;
-        }
-        setText(
-          ".ux-planning .ux-image h4",
-          item["img-title"] || item.button || "",
-        );
+        const pEl = document.querySelector(".ux-planning .ux-text p");
+        const imgEl = document.querySelector(".ux-planning .ux-image img");
+        const h4El = document.querySelector(".ux-planning .ux-image h4");
+
+        animateSwap(pEl, () => {
+          setText(".ux-planning .ux-text p", item.description || "");
+        });
+        animateSwap(imgEl, () => {
+          if (imgEl) {
+            imgEl.src = resolveAsset(item.img || "");
+            imgEl.alt = item["img-title"] || item.button || imgEl.alt;
+          }
+        });
+        animateSwap(h4El, () => {
+          setText(
+            ".ux-planning .ux-image h4",
+            item["img-title"] || item.button || "",
+          );
+        });
       };
 
       const allBtns = document.querySelectorAll(
@@ -314,6 +349,28 @@
       ".outcome-title-text",
       project["outcome-title"] || project.outcomeTitle || "",
     );
+
+    // Visual Design: Color theory paragraph and color list swatches
+    // - `.visual-design .vd-image p` <= project["color-theory"] (if present)
+    // - `.visual-design .color-list` <= li elements with classes from project["color-list"]
+    (function renderColorTheory() {
+      const colorTheory = project["color-theory"] || project.colorTheory;
+      if (colorTheory) {
+        setText(".visual-design .vd-image p", colorTheory);
+      }
+
+      const colorListEl = document.querySelector(".visual-design .color-list");
+      const colors = project["color-list"];
+      if (colorListEl && Array.isArray(colors)) {
+        colorListEl.textContent = ""; // Clear any placeholders
+        colors.forEach((cls) => {
+          const li = document.createElement("li");
+          const token = normalizeClassToken(cls);
+          if (token) li.classList.add(token);
+          colorListEl.appendChild(li);
+        });
+      }
+    })();
 
     // Right-hand info panel (Client, Role, Tools, Status, Link)
     // Prefer project.info array if present; fall back to top-level fields.
@@ -357,6 +414,22 @@
         linkEl.innerHTML = `<a href="${escapeHtml(href)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`;
       } else {
         linkEl.textContent = "";
+      }
+    }
+
+    // Implementation section CTA: set `.link-out-btn` to the project's live link
+    // Preference order: info.link -> liveLink -> link
+    const ctaBtn = document.querySelector(".link-out-btn");
+    if (ctaBtn) {
+      if (linkVal) {
+        const href = resolveAsset(linkVal);
+        ctaBtn.setAttribute("href", href);
+        // Ensure new tab with safety
+        ctaBtn.setAttribute("target", "_blank");
+        ctaBtn.setAttribute("rel", "noopener");
+      } else {
+        // If no link available, keep button present but inert
+        ctaBtn.removeAttribute("href");
       }
     }
 

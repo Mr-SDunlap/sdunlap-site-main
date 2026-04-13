@@ -19,5 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // New code will go under this line
+  // Remove default anchor smooth-scroll on mobile to avoid double-smoothing
+  // (CSS smooth + JS + GSAP can fight and cause stutter). We already set
+  // `scroll-behavior: auto` in CSS, but some browsers may keep history-based
+  // smooth scroll. This is a defensive no-op hook reserved for future use.
+  // Intentionally empty.
 });
