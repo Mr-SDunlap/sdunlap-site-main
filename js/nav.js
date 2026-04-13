@@ -31,7 +31,7 @@
   // Decide ScrollTrigger start/end per-section so the span expansion
   // aligns with current layout (hero, pinned archive, about, dynamic pages).
     // Single threshold for all sections: open when section top hits 30%.
-  const triggerSettingsFor = (id) => ({ start: "top 30%", end: "bottom 30%" });
+  const triggerSettingsFor = (id) => ({ start: "top 40%", end: "bottom 40%" });
 
 
   ANCH.forEach((a) => {

@@ -212,16 +212,17 @@ h2 {
 .ux-planning {
   & p {
     padding-bottom: 40px;
+    line-height: 1.8;
   }
   & .ux-container {
     display: flex;
     padding-top: 40px;
   }
   & .ux-text {
-    width: 40%;
+    width: 70%;
   }
   & .ux-image {
-    width: 60%;
+    width: 30%;
     padding: 10px;
     width: clamp(300px, 100%, 800px);
     margin-left: 20px;
@@ -233,10 +234,29 @@ h2 {
       color: var(--dark-coffee);
     }
     & img {
-      width: 70%;
+      width: 100%;
       height: auto;
     }
   }
+}
+.ux-planning .ux-text p,
+.ux-planning .ux-image img,
+.ux-planning .ux-image h4 {
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+.ux-planning .ux-text p.is-exiting,
+.ux-planning .ux-image img.is-exiting,
+.ux-planning .ux-image h4.is-exiting {
+  opacity: 0;
+  transform: translateY(6px);
+}
+.ux-planning .ux-text p.is-entering,
+.ux-planning .ux-image img.is-entering,
+.ux-planning .ux-image h4.is-entering {
+  opacity: 1;
+  transform: translateY(0);
 }
 .ux-btn-container {
   display: flex;
