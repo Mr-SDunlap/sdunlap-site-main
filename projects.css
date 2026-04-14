@@ -379,6 +379,24 @@ h2 {
     background-color: var(--dark-coffee);
   }
 }
+
+/* Mobile layout: stack Implementation section and make CTA full-width */
+@media (max-width: 600px) {
+  .implementation-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .implementation-container .implementation-text,
+  .implementation-container .implementation-img {
+    width: 100%;
+  }
+  /* Ensure the CTA fills the width and centers its content */
+  .implementation-text .link-out-btn,
+  .link-out-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
 .link-out-btn {
   background-color: var(--diamond);
   padding: 20px 40px;
