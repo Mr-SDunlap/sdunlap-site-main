@@ -53,6 +53,26 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+/* Swirl effect: per-character layout baseline */
+a .swirl-wrap {
+  display: inline-block;
+}
+a .swirl-clip {
+  display: inline-block;
+  overflow: hidden;
+  height: 1em;
+  line-height: 1em; /* keep a consistent clipping box */
+  vertical-align: bottom;
+}
+a .swirl-char {
+  display: inline-block;
+  will-change: transform;
+}
+a .swirl-space {
+  width: 0.35em;
+  display: inline-block;
+}
 @media (max-width: 600px) {
   section {
     padding-left: 0px;
@@ -416,14 +436,14 @@ body {
 }
 
 #mobile-nav ul {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(3px);
   display: flex;
   flex-direction: column;
-  padding: 10px;
-  margin-top: 70px;
+  padding: 20px;
+  margin-top: 60px;
+  height: calc(100vh - 60px);
   gap: 10px;
-  border-radius: 0.5rem;
   opacity: 0;
 
   & li {
@@ -432,18 +452,13 @@ body {
 
   & a {
     display: inline-block;
-    width: 100%;
     padding-block: 10px;
-    font-size: 20px;
+    font-size: 40px;
     font-weight: 500;
-    text-align: center;
-    border-radius: 0.5rem;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: var(--white);
+    color: var(--dark-coffee);
     transition: all 0.2s ease;
 
     &:hover {
-      background-color: var(--white);
       color: var(--dark-coffee);
     }
   }
@@ -864,6 +879,10 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 }
 .banner {
   width: clamp(250px, 100%, 600px);
@@ -1676,6 +1695,20 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%) rotate(90deg);
+  }
+}
+
+/* Make call-to-action buttons full-width on small screens */
+@media (max-width: 600px) {
+  /* Ensure the container stretches so the button can fill it */
+  .btn-box {
+    width: 100%;
+  }
+  /* Make any .link-out-btn span the full row */
+  .btn-box .link-out-btn,
+  .link-out-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
