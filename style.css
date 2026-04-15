@@ -1498,7 +1498,7 @@ body {
 .about-text {
   display: flex;
   flex-direction: column;
-  width: clamp(300px, 100%, 1300px);
+  width: clamp(300px, 100%, 1000px);
 }
 .about-box {
   display: flex;
