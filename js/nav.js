@@ -1,96 +1,109 @@
 /* NAVIGATION hovering and indication ================================= */
 (() => {
-  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined")
-    return;
-  gsap.registerPlugin(ScrollTrigger);
-  const ANCH = [...document.querySelectorAll("nav ul li a")];
-  if (!ANCH.length) return;
-  const measure = (el) => {
-    const prev = el.style.height;
-    el.style.height = "auto";
-    const h = el.scrollHeight || el.offsetHeight || 0;
-    el.style.height = prev;
-    return h;
-  };
-  // Radio-style activation: only one nav item open at a time.
-  const ITEMS = [];
-  function setActiveNav(current) {
-    ITEMS.forEach(({ a: link, tl }) => {
-      const isCurrent = link === current;
-      link._isSectionActive = isCurrent;
-      if (isCurrent) {
+  function initSiteNav() {
+    if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined")
+      return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const anchors = [...document.querySelectorAll("nav ul li a")].filter(
+      (a) => a.dataset.navReady !== "1",
+    );
+    if (!anchors.length) return;
+
+    const measure = (el) => {
+      const prev = el.style.height;
+      el.style.height = "auto";
+      const h = el.scrollHeight || el.offsetHeight || 0;
+      el.style.height = prev;
+      return h;
+    };
+
+    // Radio-style activation: only one nav item open at a time.
+    const items = [];
+    function setActiveNav(current) {
+      items.forEach(({ a: link, tl }) => {
+        const isCurrent = link === current;
+        link._isSectionActive = isCurrent;
+        if (isCurrent) {
+          tl.play();
+          link.setAttribute("aria-current", "true");
+        } else {
+          if (!link._isPointerInside && !link._isKeyboardFocused) tl.reverse();
+          link.removeAttribute("aria-current");
+        }
+      });
+    }
+
+    const triggerSettingsFor = () => ({ start: "top 40%", end: "bottom 40%" });
+
+    anchors.forEach((a) => {
+      a.dataset.navReady = "1";
+
+      const s = a.querySelector("span");
+      if (!s) return;
+
+      a.style.boxSizing = "border-box";
+      a.style.overflow = "hidden";
+      s.style.overflow = "hidden";
+      s.style.display = "block";
+      s.style.height = "0";
+      s.style.opacity = "0";
+
+      const tl = gsap
+        .timeline({
+          paused: true,
+          defaults: { duration: 0.28, ease: "power2.out" },
+        })
+        .to(
+          a,
+          {
+            height: () =>
+              (parseInt(getComputedStyle(a).height, 10) || 0) + measure(s),
+          },
+          0,
+        )
+        .to(s, { height: () => measure(s), opacity: 1 }, 0);
+
+      items.push({ a, tl });
+      a._isPointerInside = a._isKeyboardFocused = a._isSectionActive = false;
+      a.addEventListener("mouseenter", () => {
+        a._isPointerInside = true;
         tl.play();
-        link.setAttribute("aria-current", "true");
-      } else {
-        if (!link._isPointerInside && !link._isKeyboardFocused) tl.reverse();
-        link.removeAttribute("aria-current");
-      }
+      });
+      a.addEventListener("mouseleave", () => {
+        a._isPointerInside = false;
+        if (!a._isSectionActive && !a._isKeyboardFocused) tl.reverse();
+      });
+      a.addEventListener("focus", () => {
+        a._isKeyboardFocused = true;
+        tl.play();
+      });
+      a.addEventListener("blur", () => {
+        a._isKeyboardFocused = false;
+        if (!a._isSectionActive && !a._isPointerInside) tl.reverse();
+      });
+
+      const href = a.getAttribute("href");
+      if (!href || !href.startsWith("#")) return;
+      const id = href.slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+      const cfg = triggerSettingsFor(id);
+      ScrollTrigger.create({
+        trigger: target,
+        start: cfg.start,
+        end: cfg.end,
+        anticipatePin: cfg.anticipatePin || 0,
+        invalidateOnRefresh: true,
+        onEnter: () => setActiveNav(a),
+        onEnterBack: () => setActiveNav(a),
+      });
     });
   }
 
-  // Decide ScrollTrigger start/end per-section so the span expansion
-  // aligns with current layout (hero, pinned archive, about, dynamic pages).
-    // Single threshold for all sections: open when section top hits 30%.
-  const triggerSettingsFor = (id) => ({ start: "top 40%", end: "bottom 40%" });
-
-
-  ANCH.forEach((a) => {
-    const s = a.querySelector("span");
-    if (!s) return;
-    a.style.boxSizing = "border-box";
-    a.style.overflow = "hidden";
-    s.style.overflow = "hidden";
-    s.style.display = "block";
-    s.style.height = "0";
-    s.style.opacity = "0";
-    const tl = gsap
-      .timeline({
-        paused: true,
-        defaults: { duration: 0.28, ease: "power2.out" },
-      })
-      .to(
-        a,
-        {
-          height: () =>
-            (parseInt(getComputedStyle(a).height, 10) || 0) + measure(s),
-        },
-        0,
-      )
-      .to(s, { height: () => measure(s), opacity: 1 }, 0);
-    ITEMS.push({ a, tl });
-    a._isPointerInside = a._isKeyboardFocused = a._isSectionActive = false;
-    a.addEventListener("mouseenter", () => {
-      a._isPointerInside = true;
-      tl.play();
-    });
-    a.addEventListener("mouseleave", () => {
-      a._isPointerInside = false;
-      if (!a._isSectionActive && !a._isKeyboardFocused) tl.reverse();
-    });
-    a.addEventListener("focus", () => {
-      a._isKeyboardFocused = true;
-      tl.play();
-    });
-    a.addEventListener("blur", () => {
-      a._isKeyboardFocused = false;
-      if (!a._isSectionActive && !a._isPointerInside) tl.reverse();
-    });
-    const href = a.getAttribute("href");
-    if (!href || !href.startsWith("#")) return;
-    const id = href.slice(1);
-    const target = document.getElementById(id);
-    if (!target) return;
-    const cfg = triggerSettingsFor(id);
-    ScrollTrigger.create({
-      trigger: target,
-      start: cfg.start,
-      end: cfg.end,
-      anticipatePin: cfg.anticipatePin || 0,
-      invalidateOnRefresh: true,
-      onEnter: () => setActiveNav(a),
-      onEnterBack: () => setActiveNav(a),
-    });
-  });
+  window.refreshSiteNav = initSiteNav;
+  initSiteNav();
 })();
 /* NAVIGATION hovering and indication (END) ================================= */
 

@@ -39,28 +39,49 @@
         "ION Interactive": ["Interactive CMS", "s-ion"]
       },
       "ux-planning": [
-        { "section-title": "The Task" },
         {
           "button-one": [
             {
+              "section-title": "Constraints",
               "button": "Constraints",
               "description": "When this project came in, the challenge was clear from the start. The information was highly confidential, with full visibility limited until the SLT delivered their presentation. That meant we were working with only fragments, asking precise, almost clinical questions to extract just enough clarity to move forward. Every detail had to be intentional. We weren’t just gathering information, we were piecing together a narrative under constraints. The goal was to take something tightly guarded and turn it into an infographic that not only explained the message clearly, but built anticipation and got people genuinely excited for what was coming next.",
               "img": "assets/project-images/cloud-infographic/infographic-wire.jpg",
-              "img-title": "Wireframing"
+              "img-title": "Planning"
             }
           ]
         },
         {
           "button-two": [
             {
+              "section-title": "Approach",
               "button": "Approach",
               "description": "I worked closely with the copywriting team to reshape the content into a clear, compelling narrative, while collaborating with designers to develop animated ads and supporting page assets. Throughout the process, I partnered with the creative director to make sure everything we produced stayed aligned with what SLT had in mind, despite the limited visibility we were working with. That alignment allowed us to stay on schedule and keep momentum. From there, I focused on pushing the experience further by creating an interactive way to showcase the before and after states, giving the story a more tangible and engaging impact.",
               "img": "assets/project-images/cloud-infographic/infographic-wire.jpg",
-              "img-title": "Cloud 2.0 architecture"
+              "img-title": "Story telling"
             }
           ]
         }
       ],
+      "visual-design": [
+        {
+          "vd-text": [
+            {
+              "section-title": "Visual Design",
+              "copy-one": "The objective was to integrate the existing cloud design into the hero section. After collaborating with the original designer and exploring several alternative directions, this approach proved to be the most compelling. It establishes a clear focal point while introducing a sense of human connection.",
+              "copy-two": "To present the information as clearly and accurately as possible, we developed an animation that illustrates the flow of data. This approach establishes a visual narrative that connects the before and after states of cloud integration."
+            }
+          ]
+        },
+        {
+          "vd-images": [
+            {
+              "copy-one-img": "./assets/project-images/cloud-infographic/visual-id/cloud-infographic-hero.png",
+              "copy-two-img": "./assets/project-images/cloud-infographic/cloud-diagram-2-final.gif"
+            }
+          ]
+        }
+      ],
+      "video": "./assets/project-images/cloud-infographic/visual-id/infographic-scroll.mp4",
       "color-theory": "Lumen Technologies uses a balanced color system that mixes warm, high-energy tones like coral and orange with cooler hues like teal and aqua to show both innovation and reliability. The warm colors grab attention and signal action and responsiveness, while the cooler tones create a sense of trust, clarity, and technical depth. Along with gradients that suggest movement and change, the palette reflects modern tech systems that are stable at the core but always evolving.",
       "color-list": ["lmn-red", "lmn-light-teal", "lmn-teal", "lmn-orange"],
       "role": "Visual Designer - Developer",
