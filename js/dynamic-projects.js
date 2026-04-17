@@ -53,6 +53,75 @@
       return `../${cleaned}`;
   }
 
+  function getHomepageHref() {
+    return new URL("../index.html", window.location.href).href;
+  }
+
+  function bindHomeLogoNavigation() {
+    const homepageHref = getHomepageHref();
+
+    document.querySelectorAll(".home-logo").forEach((link) => {
+      link.href = homepageHref;
+
+      if (link.dataset.homeLogoBound === "1") return;
+      link.dataset.homeLogoBound = "1";
+
+      link.addEventListener(
+        "click",
+        (event) => {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          window.location.assign(homepageHref);
+        },
+        true,
+      );
+    });
+  }
+
+  function toRomanNumeral(value) {
+    const numerals = [
+      [1000, "M"],
+      [900, "CM"],
+      [500, "D"],
+      [400, "CD"],
+      [100, "C"],
+      [90, "XC"],
+      [50, "L"],
+      [40, "XL"],
+      [10, "X"],
+      [9, "IX"],
+      [5, "V"],
+      [4, "IV"],
+      [1, "I"],
+    ];
+
+    let num = Math.max(1, Number(value) || 1);
+    let out = "";
+
+    numerals.forEach(([amount, numeral]) => {
+      while (num >= amount) {
+        out += numeral;
+        num -= amount;
+      }
+    });
+
+    return out;
+  }
+
+  function cleanSectionLabel(label, fallback) {
+    const text = String(label || fallback || "")
+      .replace(/^\s*\d+\s*\/\s*/g, "")
+      .trim();
+    return text || fallback || "";
+  }
+
+  function formatNavLabel(label) {
+    return cleanSectionLabel(label, "")
+      .split(/\s+/)
+      .filter(Boolean)
+      .join("\u00A0");
+  }
+
   function normalizeClassToken(v) {
     return String(v || "")
       .trim()
@@ -65,7 +134,6 @@
     if (Array.isArray(planning)) {
       planning.forEach((entry) => {
         if (entry && typeof entry === "object") {
-          if ("section-title" in entry) out.sectionTitle = entry["section-title"] || "";
           if ("button-one" in entry && Array.isArray(entry["button-one"])) {
             out.buttonOne = entry["button-one"][0] || null;
           }
@@ -75,10 +143,47 @@
         }
       });
     }
+    out.sectionTitle =
+      out.buttonOne?.["section-title"] ||
+      out.buttonTwo?.["section-title"] ||
+      "";
+    return out;
+  }
+
+  function parseVisualDesign(visualDesign) {
+    const out = {
+      sectionTitle: "",
+      copyOne: "",
+      copyOneImg: "",
+      copyTwo: "",
+      copyTwoImg: "",
+    };
+
+    if (!Array.isArray(visualDesign)) return out;
+
+    visualDesign.forEach((entry) => {
+      if (!entry || typeof entry !== "object") return;
+
+      if (Array.isArray(entry["vd-text"])) {
+        const textBlock = entry["vd-text"][0] || {};
+        out.sectionTitle = textBlock["section-title"] || out.sectionTitle;
+        out.copyOne = textBlock["copy-one"] || out.copyOne;
+        out.copyTwo = textBlock["copy-two"] || out.copyTwo;
+      }
+
+      if (Array.isArray(entry["vd-images"])) {
+        const imageBlock = entry["vd-images"][0] || {};
+        out.copyOneImg = imageBlock["copy-one-img"] || out.copyOneImg;
+        out.copyTwoImg = imageBlock["copy-two-img"] || out.copyTwoImg;
+      }
+    });
+
     return out;
   }
 
   async function load() {
+    bindHomeLogoNavigation();
+
     const params = new URLSearchParams(location.search);
     const wantedSlug =
       params.get("slug") || params.get("project") || params.get("name");
@@ -140,6 +245,14 @@
     setText(".project-name", project.projectName);
     setText(".project-description", project.description || "");
     setText(".project-summary", project.summary || project.description || "");
+    const overviewParagraph = document.querySelector(".overview p");
+    if (overviewParagraph) {
+      const baseText = overviewParagraph.textContent.trim();
+      const summaryText = project.summary || project.description || "";
+      overviewParagraph.textContent = [baseText, summaryText]
+        .filter(Boolean)
+        .join(" ");
+    }
     // Legacy detail summary block fallback
     setText(".summary", project.outcome || project.role || "");
     // Hero image (src/alt) inside the hero container
@@ -295,10 +408,17 @@
 
       const updateUx = (item) => {
         if (!item) return;
+        const h2El = document.querySelector(".ux-planning .ux-text h2");
         const pEl = document.querySelector(".ux-planning .ux-text p");
         const imgEl = document.querySelector(".ux-planning .ux-image img");
         const h4El = document.querySelector(".ux-planning .ux-image h4");
 
+        animateSwap(h2El, () => {
+          setText(
+            ".ux-planning .ux-text h2",
+            item["section-title"] || item.button || "",
+          );
+        });
         animateSwap(pEl, () => {
           setText(".ux-planning .ux-text p", item.description || "");
         });
@@ -339,16 +459,52 @@
     }
 
     // Section titles populated from JSON (supports dashed keys)
-    // .design-title-text <= project["design-title"] (fallbacks to empty)
     setHTML(".ux-title-text", project["ux-title"] || project.uxTitle || "");
-    setHTML(
-      ".design-title-text",
-      project["design-title"] || project.designTitle || "",
-    );
     setHTML(
       ".outcome-title-text",
       project["outcome-title"] || project.outcomeTitle || "",
     );
+
+    (function renderVisualDesign() {
+      const visualDesign = parseVisualDesign(project["visual-design"]);
+      const vdText = document.querySelector(".visual-design .vd-text");
+      if (!vdText) return;
+
+      const heading =
+        vdText.querySelector("h2") || document.createElement("h2");
+      heading.textContent =
+        visualDesign.sectionTitle ||
+        project["design-title"] ||
+        project.designTitle ||
+        "Visual Design";
+
+      vdText.textContent = "";
+      vdText.appendChild(heading);
+
+      const contentItems = [
+        { type: "copy", value: visualDesign.copyOne },
+        { type: "image", value: visualDesign.copyOneImg },
+        { type: "copy", value: visualDesign.copyTwo },
+        { type: "image", value: visualDesign.copyTwoImg },
+      ];
+
+      contentItems.forEach((item, index) => {
+        if (!item.value) return;
+
+        if (item.type === "copy") {
+          const paragraph = document.createElement("p");
+          paragraph.textContent = item.value;
+          vdText.appendChild(paragraph);
+          return;
+        }
+
+        const img = document.createElement("img");
+        img.className = "vd-feature-image";
+        img.src = resolveAsset(item.value);
+        img.alt = `${heading.textContent} image ${index === 1 ? "one" : "two"}`;
+        vdText.appendChild(img);
+      });
+    })();
 
     // Visual Design: Color theory paragraph and color list swatches
     // - `.visual-design .vd-image p` <= project["color-theory"] (if present)
@@ -433,55 +589,89 @@
       }
     }
 
+    const implementationMedia = document.querySelector(".implementation-img");
+    if (implementationMedia) {
+      implementationMedia.textContent = "";
+
+      if (project.video) {
+        const video = document.createElement("video");
+        video.src = resolveAsset(project.video);
+        video.loop = true;
+        video.autoplay = true;
+        video.muted = true;
+        video.playsInline = true;
+        video.controls = false;
+        video.setAttribute("aria-label", `${project.projectName || "Project"} outcome video`);
+        implementationMedia.appendChild(video);
+      }
+    }
+
     // Build dynamic in-page navigation for sections
     (function buildProjectNav() {
       const sections = [
         {
           sel: ".hero-container",
           id: "section_overview",
-          label:
-            "Overview" || document.querySelector(".hero-container h4")?.textContent,
+          label: "Overview",
         },
         {
           sel: ".tool-kit",
           id: "section_toolkit",
-          label: "Tool Kit",
+          label: cleanSectionLabel(
+            document.querySelector(".tool-kit h4")?.textContent,
+            "Tool Kit",
+          ),
         },
         {
           sel: ".ux-planning",
           id: "section_ux",
-          label:
-            document.querySelector(".ux-planning .ux-text h2")?.textContent ||
+          label: cleanSectionLabel(
+            document.querySelector(".ux-planning h4")?.textContent ||
+              document.querySelector(".ux-planning .ux-text h2")?.textContent,
             "UX & Planning",
+          ),
         },
         {
           sel: ".visual-design",
           id: "section_visual",
-          label:
-            (document.querySelector(".visual-design h4")?.textContent || "Visual Design")
-              .replace(/^\s*\d+\s*\/?\s*/g, "")
-              .trim(),
+          label: cleanSectionLabel(
+            document.querySelector(".visual-design h4")?.textContent,
+            "Visual Design",
+          ),
         },
-        { sel: ".outcome", id: "section_outcome", label: "Outcome" },
+        {
+          sel: ".implementation",
+          id: "section_implementation",
+          label: cleanSectionLabel(
+            document.querySelector(".implementation h4")?.textContent,
+            "Implementation",
+          ),
+        },
         {
           sel: ".additional-projects",
           id: "section_more",
-          label: "Explore",
+          label: cleanSectionLabel(
+            document.querySelector(".additional-projects h2")?.textContent,
+            "Explore Other Projects",
+          ),
         },
       ].filter((s) => document.querySelector(s.sel));
 
       const ul = document.querySelector("#site-nav ul");
       if (!ul || !sections.length) return;
 
+      const existingHomeLogo = document.querySelector("#site-nav .home-logo");
+      const homeLabel = existingHomeLogo?.textContent?.trim() || "S_";
+
       // Clear any existing items and rebuild
       ul.textContent = "";
 
-      // Brand/home anchor -> first section
+      // Brand/home anchor should always return to the homepage.
       const homeLi = document.createElement("li");
       const homeA = document.createElement("a");
       homeA.className = "home-logo split-text";
-      homeA.href = `#${sections[0].id}`;
-      homeA.textContent = "sd";
+      homeA.href = getHomepageHref();
+      homeA.textContent = homeLabel;
       homeLi.appendChild(homeA);
       ul.appendChild(homeLi);
 
@@ -493,12 +683,21 @@
         const li = document.createElement("li");
         const a = document.createElement("a");
         a.href = `#${s.id}`;
+        a.appendChild(
+          document.createTextNode(`${toRomanNumeral(sections.indexOf(s) + 1)}.`),
+        );
         const span = document.createElement("span");
-        span.textContent = s.label;
+        span.textContent = `\u00A0${formatNavLabel(s.label)}`;
         a.appendChild(span);
         li.appendChild(a);
         ul.appendChild(li);
       });
+
+      bindHomeLogoNavigation();
+      if (typeof window.refreshSiteNav === "function") {
+        window.refreshSiteNav();
+      }
+
       // Smooth scrolling is handled globally in CSS (html { scroll-behavior: smooth; })
     })();
 

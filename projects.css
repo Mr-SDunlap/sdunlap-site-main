@@ -57,63 +57,83 @@ body {
   flex-direction: column;
   gap: 80px;
 }
-
 .hero-container {
-  padding-top: 40px;
-  & h4 {
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--orange);
+  & .hero-header {
+    padding: 40px;
   }
-  & .hero-container_inner {
-    display: flex;
-    gap: 20px;
-  }
-  & .hero-text {
-    flex: 1;
-  }
-  & .hero-image {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    flex: 1;
-    position: relative;
-    & .image-container {
-      width: clamp(200px, 100%, 400px);
-      aspect-ratio: 1/1;
-      background-color: var(--dark-coffee);
-      padding: 30px;
-      position: relative;
+  & .overview {
+    width: clamp(200px, 90%, 1000px);
+    margin: 0 auto;
+    padding-top: 60px;
+
+    & h4 {
+      border-bottom: solid 1px var(--pale-grey);
+      text-align: center;
+
+      @media (max-width: 600px) {
+        text-align: left;
+      }
     }
-    & img {
-      width: clamp(200px, 100%, 800px);
-    }
-    & figcaption,
-    & .hero-caption {
-      position: absolute;
-      left: 16px;
-      bottom: 16px;
-      max-width: 80%;
-      padding: 8px 10px;
-      font-size: 12px;
-      line-height: 1.4;
-      color: var(--dark-coffee);
-      background: rgba(255, 255, 255, 0.9);
+
+    & p {
+      padding-top: 20px;
+      font-weight: 300;
+      line-height: 1.6;
+      text-align: center;
+
+      @media (max-width: 600px) {
+        text-align: left;
+      }
     }
   }
-  & .project-name {
-    font-weight: 600;
-    font-size: 5rem;
-    color: var(--text-black);
-    padding-bottom: 40px;
-  }
-  & .project-summary {
-    font-weight: 300;
-    font-size: 18px;
-    color: var(--dark-coffee);
-    line-height: 1.6;
+  @media (max-width: 600px) {
+    margin-top: 60px;
   }
 }
+
+.hero-bg-image {
+  width: clamp(270px, 100%, 1400px);
+  height: 400px;
+  background-image: url(assets/project-images/cloud-infographic/hero/desktop.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+
+  & .hero-text-box {
+    padding-left: 40px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+
+    & .project-title {
+      font-size: clamp(5rem, 5vw, 10rem);
+    }
+  }
+
+  @media (max-width: 1000px) {
+    background-image: url(assets/project-images/cloud-infographic/hero/tablet.jpg);
+    height: 375px;
+
+    & .hero-text-box {
+      display: none;
+    }
+  }
+  @media (max-width: 600px) {
+    background-image: url(assets/project-images/cloud-infographic/hero/mobile.jpg);
+    height: 300px;
+  }
+}
+.hero-header {
+  background-image: linear-gradient(90deg, #dfdede, #a8a5a5);
+}
+@media (min-width: 1001px) {
+  .hero-header {
+    display: none;
+  }
+}
+
 p {
   font-weight: 300;
   font-size: 18px;
@@ -121,11 +141,16 @@ p {
   line-height: 1.6;
 }
 h4 {
-  font-size: 14px;
-  font-weight: 300;
+  font-family: "Space Grotesk";
+  font-size: 16px;
+  font-weight: 500;
   text-transform: uppercase;
   color: var(--orange);
   padding-bottom: 15px;
+}
+section {
+  width: clamp(200px, 90%, 1400px);
+  margin: 0 auto;
 }
 .section-line {
   display: block;
@@ -135,6 +160,8 @@ h4 {
 }
 .tool-kit {
   position: relative;
+  width: clamp(300px, 90%, 1400px);
+  margin: 0 auto;
 }
 
 .tool-list {
@@ -142,22 +169,25 @@ h4 {
   flex-wrap: wrap;
   gap: 20px;
   padding-top: 40px;
+  justify-content: center;
 }
 .tool {
   list-style: none;
-  width: 175px;
-  aspect-ratio: 1/1;
   padding: 20px;
   background-color: var(--diamond);
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 20px;
   position: relative;
+  flex: 1 1 150px;
+  min-width: 200px;
+  max-width: 360px;
 
   & .tool-img {
     width: 40px;
     height: 40px;
     background-size: contain;
-    background-repeat: none;
+    background-repeat: no-repeat;
     background-position: left center;
   }
   /* software icons */
@@ -189,11 +219,6 @@ h4 {
     background-image: url("./assets/icons/ion-icon.png");
   }
 
-  & .tool-desc {
-    position: absolute;
-    left: 20px;
-    bottom: 20px;
-  }
   & .tool-name {
     font-size: 16px;
     font-weight: 500;
@@ -202,11 +227,15 @@ h4 {
     font-size: 12px;
     font-weight: 300;
   }
+
+  & .tool-desc {
+    min-width: 0;
+  }
 }
 h2 {
   font-size: 36px;
   font-weight: 500;
-  padding-block: 20px;
+  padding-bottom: 40px;
 }
 /* ux and planning section =================================================*/
 .ux-planning {
@@ -217,11 +246,21 @@ h2 {
   & .ux-container {
     display: flex;
     padding-top: 40px;
+
+    @media (max-width: 1000px) {
+      flex-direction: column-reverse;
+    }
   }
   & .ux-text {
     width: 70%;
+
+    @media (max-width: 1000px) {
+      width: 100%;
+      padding-top: 40px;
+    }
   }
   & .ux-image {
+    align-self: flex-start;
     width: 30%;
     padding: 10px;
     width: clamp(300px, 100%, 800px);
@@ -236,6 +275,10 @@ h2 {
     & img {
       width: 100%;
       height: auto;
+    }
+
+    @media (max-width: 1000px) {
+      margin-left: 0;
     }
   }
 }
@@ -261,7 +304,6 @@ h2 {
 .ux-btn-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 20px;
 }
 .active-btn {
@@ -275,7 +317,8 @@ h2 {
   text-transform: uppercase;
   color: var(--grey);
   border: none;
-  background-color: transparent;
+  background-color: var(--pale-grey);
+  padding: 20px;
   font-size: 16px;
   font-weight: 500;
   display: flex;
@@ -283,6 +326,10 @@ h2 {
   gap: 12px;
   cursor: pointer;
   transition: all 250ms ease;
+
+  &:hover {
+    background-color: var(--diamond);
+  }
 
   &:hover > div {
     transform: rotate(90deg);
@@ -315,20 +362,41 @@ h2 {
   padding-top: 40px;
   position: relative;
   display: flex;
+  align-items: flex-start;
   gap: 20px;
 
+  @media (max-width: 1000px) {
+    flex-direction: column;
+  }
+
   & .vd-text {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
     & h2 {
       font-weight: 400;
+      padding-bottom: 0;
     }
+
     background-color: var(--dark-coffee);
     color: var(--white);
     min-height: 350px;
     width: 60%;
-    padding: 10px 30px;
+    padding: 40px 30px;
+
+    @media (max-width: 1000px) {
+      width: 100%;
+    }
 
     & p {
       color: var(--pale-grey) !important;
+    }
+
+    & img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
   }
   & .vd-image {
@@ -336,6 +404,10 @@ h2 {
     width: 40%;
     background-color: var(--diamond);
     min-height: 350px;
+
+    @media (max-width: 1000px) {
+      width: 100%;
+    }
     & h3 {
       font-weight: 500;
       padding-top: 10px;
@@ -367,16 +439,36 @@ h2 {
   position: relative;
   margin-bottom: 60px;
 
+  @media (max-width: 1000px) {
+    flex-direction: column;
+  }
+
   & .implementation-text {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
     width: 40%;
+
+    @media (max-width: 1000px) {
+      width: 100%;
+    }
   }
   & .implementation-img {
     width: 60%;
     background-color: var(--dark-coffee);
+
+    @media (max-width: 1000px) {
+      width: 100%;
+      margin-top: 40px;
+    }
+
+    & video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 }
 
@@ -447,14 +539,6 @@ h2 {
     top: 50%;
     transform: translate(-50%, -50%) rotate(90deg);
   }
-}
-.final-img {
-  width: clamp(300px, 95%, 1000px);
-  min-height: 350px;
-  margin: 0 auto;
-  padding-block: 40px;
-  position: relative;
-  background-color: var(--diamond);
 }
 /* colors */
 .lmn-teal {
