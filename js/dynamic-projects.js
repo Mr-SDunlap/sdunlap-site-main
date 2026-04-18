@@ -19,6 +19,11 @@
     const el = $(sel);
     if (el) el.textContent = value || "";
   }
+  function setTextAll(sel, value) {
+    document.querySelectorAll(sel).forEach((el) => {
+      el.textContent = value || "";
+    });
+  }
   function setHTML(sel, value) {
     const el = $(sel);
     if (el) el.innerHTML = value || "";
@@ -235,13 +240,12 @@
       : document.title;
     // Support both old and new hero markup
     // Hero section header (e.g., "Project 01") from JSON
-    setText(
-      ".hero-container h4",
+    const projectNumber =
       project.number || (typeof project.index === "number"
         ? `Project ${String(project.index + 1).padStart(2, "0")}`
-        : "")
-    );
-    setText(".project-title", project.projectName);
+        : "");
+    setTextAll(".hero-header h4, .hero-text-box h4", projectNumber);
+    setTextAll(".hero-header .project-title, .hero-text-box .project-title", project.projectName);
     setText(".project-name", project.projectName);
     setText(".project-description", project.description || "");
     setText(".project-summary", project.summary || project.description || "");
