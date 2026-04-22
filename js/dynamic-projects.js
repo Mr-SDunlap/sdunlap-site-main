@@ -468,6 +468,10 @@
       ".outcome-title-text",
       project["outcome-title"] || project.outcomeTitle || "",
     );
+    setText(
+      ".implementation-text p",
+      project.outcome || "",
+    );
 
     (function renderVisualDesign() {
       const visualDesign = parseVisualDesign(project["visual-design"]);

@@ -56,7 +56,7 @@
               "section-title": "Approach",
               "button": "Approach",
               "description": "I worked closely with the copywriting team to reshape the content into a clear, compelling narrative, while collaborating with designers to develop animated ads and supporting page assets. Throughout the process, I partnered with the creative director to make sure everything we produced stayed aligned with what SLT had in mind, despite the limited visibility we were working with. That alignment allowed us to stay on schedule and keep momentum. From there, I focused on pushing the experience further by creating an interactive way to showcase the before and after states, giving the story a more tangible and engaging impact.",
-              "img": "assets/project-images/cloud-infographic/infographic-wire.jpg",
+              "img": "assets/project-images/cloud-infographic/Lumen_cloud-infographic_macbook.png",
               "img-title": "Story telling"
             }
           ]
@@ -85,7 +85,7 @@
       "color-theory": "Lumen Technologies uses a balanced color system that mixes warm, high-energy tones like coral and orange with cooler hues like teal and aqua to show both innovation and reliability. The warm colors grab attention and signal action and responsiveness, while the cooler tones create a sense of trust, clarity, and technical depth. Along with gradients that suggest movement and change, the palette reflects modern tech systems that are stable at the core but always evolving.",
       "color-list": ["lmn-red", "lmn-light-teal", "lmn-teal", "lmn-orange"],
       "role": "Visual Designer - Developer",
-      "description": "Complex infographic simplifying Cloud 2.0 concepts for C-level executives and stakeholders.",
+      "description": "Designed and developed an animated system to visualize cloud data flow, improving clarity between pre- and post-integration states.",
       "button": "Explore",
       "link": "./archive/cloud-2-infographic.html",
       "image": "./assets/project-images/cloud-infographic/iMac-mock_cloud-2.jpg",

@@ -1025,6 +1025,13 @@ body {
     text-align: center;
     z-index: 1;
     padding-bottom: 40px;
+
+    & p {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--white);
+    }
   }
   .archive-title {
     font-size: 36px;
