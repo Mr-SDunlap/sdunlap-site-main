@@ -3,3 +3,6 @@ js/contact-form.js
 .env
 .env.*
 node_modules/
+
+# Claude Code local data
+.claude/
