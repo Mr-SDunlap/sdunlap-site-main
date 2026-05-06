@@ -7,6 +7,30 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const template = existingCards[0];
 
+  const attachHoverPlayback = (videoEl, triggerEl) => {
+    if (!videoEl || !triggerEl) return;
+
+    const playVideo = () => {
+      const playback = videoEl.play();
+      if (playback && typeof playback.catch === "function") {
+        playback.catch(() => {});
+      }
+    };
+
+    const pauseVideo = () => {
+      videoEl.pause();
+      videoEl.currentTime = 0;
+    };
+
+    videoEl.pause();
+    videoEl.currentTime = 0;
+
+    triggerEl.onmouseenter = playVideo;
+    triggerEl.onmouseleave = pauseVideo;
+    triggerEl.onfocus = playVideo;
+    triggerEl.onblur = pauseVideo;
+  };
+
   // Simple slugify to build dynamic page links consistently
   const slugify = (s) =>
     (s || "")
@@ -76,16 +100,38 @@ window.addEventListener("DOMContentLoaded", () => {
         if (descriptionEl)
           descriptionEl.textContent = project.description || "";
 
-        const imageEl = card.querySelector(".project-bg-image");
-        if (imageEl) {
+        const mediaEl = card.querySelector(".project-bg-image, .project-bg-video");
+        if (mediaEl) {
           const imageSrc = project.image || "";
-          if ("src" in imageEl) {
-            imageEl.src = imageSrc;
-            imageEl.alt = project.projectName
-              ? `${project.projectName} preview`
-              : "Project image";
-          } else {
-            imageEl.style.backgroundImage = imageSrc
+          const videoSrc = project.video || "";
+          const wantsVideo = Boolean(videoSrc);
+
+          if (wantsVideo && !mediaEl.classList.contains("project-bg-video")) {
+            const videoEl = document.createElement("video");
+            videoEl.className = "project-bg-video";
+            videoEl.muted = true;
+            videoEl.setAttribute("muted", "");
+            videoEl.loop = true;
+            videoEl.playsInline = true;
+            videoEl.preload = "metadata";
+            videoEl.setAttribute("aria-hidden", "true");
+            mediaEl.replaceWith(videoEl);
+          } else if (!wantsVideo && mediaEl.classList.contains("project-bg-video")) {
+            const imageDiv = document.createElement("div");
+            imageDiv.className = "project-bg-image";
+            mediaEl.replaceWith(imageDiv);
+          }
+
+          const nextMediaEl = card.querySelector(
+            ".project-bg-image, .project-bg-video",
+          );
+          if (nextMediaEl?.classList.contains("project-bg-video")) {
+            nextMediaEl.src = videoSrc;
+            nextMediaEl.poster = imageSrc;
+            nextMediaEl.load();
+            attachHoverPlayback(nextMediaEl, linkEl || card);
+          } else if (nextMediaEl) {
+            nextMediaEl.style.backgroundImage = imageSrc
               ? `url("${imageSrc}")`
               : "none";
           }

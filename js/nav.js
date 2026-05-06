@@ -182,11 +182,11 @@
   const menu = mobile.querySelector("ul");
   if (!menu) return;
 
-  // start hidden (off-canvas above) and non-interactive
-  gsap.set(menu, { yPercent: -100, autoAlpha: 0, pointerEvents: "none" });
+  // start hidden off-canvas to the right and non-interactive
+  gsap.set(menu, { xPercent: 100, autoAlpha: 0, pointerEvents: "none" });
 
   const tl = gsap.timeline({ paused: true }).to(menu, {
-    yPercent: 0,
+    xPercent: 0,
     autoAlpha: 1,
     pointerEvents: "auto",
     duration: 0.36,

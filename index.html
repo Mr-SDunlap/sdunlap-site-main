@@ -3,6 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+  default-src 'self';
+  script-src 'self' https://cdnjs.cloudflare.com 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE=';
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src 'self' https://fonts.gstatic.com data:;
+  img-src 'self' data: https:;
+  connect-src 'self';
+  object-src 'none';
+  base-uri 'self';
+  form-action 'self';
+"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>SDUNLAP | Stephen Dunlap</title>
     <link
@@ -22,15 +36,12 @@
     <script src="./js/nav.js" defer></script>
     <script src="./js/gsap-init.js" defer></script>
     <script src="./js/forms.js" defer></script>
-    <!-- <script src="./js/gsap-portfolio.js" defer></script> -->
     <script src="./js/cursor.js" defer></script>
     <script src="./js/projects.js" defer></script>
-    <!-- Pinned horizontal scroll for Archive (projects) -->
     <script src="./js/archive-horizontal-scroll.js" defer></script>
     <script src="./js/app.js" defer></script>
     <script src="./js/anchor-swirls.js" defer></script>
     <script src="./js/smooth-scroll.js" defer></script>
-    <!-- <script src="./js/process-horizontal-scroll.js" defer></script> -->
   </head>
 
   <body>
@@ -42,9 +53,6 @@
         <li>
           <a href="#section_files">I.<span>&nbsp;The&nbsp;Archive</span></a>
         </li>
-        <!-- <li>
-          <a href="#section_featured">II.<span>&nbsp;The&nbsp;Process</span></a>
-        </li> -->
         <li>
           <a href="#section_about">II.<span>&nbsp;The&nbsp;Profile</span></a>
         </li>
@@ -68,15 +76,11 @@
         <li>
           <a href="#section_files">The Archive</a>
         </li>
-        <!-- <li>
-          <a href="#section_featured">Process</a>
-        </li> -->
         <li>
           <a href="#section_about">The Profile</a>
         </li>
       </ul>
     </nav>
-    <!-- Sections of the site -->
     <section id="section_landing">
       <div class="section-container landing-container">
         <div class="name-header-container">
@@ -137,45 +141,11 @@
             <div class="project-bg-image"></div>
             <div class="info-box">
               <h3 class="project-name"></h3>
-              <p class="project-description"></p>
             </div>
           </a>
         </div>
       </div>
     </section>
-    <!-- <section id="section_featured">
-      <div class="process-wrapper">
-        <div class="process-card">
-          <h2>Discovery</h2>
-          <p>
-            Understanding the core problem through research and user interviews.
-          </p>
-          <span class="process-number">01</span>
-        </div>
-        <div class="process-card">
-          <h2>Define</h2>
-          <p>Synthesizing insights to pinpoint the exact challenge to solve.</p>
-          <span class="process-number">02</span>
-        </div>
-        <div class="process-card">
-          <h2>Design</h2>
-          <p>
-            Iterating on visual solutions and prototypes to find the best fit.
-          </p>
-          <span class="process-number">03</span>
-        </div>
-        <div class="process-card">
-          <h2>Deliver</h2>
-          <p>Refining the final product and ensuring seamless handoff.</p>
-          <span class="process-number">04</span>
-        </div>
-        <div class="process-card">
-          <h2>Digest</h2>
-          <p>Collect data to support all levels of business.</p>
-          <span class="process-number">05</span>
-        </div>
-      </div>
-    </section> -->
     <section id="section_about">
       <div class="section-container about-container">
         <div class="about-box">
@@ -358,9 +328,9 @@
         <h2 id="modal-title">Connect</h2>
         <!-- Success panel shown after successful submit -->
         <div class="modal-success" hidden>
-          <h3>Thanks — message sent</h3>
+          <h3>Message sent</h3>
           <p>
-            I'll get back to you shortly. Close this message to continue
+            I'll get back to you shortly. Close this window to continue
             browsing.
           </p>
           <div class="modal-actions">
@@ -370,7 +340,7 @@
           </div>
         </div>
 
-        <form id="contact-form" action="#" method="post">
+        <form id="contact-form" action="/api/contact" method="post">
           <label for="name">Name</label>
           <input id="name" name="name" type="text" required />
 
@@ -379,6 +349,8 @@
 
           <label for="message">Message</label>
           <textarea id="message" name="message" rows="5" required></textarea>
+
+          <p class="form-error" hidden></p>
 
           <div class="modal-actions">
             <button type="submit" class="btn primary">Send</button>

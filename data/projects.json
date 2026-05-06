@@ -178,6 +178,7 @@
           ]
         }
       ],
+      "video": "./assets/project-images/product-finder/product-finder-scroll.mp4",
       "color-theory": "The color system supports usability and clarity, leveraging Lumen’s established palette to create clear visual hierarchy and interactive states. Bright accent colors highlight actions and selections, while cooler tones maintain structure and readability across dense informational layouts.",
       "color-list": ["lmn-red", "lmn-light-teal", "lmn-teal", "lmn-orange"],
       "role": "Product Designer - Front-End Developer",
@@ -257,6 +258,7 @@
           ]
         }
       ],
+      "video": "./assets/project-images/ai-framework/ai-framework-scroll.mp4",
       "tool-kit": {
         "Adobe XD": ["Visual Prototyping", ".s-xd"],
         "HTML": ["Markup Language", ".s-html"],
