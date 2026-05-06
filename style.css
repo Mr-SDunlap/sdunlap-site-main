@@ -907,8 +907,10 @@ body {
 
 .about-stats {
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
   padding-block: 40px;
 
   @media (max-width: 1000px) {
@@ -1055,19 +1057,22 @@ body {
     left: 0;
     bottom: 0;
     width: 100%;
-    padding: 20px;
+    padding: 10px;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
   }
   .project {
     position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    width: clamp(300px, 100%, 70vw);
-    min-height: 600px;
-    height: 70vh;
+    width: clamp(300px, 100%, 500px);
+    aspect-ratio: 1/1;
 
     & .project-status {
+      position: relative;
+      z-index: 2;
+      flex: 0 0 auto;
       width: 100%;
       padding: 10px;
       background-color: var(--platinum);
@@ -1089,6 +1094,9 @@ body {
       }
     }
     & .project-bg-image {
+      position: relative;
+      z-index: 1;
+      flex: 0 0 auto;
       width: 100%;
       aspect-ratio: 1/0.6;
       background-position: center;
@@ -1096,9 +1104,18 @@ body {
       background-size: cover;
       /* filter: grayscale(1); */
     }
+    & .project-bg-video {
+      position: relative;
+      z-index: 1;
+      flex: 0 0 auto;
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      display: block;
+    }
     & .project-name {
-      font-size: 40px;
-      font-weight: 700;
+      font-size: 30px;
+      font-weight: 500;
       line-height: 1.6;
       color: var(--white);
     }
@@ -1272,6 +1289,13 @@ body {
   min-height: 120px;
   max-height: 320px;
   overflow: auto;
+}
+
+.form-error {
+  color: #b42318;
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 4px 0 0;
 }
 
 /* Success toast inside modal */
@@ -1472,6 +1496,10 @@ body {
 #section_files {
   background-color: var(--dark-coffee);
   padding-block: 40px;
+
+  @media (max-width: 600px) {
+    padding-block: 80px;
+  }
 }
 #section_files .archive_title-box {
   text-align: left;
@@ -1549,6 +1577,7 @@ body {
 .about-mobile-stats {
   padding-block: 40px;
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 20px;
   @media (min-width: 1001px) {
@@ -1559,6 +1588,7 @@ body {
   }
 
   & .p_img-container {
+    flex: 0 0 auto;
     position: relative;
     max-height: 275px;
     max-width: 275px;
@@ -1741,10 +1771,24 @@ body {
 /* Ensure cards fit within the viewport on small screens (native scroll) */
 @media (max-width: 900px) {
   #section_files .project {
-    width: min(86vw, 560px);
+    width: min(86vw, 500px);
   }
   #section_files .project-container {
-    gap: 16px;
     overflow-x: auto;
+  }
+}
+
+@media (max-width: 730px) {
+  #section_files .project-container {
+    flex-direction: column;
+    align-items: stretch;
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+
+  #section_files .project {
+    width: 100%;
+    max-width: none;
+    scroll-snap-align: none;
   }
 }

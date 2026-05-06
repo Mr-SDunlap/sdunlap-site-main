@@ -1,0 +1,5 @@
+# Local secrets
+js/contact-form.js
+.env
+.env.*
+node_modules/

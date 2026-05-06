@@ -1,0 +1,12 @@
+{
+  "name": "sdunlap-site-main",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "send:contact": "node --env-file=.env js/contact-form.js"
+  },
+  "dependencies": {
+    "form-data": "^4.0.1",
+    "mailgun.js": "^11.1.0"
+  }
+}
