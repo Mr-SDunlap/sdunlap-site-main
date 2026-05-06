@@ -3,3 +3,5 @@ js/contact-form.js
 .env
 .env.*
 node_modules/
+api/
+.claude/
