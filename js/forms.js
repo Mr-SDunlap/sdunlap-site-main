@@ -38,7 +38,7 @@
             if (data?.error) message = data.error;
           } catch (parseErr) {}
           if (
-            res.status === 404 &&
+            (res.status === 404 || res.status === 405) &&
             a === "/api/contact" &&
             /^(127\.0\.0\.1|localhost)$/.test(window.location.hostname)
           ) {
