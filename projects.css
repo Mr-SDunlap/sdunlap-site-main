@@ -149,7 +149,6 @@ h4 {
   padding-bottom: 15px;
 }
 section {
-  width: clamp(200px, 90%, 1400px);
   margin: 0 auto;
 }
 #section_overview {
@@ -245,6 +244,7 @@ h2 {
 }
 /* ux and planning section =================================================*/
 .ux-planning {
+  width: clamp(200px, 90%, 1400px);
   & p {
     padding-bottom: 40px;
     line-height: 1.8;
@@ -364,6 +364,19 @@ h2 {
 }
 
 /* Visual design ======================================= */
+#section_visual {
+  width: clamp(200px, 90%, 1400px);
+
+  @media (max-width: 600px) {
+    width: clamp(200px, 100%, 1400px);
+
+    & h4,
+    & span {
+      width: clamp(200px, 90%, 1400px);
+      margin: 0 auto;
+    }
+  }
+}
 .vd-container {
   padding-top: 40px;
   position: relative;
@@ -414,6 +427,11 @@ h2 {
     @media (max-width: 1000px) {
       width: 100%;
     }
+    @media (max-width: 600px) {
+      width: clamp(200px, 90%, 1400px) !important;
+      margin: 0 auto;
+    }
+
     & h3 {
       font-weight: 500;
       padding-top: 10px;
@@ -438,6 +456,9 @@ h2 {
 }
 
 /* Implementation section ======================================= */
+#section_implementation {
+  width: clamp(200px, 90%, 1400px);
+}
 .implementation-container {
   padding-top: 40px;
   display: flex;
