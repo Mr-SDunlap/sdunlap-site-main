@@ -21,6 +21,7 @@
       defer
     ></script>
     <script src="../js/nav.js" defer></script>
+    <script src="../js/forms.js" defer></script>
     <script src="../js/dynamic-projects.js" defer></script>
     <script src="../js/anchor-swirls.js" defer></script>
   </head>
@@ -31,10 +32,10 @@
           <a href="../index.html" class="home-logo split-text">S_</a>
         </li>
       </ul>
-      <a href="#section_landing" class="connect-btn split-text"
+      <a href="#" class="connect-btn split-text"
         ><span>Connect</span
         ><img
-          src="./assets/icons/icons8-chat-bubble-30.png"
+          src="../assets/icons/icons8-chat-bubble-30.png"
           alt="connect with Stephen"
       /></a>
     </nav>
@@ -45,17 +46,8 @@
         <span class="bar middle-bar"></span>
         <span class="bar bottom-bar"></span>
       </div>
-
       <ul>
-        <li>
-          <a href="#section_files">The Archive</a>
-        </li>
-        <!-- <li>
-          <a href="#section_featured">Process</a>
-        </li> -->
-        <li>
-          <a href="#section_about">The Profile</a>
-        </li>
+        <li><a href="../index.html">Home</a></li>
       </ul>
     </nav>
     <section class="hero-container">
@@ -208,5 +200,54 @@
         </div>
       </div>
     </section>
+
+    <div
+      id="contact-modal"
+      class="modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal-overlay" data-modal-close></div>
+      <div class="modal-panel" role="document" aria-labelledby="modal-title">
+        <button
+          class="modal-close"
+          data-modal-close
+          aria-label="Close contact form"
+        >
+          ×
+        </button>
+        <h2 id="modal-title">Connect</h2>
+        <div class="modal-success" hidden>
+          <h3>Message sent</h3>
+          <p>
+            I'll get back to you shortly. Close this window to continue
+            browsing.
+          </p>
+          <div class="modal-actions">
+            <button type="button" class="btn primary" data-modal-close>
+              Close
+            </button>
+          </div>
+        </div>
+        <form id="contact-form" action="/api/contact" method="post">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required />
+
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required />
+
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+
+          <p class="form-error" hidden></p>
+
+          <div class="modal-actions">
+            <button type="submit" class="btn primary">Send</button>
+            <button type="button" class="btn" data-modal-close>Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </body>
 </html>

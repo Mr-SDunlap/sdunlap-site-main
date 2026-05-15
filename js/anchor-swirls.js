@@ -63,6 +63,7 @@
   function prepareAnchor(a) {
     if (!a || a.dataset.swirlReady === "1") return;
     if (a.closest("#site-nav")) return; // skip sidebar nav
+    if (a.classList.contains("home-logo")) return; // skip logo
     // Avoid anchors that contain interactive children like images only
     // We will only split actual text nodes and leave elements intact.
     // If already split previously (e.g., older markup), rebuild once to avoid duplicates

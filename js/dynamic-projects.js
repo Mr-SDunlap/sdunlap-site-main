@@ -709,6 +709,20 @@
       // Smooth scrolling is handled globally in CSS (html { scroll-behavior: smooth; })
     })();
 
+    // Populate mobile nav with all project links
+    (function buildMobileNav() {
+      const mobileUl = document.querySelector("#mobile-nav ul");
+      if (!mobileUl || !enhanced.length) return;
+      enhanced.forEach((p) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = `dynamic-project-page.html?slug=${encodeURIComponent(p.slug)}`;
+        a.textContent = p.projectName || p.slug;
+        li.appendChild(a);
+        mobileUl.appendChild(li);
+      });
+    })();
+
     // Previous / Next links
     const i = project.index;
     const prev = enhanced[(i - 1 + enhanced.length) % enhanced.length];
