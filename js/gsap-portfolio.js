@@ -1,5 +1,3 @@
-gsap.registerPlugin(ScrollTrigger);
-
 // Pin the archive and expand its background on scroll
 window.addEventListener("DOMContentLoaded", () => {
   if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined")

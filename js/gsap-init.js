@@ -1,6 +1,48 @@
 // GSAP initialization: simple entrance animation
 // Requires GSAP loaded before this script (we add a CDN in index.html)
 
+// About section: narrative block reveals + progress dot sync
+window.addEventListener("DOMContentLoaded", function () {
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  const blocks = document.querySelectorAll(".about-narrative-block");
+  const dots = document.querySelectorAll(".about-dot");
+
+  function syncDots(index) {
+    dots.forEach((d, i) => d.classList.toggle("active", i === index));
+  }
+
+  blocks.forEach((block, i) => {
+    const inner = block.querySelector(".block-inner");
+    if (!inner) return;
+
+    // Fade-up reveal for block content
+    gsap.from(inner, {
+      opacity: 0,
+      y: 30,
+      duration: 0.85,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: block,
+        start: "top 68%",
+        toggleActions: "play none none reverse",
+      },
+    });
+
+    // Dot indicator — activate when block occupies the middle of the viewport
+    if (dots.length) {
+      ScrollTrigger.create({
+        trigger: block,
+        start: "top 52%",
+        end: "bottom 52%",
+        onEnter: () => syncDots(i),
+        onEnterBack: () => syncDots(i),
+      });
+    }
+  });
+});
+
 window.addEventListener("DOMContentLoaded", function () {
   if (typeof gsap === "undefined") {
     console.warn("GSAP not found. Make sure the CDN is loaded.");

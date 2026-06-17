@@ -1,6 +1,3 @@
-// Populate archive/dynamic-project-page.html from data/projects.json
-// Selects a project by ?slug=..., ?id=..., or ?name=...
-
 (function () {
   function slugify(s) {
     return (s || "")
@@ -12,25 +9,13 @@
       .replace(/^-+|-+$/g, "");
   }
 
-  function $(sel) {
-    return document.querySelector(sel);
-  }
-  function setText(sel, value) {
-    const el = $(sel);
-    if (el) el.textContent = value || "";
-  }
-  function setTextAll(sel, value) {
-    document.querySelectorAll(sel).forEach((el) => {
-      el.textContent = value || "";
-    });
-  }
-  function setHTML(sel, value) {
-    const el = $(sel);
-    if (el) el.innerHTML = value || "";
-  }
-  function setBg(sel, url) {
-    const el = $(sel);
-    if (el && url) el.style.backgroundImage = `url("${url}")`;
+  function resolveAsset(url) {
+    if (!url) return "";
+    var s = String(url).trim();
+    if (/^(?:https?:)?\/\//.test(s)) return s;
+    if (s.startsWith("/")) return s;
+    var cleaned = s.startsWith("./") ? s.slice(2) : s;
+    return "../" + cleaned;
   }
 
   function escapeHtml(s) {
@@ -39,92 +24,7 @@
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;");
-  }
-
-  // Resolve asset paths for pages inside /archive so that values like
-  // "assets/..." or "./assets/..." point to the root-level assets folder.
-  function resolveAsset(url) {
-    if (!url) return "";
-    const s = String(url).trim();
-    // Absolute or protocol-relative URLs
-    if (/^(?:https?:)?\/\//.test(s)) return s;
-    // Root-relative URL already fine
-    if (s.startsWith("/")) return s;
-    // Strip a leading ./ so we can normalize consistently
-    const cleaned = s.startsWith("./") ? s.slice(2) : s;
-    // The dynamic page lives at /archive, so go up one level
-      return `../${cleaned}`;
-  }
-
-  function getHomepageHref() {
-    return new URL("../index.html", window.location.href).href;
-  }
-
-  function bindHomeLogoNavigation() {
-    const homepageHref = getHomepageHref();
-
-    document.querySelectorAll(".home-logo").forEach((link) => {
-      link.href = homepageHref;
-
-      if (link.dataset.homeLogoBound === "1") return;
-      link.dataset.homeLogoBound = "1";
-
-      link.addEventListener(
-        "click",
-        (event) => {
-          event.preventDefault();
-          event.stopImmediatePropagation();
-          window.location.assign(homepageHref);
-        },
-        true,
-      );
-    });
-  }
-
-  function toRomanNumeral(value) {
-    const numerals = [
-      [1000, "M"],
-      [900, "CM"],
-      [500, "D"],
-      [400, "CD"],
-      [100, "C"],
-      [90, "XC"],
-      [50, "L"],
-      [40, "XL"],
-      [10, "X"],
-      [9, "IX"],
-      [5, "V"],
-      [4, "IV"],
-      [1, "I"],
-    ];
-
-    let num = Math.max(1, Number(value) || 1);
-    let out = "";
-
-    numerals.forEach(([amount, numeral]) => {
-      while (num >= amount) {
-        out += numeral;
-        num -= amount;
-      }
-    });
-
-    return out;
-  }
-
-  function cleanSectionLabel(label, fallback) {
-    const text = String(label || fallback || "")
-      .replace(/^\s*\d+\s*\/\s*/g, "")
-      .trim();
-    return text || fallback || "";
-  }
-
-  function formatNavLabel(label) {
-    return cleanSectionLabel(label, "")
-      .split(/\s+/)
-      .filter(Boolean)
-      .join("\u00A0");
+      .replace(/"/g, "&quot;");
   }
 
   function normalizeClassToken(v) {
@@ -135,615 +35,725 @@
   }
 
   function parseUXPlanning(planning) {
-    const out = { sectionTitle: "", buttonOne: null, buttonTwo: null };
-    if (Array.isArray(planning)) {
-      planning.forEach((entry) => {
-        if (entry && typeof entry === "object") {
-          if ("button-one" in entry && Array.isArray(entry["button-one"])) {
-            out.buttonOne = entry["button-one"][0] || null;
-          }
-          if ("button-two" in entry && Array.isArray(entry["button-two"])) {
-            out.buttonTwo = entry["button-two"][0] || null;
-          }
+    var out = [];
+    if (!Array.isArray(planning)) return out;
+    planning.forEach(function (entry) {
+      if (!entry || typeof entry !== "object") return;
+      ["button-one", "button-two"].forEach(function (key) {
+        if (key in entry && Array.isArray(entry[key]) && entry[key][0]) {
+          out.push(entry[key][0]);
         }
       });
-    }
-    out.sectionTitle =
-      out.buttonOne?.["section-title"] ||
-      out.buttonTwo?.["section-title"] ||
-      "";
+    });
     return out;
   }
 
-  function parseVisualDesign(visualDesign) {
-    const out = {
-      sectionTitle: "",
-      copyOne: "",
-      copyOneImg: "",
-      copyTwo: "",
-      copyTwoImg: "",
-    };
-
-    if (!Array.isArray(visualDesign)) return out;
-
-    visualDesign.forEach((entry) => {
+  function parseVisualDesign(vd) {
+    var out = { blocks: [], images: [] };
+    if (!Array.isArray(vd)) return out;
+    var text = {},
+      imgs = {};
+    vd.forEach(function (entry) {
       if (!entry || typeof entry !== "object") return;
-
-      if (Array.isArray(entry["vd-text"])) {
-        const textBlock = entry["vd-text"][0] || {};
-        out.sectionTitle = textBlock["section-title"] || out.sectionTitle;
-        out.copyOne = textBlock["copy-one"] || out.copyOne;
-        out.copyTwo = textBlock["copy-two"] || out.copyTwo;
+      if (Array.isArray(entry["vd-text"]) && entry["vd-text"][0]) {
+        text = entry["vd-text"][0];
       }
-
-      if (Array.isArray(entry["vd-images"])) {
-        const imageBlock = entry["vd-images"][0] || {};
-        out.copyOneImg = imageBlock["copy-one-img"] || out.copyOneImg;
-        out.copyTwoImg = imageBlock["copy-two-img"] || out.copyTwoImg;
+      if (Array.isArray(entry["vd-images"]) && entry["vd-images"][0]) {
+        imgs = entry["vd-images"][0];
       }
     });
-
+    if (text["copy-one"]) {
+      out.blocks.push({ copy: text["copy-one"] });
+      out.images.push(imgs["copy-one-img"] || "");
+    }
+    if (text["copy-two"]) {
+      out.blocks.push({ copy: text["copy-two"] });
+      out.images.push(imgs["copy-two-img"] || "");
+    }
+    out.sectionTitle = text["section-title"] || "";
     return out;
   }
 
-  async function load() {
-    bindHomeLogoNavigation();
-
-    const params = new URLSearchParams(location.search);
-    const wantedSlug =
+  async function init() {
+    var params = new URLSearchParams(location.search);
+    var wantedSlug =
       params.get("slug") || params.get("project") || params.get("name");
-    const wantedId = params.get("id") || params.get("index");
+    var wantedId = params.get("id") || params.get("index");
 
-    // dynamic page lives in /archive, JSON is one level up
-    let data;
+    var data;
     try {
-      const res = await fetch("../data/projects.json", {
+      var res = await fetch("../data/projects.json", {
         headers: { Accept: "application/json" },
       });
       data = await res.json();
     } catch (e) {
-      console.warn("Failed to load projects.json", e);
       return;
     }
 
-    const list = Array.isArray(data?.projects)
+    var list = Array.isArray(data?.projects)
       ? data.projects
       : Array.isArray(data)
         ? data
         : [];
     if (!list.length) return;
 
-    // Build derived slugs for matching if not provided
-    const enhanced = list.map((p, i) => ({
-      index: i,
-      slug: p.slug || slugify(p.projectName || p.name || ""),
-      ...p,
-    }));
+    var enhanced = list.map(function (p, i) {
+      return Object.assign({}, p, {
+        index: i,
+        slug: p.slug || slugify(p.projectName || p.name || ""),
+      });
+    });
 
-    let project = null;
+    var project = null;
     if (wantedSlug) {
-      const s = slugify(wantedSlug);
+      var s = slugify(wantedSlug);
       project =
-        enhanced.find(
-          (p) => slugify(p.slug) === s || slugify(p.projectName) === s,
-        ) || null;
+        enhanced.find(function (p) {
+          return slugify(p.slug) === s || slugify(p.projectName) === s;
+        }) || null;
     }
     if (!project && wantedId != null && !Number.isNaN(Number(wantedId))) {
-      const idx = Math.max(0, Math.min(enhanced.length - 1, Number(wantedId)));
+      var idx = Math.max(0, Math.min(enhanced.length - 1, Number(wantedId)));
       project = enhanced[idx];
     }
     if (!project) project = enhanced[0];
 
-    // Fill hero and basics
+    populatePage(project, enhanced);
+    requestAnimationFrame(function () {
+      initAnimations(project);
+    });
+  }
+
+  function populatePage(project, allProjects) {
     document.title = project.projectName
-      ? `${project.projectName} — SDUNLAP`
-      : document.title;
-    // Support both old and new hero markup
-    // Hero section header (e.g., "Project 01") from JSON
-    const projectNumber =
-      project.number || (typeof project.index === "number"
-        ? `Project ${String(project.index + 1).padStart(2, "0")}`
-        : "");
-    setTextAll(".hero-header h4, .hero-text-box h4", projectNumber);
-    setTextAll(".hero-header .project-title, .hero-text-box .project-title", project.projectName);
-    setText(".project-name", project.projectName);
-    setText(".project-description", project.description || "");
-    setText(".project-summary", project.summary || project.description || "");
-    const overviewParagraph = document.querySelector(".overview p");
-    if (overviewParagraph) {
-      const baseText = overviewParagraph.textContent.trim();
-      const summaryText = project.summary || project.description || "";
-      overviewParagraph.textContent = [baseText, summaryText]
-        .filter(Boolean)
-        .join(" ");
-    }
-    // Legacy detail summary block fallback
-    setText(".summary", project.outcome || project.role || "");
-    // Hero image (src/alt) inside the hero container
-    const heroImg = document.querySelector(".hero-container img");
-    if (heroImg) {
-      const imgSrc = project.heroImage || project.image || "";
-      heroImg.src = resolveAsset(imgSrc);
-      heroImg.alt =
-        project["heroImage-alt"] ||
-        (project.projectName ? `${project.projectName} hero image` : "");
-    }
+      ? project.projectName + " — SDUNLAP"
+      : "Project — SDUNLAP";
 
-    // Optional hero caption under the image
-    const captionEl = document.querySelector(
-      ".hero-container .image-container figcaption, .hero-container .image-container caption",
-    );
-    if (captionEl) {
-      const baseCaption =
-        project.heroImageCaption || project["heroImage-alt"] || "";
-      const extraCaption = project.caption || "";
-      const caption = [baseCaption, extraCaption].filter(Boolean).join(" — ");
-      captionEl.textContent = caption;
-    }
-
-    // Tools used list inside the hero area
-    const toolsList = document.querySelector(".hero-container .tools-used");
-    if (toolsList) {
-      toolsList.textContent = "";
-      if (Array.isArray(project.toolsUsed)) {
-        project.toolsUsed.forEach((tool) => {
-          const li = document.createElement("li");
-          li.textContent = tool;
-          toolsList.appendChild(li);
-        });
-      }
-    }
-
-    // Optional sections if you extend JSON later
-    setHTML(".ux-subheader", project.ux || "");
-    setHTML(".design-subheader", project.design || "");
-    setHTML(".outcome-subheader", project.outcome || "");
-
-    // Tool-kit list rendering (name, purpose, icon class)
-    const toolList = document.querySelector(".tool-kit .tool-list");
-    if (toolList) {
-      toolList.textContent = ""; // clear any sample item
-      const tk = project["tool-kit"]; // object: { name: [purpose, class] }
-      if (tk && typeof tk === "object" && !Array.isArray(tk)) {
-        Object.entries(tk).forEach(([name, arr]) => {
-          const purpose = Array.isArray(arr) ? String(arr[0] || "") : "";
-          const extraClass = Array.isArray(arr) ? normalizeClassToken(arr[1]) : "";
-
-          const li = document.createElement("li");
-          li.className = "tool";
-
-          const imgDiv = document.createElement("div");
-          imgDiv.className = "tool-img";
-          if (extraClass) imgDiv.classList.add(extraClass);
-
-          const desc = document.createElement("div");
-          desc.className = "tool-desc";
-
-          const nameDiv = document.createElement("div");
-          nameDiv.className = "tool-name";
-          nameDiv.textContent = name;
-
-          const purposeDiv = document.createElement("div");
-          purposeDiv.className = "tool-purpose";
-          purposeDiv.textContent = purpose;
-
-          desc.appendChild(nameDiv);
-          desc.appendChild(purposeDiv);
-          li.appendChild(imgDiv);
-          li.appendChild(desc);
-          toolList.appendChild(li);
-        });
-      }
-    }
-
-    // UX & Planning section (title, description, button-one, image and image title)
-    const uxPlan = parseUXPlanning(project["ux-planning"]);
-    if (uxPlan.sectionTitle) {
-      setText(".ux-planning .ux-text h2", uxPlan.sectionTitle);
-    }
-    if (uxPlan.buttonOne) {
-      // Paragraph description
-      setText(".ux-planning .ux-text p", uxPlan.buttonOne.description || "");
-
-      // First button label while preserving the icon div
-      const btnOne = document.querySelector(
-        ".ux-planning .ux-btn-container .link-btn:first-child",
-      );
-      if (btnOne) {
-        // Remove existing text nodes, keep icon wrapper(s)
-        Array.from(btnOne.childNodes).forEach((n) => {
-          if (n.nodeType === 3) btnOne.removeChild(n);
-        });
-        btnOne.appendChild(
-          document.createTextNode(" " + (uxPlan.buttonOne.button || "")),
-        );
-      }
-
-      // Image + title
-      const uxImg = document.querySelector(".ux-planning .ux-image img");
-      if (uxImg) {
-        uxImg.src = resolveAsset(uxPlan.buttonOne.img || "");
-        uxImg.alt = uxPlan.buttonOne["img-title"] || uxPlan.buttonOne.button || uxImg.alt;
-      }
-      setText(
-        ".ux-planning .ux-image h4",
-        uxPlan.buttonOne["img-title"] || uxPlan.buttonOne.button || "",
-      );
-
-      // Second button label (if present)
-      const btnTwo = document.querySelector(
-        ".ux-planning .ux-btn-container .link-btn:nth-child(2)",
-      );
-      if (btnTwo && uxPlan.buttonTwo) {
-        Array.from(btnTwo.childNodes).forEach((n) => {
-          if (n.nodeType === 3) btnTwo.removeChild(n);
-        });
-        btnTwo.appendChild(
-          document.createTextNode(" " + (uxPlan.buttonTwo.button || "")),
-        );
-      }
-
-      // Interaction: clicking buttons swaps content with a brief animation
-      const TRANSITION_MS = 220;
-      const animateSwap = (el, apply) => {
-        if (!el) {
-          if (typeof apply === "function") apply();
-          return;
-        }
-        let done = false;
-        const onEnd = () => {
-          if (done) return;
-          done = true;
-          el.removeEventListener("transitionend", onEnd);
-          if (typeof apply === "function") apply();
-          el.classList.remove("is-exiting");
-          el.classList.add("is-entering");
-          requestAnimationFrame(() => {
-            // Force reflow so the enter transition plays
-            el.getBoundingClientRect();
-            el.classList.remove("is-entering");
-          });
-        };
-        el.addEventListener("transitionend", onEnd);
-        el.classList.add("is-exiting");
-        // Fallback in case transitionend doesn’t fire
-        setTimeout(onEnd, TRANSITION_MS + 60);
-      };
-
-      const updateUx = (item) => {
-        if (!item) return;
-        const h2El = document.querySelector(".ux-planning .ux-text h2");
-        const pEl = document.querySelector(".ux-planning .ux-text p");
-        const imgEl = document.querySelector(".ux-planning .ux-image img");
-        const h4El = document.querySelector(".ux-planning .ux-image h4");
-
-        animateSwap(h2El, () => {
-          setText(
-            ".ux-planning .ux-text h2",
-            item["section-title"] || item.button || "",
-          );
-        });
-        animateSwap(pEl, () => {
-          setText(".ux-planning .ux-text p", item.description || "");
-        });
-        animateSwap(imgEl, () => {
-          if (imgEl) {
-            imgEl.src = resolveAsset(item.img || "");
-            imgEl.alt = item["img-title"] || item.button || imgEl.alt;
-          }
-        });
-        animateSwap(h4El, () => {
-          setText(
-            ".ux-planning .ux-image h4",
-            item["img-title"] || item.button || "",
-          );
-        });
-      };
-
-      const allBtns = document.querySelectorAll(
-        ".ux-planning .ux-btn-container .link-btn",
-      );
-      const setActive = (el) => {
-        allBtns.forEach((b) => b.classList.remove("active-btn"));
-        if (el) el.classList.add("active-btn");
-      };
-
-      if (btnOne) {
-        btnOne.addEventListener("click", () => {
-          updateUx(uxPlan.buttonOne);
-          setActive(btnOne);
-        });
-      }
-      if (btnTwo && uxPlan.buttonTwo) {
-        btnTwo.addEventListener("click", () => {
-          updateUx(uxPlan.buttonTwo);
-          setActive(btnTwo);
-        });
-      }
-    }
-
-    // Section titles populated from JSON (supports dashed keys)
-    setHTML(".ux-title-text", project["ux-title"] || project.uxTitle || "");
-    setHTML(
-      ".outcome-title-text",
-      project["outcome-title"] || project.outcomeTitle || "",
-    );
-    setText(
-      ".implementation-text p",
-      project.outcome || "",
-    );
-
-    (function renderVisualDesign() {
-      const visualDesign = parseVisualDesign(project["visual-design"]);
-      const vdText = document.querySelector(".visual-design .vd-text");
-      if (!vdText) return;
-
-      const heading =
-        vdText.querySelector("h2") || document.createElement("h2");
-      heading.textContent =
-        visualDesign.sectionTitle ||
-        project["design-title"] ||
-        project.designTitle ||
-        "Visual Design";
-
-      vdText.textContent = "";
-      vdText.appendChild(heading);
-
-      const contentItems = [
-        { type: "copy", value: visualDesign.copyOne },
-        { type: "image", value: visualDesign.copyOneImg },
-        { type: "copy", value: visualDesign.copyTwo },
-        { type: "image", value: visualDesign.copyTwoImg },
-      ];
-
-      contentItems.forEach((item, index) => {
-        if (!item.value) return;
-
-        if (item.type === "copy") {
-          const paragraph = document.createElement("p");
-          paragraph.textContent = item.value;
-          vdText.appendChild(paragraph);
-          return;
-        }
-
-        const img = document.createElement("img");
-        img.className = "vd-feature-image";
-        img.src = resolveAsset(item.value);
-        img.alt = `${heading.textContent} image ${index === 1 ? "one" : "two"}`;
-        vdText.appendChild(img);
-      });
-    })();
-
-    // Visual Design: Color theory paragraph and color list swatches
-    // - `.visual-design .vd-image p` <= project["color-theory"] (if present)
-    // - `.visual-design .color-list` <= li elements with classes from project["color-list"]
-    (function renderColorTheory() {
-      const colorTheory = project["color-theory"] || project.colorTheory;
-      if (colorTheory) {
-        setText(".visual-design .vd-image p", colorTheory);
-      }
-
-      const colorListEl = document.querySelector(".visual-design .color-list");
-      const colors = project["color-list"];
-      if (colorListEl && Array.isArray(colors)) {
-        colorListEl.textContent = ""; // Clear any placeholders
-        colors.forEach((cls) => {
-          const li = document.createElement("li");
-          const token = normalizeClassToken(cls);
-          if (token) li.classList.add(token);
-          colorListEl.appendChild(li);
-        });
-      }
-    })();
-
-    // Right-hand info panel (Client, Role, Tools, Status, Link)
-    // Prefer project.info array if present; fall back to top-level fields.
-    const infoMap = {};
+    var infoMap = {};
     if (Array.isArray(project.info)) {
-      project.info.forEach((entry) => {
+      project.info.forEach(function (entry) {
         if (entry && typeof entry === "object") {
-          const [k, v] = Object.entries(entry)[0] || [];
-          if (k) infoMap[k] = v;
+          var entries = Object.entries(entry);
+          if (entries[0]) infoMap[entries[0][0]] = entries[0][1];
         }
       });
     }
 
-    const client = infoMap.client ?? project.client ?? "";
-    const role = infoMap.role ?? project.role ?? "";
-    const tools = infoMap.tools ?? project.toolsUsed ?? [];
-    const status = infoMap.status ?? project.status ?? "";
-    const linkVal = infoMap.link ?? project.liveLink ?? project.link ?? "";
+    var client = infoMap.client ?? project.client ?? "";
+    var role = infoMap.role ?? project.role ?? "";
+    var tools = infoMap.tools ?? project.toolsUsed ?? [];
+    var status = infoMap.status ?? project.status ?? "";
+    var liveLink = infoMap.link ?? project.liveLink ?? project.link ?? "";
+    var projectNumber =
+      project.number ||
+      "Project " + String(project.index + 1).padStart(2, "0");
 
-    setText(".info-client", client);
-    setText(".info-role", role);
-    if (Array.isArray(tools)) {
-      setText(".info-tools", tools.join(" · "));
-    } else {
-      setText(".info-tools", String(tools || ""));
+    // Hero
+    var heroBg = document.querySelector(".dp-hero-bg");
+    if (heroBg) {
+      var heroSrc = resolveAsset(project.heroImage || project.image || "");
+      heroBg.style.backgroundImage = 'url("' + heroSrc + '")';
     }
-    setText(".info-status", status);
+    setText(".dp-hero-label", projectNumber);
+    setText(".dp-hero-title", project.projectName || "");
+    setText(".dp-hero-role", role);
+    setText(".dp-hero-status", status);
 
-    // Render link as an anchor if available
-    const linkEl = document.querySelector(".info-link");
-    if (linkEl) {
-      if (linkVal) {
-        const href = resolveAsset(linkVal);
-        let label = href;
-        try {
-          const u = new URL(href, location.href);
-          label = u.hostname.replace(/^www\./, "");
-        } catch (_) {
-          // keep href as label
+    // Overview
+    setText(".dp-overview-desc", project.description || project.summary || "");
+    setText(".dp-client", client);
+    setText(".dp-role", role);
+    setText(
+      ".dp-tools",
+      Array.isArray(tools) ? tools.join(" · ") : String(tools || ""),
+    );
+    setText(".dp-status", status);
+
+    // Mobile nav ID
+    var navId = document.querySelector(".dp-mnav-id");
+    if (navId) {
+      navId.textContent =
+        "ID: " + (project.slug || slugify(project.projectName)).toUpperCase();
+    }
+
+    // Approach
+    buildApproach(project);
+
+    // Design
+    buildDesign(project);
+
+    // Outcome
+    buildOutcome(project, liveLink);
+
+    // Explore prev/next
+    buildExplore(project, allProjects);
+
+    // Footer project links
+    buildFooterLinks(allProjects);
+
+    // Home logo navigation
+    bindHomeLinks();
+  }
+
+  function setText(sel, value) {
+    var el = document.querySelector(sel);
+    if (el) el.textContent = value || "";
+  }
+
+  function buildApproach(project) {
+    var section = document.querySelector(".dp-approach");
+    var container = document.querySelector(".dp-approach-scroll");
+    if (!section || !container) return;
+
+    var blocks = parseUXPlanning(project["ux-planning"]);
+    if (!blocks.length) {
+      section.classList.add("dp-hidden");
+      return;
+    }
+
+    var heading = document.querySelector(".dp-approach-heading");
+    if (heading) {
+      heading.textContent =
+        project["ux-title"] || project.uxTitle || "The Approach";
+    }
+
+    container.innerHTML = "";
+    blocks.forEach(function (block, i) {
+      var div = document.createElement("div");
+      div.className = "dp-approach-block";
+      div.setAttribute("data-block", i);
+
+      var inner = document.createElement("div");
+      inner.className = "dp-approach-block-inner";
+
+      if (block.img) {
+        var imgWrap = document.createElement("div");
+        imgWrap.className = "dp-approach-img-wrap";
+        var img = document.createElement("img");
+        img.className = "dp-approach-img";
+        img.src = resolveAsset(block.img);
+        img.alt = block["img-title"] || block.button || "";
+        img.loading = "lazy";
+        imgWrap.appendChild(img);
+        inner.appendChild(imgWrap);
+      }
+
+      var title = document.createElement("h3");
+      title.className = "dp-approach-block-title";
+      title.textContent =
+        block["section-title"] || block.button || "Step " + (i + 1);
+      inner.appendChild(title);
+
+      var desc = document.createElement("p");
+      desc.className = "dp-approach-block-desc";
+      desc.textContent = block.description || "";
+      inner.appendChild(desc);
+
+      div.appendChild(inner);
+      container.appendChild(div);
+    });
+
+    var stepFill = document.querySelector(".dp-step-fill");
+    var stepCount = document.querySelector(".dp-step-count");
+    if (stepFill) stepFill.style.width = (1 / blocks.length) * 100 + "%";
+    if (stepCount) {
+      stepCount.textContent =
+        "01 / " + String(blocks.length).padStart(2, "0");
+    }
+  }
+
+  function buildDesign(project) {
+    var section = document.querySelector(".dp-design");
+    var scrollContainer = document.querySelector(".dp-design-scroll");
+    var imgContainer = document.querySelector(".dp-design-img-container");
+    if (!section || !scrollContainer || !imgContainer) return;
+
+    var vd = parseVisualDesign(project["visual-design"]);
+    if (!vd.blocks.length) {
+      section.classList.add("dp-hidden");
+      return;
+    }
+
+    var designTitle =
+      project["design-title"] ||
+      project.designTitle ||
+      vd.sectionTitle ||
+      "The Design";
+    var colorTheory = project["color-theory"] || project.colorTheory || "";
+    var colorList = project["color-list"] || [];
+
+    scrollContainer.innerHTML = "";
+    vd.blocks.forEach(function (block, i) {
+      var div = document.createElement("div");
+      div.className = "dp-design-block";
+      div.setAttribute("data-block", i);
+
+      var inner = document.createElement("div");
+      inner.className = "dp-design-block-inner";
+
+      if (i === 0) {
+        var num = document.createElement("span");
+        num.className = "dp-num";
+        num.textContent = "02";
+        inner.appendChild(num);
+
+        var h2 = document.createElement("h2");
+        h2.className = "dp-design-heading";
+        h2.textContent = designTitle;
+        inner.appendChild(h2);
+      }
+
+      var p = document.createElement("p");
+      p.className = "dp-design-copy";
+      p.textContent = block.copy;
+      inner.appendChild(p);
+
+      if (i === vd.blocks.length - 1 && (colorTheory || colorList.length)) {
+        var ct = document.createElement("div");
+        ct.className = "dp-color-theory";
+
+        var ctH = document.createElement("h4");
+        ctH.className = "dp-color-heading";
+        ctH.textContent = "Color Palette";
+        ct.appendChild(ctH);
+
+        if (colorList.length) {
+          var ul = document.createElement("ul");
+          ul.className = "dp-color-list";
+          colorList.forEach(function (cls) {
+            var li = document.createElement("li");
+            var token = normalizeClassToken(cls);
+            if (token) li.classList.add(token);
+            ul.appendChild(li);
+          });
+          ct.appendChild(ul);
         }
-        linkEl.innerHTML = `<a href="${escapeHtml(href)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`;
-      } else {
-        linkEl.textContent = "";
+
+        if (colorTheory) {
+          var ctP = document.createElement("p");
+          ctP.className = "dp-color-desc";
+          ctP.textContent = colorTheory;
+          ct.appendChild(ctP);
+        }
+
+        inner.appendChild(ct);
       }
+
+      div.appendChild(inner);
+      scrollContainer.appendChild(div);
+    });
+
+    imgContainer.innerHTML = "";
+    var hasImages = vd.images.some(function (src) {
+      return !!src;
+    });
+    if (!hasImages) {
+      var placeholder = document.createElement("div");
+      placeholder.style.cssText =
+        "width:100%;height:100%;background:var(--diamond)";
+      imgContainer.appendChild(placeholder);
+    } else {
+      vd.images.forEach(function (src, i) {
+        if (!src) return;
+        var img = document.createElement("img");
+        img.src = resolveAsset(src);
+        img.alt = designTitle + " — visual " + (i + 1);
+        img.loading = "lazy";
+        if (i === 0) img.classList.add("dp-img-active");
+        imgContainer.appendChild(img);
+      });
+    }
+  }
+
+  function buildOutcome(project, liveLink) {
+    var section = document.querySelector(".dp-outcome");
+    if (!section) return;
+
+    var outcomeText = project.outcome || "";
+    var hasMedia = !!(project.video || project.heroImage || project.image);
+
+    if (!outcomeText && !hasMedia) {
+      section.classList.add("dp-hidden");
+      return;
     }
 
-    // Implementation section CTA: set `.link-out-btn` to the project's live link
-    // Preference order: info.link -> liveLink -> link
-    const ctaBtn = document.querySelector(".link-out-btn");
-    if (ctaBtn) {
-      if (linkVal) {
-        const href = resolveAsset(linkVal);
-        ctaBtn.setAttribute("href", href);
-        // Ensure new tab with safety
-        ctaBtn.setAttribute("target", "_blank");
-        ctaBtn.setAttribute("rel", "noopener");
-      } else {
-        // If no link available, keep button present but inert
-        ctaBtn.removeAttribute("href");
-      }
+    var heading = document.querySelector(".dp-outcome-heading");
+    if (heading) {
+      heading.textContent =
+        project["outcome-title"] || project.outcomeTitle || "The Outcome";
     }
 
-    const implementationMedia = document.querySelector(".implementation-img");
-    if (implementationMedia) {
-      implementationMedia.textContent = "";
+    setText(".dp-outcome-text", outcomeText);
 
+    var mediaContainer = document.querySelector(".dp-outcome-media");
+    if (mediaContainer) {
+      mediaContainer.innerHTML = "";
       if (project.video) {
-        const video = document.createElement("video");
+        var video = document.createElement("video");
         video.src = resolveAsset(project.video);
         video.loop = true;
         video.autoplay = true;
         video.muted = true;
         video.playsInline = true;
         video.controls = false;
-        video.setAttribute("aria-label", `${project.projectName || "Project"} outcome video`);
-        implementationMedia.appendChild(video);
+        mediaContainer.appendChild(video);
+      } else {
+        var img = document.createElement("img");
+        img.src = resolveAsset(project.heroImage || project.image || "");
+        img.alt = (project.projectName || "Project") + " outcome";
+        mediaContainer.appendChild(img);
       }
     }
 
-    // Build dynamic in-page navigation for sections
-    (function buildProjectNav() {
-      const sections = [
-        {
-          sel: ".hero-container",
-          id: "section_overview",
-          label: "Overview",
-        },
-        {
-          sel: ".tool-kit",
-          id: "section_toolkit",
-          label: cleanSectionLabel(
-            document.querySelector(".tool-kit h4")?.textContent,
-            "Tool Kit",
-          ),
-        },
-        {
-          sel: ".ux-planning",
-          id: "section_ux",
-          label: cleanSectionLabel(
-            document.querySelector(".ux-planning h4")?.textContent ||
-              document.querySelector(".ux-planning .ux-text h2")?.textContent,
-            "UX & Planning",
-          ),
-        },
-        {
-          sel: ".visual-design",
-          id: "section_visual",
-          label: cleanSectionLabel(
-            document.querySelector(".visual-design h4")?.textContent,
-            "Visual Design",
-          ),
-        },
-        {
-          sel: ".implementation",
-          id: "section_implementation",
-          label: cleanSectionLabel(
-            document.querySelector(".implementation h4")?.textContent,
-            "Implementation",
-          ),
-        },
-        {
-          sel: ".additional-projects",
-          id: "section_more",
-          label: cleanSectionLabel(
-            document.querySelector(".additional-projects h2")?.textContent,
-            "Explore Other Projects",
-          ),
-        },
-      ].filter((s) => document.querySelector(s.sel));
-
-      const ul = document.querySelector("#site-nav ul");
-      if (!ul || !sections.length) return;
-
-      const existingHomeLogo = document.querySelector("#site-nav .home-logo");
-      const homeLabel = existingHomeLogo?.textContent?.trim() || "S_";
-
-      // Clear any existing items and rebuild
-      ul.textContent = "";
-
-      // Brand/home anchor should always return to the homepage.
-      const homeLi = document.createElement("li");
-      const homeA = document.createElement("a");
-      homeA.className = "home-logo split-text";
-      homeA.href = getHomepageHref();
-      homeA.textContent = homeLabel;
-      homeLi.appendChild(homeA);
-      ul.appendChild(homeLi);
-
-      // Ensure IDs and add links
-      sections.forEach((s) => {
-        const sec = document.querySelector(s.sel);
-        if (!sec) return;
-        sec.id = s.id;
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.href = `#${s.id}`;
-        a.appendChild(
-          document.createTextNode(`${toRomanNumeral(sections.indexOf(s) + 1)}.`),
-        );
-        const span = document.createElement("span");
-        span.textContent = `\u00A0${formatNavLabel(s.label)}`;
-        a.appendChild(span);
-        li.appendChild(a);
-        ul.appendChild(li);
-      });
-
-      bindHomeLogoNavigation();
-      if (typeof window.refreshSiteNav === "function") {
-        window.refreshSiteNav();
+    var cta = document.querySelector(".dp-outcome-cta");
+    if (cta) {
+      if (liveLink) {
+        cta.href = /^https?:\/\//.test(liveLink)
+          ? liveLink
+          : resolveAsset(liveLink);
+      } else {
+        cta.classList.add("dp-hidden");
       }
-
-      // Smooth scrolling is handled globally in CSS (html { scroll-behavior: smooth; })
-    })();
-
-    // Populate mobile nav with all project links
-    (function buildMobileNav() {
-      const mobileUl = document.querySelector("#mobile-nav ul");
-      if (!mobileUl || !enhanced.length) return;
-      enhanced.forEach((p) => {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.href = `dynamic-project-page.html?slug=${encodeURIComponent(p.slug)}`;
-        a.textContent = p.projectName || p.slug;
-        li.appendChild(a);
-        mobileUl.appendChild(li);
-      });
-    })();
-
-    // Previous / Next links
-    const i = project.index;
-    const prev = enhanced[(i - 1 + enhanced.length) % enhanced.length];
-    const next = enhanced[(i + 1) % enhanced.length];
-    const buildHref = (p) =>
-      `dynamic-project-page.html?slug=${encodeURIComponent(p.slug)}`;
-    const left = $(".additional-projects .project-left");
-    const right = $(".additional-projects .project-right");
-    if (left) {
-      left.href = buildHref(prev);
-      left.textContent = prev.projectName || prev.slug;
-    }
-    if (right) {
-      right.href = buildHref(next);
-      right.textContent = next.projectName || next.slug;
     }
   }
 
+  function buildExplore(project, allProjects) {
+    if (allProjects.length < 2) {
+      var section = document.querySelector(".dp-explore");
+      if (section) section.classList.add("dp-hidden");
+      return;
+    }
+
+    var i = project.index;
+    var prev = allProjects[(i - 1 + allProjects.length) % allProjects.length];
+    var next = allProjects[(i + 1) % allProjects.length];
+    var href = function (p) {
+      return (
+        "dynamic-project-page.html?slug=" + encodeURIComponent(p.slug)
+      );
+    };
+
+    var prevCard = document.querySelector(".dp-prev");
+    var nextCard = document.querySelector(".dp-next");
+    if (prevCard) {
+      prevCard.href = href(prev);
+      var name = prevCard.querySelector(".dp-explore-name");
+      if (name) name.textContent = prev.projectName || prev.slug;
+    }
+    if (nextCard) {
+      nextCard.href = href(next);
+      var name2 = nextCard.querySelector(".dp-explore-name");
+      if (name2) name2.textContent = next.projectName || next.slug;
+    }
+  }
+
+  function buildFooterLinks(allProjects) {
+    var ul = document.querySelector(".footer .project-links");
+    if (!ul) return;
+    allProjects.forEach(function (p) {
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.href =
+        "dynamic-project-page.html?slug=" + encodeURIComponent(p.slug);
+      a.textContent = p.projectName || p.slug;
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+  }
+
+  function bindHomeLinks() {
+    var homeHref = new URL("../index.html", window.location.href).href;
+    document.querySelectorAll(".home-logo").forEach(function (link) {
+      link.href = homeHref;
+      if (link.dataset.homeBound === "1") return;
+      link.dataset.homeBound = "1";
+      link.addEventListener(
+        "click",
+        function (e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          window.location.assign(homeHref);
+        },
+        true,
+      );
+    });
+  }
+
+  // --- GSAP Animations ---
+
+  function initAnimations() {
+    if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined")
+      return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    animateProgress();
+    animateHero();
+    animateOverview();
+    animateApproach();
+    animateDesign();
+    animateOutcome();
+    animateExplore();
+  }
+
+  function animateProgress() {
+    gsap.to(".dp-progress-fill", {
+      width: "100%",
+      ease: "none",
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.3,
+      },
+    });
+  }
+
+  function animateHero() {
+    var content = document.querySelector(".dp-hero-content");
+    if (content) {
+      gsap.from(content.children, {
+        y: 30,
+        opacity: 0,
+        duration: 0.9,
+        stagger: 0.15,
+        ease: "power2.out",
+        delay: 0.25,
+      });
+    }
+
+    var indicator = document.querySelector(".dp-hero .scroll-indicator");
+    if (indicator) {
+      gsap.from(indicator, {
+        opacity: 0,
+        y: 10,
+        duration: 0.6,
+        delay: 1,
+        ease: "power2.out",
+      });
+    }
+
+    gsap.to(".dp-hero-bg", {
+      yPercent: 15,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".dp-hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+
+    gsap.to(".dp-hero-content", {
+      y: -60,
+      opacity: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".dp-hero",
+        start: "60% center",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+
+    gsap.to(".dp-hero .scroll-indicator", {
+      opacity: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".dp-hero",
+        start: "20% top",
+        end: "40% top",
+        scrub: true,
+      },
+    });
+  }
+
+  function animateOverview() {
+    var desc = document.querySelector(".dp-overview-desc");
+    if (desc) {
+      gsap.from(desc, {
+        y: 40,
+        opacity: 0,
+        duration: 0.85,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: desc,
+          start: "top 82%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }
+
+    var items = document.querySelectorAll(".dp-meta-item");
+    if (items.length) {
+      gsap.from(items, {
+        y: 24,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.08,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".dp-meta-grid",
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }
+  }
+
+  function animateApproach() {
+    var section = document.querySelector(".dp-approach");
+    if (!section || section.classList.contains("dp-hidden")) return;
+
+    var blocks = section.querySelectorAll(".dp-approach-block");
+    var stepFill = section.querySelector(".dp-step-fill");
+    var stepCount = section.querySelector(".dp-step-count");
+    var total = blocks.length;
+
+    blocks.forEach(function (block, i) {
+      var inner = block.querySelector(".dp-approach-block-inner");
+      if (inner) {
+        gsap.from(inner, {
+          y: 40,
+          opacity: 0,
+          duration: 0.85,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: block,
+            start: "top 68%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      }
+
+      ScrollTrigger.create({
+        trigger: block,
+        start: "top 52%",
+        end: "bottom 52%",
+        onEnter: function () {
+          updateStep(i);
+        },
+        onEnterBack: function () {
+          updateStep(i);
+        },
+      });
+    });
+
+    function updateStep(index) {
+      if (stepFill) {
+        stepFill.style.width = ((index + 1) / total) * 100 + "%";
+      }
+      if (stepCount) {
+        stepCount.textContent =
+          String(index + 1).padStart(2, "0") +
+          " / " +
+          String(total).padStart(2, "0");
+      }
+    }
+  }
+
+  function animateDesign() {
+    var section = document.querySelector(".dp-design");
+    if (!section || section.classList.contains("dp-hidden")) return;
+
+    var blocks = section.querySelectorAll(".dp-design-block");
+    var images = section.querySelectorAll(".dp-design-img-container img");
+
+    blocks.forEach(function (block, i) {
+      var inner = block.querySelector(".dp-design-block-inner");
+      if (inner) {
+        gsap.from(inner, {
+          y: 40,
+          opacity: 0,
+          duration: 0.85,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: block,
+            start: "top 68%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      }
+
+      if (images.length > 1) {
+        ScrollTrigger.create({
+          trigger: block,
+          start: "top 52%",
+          end: "bottom 52%",
+          onEnter: function () {
+            setActiveImage(i);
+          },
+          onEnterBack: function () {
+            setActiveImage(i);
+          },
+        });
+      }
+    });
+
+    function setActiveImage(index) {
+      images.forEach(function (img, j) {
+        img.classList.toggle("dp-img-active", j === index);
+      });
+    }
+  }
+
+  function animateOutcome() {
+    var section = document.querySelector(".dp-outcome");
+    if (!section || section.classList.contains("dp-hidden")) return;
+
+    var content = section.querySelector(".dp-outcome-content");
+    if (content) {
+      gsap.from(content.children, {
+        y: 30,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: content,
+          start: "top 78%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }
+
+    var media = section.querySelector(".dp-outcome-media img, .dp-outcome-media video");
+    if (media) {
+      gsap.from(media, {
+        scale: 1.08,
+        duration: 1.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      });
+    }
+  }
+
+  function animateExplore() {
+    var cards = document.querySelectorAll(".dp-explore-card");
+    if (!cards.length) return;
+
+    gsap.from(cards, {
+      y: 24,
+      opacity: 0,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".dp-explore",
+        start: "top 82%",
+        toggleActions: "play none none reverse",
+      },
+    });
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", load);
+    document.addEventListener("DOMContentLoaded", init);
   } else {
-    load();
+    init();
   }
 })();
