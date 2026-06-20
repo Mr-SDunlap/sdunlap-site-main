@@ -139,7 +139,7 @@ body {
 }
 
 .dp-hero-device.dp-device-active {
-  display: block;
+  display: none;
 }
 
 .dp-hero-device-chrome {
