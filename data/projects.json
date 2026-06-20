@@ -10,8 +10,9 @@
       "toolsUsed": ["Astro JS", "Supabase", "Stripe", "Resend"],
       "description": "A fully custom e-commerce storefront designed and built end-to-end for Ouros Designs — from brand identity to deployed code.",
       "summary": "End-to-end ownership of a Shopify storefront, including custom Liquid templating, responsive UI, and performance-first frontend architecture.",
-      "image": "./assets/place-holders/pexels-pixabay-39284.jpg",
-      "heroImage": "./assets/place-holders/pexels-pixabay-39284.jpg",
+      "image": "./assets/project-images/ouros-designs/hero-homepage.png",
+      "heroImage": "./assets/project-images/ouros-designs/ouros-designs-mobile.jpg",
+      "heroDevice": "./assets/project-images/ouros-designs/hero-homepage.png",
       "heroImage-alt": "Ouros Designs e-commerce storefront.",
       "info": [
         { "role": "Design + Development" },
@@ -32,9 +33,9 @@
             {
               "section-title": "Constraints",
               "button": "Constraints",
-              "description": "The primary challenge was translating a brand identity into a high-converting storefront with a distinct aesthetic — all within Shopify's templating constraints. Every design decision had to balance visual impact with platform capabilities and performance requirements.",
-              "img": "./assets/place-holders/pexels-asphotography-95916.jpg",
-              "img-title": "Planning"
+              "description": "The goal was full ownership — no platform lock-in, no recurring SaaS fees eating into margins. Every architectural decision had to balance cost-efficiency with scalability: Astro for static-first performance, Supabase for auth and storage, Stripe for payments, and Resend for transactional email. All self-managed, all under one roof.",
+              "img": "./assets/project-images/ouros-designs/stack-architecture.svg",
+              "img-title": "System Architecture"
             }
           ]
         },
@@ -43,9 +44,9 @@
             {
               "section-title": "Approach",
               "button": "Approach",
-              "description": "I approached this as a product problem first — mapping the customer journey before touching the visual layer. Custom Liquid components gave us full control over the UI while keeping the build maintainable. The result is a storefront that feels bespoke without sacrificing performance or developer ergonomics.",
-              "img": "./assets/place-holders/pexels-pixabay-38639.jpg",
-              "img-title": "Design System"
+              "description": "I approached this as a product problem first — mapping the customer journey before touching the visual layer. Astro's component architecture gave full control over the UI while keeping the build maintainable. The result is a storefront that feels bespoke without sacrificing performance or developer ergonomics.",
+              "img": "./assets/project-images/ouros-designs/philosophy-section.png",
+              "img-title": "Design Philosophy"
             }
           ]
         }
@@ -63,16 +64,17 @@
         {
           "vd-images": [
             {
-              "copy-one-img": "./assets/place-holders/pexels-pixabay-38639.jpg",
-              "copy-two-img": "./assets/place-holders/pexels-pixabay-39284.jpg"
+              "copy-one-img": "./assets/project-images/ouros-designs/quality-pillars.png",
+              "copy-two-img": "./assets/project-images/ouros-designs/404-page.png"
             }
           ]
         }
       ],
       "outcome": "A deployed, production-ready storefront that reflects the brand's identity while delivering a fast, conversion-optimized shopping experience.",
-      "ux-title": "The Approach",
+      "ux-title": "The Task",
       "design-title": "The Design",
-      "outcome-title": "The Outcome"
+      "outcome-title": "The Outcome",
+      "liveLink": "https://www.ourosdesigns.com"
     },
     {
       "projectName": "Lumen Technologies",
@@ -156,6 +158,7 @@
       "color-theory": "Lumen's palette balances warm, high-energy tones like coral and orange with cooler hues — teal and aqua — to express both innovation and reliability. The system is designed to feel technically authoritative while remaining visually accessible.",
       "color-list": ["lmn-red", "lmn-light-teal", "lmn-teal", "lmn-orange"],
       "outcome": "Three years of production across campaign systems, product tools, and AI frameworks — each piece positioning Lumen as a technically credible, design-forward enterprise brand.",
+      "pageUrl": "lumen-project-page.html",
       "liveLink": "https://interact.lumen.com/cloud2-network-evolution",
       "ux-title": "The Approach",
       "design-title": "The Design",

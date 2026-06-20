@@ -157,6 +157,8 @@
         modal.setAttribute("aria-hidden", "true");
         document.documentElement.style.overflow = "";
         document.body.style.overflow = "";
+        const f = document.getElementById("contact-form");
+        if (f) f.reset();
         triggers[0] && triggers[0].focus();
       },
     });

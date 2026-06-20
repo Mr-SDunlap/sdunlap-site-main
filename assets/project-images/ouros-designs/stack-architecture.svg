@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="none">
+  <defs>
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#1a2233"/>
+    </linearGradient>
+    <linearGradient id="line-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff611a" stop-opacity="0.1"/>
+      <stop offset="50%" stop-color="#ff611a" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#ff611a" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="line-grad-v" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff611a" stop-opacity="0.1"/>
+      <stop offset="50%" stop-color="#ff611a" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#ff611a" stop-opacity="0.1"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="card-shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="12" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="800" fill="url(#bg-grad)"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.04" stroke="#fff" stroke-width="0.5">
+    <line x1="0" y1="100" x2="1200" y2="100"/>
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="500" x2="1200" y2="500"/>
+    <line x1="0" y1="600" x2="1200" y2="600"/>
+    <line x1="0" y1="700" x2="1200" y2="700"/>
+    <line x1="150" y1="0" x2="150" y2="800"/>
+    <line x1="300" y1="0" x2="300" y2="800"/>
+    <line x1="450" y1="0" x2="450" y2="800"/>
+    <line x1="600" y1="0" x2="600" y2="800"/>
+    <line x1="750" y1="0" x2="750" y2="800"/>
+    <line x1="900" y1="0" x2="900" y2="800"/>
+    <line x1="1050" y1="0" x2="1050" y2="800"/>
+  </g>
+
+  <!-- Section label -->
+  <text x="60" y="56" font-family="'Space Grotesk', 'SF Pro Display', system-ui, sans-serif" font-size="10" letter-spacing="0.25em" fill="#ff611a" font-weight="500" text-transform="uppercase">SYSTEM ARCHITECTURE</text>
+  <line x1="60" y1="70" x2="280" y2="70" stroke="#ff611a" stroke-width="1" opacity="0.3"/>
+
+  <!-- Center hub — OUROS DESIGNS -->
+  <g filter="url(#card-shadow)">
+    <rect x="440" y="310" width="320" height="180" rx="6" fill="#161d27" stroke="#2a3444" stroke-width="1"/>
+    <rect x="440" y="310" width="320" height="4" rx="2" fill="#ff611a"/>
+    <!-- Ouros logo mark -->
+    <circle cx="600" cy="374" r="22" stroke="#fff" stroke-width="2" fill="none" opacity="0.9"/>
+    <circle cx="600" cy="374" r="6" fill="#ff611a"/>
+    <text x="600" y="416" font-family="'Space Grotesk', 'SF Pro Display', system-ui, sans-serif" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="0.08em">OUROS DESIGNS</text>
+    <text x="600" y="440" font-family="'Outfit', 'SF Pro Text', system-ui, sans-serif" font-size="11" fill="#8a9396" text-anchor="middle" letter-spacing="0.06em">STOREFRONT · BRAND · COMMERCE</text>
+    <!-- Decorative corners -->
+    <path d="M444 314 L444 318 L448 318" stroke="#ff611a" stroke-width="1" fill="none" opacity="0.4"/>
+    <path d="M756 314 L756 318 L752 318" stroke="#ff611a" stroke-width="1" fill="none" opacity="0.4"/>
+    <path d="M444 486 L444 482 L448 482" stroke="#ff611a" stroke-width="1" fill="none" opacity="0.4"/>
+    <path d="M756 486 L756 482 L752 482" stroke="#ff611a" stroke-width="1" fill="none" opacity="0.4"/>
+  </g>
+
+  <!-- CONNECTION LINES -->
+  <!-- Top: Astro to center -->
+  <line x1="600" y1="208" x2="600" y2="310" stroke="url(#line-grad-v)" stroke-width="1.5"/>
+  <circle cx="600" cy="258" r="3" fill="#ff611a" opacity="0.5" filter="url(#glow)"/>
+
+  <!-- Bottom: Stripe to center -->
+  <line x1="600" y1="490" x2="600" y2="592" stroke="url(#line-grad-v)" stroke-width="1.5"/>
+  <circle cx="600" cy="542" r="3" fill="#ff611a" opacity="0.5" filter="url(#glow)"/>
+
+  <!-- Left: Supabase to center -->
+  <line x1="248" y1="400" x2="440" y2="400" stroke="url(#line-grad)" stroke-width="1.5"/>
+  <circle cx="344" cy="400" r="3" fill="#ff611a" opacity="0.5" filter="url(#glow)"/>
+
+  <!-- Right: Resend to center -->
+  <line x1="760" y1="400" x2="952" y2="400" stroke="url(#line-grad)" stroke-width="1.5"/>
+  <circle cx="856" cy="400" r="3" fill="#ff611a" opacity="0.5" filter="url(#glow)"/>
+
+  <!-- CARD: ASTRO JS (top) -->
+  <g filter="url(#card-shadow)">
+    <rect x="480" y="108" width="240" height="100" rx="6" fill="#161d27" stroke="#2a3444" stroke-width="1"/>
+    <!-- Astro icon approximation -->
+    <g transform="translate(510, 138)">
+      <path d="M12 0 L20 18 L12 14 L4 18 Z" fill="#ff611a" opacity="0.85"/>
+      <circle cx="12" cy="8" r="2.5" fill="#161d27"/>
+    </g>
+    <text x="546" y="152" font-family="'Space Grotesk', 'SF Pro Display', system-ui, sans-serif" font-size="15" font-weight="600" fill="#ffffff" letter-spacing="0.04em">Astro JS</text>
+    <text x="510" y="176" font-family="'Outfit', 'SF Pro Text', system-ui, sans-serif" font-size="10.5" fill="#8a9396" letter-spacing="0.03em">Static-first framework</text>
+    <text x="510" y="192" font-family="'Outfit', 'SF Pro Text', system-ui, sans-serif" font-size="10.5" fill="#5a6368" letter-spacing="0.03em">SSR · Islands · Zero JS default</text>
+  </g>
+
+  <!-- CARD: SUPABASE (left) -->
+  <g filter="url(#card-shadow)">
+    <rect x="48" y="350" width="200" height="100" rx="6" fill="#161d27" stroke="#2a3444" stroke-width="1"/>
+    <!-- DB icon -->
+    <g transform="translate(74, 376)">
+      <ellipse cx="10" cy="3" rx="10" ry="3" fill="none" stroke="#3ecf8e" stroke-width="1.5"/>
+      <path d="M0 3 v10 c0 1.66 4.48 3 10 3 s10-1.34 10-3 v-10" fill="none" stroke="#3ecf8e" stroke-width="1.5"/>
+      <ellipse cx="10" cy="10" rx="10" ry="3" fill="none" stroke="#3ecf8e" stroke-width="1" opacity="0.4"/>
+    </g>
+    <text x="106" y="392" font-family="'Space Grotesk', 'SF Pro Display', system-ui, sans-serif" font-size="15" font-weight="600" fill="#ffffff" letter-spacing="0.04em">Supabase</text>
+    <text x="74" y="418" font-family="'Outfit', 'SF Pro Text', system-ui, sans-serif" font-size="10.5" fill="#8a9396" letter-spacing="0.03em">Backend + Auth + Storage</text>
+    <text x="74" y="434" font-family="'Outfit', 'SF Pro Text', system-ui, sans-serif" font-size="10.5" fill="#5a6368" letter-spacing="0.03em">PostgreSQL · Row-level security</text>
+  </g>
+
+  <!-- CARD: RESEND (right) -->
+  <g filter="url(#card-shadow)">
+    <rect x="952" y="350" width="200" height="100" rx="6" fill="#161d27" stroke="#2a3444" stroke-width="1"/>
+    <!-- Mail icon -->
+    <g transform="translate(978, 378)">
+      <rect x="0" y="0" width="20" height="14" rx="2" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.8"/>
+      <path d="M0 0 L10 8 L20 0" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
+    </g>
+    <text x="1010" y="392" font-family="'Space Grotesk', 'SF Pro Display', system-ui, sans-serif" font-size="15" font-weight="600" fill="#ffffff" letter-spacing="0.04em">Resend</text>
+    <text x="978" y="418" font-family="'Outfit', 'SF Pro Text', system-ui, sans-serif" font-size="10.5" fill="#8a9396" letter-spacing="0.03em">Transactional Email</text>
+    <text x="978" y="434" font-family="'Outfit', 'SF Pro Text', system-ui, sans-serif" font-size="10.5" fill="#5a6368" letter-spacing="0.03em">Purchase · Download · Support</text>
+  </g>
+
+  <!-- CARD: STRIPE (bottom) -->
+  <g filter="url(#card-shadow)">
+    <rect x="480" y="592" width="240" height="100" rx="6" fill="#161d27" stroke="#2a3444" stroke-width="1"/>
+    <!-- Stripe S icon -->
+    <g transform="translate(510, 618)">
+      <rect width="20" height="20" rx="4" fill="#635bff" opacity="0.9"/>
+      <text x="10" y="15" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">S</text>
+    </g>
+    <text x="542" y="632" font-family="'Space Grotesk', 'SF Pro Display', system-ui, sans-serif" font-size="15" font-weight="600" fill="#ffffff" letter-spacing="0.04em">Stripe</text>
+    <text x="510" y="658" font-family="'Outfit', 'SF Pro Text', system-ui, sans-serif" font-size="10.5" fill="#8a9396" letter-spacing="0.03em">Payment Processing</text>
+    <text x="510" y="674" font-family="'Outfit', 'SF Pro Text', system-ui, sans-serif" font-size="10.5" fill="#5a6368" letter-spacing="0.03em">Checkout · Webhooks · Billing</text>
+  </g>
+
+  <!-- Data flow labels on lines -->
+  <g font-family="'Space Grotesk', 'SF Pro Display', system-ui, sans-serif" font-size="8" letter-spacing="0.18em" fill="#ff611a" opacity="0.6">
+    <text x="614" y="268" transform="rotate(-90, 614, 268)">RENDERS</text>
+    <text x="614" y="560" transform="rotate(-90, 614, 560)">PAYMENTS</text>
+    <text x="354" y="390">DATA</text>
+    <text x="826" y="390">EMAIL</text>
+  </g>
+
+  <!-- Bottom tagline -->
+  <text x="600" y="760" font-family="'Outfit', 'SF Pro Text', system-ui, sans-serif" font-size="12" fill="#5a6368" text-anchor="middle" letter-spacing="0.12em">NO VENDOR LOCK-IN · FULL OWNERSHIP · SELF-MANAGED</text>
+</svg>
