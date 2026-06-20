@@ -9,33 +9,6 @@
     window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function splitTextNode(node) {
-    const text = node.nodeValue;
-    if (!text || !text.trim()) return null;
-    // Normalize whitespace so indentation/newlines don't create extra chars
-    const norm = text.replace(/\s+/g, " ").trim();
-    if (!norm.length) return null;
-    const wrap = document.createElement("span");
-    wrap.className = "swirl-wrap";
-    for (const ch of norm) {
-      // Per-character clip wrapper to mask vertical movement
-      const clip = document.createElement("span");
-      clip.className = "swirl-clip";
-
-      const span = document.createElement("span");
-      span.className = "swirl-char";
-      if (ch === " ") {
-        span.classList.add("swirl-space");
-        span.textContent = "\u00A0"; // non-breaking space keeps spacing
-      } else {
-        span.textContent = ch;
-      }
-      clip.appendChild(span);
-      wrap.appendChild(clip);
-    }
-    return wrap;
-  }
-
   function createSwirlWrapFromText(text) {
     const norm = String(text || "")
       .replace(/\s+/g, " ")

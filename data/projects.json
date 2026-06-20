@@ -1,42 +1,31 @@
 {
   "projects": [
     {
-      "projectName": "Cloud Infographic",
-      "toolsUsed": [
-        "XD",
-        "Illustrator",
-        "Adobe\u00a0After\u00a0Effects",
-        "Photoshop",
-        "HTML",
-        "CSS",
-        "Javascript"
-      ],
+      "projectName": "Ouros Designs",
+      "slug": "ouros-designs",
+      "number": "Project 01",
+      "role": "Design + Development",
+      "client": "Ouros Designs",
+      "status": "Active",
+      "toolsUsed": ["Astro JS", "Supabase", "Stripe", "Resend"],
+      "description": "A fully custom e-commerce storefront designed and built end-to-end for Ouros Designs — from brand identity to deployed code.",
+      "summary": "End-to-end ownership of a Shopify storefront, including custom Liquid templating, responsive UI, and performance-first frontend architecture.",
+      "image": "./assets/project-images/ouros-designs/hero-homepage.png",
+      "heroImage": "./assets/project-images/ouros-designs/ouros-designs-mobile.jpg",
+      "heroDevice": "./assets/project-images/ouros-designs/hero-homepage.png",
+      "heroImage-alt": "Ouros Designs e-commerce storefront.",
       "info": [
-        { "role": "Visual Designer - Developer" },
-        { "client": "Lumen Technologies" },
-        {
-          "tools": [
-            "XD",
-            "Illustrator",
-            "Adobe\u00a0After\u00a0Effects",
-            "Photoshop",
-            "HTML",
-            "CSS",
-            "Javascript"
-          ]
-        },
-        { "status": "live" },
-        { "link": "https://interact.lumen.com/cloud2-network-evolution" }
+        { "role": "Design + Development" },
+        { "client": "Ouros Designs" },
+        { "tools": ["Astro JS", "Supabase", "Stripe", "Resend"] },
+        { "status": "Active" }
       ],
       "tool-kit": {
-        "figma": ["Visual Prototyping", ".s-figma"],
-        "HTML": ["Markup Language", ".s-html"],
+        "Figma": ["Visual Prototyping", ".s-figma"],
+        "Shopify": ["E-commerce Platform", ".s-shopify"],
+        "Liquid": ["Templating Language", ".s-html"],
         "CSS": ["Styling Language", ".s-css"],
-        "JavaScript": ["Programming Language", ".s-js"],
-        "After Effects": ["Motion Graphics", ".s-aee"],
-        "Photoshop": ["Raster Graphics", ".s-photo"],
-        "Illustrator": ["Vector Graphics", "s-illustrator"],
-        "ION Interactive": ["Interactive CMS", "s-ion"]
+        "JavaScript": ["Interactivity", ".s-js"]
       },
       "ux-planning": [
         {
@@ -44,9 +33,9 @@
             {
               "section-title": "Constraints",
               "button": "Constraints",
-              "description": "When this project came in, the challenge was clear from the start. The information was highly confidential, with full visibility limited until the SLT delivered their presentation. That meant we were working with only fragments, asking precise, almost clinical questions to extract just enough clarity to move forward. Every detail had to be intentional. We weren’t just gathering information, we were piecing together a narrative under constraints. The goal was to take something tightly guarded and turn it into an infographic that not only explained the message clearly, but built anticipation and got people genuinely excited for what was coming next.",
-              "img": "assets/project-images/cloud-infographic/infographic-wire.jpg",
-              "img-title": "Planning"
+              "description": "The goal was full ownership — no platform lock-in, no recurring SaaS fees eating into margins. Every architectural decision had to balance cost-efficiency with scalability: Astro for static-first performance, Supabase for auth and storage, Stripe for payments, and Resend for transactional email. All self-managed, all under one roof.",
+              "img": "./assets/project-images/ouros-designs/stack-architecture.svg",
+              "img-title": "System Architecture"
             }
           ]
         },
@@ -55,9 +44,9 @@
             {
               "section-title": "Approach",
               "button": "Approach",
-              "description": "I worked closely with the copywriting team to reshape the content into a clear, compelling narrative, while collaborating with designers to develop animated ads and supporting page assets. Throughout the process, I partnered with the creative director to make sure everything we produced stayed aligned with what SLT had in mind, despite the limited visibility we were working with. That alignment allowed us to stay on schedule and keep momentum. From there, I focused on pushing the experience further by creating an interactive way to showcase the before and after states, giving the story a more tangible and engaging impact.",
-              "img": "assets/project-images/cloud-infographic/Lumen_cloud-infographic_macbook.png",
-              "img-title": "Story telling"
+              "description": "I approached this as a product problem first — mapping the customer journey before touching the visual layer. Astro's component architecture gave full control over the UI while keeping the build maintainable. The result is a storefront that feels bespoke without sacrificing performance or developer ergonomics.",
+              "img": "./assets/project-images/ouros-designs/philosophy-section.png",
+              "img-title": "Design Philosophy"
             }
           ]
         }
@@ -67,8 +56,93 @@
           "vd-text": [
             {
               "section-title": "Visual Design",
-              "copy-one": "The objective was to integrate the existing cloud design into the hero section. After collaborating with the original designer and exploring several alternative directions, this approach proved to be the most compelling. It establishes a clear focal point while introducing a sense of human connection.",
-              "copy-two": "To present the information as clearly and accurately as possible, we developed an animation that illustrates the flow of data. This approach establishes a visual narrative that connects the before and after states of cloud integration."
+              "copy-one": "The visual language centers on minimal, high-contrast layouts that let the product photography breathe. Typography and spacing carry most of the brand weight, reducing reliance on decorative elements.",
+              "copy-two": "Every interactive state — hover, focus, cart, checkout — was designed as part of the same system, ensuring a coherent experience from first page load to purchase completion."
+            }
+          ]
+        },
+        {
+          "vd-images": [
+            {
+              "copy-one-img": "./assets/project-images/ouros-designs/quality-pillars.png",
+              "copy-two-img": "./assets/project-images/ouros-designs/404-page.png"
+            }
+          ]
+        }
+      ],
+      "outcome": "A deployed, production-ready storefront that reflects the brand's identity while delivering a fast, conversion-optimized shopping experience.",
+      "ux-title": "The Task",
+      "design-title": "The Design",
+      "outcome-title": "The Outcome",
+      "liveLink": "https://www.ourosdesigns.com"
+    },
+    {
+      "projectName": "Lumen Technologies",
+      "slug": "lumen-technologies",
+      "number": "Project 02",
+      "role": "Visual Designer — Developer",
+      "client": "Lumen Technologies",
+      "status": "Archived",
+      "toolsUsed": [
+        "Figma",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "After Effects",
+        "ION Interactive"
+      ],
+      "description": "A curated archive of interactive digital experiences produced for Lumen Technologies — spanning campaign systems, product tools, and infographic frameworks.",
+      "summary": "Three years of enterprise-scale digital production: interactive infographics, guided product tools, and AI framework visualizations — each built under real deadlines and cross-functional constraints.",
+      "image": "./assets/project-images/cloud-infographic/iMac-mock_cloud-2.jpg",
+      "heroImage": "./assets/project-images/cloud-infographic/iMac-mock_cloud-2.jpg",
+      "heroImage-alt": "Lumen Technologies Cloud 2.0 Infographic on display.",
+      "video": "./assets/project-images/cloud-infographic/visual-id/infographic-scroll.mp4",
+      "info": [
+        { "role": "Visual Designer — Developer" },
+        { "client": "Lumen Technologies" },
+        { "tools": ["Figma", "HTML", "CSS", "JavaScript", "After Effects"] },
+        { "status": "Archived" },
+        { "link": "https://interact.lumen.com/cloud2-network-evolution" }
+      ],
+      "tool-kit": {
+        "Figma": ["Visual Prototyping", ".s-figma"],
+        "HTML": ["Markup Language", ".s-html"],
+        "CSS": ["Styling Language", ".s-css"],
+        "JavaScript": ["Programming Language", ".s-js"],
+        "After Effects": ["Motion Graphics", ".s-aee"],
+        "ION Interactive": ["Interactive CMS", "s-ion"]
+      },
+      "ux-planning": [
+        {
+          "button-one": [
+            {
+              "section-title": "Constraints",
+              "button": "Constraints",
+              "description": "Enterprise-scale work means operating under access restrictions, multi-stakeholder reviews, and CMS constraints — all while maintaining output quality and momentum. Each project required extracting enough context from limited information to move decisively.",
+              "img": "./assets/project-images/cloud-infographic/infographic-wire.jpg",
+              "img-title": "Planning"
+            }
+          ]
+        },
+        {
+          "button-two": [
+            {
+              "section-title": "Approach",
+              "button": "Approach",
+              "description": "I embedded into cross-functional teams as both designer and developer, owning the full production pipeline. Tight collaboration with creative directors and copy teams kept work aligned to strategy without losing execution quality.",
+              "img": "./assets/project-images/cloud-infographic/Lumen_cloud-infographic_macbook.png",
+              "img-title": "Collaboration"
+            }
+          ]
+        }
+      ],
+      "visual-design": [
+        {
+          "vd-text": [
+            {
+              "section-title": "Visual Design",
+              "copy-one": "Each piece in the Lumen archive follows Lumen's brand system while pushing the boundaries of what's achievable within enterprise CMS constraints. Strong hierarchy, motion, and structured layouts communicate technical depth without overwhelming.",
+              "copy-two": "Motion design played a central role across all pieces — reinforcing narrative flow, guiding user attention, and making abstract infrastructure concepts tangible and engaging."
             }
           ]
         },
@@ -81,201 +155,14 @@
           ]
         }
       ],
-      "video": "./assets/project-images/cloud-infographic/visual-id/infographic-scroll.mp4",
-      "color-theory": "Lumen Technologies uses a balanced color system that mixes warm, high-energy tones like coral and orange with cooler hues like teal and aqua to show both innovation and reliability. The warm colors grab attention and signal action and responsiveness, while the cooler tones create a sense of trust, clarity, and technical depth. Along with gradients that suggest movement and change, the palette reflects modern tech systems that are stable at the core but always evolving.",
+      "color-theory": "Lumen's palette balances warm, high-energy tones like coral and orange with cooler hues — teal and aqua — to express both innovation and reliability. The system is designed to feel technically authoritative while remaining visually accessible.",
       "color-list": ["lmn-red", "lmn-light-teal", "lmn-teal", "lmn-orange"],
-      "role": "Visual Designer - Developer",
-      "description": "Designed and developed an animated system to visualize cloud data flow, improving clarity between pre- and post-integration states.",
-      "button": "Explore",
-      "link": "./archive/cloud-2-infographic.html",
-      "image": "./assets/project-images/cloud-infographic/iMac-mock_cloud-2.jpg",
-      "caption": "Cloud 2.0 infographic page",
-      "number": "Project showcase 01",
-      "client": "Lumen Technologies",
-      "status": "live",
-      "team": "Two designers including myself as lead - Copy Team",
+      "outcome": "Three years of production across campaign systems, product tools, and AI frameworks — each piece positioning Lumen as a technically credible, design-forward enterprise brand.",
+      "pageUrl": "lumen-project-page.html",
       "liveLink": "https://interact.lumen.com/cloud2-network-evolution",
-      "summary": "This infographic communicates why that shift is happening and how distributed, high-capacity, intelligent connectivity defines the next era of infrastructure, making a complex technical transformation accessible to both executive and technical audiences.",
       "ux-title": "The Approach",
-      "ux": "My approach centered on reducing cognitive load while preserving technical credibility. The experience establishes urgency first by highlighting exponential data growth and architectural strain, then transitions into a direct visual comparison between Cloud 1.0 and Cloud 2.0 so viewers can see the transformation before analyzing it. Information is layered progressively, moving from high-level context to supporting projections and finally architectural diagrams, ensuring clarity for decision-makers while maintaining depth for technical stakeholders.",
       "design-title": "The Design",
-      "design": "The design emphasizes contrast, hierarchy, and scale to reinforce the narrative of evolution. Centralized versus distributed architectures are positioned as visual opposites, supported by geographic mapping and network diagrams that make infrastructure expansion tangible and intuitive. Key growth metrics act as visual anchors within the scroll, creating rhythm and reinforcing urgency, while the overall visual language remains controlled, technical, and purposeful to communicate authority without overwhelming the viewer.",
-      "outcome-title": "The Outcome",
-      "outcome": "The final piece distilled a complex architectural transition into a fast, shareable format that strengthened Cloud 2.0 thought leadership and aligned business and technical audiences around a shared understanding of network evolution. By clearly articulating why legacy systems fall short and what the future state requires, the infographic positioned the organization as a forward-looking enabler of AI-scale infrastructure and created a strong foundation for deeper strategic engagement.",
-      "heroImage": "assets/project-images/cloud-infographic/ipad_cloud-infograph_square.jpg",
-      "heroImage-alt": "Cloud 2.0 infographic landing page on display of laptop."
-    },
-    {
-      "projectName": "Product Finder",
-      "toolsUsed": [
-        "Figma",
-        "Illustrator",
-        "HTML",
-        "CSS",
-        "Javascript",
-        "ION Interactive"
-      ],
-      "info": [
-        { "role": "Product Designer - Front-End Developer" },
-        { "client": "Lumen Technologies" },
-        {
-          "tools": [
-            "Figma",
-            "Illustrator",
-            "HTML",
-            "CSS",
-            "Javascript",
-            "ION Interactive"
-          ]
-        },
-        { "status": "live" },
-        { "link": "https://www.lumen.com/en-us/resources/product-finder.html" }
-      ],
-      "tool-kit": {
-        "Adobe XD": ["Visual Prototyping", ".s-xd"],
-        "Illustrator": ["Vector Graphics", "s-illustrator"]
-      },
-      "ux-planning": [
-        {
-          "button-one": [
-            {
-              "section-title": "Constraints",
-              "button": "Constraints",
-              "description": "The primary challenge was simplifying a large and complex product ecosystem into a guided experience that could serve multiple audience types simultaneously. Users ranged from highly technical buyers to business stakeholders with limited product knowledge, which meant the experience needed to balance clarity with depth. Additionally, the tool had to integrate within existing CMS limitations while maintaining performance and scalability.",
-              "img": "assets/project-images/product-finder/wireframe.jpg",
-              "img-title": "Planning"
-            }
-          ]
-        },
-        {
-          "button-two": [
-            {
-              "section-title": "Approach",
-              "button": "Approach",
-              "description": "I approached the experience as a decision-making tool rather than a traditional browsing interface. By structuring the flow around guided inputs and progressive filtering, users could quickly narrow down relevant solutions without needing prior knowledge of Lumen’s full product suite. I collaborated with stakeholders to define key decision points, then translated those into an intuitive UI that prioritizes clarity, speed, and usability across devices.",
-              "img": "assets/project-images/product-finder/wireframe.jpg",
-              "img-title": "User Flow"
-            }
-          ]
-        }
-      ],
-      "visual-design": [
-        {
-          "vd-text": [
-            {
-              "section-title": "Visual Design",
-              "copy-one": "The design focuses on clarity and usability, using strong hierarchy and structured layouts to guide users through complex decision paths. Visual elements are intentionally minimal to reduce distraction and keep attention on user inputs and results.",
-              "copy-two": "Interactive components such as filters, selections, and results states were designed to provide immediate feedback, reinforcing user confidence and making the experience feel responsive and controlled."
-            }
-          ]
-        },
-        {
-          "vd-images": [
-            {
-              "copy-one-img": "./assets/project-images/product-finder/product-finder-ui.png",
-              "copy-two-img": "./assets/project-images/product-finder/product-finder-results.png"
-            }
-          ]
-        }
-      ],
-      "video": "./assets/project-images/product-finder/product-finder-scroll.mp4",
-      "color-theory": "The color system supports usability and clarity, leveraging Lumen’s established palette to create clear visual hierarchy and interactive states. Bright accent colors highlight actions and selections, while cooler tones maintain structure and readability across dense informational layouts.",
-      "color-list": ["lmn-red", "lmn-light-teal", "lmn-teal", "lmn-orange"],
-      "role": "Product Designer - Front-End Developer",
-      "description": "Interactive tool designed to help users quickly identify the right Lumen products based on their needs.",
-      "team": "Cross-functional team including designers, developers, and stakeholders",
-      "summary": "The Product Finder transforms a complex product catalog into a streamlined decision-making experience, enabling users to quickly identify relevant solutions without needing deep product knowledge.",
-      "ux": "The experience is built around guided decision-making, reducing cognitive load by breaking down complex choices into manageable steps. Users are progressively led through inputs that refine results in real time, ensuring clarity while maintaining efficiency.",
-      "design": "The design prioritizes structure and responsiveness, using clear hierarchy, modular components, and immediate feedback states to create a seamless and intuitive user experience across all devices.",
-      "outcome": "The final product improved product discoverability and reduced friction in the decision-making process, helping users quickly connect their needs with the appropriate solutions while reinforcing Lumen’s positioning as a customer-focused technology provider."
-    },
-    {
-      "projectName": "AI Framework",
-      "toolsUsed": [
-        "Figma",
-        "Illustrator",
-        "After Effects",
-        "HTML",
-        "CSS",
-        "Javascript"
-      ],
-      "info": [
-        { "role": "Visual Designer - Developer" },
-        { "client": "Lumen Technologies" },
-        {
-          "tools": [
-            "Figma",
-            "Illustrator",
-            "After Effects",
-            "HTML",
-            "CSS",
-            "Javascript"
-          ]
-        },
-        { "status": "live" },
-        { "link": "https://interact.lumen.com/ai-framework" }
-      ],
-      "ux-planning": [
-        {
-          "button-one": [
-            {
-              "section-title": "Constraints",
-              "button": "Constraints",
-              "description": "The challenge was translating an abstract and rapidly evolving concept like AI infrastructure into something structured, digestible, and visually engaging. The content needed to resonate with both technical and executive audiences while avoiding overwhelming complexity. At the same time, the experience had to align with broader messaging around innovation and thought leadership.",
-              "img": "assets/project-images/ai-framework/wireframe.jpg",
-              "img-title": "Planning"
-            }
-          ]
-        },
-        {
-          "button-two": [
-            {
-              "section-title": "Approach",
-              "button": "Approach",
-              "description": "I focused on creating a narrative-driven experience that breaks down the AI ecosystem into clear, interconnected components. By structuring the framework visually and reinforcing it through motion and interaction, users can understand not just individual elements, but how they work together as a system. Collaboration with stakeholders ensured the experience remained accurate while still being accessible and engaging.",
-              "img": "assets/project-images/ai-framework/wireframe.jpg",
-              "img-title": "Framework Structure"
-            }
-          ]
-        }
-      ],
-      "visual-design": [
-        {
-          "vd-text": [
-            {
-              "section-title": "Visual Design",
-              "copy-one": "The visual design emphasizes structure and connectivity, using layered diagrams and motion to represent how different components of AI infrastructure interact. The goal was to make complex systems feel organized and approachable.",
-              "copy-two": "Motion design plays a key role in reinforcing relationships between elements, guiding users through the framework and helping them understand how each piece contributes to the larger system."
-            }
-          ]
-        },
-        {
-          "vd-images": [
-            {
-              "copy-one-img": "./assets/project-images/ai-framework/ai-framework-diagram.png",
-              "copy-two-img": "./assets/project-images/ai-framework/ai-framework-motion.gif"
-            }
-          ]
-        }
-      ],
-      "video": "./assets/project-images/ai-framework/ai-framework-scroll.mp4",
-      "tool-kit": {
-        "Adobe XD": ["Visual Prototyping", ".s-xd"],
-        "HTML": ["Markup Language", ".s-html"],
-        "CSS": ["Styling Language", ".s-css"],
-        "JavaScript": ["Programming Language", ".s-js"],
-        "Photoshop": ["Raster Graphics", ".s-photo"],
-        "ION Interactive": ["Interactive CMS", "s-ion"]
-      },
-      "color-theory": "The color system reflects innovation and intelligence, combining cool tones to convey trust and technical depth with vibrant accents that highlight key interactions and system relationships. Gradients and motion further reinforce the idea of continuous evolution within AI systems.",
-      "color-list": ["lmn-red", "lmn-light-teal", "lmn-teal", "lmn-orange"],
-      "role": "Visual Designer - Developer",
-      "description": "Interactive framework explaining how AI infrastructure components connect and operate at scale.",
-      "team": "Design, development, and strategy teams",
-      "summary": "This experience breaks down the complexity of AI infrastructure into a structured, visual framework that helps audiences understand how different components interact to enable scalable, intelligent systems.",
-      "ux": "The experience is designed as a guided narrative, progressively revealing layers of the AI ecosystem to reduce cognitive overload while maintaining depth and technical credibility.",
-      "design": "The design leverages structure, motion, and visual hierarchy to communicate relationships between components, making abstract systems tangible and easier to understand.",
-      "outcome": "The final experience positioned Lumen as a leader in AI infrastructure by clearly articulating how its ecosystem supports scalable, intelligent solutions, creating a strong foundation for both education and strategic conversations."
+      "outcome-title": "The Outcome"
     }
   ]
 }

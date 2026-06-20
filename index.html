@@ -34,13 +34,14 @@
       defer
     ></script>
     <script src="./js/nav.js" defer></script>
+    <script src="./js/ambient-bg.js" defer></script>
     <script src="./js/gsap-init.js" defer></script>
     <script src="./js/forms.js" defer></script>
     <script src="./js/cursor.js" defer></script>
     <script src="./js/projects.js" defer></script>
     <script src="./js/archive-horizontal-scroll.js" defer></script>
     <script src="./js/app.js" defer></script>
-    <script src="./js/anchor-swirls.js" defer></script>
+
     <script src="./js/smooth-scroll.js" defer></script>
   </head>
 
@@ -51,43 +52,100 @@
           <a href="#section_landing" class="home-logo split-text">S_</a>
         </li>
         <li>
-          <a href="#section_files">I.<span>&nbsp;The&nbsp;Archive</span></a>
+          <a href="#section_about">I.<span>&nbsp;The&nbsp;Profile</span></a>
         </li>
         <li>
-          <a href="#section_about">II.<span>&nbsp;The&nbsp;Profile</span></a>
+          <a href="#section_files">II.<span>&nbsp;The&nbsp;Archive</span></a>
         </li>
       </ul>
       <a href="#section_landing" class="connect-btn split-text"
         ><span>Connect</span
-        ><img
-          src="./assets/icons/icons8-chat-bubble-30.png"
-          alt="connect with Stephen"
-      /></a>
+        ><svg
+          class="nav-connect-icon"
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          aria-hidden="true"
+        >
+          <line
+            x1="3"
+            y1="13"
+            x2="13"
+            y2="3"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="square"
+          />
+          <polyline
+            points="7,3 13,3 13,9"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="square"
+            stroke-linejoin="miter"
+            fill="none"
+          /></svg
+      ></a>
     </nav>
     <nav id="mobile-nav">
       <a href="#section_landing" class="home-logo split-text">S_</a>
-      <div class="burger-menu">
-        <span class="bar top-bar"></span>
-        <span class="bar middle-bar"></span>
-        <span class="bar bottom-bar"></span>
-      </div>
+      <button
+        class="burger-menu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="bar h-bar"></span>
+        <span class="bar v-bar"></span>
+      </button>
 
-      <ul>
-        <li>
-          <a href="#section_files">The Archive</a>
-        </li>
-        <li>
-          <a href="#section_about">The Profile</a>
-        </li>
-      </ul>
+      <div class="mobile-nav-panel">
+        <div class="mobile-nav-header">
+          <span class="mnav-sys">SYS // NAV_OPEN</span>
+          <span class="mnav-id">ID: S_DUNLAP</span>
+        </div>
+        <ul class="mobile-nav-links">
+          <li>
+            <a href="#section_about">
+              <span class="mnav-index">I.</span>
+              <span class="mnav-label">The Profile</span>
+            </a>
+          </li>
+          <li>
+            <a href="#section_files">
+              <span class="mnav-index">II.</span>
+              <span class="mnav-label">The Archive</span>
+            </a>
+          </li>
+        </ul>
+        <div class="mobile-nav-footer">
+          <button class="mnav-connect-btn connect-btn">
+            Let's Connect
+            <div class="arrow">
+              <span class="left-tic tic"></span>
+              <span class="right-tic tic"></span>
+              <span class="line"></span>
+            </div>
+          </button>
+          <a
+            href="https://www.linkedin.com/in/stephendunlap0001/"
+            class="mnav-linkedin"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="mnav-li-label">LinkedIn</span>
+            <span class="mnav-li-handle">stephendunlap0001 ↗</span>
+          </a>
+        </div>
+      </div>
     </nav>
     <section id="section_landing">
+      <div class="ambient-bg" data-ambient="light" aria-hidden="true"></div>
       <div class="section-container landing-container">
         <div class="name-header-container">
           <div class="status">
-            <span class="status-dot"></span>
-            <p>system status:</p>
-            <p>Developing</p>
+            <!-- <span class="status-dot"></span> -->
+            <p>SYS // Status:</p>
+            <p>Active</p>
           </div>
           <h1 class="site-name">STEPHEN_DUNLAP</h1>
           <div class="landing-name">
@@ -95,10 +153,10 @@
           </div>
           <div class="home-message">
             <p class="main-message">
-              I turn complex product requirements into scalable,
-              production-ready digital systems.
+              I design and engineer digital products — from the first system
+              diagram to the last deploy.
             </p>
-            <div class="notes">
+            <!-- <div class="notes">
               <div class="note">
                 <h4>Build Identification</h4>
                 <p>v1.0.0-developing phase</p>
@@ -107,203 +165,278 @@
                 <h4>Primary Protocol</h4>
                 <p>Functional Minimalism</p>
               </div>
+            </div> -->
+          </div>
+          <!-- <div class="landing-btns">
+            <a class="landing-about-btn primary-btn" href="#section_about"
+              >The Profile</a
+            >
+            <a class="landing-work-btn primary-btn" href="#section_files">
+              The Archive
+            </a>
+          </div> -->
+        </div>
+      </div>
+      <a
+        href="#section_about"
+        class="scroll-indicator"
+        aria-label="Scroll down"
+      >
+        <span class="scroll-label">Scroll</span>
+        <div class="scroll-line">
+          <div class="scroll-dot"></div>
+        </div>
+      </a>
+    </section>
+    <section id="section_about">
+      <div class="about-narrative">
+        <!-- Left: sticky identity panel -->
+        <div class="about-sticky-col">
+          <div class="about-sticky-inner">
+            <span class="about-module-label">Identity_Verification</span>
+            <h1 class="about-title">The_Profile<br /><span>/Who Am I</span></h1>
+            <p class="about-bio">
+              I design and engineer digital products — marketing systems,
+              product interfaces, interactive experiences. The same person who
+              maps the architecture ships the code. No handoff. No translation
+              loss. No gap between what was conceived and what gets built.
+            </p>
+            <div class="about-stats">
+              <div class="stat">
+                <span class="stat-number">4+</span>
+                <span class="stat-label"
+                  >years at the intersection of design and engineering</span
+                >
+              </div>
+              <div class="stat">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">production interfaces shipped</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">20+</span>
+                <span class="stat-label"
+                  >interactive systems designed and built</span
+                >
+              </div>
+            </div>
+            <div class="about-nav-dots" aria-hidden="true">
+              <span class="about-dot" data-dot="0"></span>
+              <span class="about-dot" data-dot="1"></span>
+              <span class="about-dot" data-dot="2"></span>
             </div>
           </div>
-          <div class="landing-btns">
-            <a class="landing-work-btn primary-btn" href="#section_files"
-              >The Archive</a
-            >
-            <a class="landing-about-btn secondary-btn" href="#section_about">
-              The Profile
-            </a>
+        </div>
+
+        <!-- Right: scrolling narrative blocks -->
+        <div class="about-scroll-col">
+          <!-- Block 0: Systems Thinking -->
+          <div class="about-narrative-block" data-block="0">
+            <div class="block-inner">
+              <p class="comp-num">01</p>
+              <h4>Systems Thinking</h4>
+              <p>
+                Before anything gets designed or built, I map the components
+                that need to operate together — and the edges that will stress
+                at scale. Every engagement starts with understanding the
+                structure, not the surface.
+              </p>
+            </div>
+          </div>
+
+          <!-- Block 1: Design Engineering -->
+          <div class="about-narrative-block" data-block="1">
+            <div class="block-inner">
+              <p class="comp-num">02</p>
+              <h4>Design Engineering</h4>
+              <p>
+                User research and A/B testing inform the decisions. Modular
+                design systems make them scalable. Every component is
+                intentional, every pattern reusable — built to stay cohesive as
+                the product grows.
+              </p>
+            </div>
+          </div>
+
+          <!-- Block 2: Full-Scope Delivery -->
+          <div class="about-narrative-block" data-block="2">
+            <div class="block-inner">
+              <p class="comp-num">03</p>
+              <h4>Full-Scope Delivery</h4>
+              <p>
+                The system architecture wires everything together. The design
+                system brings the brand to life. And because the same person
+                conceived it and shipped it, nothing gets lost between the
+                vision and the build.
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </section>
     <section id="section_files">
-      <div class="content-container">
-        <div class="archive_title-box">
-          <h1 class="archive-title">
-            The_Archive<br /><span>/Selected works</span>
-          </h1>
-          <p>
-            Selected work across product, marketing, and interactive systems —
-            designed and built by the same hand, from concept to deployed code.
-          </p>
+      <!-- Archive header -->
+      <!-- <div class="archive-header">
+        <h1 class="archive-title">
+          The_Archive<br /><span>/Selected works</span>
+        </h1>
+        <p>
+          Selected work across product, marketing, and interactive systems —
+          designed and built by the same hand, from concept to deployed code.
+        </p>
+      </div> -->
+
+      <!-- Project 01: Ouros Designs (media left, info right) -->
+      <div class="project-narrative pn--reverse">
+        <div class="pn-media-col">
+          <div class="pn-media-inner">
+            <div
+              class="pn-media-frame"
+              style="
+                background-image: url(&quot;./assets/project-images/ouros-designs/ouros-designs-mobile.jpg&quot;);
+              "
+              role="img"
+              aria-label="Ouros Designs storefront"
+            ></div>
+          </div>
         </div>
-        <div class="project-container">
-          <a class="project" href="">
-            <div class="project-status">
-              <div class="status-indicator">Active</div>
-              <span class="date">01.19.24</span>
-            </div>
-            <div class="project-bg-image"></div>
-            <div class="info-box">
-              <h3 class="project-name"></h3>
+        <div class="pn-info-col">
+          <span class="pn-module">01 / Project Alpha</span>
+          <div class="project-status">
+            <!-- <div class="status-indicator">Active</div> -->
+            <span class="date">2026</span>
+          </div>
+          <h2 class="pn-title">OUROS<br />DESIGNS</h2>
+          <p class="pn-desc">
+            Hard-coded with Astro JS on the front end and Supabase on the back —
+            no platform lock-in, no compromises. Stripe and Resend are
+            integrated for payments and transactional email, built to sell
+            digital assets for creators or scale in any direction.
+          </p>
+          <div class="pn-tags">
+            <span>Astro JS</span>
+            <span>Supabase</span>
+            <span>Stripe</span>
+            <span>Resend</span>
+          </div>
+          <a
+            href="archive/dynamic-project-page.html?slug=ouros-designs"
+            class="link-out-btn"
+          >
+            View Project
+            <div class="arrow">
+              <span class="left-tic tic"></span>
+              <span class="right-tic tic"></span>
+              <span class="line"></span>
             </div>
           </a>
+          <div class="pn-ref">ID: 001-OUROS-2026 // STATUS: ACTIVE</div>
+        </div>
+      </div>
+
+      <!-- Project 02: Lumen Technologies (media left, info right) -->
+      <div class="project-narrative pn--reverse">
+        <div class="pn-info-col pn-info-col-2">
+          <span class="pn-module">02 / Project Beta</span>
+          <div class="project-status">
+            <!-- <div class="status-indicator">Archived</div> -->
+            <span class="date">2022–2025</span>
+          </div>
+          <h2 class="pn-title">LUMEN<br />TECHNOLOGIES</h2>
+          <p class="pn-desc">
+            A curated archive of interactive digital experiences produced for
+            Lumen Technologies — spanning campaign systems, product tools, and
+            infographic frameworks built under real enterprise constraints.
+          </p>
+          <div class="pn-tags">
+            <span>Visual Design</span>
+            <span>Motion Design</span>
+            <span>Interactive Design</span>
+            <span>Front-End Engineering</span>
+          </div>
+          <a href="archive/lumen-project-page.html" class="link-out-btn">
+            View Archive
+            <div class="arrow">
+              <span class="left-tic tic"></span>
+              <span class="right-tic tic"></span>
+              <span class="line"></span>
+            </div>
+          </a>
+          <div class="pn-ref">ID: 002-LMN-2025 // STATUS: ARCHIVED</div>
+        </div>
+        <div class="pn-media-col">
+          <div class="pn-media-inner">
+            <div
+              class="pn-media-frame"
+              style="
+                background-image: url(&quot;./assets/project-images/cloud-infographic/iMac-mock_cloud-2.jpg&quot;);
+              "
+              role="img"
+              aria-label="Lumen Technologies project showcase"
+            ></div>
+          </div>
         </div>
       </div>
     </section>
-    <section id="section_about">
-      <div class="section-container about-container">
-        <div class="about-box">
-          <div class="about-text">
-            <h1 class="about-title">The_Profile<br /><span>/Who Am I</span></h1>
-            <p class="about-bio">
-              Architecture trained me to think in systems — I taught myself to
-              build them. I design and engineer digital products across
-              marketing, product, and interactive systems, carrying work from
-              first concept to deployed code. No handoff. No translation loss.
-              One perspective driving the whole thing through.
-            </p>
-            <div class="about-mobile-stats">
-              <div class="about-stats">
-                <div class="stat">
-                  <span class="stat-number">4+</span>
-                  <span class="stat-label"
-                    >years at the intersection of design and engineering</span
-                  >
-                </div>
-                <div class="stat">
-                  <span class="stat-number">50+</span>
-                  <span class="stat-label"
-                    >production interfaces shipped</span
-                  >
-                </div>
-                <div class="stat">
-                  <span class="stat-number">20+</span>
-                  <span class="stat-label">interactive systems designed and built</span>
-                </div>
-              </div>
-              <div class="p_img-container">
-                <div class="img-box"></div>
-              </div>
+    <section id="section_connect">
+      <div class="connect-narrative">
+        <div class="connect-inner">
+          <span class="connect-module-label">Let's_Connect</span>
+          <h2 class="connect-title">
+            Building a product, a team, or something in between?
+          </h2>
+          <p class="connect-sub">let's talk.</p>
+          <button class="link-out-btn connect-btn">
+            Start a Conversation
+            <div class="arrow">
+              <span class="left-tic tic"></span>
+              <span class="right-tic tic"></span>
+              <span class="line"></span>
             </div>
-            <div class="mobile-competencies">
-              <div class="core-competencies">
-                <h4 class="comp-title"><span></span>Core_Competencies</h4>
-                <ul class="competencies">
-                  <li>
-                    <div class="li-box">
-                      <p class="comp-num">01</p>
-                    </div>
-                    <div class="li-box">
-                      <h4>Systems Thinking</h4>
-                      <p>Architecture to product — structure that holds</p>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="li-box">
-                      <p class="comp-num">02</p>
-                    </div>
-                    <div class="li-box">
-                      <h4>Design Engineering</h4>
-                      <p>Design it. Build it. No gap between the two.</p>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="li-box">
-                      <p class="comp-num">03</p>
-                    </div>
-                    <div class="li-box">
-                      <h4>Full-Scope Delivery</h4>
-                      <p>First sketch to deployed code — same hands throughout</p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="about-buttons">
-              <div class="banner">
-                <h2>Learn More</h2>
-                <p>
-                  If you're building something that needs to be designed
-                  and engineered well — let's talk.
-                </p>
-              </div>
-              <div class="btn-box">
-                <button class="link-out-btn connect-btn">
-                  Let's Connect
-                  <div class="arrow">
-                    <span class="left-tic tic"></span>
-                    <span class="right-tic tic"></span>
-                    <span class="line"></span>
-                  </div>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="profile">
-            <div class="p_img-container">
-              <span class="img-box"></span>
-            </div>
-            <div class="core-competencies">
-              <h4 class="comp-title"><span></span>Core_Competencies</h4>
-              <ul class="competencies">
-                <li>
-                  <div class="li-box">
-                    <p class="comp-num">01</p>
-                  </div>
-                  <div class="li-box">
-                    <h4>System Architecture</h4>
-                    <p>Scalable design systems</p>
-                  </div>
-                </li>
-                <li>
-                  <div class="li-box">
-                    <p class="comp-num">02</p>
-                  </div>
-                  <div class="li-box">
-                    <h4>Design Infrastructure</h4>
-                    <p>Reusable UI foundation</p>
-                  </div>
-                </li>
-                <li>
-                  <div class="li-box">
-                    <p class="comp-num">03</p>
-                  </div>
-                  <div class="li-box">
-                    <h4>Front-end Engineering</h4>
-                    <p>Responsive UI development</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
+          </button>
         </div>
       </div>
     </section>
     <section class="footer">
-      <div class="footer-container">
-        <p>&copy;2026 sdunlap</p>
-        <div class="site-links">
-          <ul class="main-links">
-            <h4>Navigation</h4>
-            <li><a href="#section_landing">Homepage</a></li>
-            <li><a href="" class="connect-btn">Connect</a></li>
-          </ul>
-          <ul class="project-links">
-            <h4>Projects</h4>
-            <li>
-              <a
-                href="http://127.0.0.1:5500/archive/dynamic-project-page.html?slug=cloud-2-0-infographic"
-                >Cloud 2.0 Infographic</a
-              >
-            </li>
-            <li>
-              <a
-                href="http://127.0.0.1:5500/archive/dynamic-project-page.html?slug=ai-interactive-framework"
-                >AI Interactive Framework</a
-              >
-            </li>
-            <li>
-              <a
-                href="http://127.0.0.1:5500/archive/dynamic-project-page.html?slug=product-finder"
-                >Product Finder</a
-              >
-            </li>
-          </ul>
+      <div class="footer-inner">
+        <div class="footer-header">
+          <span class="footer-sys">SYS // FOOTER</span>
+          <span class="footer-id">ID: S_DUNLAP</span>
+        </div>
+        <div class="footer-links">
+          <div class="footer-links-group">
+            <span class="footer-group-label">Navigation</span>
+            <ul>
+              <li><a href="#section_landing">Homepage</a></li>
+              <li>
+                <button class="connect-btn footer-connect-btn">Connect</button>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-links-group">
+            <span class="footer-group-label">Projects</span>
+            <ul>
+              <li>
+                <a href="archive/dynamic-project-page.html?slug=ouros-designs"
+                  >Ouros Designs</a
+                >
+              </li>
+              <li>
+                <a href="archive/lumen-project-page.html">Lumen Technologies</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy;2026 sdunlap</p>
+          <a
+            href="https://www.linkedin.com/in/stephendunlap0001/"
+            class="footer-linkedin"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="footer-li-label">LinkedIn</span>
+            <span class="footer-li-handle">stephendunlap0001 ↗</span>
+          </a>
         </div>
       </div>
     </section>
@@ -317,43 +450,120 @@
     >
       <div class="modal-overlay" data-modal-close></div>
       <div class="modal-panel" role="document" aria-labelledby="modal-title">
-        <button
-          class="modal-close"
-          data-modal-close
-          aria-label="Close contact form"
-        >
-          ×
-        </button>
-        <h2 id="modal-title">Connect</h2>
-        <!-- Success panel shown after successful submit -->
-        <div class="modal-success" hidden>
-          <h3>Message sent</h3>
-          <p>
-            I'll get back to you shortly. Close this window to continue
-            browsing.
-          </p>
-          <div class="modal-actions">
-            <button type="button" class="btn primary" data-modal-close>
-              Close
+        <div class="modal-header">
+          <div class="modal-sys-row">
+            <span class="modal-sys-label">SYS // CONNECT</span>
+            <button
+              class="modal-close"
+              data-modal-close
+              aria-label="Close contact form"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                aria-hidden="true"
+              >
+                <line
+                  x1="1"
+                  y1="1"
+                  x2="13"
+                  y2="13"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="square"
+                />
+                <line
+                  x1="13"
+                  y1="1"
+                  x2="1"
+                  y2="13"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="square"
+                />
+              </svg>
             </button>
           </div>
+          <h2 id="modal-title" class="modal-title">Let's_Connect</h2>
+          <p class="modal-sub">Drop a message and I'll get back to you.</p>
         </div>
 
-        <form id="contact-form" action="/api/contact" method="post">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" required />
+        <!-- Success panel shown after successful submit -->
+        <div class="modal-success" hidden>
+          <span class="modal-success-label">SYS // TRANSMISSION_RECEIVED</span>
+          <h3>Message sent.</h3>
+          <p>I'll get back to you shortly.</p>
+          <button type="button" class="modal-submit-btn" data-modal-close>
+            Close
+          </button>
+        </div>
 
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required />
-
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
+        <form
+          id="contact-form"
+          action="/api/contact"
+          method="post"
+          autocomplete="off"
+        >
+          <div class="modal-field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required placeholder=" " />
+          </div>
+          <div class="modal-field">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              placeholder=" "
+            />
+          </div>
+          <div class="modal-field">
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              required
+              placeholder=" "
+            ></textarea>
+          </div>
 
           <p class="form-error" hidden></p>
 
           <div class="modal-actions">
-            <button type="submit" class="btn primary">Send</button>
-            <button type="button" class="btn" data-modal-close>Cancel</button>
+            <button type="submit" class="modal-submit-btn">
+              Send Message
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 13 13"
+                fill="none"
+                aria-hidden="true"
+              >
+                <line
+                  x1="2"
+                  y1="11"
+                  x2="11"
+                  y2="2"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="square"
+                />
+                <polyline
+                  points="5.5,2 11,2 11,7.5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="square"
+                  fill="none"
+                />
+              </svg>
+            </button>
+            <button type="button" class="modal-cancel-btn" data-modal-close>
+              Cancel
+            </button>
           </div>
         </form>
       </div>

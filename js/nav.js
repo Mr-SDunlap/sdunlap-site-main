@@ -6,7 +6,7 @@
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const anchors = [...document.querySelectorAll("nav ul li a")].filter(
+    const anchors = [...document.querySelectorAll("#site-nav ul li a")].filter(
       (a) => a.dataset.navReady !== "1",
     );
     if (!anchors.length) return;
@@ -157,6 +157,8 @@
         modal.setAttribute("aria-hidden", "true");
         document.documentElement.style.overflow = "";
         document.body.style.overflow = "";
+        const f = document.getElementById("contact-form");
+        if (f) f.reset();
         triggers[0] && triggers[0].focus();
       },
     });
@@ -177,21 +179,24 @@
 /* Burger menu =============================== */
 (() => {
   const burger = document.querySelector(".burger-menu");
-  const mobile = document.getElementById("mobile-nav");
-  if (!burger || !mobile || typeof gsap === "undefined") return;
-  const menu = mobile.querySelector("ul");
-  if (!menu) return;
+  const panel = document.querySelector(".mobile-nav-panel");
+  if (!burger || !panel || typeof gsap === "undefined") return;
 
-  // start hidden off-canvas to the right and non-interactive
-  gsap.set(menu, { xPercent: 100, autoAlpha: 0, pointerEvents: "none" });
+  gsap.set(panel, { autoAlpha: 0, yPercent: -4, pointerEvents: "none" });
 
-  const tl = gsap.timeline({ paused: true }).to(menu, {
-    xPercent: 0,
-    autoAlpha: 1,
-    pointerEvents: "auto",
-    duration: 0.36,
-    ease: "power3.out",
-  });
+  const tl = gsap
+    .timeline({ paused: true })
+    .to(panel, {
+      autoAlpha: 1,
+      yPercent: 0,
+      pointerEvents: "auto",
+      duration: 0.4,
+      ease: "power3.out",
+    });
+
+  // Stagger nav links in on open
+  const links = panel.querySelectorAll(".mobile-nav-links li");
+  tl.from(links, { y: 20, opacity: 0, duration: 0.3, stagger: 0.07, ease: "power2.out" }, 0.1);
 
   const setOpen = (isOpen) => {
     burger.classList.toggle("open", isOpen);
@@ -207,17 +212,10 @@
     }
   };
 
-  burger.addEventListener("click", (e) => {
-    e.preventDefault();
-    setOpen(!burger.classList.contains("open"));
-  });
+  burger.addEventListener("click", () => setOpen(!burger.classList.contains("open")));
 
-  // Close menu when a nav link is clicked
-  menu
-    .querySelectorAll("a")
-    .forEach((a) => a.addEventListener("click", () => setOpen(false)));
+  panel.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
 
-  // Close with Escape key
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && burger.classList.contains("open")) setOpen(false);
   });
