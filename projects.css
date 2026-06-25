@@ -1829,3 +1829,298 @@ body {
 .lp-cta--dark .arrow .line {
   background-color: var(--dark-coffee);
 }
+
+/* ============================================================
+   ABOUT ME PAGE
+   ============================================================ */
+
+/* --- Hero ----------------------------------------------------- */
+.am-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: radial-gradient(
+    120% 95% at 50% 0%,
+    #1c252e 0%,
+    #13191e 50%,
+    #0c1116 100%
+  );
+}
+
+.am-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 60px;
+  max-width: 960px;
+}
+
+.am-hero-label {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 24px;
+}
+
+.am-hero-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  margin-bottom: 28px;
+  padding-bottom: 0;
+}
+
+.am-hero-sub {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--platinum);
+  letter-spacing: 0.04em;
+  max-width: 460px;
+  line-height: 1.6;
+}
+
+.am-hero .scroll-indicator {
+  z-index: 2;
+}
+
+/* --- Journey (reuses .about-narrative / .about-sticky-col / etc.) -- */
+#am-journey {
+  background-color: var(--glass);
+}
+
+#am-journey .about-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--dark-coffee);
+  line-height: 1.05;
+  padding-bottom: 0;
+}
+
+#am-journey .comp-num {
+  font-size: clamp(4rem, 8vw, 6.5rem);
+  font-weight: 800;
+  font-family: "Space Grotesk", sans-serif;
+  color: rgba(0, 0, 0, 0.05);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+#am-journey h4 {
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 700;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--dark-coffee);
+  margin-bottom: 16px;
+}
+
+#am-journey .block-inner > p:not(.comp-num) {
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--grey);
+  line-height: 1.65;
+}
+
+#am-journey .about-nav-dots {
+  margin-top: 32px;
+  padding-top: 0;
+}
+
+@media (max-width: 768px) {
+  #am-journey .about-nav-dots {
+    display: none;
+  }
+}
+
+/* --- Carousels -------------------------------------------------- */
+.am-carousel-section {
+  padding: 120px 60px;
+  background-color: var(--glass);
+}
+
+.am-carousel-section--dark {
+  background-color: var(--dark-coffee);
+}
+
+.am-carousel {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.am-carousel-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.am-carousel-label {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 12px;
+}
+
+.am-carousel-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  color: var(--dark-coffee);
+  padding-bottom: 0;
+}
+
+.am-carousel-section--dark .am-carousel-title {
+  color: var(--white);
+}
+
+.am-carousel-controls {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.am-carousel-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--platinum);
+  background: transparent;
+  color: var(--dark-coffee);
+  font-size: 18px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.am-carousel-btn:hover:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.am-carousel-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.am-carousel-section--dark .am-carousel-btn {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: var(--white);
+}
+
+.am-carousel-section--dark .am-carousel-btn:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.am-carousel-viewport {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.am-carousel-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.am-carousel-track {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+
+.am-carousel-card {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  width: clamp(170px, 22vw, 230px);
+}
+
+.am-card-art {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  border-radius: 4px;
+  background: linear-gradient(160deg, #1c252e 0%, var(--dark-coffee) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.am-card-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.am-carousel-section--dark .am-card-art {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
+}
+
+.am-card-initial {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  font-weight: 700;
+  color: var(--orange);
+  opacity: 0.85;
+}
+
+.am-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.am-card-type {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.am-card-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--dark-coffee);
+  line-height: 1.35;
+  padding-bottom: 0;
+}
+
+.am-carousel-section--dark .am-card-title {
+  color: var(--white);
+}
+
+@media (max-width: 600px) {
+  .am-hero-content {
+    padding: 0 20px;
+  }
+  .am-hero-title {
+    font-size: clamp(2.8rem, 12vw, 5rem);
+  }
+
+  .am-carousel-section {
+    padding: 64px 20px;
+  }
+  .am-carousel-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .am-carousel-card {
+    width: clamp(140px, 42vw, 180px);
+  }
+}
