@@ -8,9 +8,20 @@ window.addEventListener("DOMContentLoaded", function () {
 
   const blocks = document.querySelectorAll(".about-narrative-block");
   const dots = document.querySelectorAll(".about-dot");
+  const dotsWrap = document.querySelector(".about-nav-dots");
 
   function syncDots(index) {
     dots.forEach((d, i) => d.classList.toggle("active", i === index));
+  }
+
+  // Only show the dot rail while the about section is actually in view
+  if (dotsWrap) {
+    ScrollTrigger.create({
+      trigger: "#section_about",
+      start: "top bottom",
+      end: "bottom top",
+      onToggle: ({ isActive }) => dotsWrap.classList.toggle("is-visible", isActive),
+    });
   }
 
   blocks.forEach((block, i) => {

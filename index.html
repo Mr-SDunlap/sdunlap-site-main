@@ -148,9 +148,6 @@
             <p>Active</p>
           </div>
           <h1 class="site-name">STEPHEN_DUNLAP</h1>
-          <div class="landing-name">
-            <h3>/Portfolio</h3>
-          </div>
           <div class="home-message">
             <p class="main-message">
               I design and engineer digital products — from the first system
@@ -194,12 +191,17 @@
         <div class="about-sticky-col">
           <div class="about-sticky-inner">
             <span class="about-module-label">Identity_Verification</span>
-            <h1 class="about-title">The_Profile<br /><span>/Who Am I</span></h1>
+            <h1 class="about-title">The_Profile</h1>
             <p class="about-bio">
               I design and engineer digital products — marketing systems,
-              product interfaces, interactive experiences. The same person who
-              maps the architecture ships the code. No handoff. No translation
-              loss. No gap between what was conceived and what gets built.
+              product interfaces, interactive experiences — and I use AI in my
+              workflow without pretending otherwise. It's a tool like any other
+              and the judgment about when and how still has to come from
+              somewhere. Outside the work, I'm into anime, smoothies, and
+              conversations where I'm mostly listening. I'm a firm beleiver that
+              the most interesting take in the room isn't always the loudest
+              one. If that sounds like someone you'd want building your thing,
+              let's talk.
             </p>
             <div class="about-stats">
               <div class="stat">
@@ -219,18 +221,38 @@
                 >
               </div>
             </div>
-            <div class="about-nav-dots" aria-hidden="true">
-              <span class="about-dot" data-dot="0"></span>
-              <span class="about-dot" data-dot="1"></span>
-              <span class="about-dot" data-dot="2"></span>
+            <div class="about-profile-cta">
+              <a class="link-out-btn" href="archive/about-me.html">
+                More About Me
+                <div class="arrow">
+                  <span class="left-tic tic"></span>
+                  <span class="right-tic tic"></span>
+                  <span class="line"></span>
+                </div>
+              </a>
             </div>
           </div>
         </div>
 
         <!-- Right: scrolling narrative blocks -->
         <div class="about-scroll-col">
-          <!-- Block 0: Systems Thinking -->
-          <div class="about-narrative-block" data-block="0">
+          <!-- Block 0: Portrait -->
+          <div
+            class="about-narrative-block about-portrait-block"
+            data-block="0"
+          >
+            <div class="block-inner about-portrait-inner">
+              <img
+                src="./assets/main-photo/headshot.JPG"
+                alt="Stephen Dunlap"
+                class="about-portrait-img"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <!-- Block 1: Systems Thinking -->
+          <div class="about-narrative-block" data-block="1">
             <div class="block-inner">
               <p class="comp-num">01</p>
               <h4>Systems Thinking</h4>
@@ -243,8 +265,8 @@
             </div>
           </div>
 
-          <!-- Block 1: Design Engineering -->
-          <div class="about-narrative-block" data-block="1">
+          <!-- Block 2: Design Engineering -->
+          <div class="about-narrative-block" data-block="2">
             <div class="block-inner">
               <p class="comp-num">02</p>
               <h4>Design Engineering</h4>
@@ -257,8 +279,8 @@
             </div>
           </div>
 
-          <!-- Block 2: Full-Scope Delivery -->
-          <div class="about-narrative-block" data-block="2">
+          <!-- Block 3: Full-Scope Delivery -->
+          <div class="about-narrative-block" data-block="3">
             <div class="block-inner">
               <p class="comp-num">03</p>
               <h4>Full-Scope Delivery</h4>
@@ -272,18 +294,19 @@
           </div>
         </div>
       </div>
+      <div class="about-nav-dots" aria-hidden="true">
+        <span class="about-dot" data-dot="0"></span>
+        <span class="about-dot" data-dot="1"></span>
+        <span class="about-dot" data-dot="2"></span>
+        <span class="about-dot" data-dot="3"></span>
+      </div>
     </section>
     <section id="section_files">
       <!-- Archive header -->
-      <!-- <div class="archive-header">
-        <h1 class="archive-title">
-          The_Archive<br /><span>/Selected works</span>
-        </h1>
-        <p>
-          Selected work across product, marketing, and interactive systems —
-          designed and built by the same hand, from concept to deployed code.
-        </p>
-      </div> -->
+      <div class="archive-header">
+        <span class="archive-module-label">Collection_of_Work</span>
+        <h1 class="archive-title">The_Archive</h1>
+      </div>
 
       <!-- Project 01: Ouros Designs (media left, info right) -->
       <div class="project-narrative pn--reverse">
@@ -407,6 +430,7 @@
             <span class="footer-group-label">Navigation</span>
             <ul>
               <li><a href="#section_landing">Homepage</a></li>
+              <li><a href="archive/about-me.html">About Me</a></li>
               <li>
                 <button class="connect-btn footer-connect-btn">Connect</button>
               </li>
