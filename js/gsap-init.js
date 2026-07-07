@@ -52,6 +52,38 @@ window.addEventListener("DOMContentLoaded", function () {
       });
     }
   });
+
+  // Stat counters: count up from 0 to their target value as they scroll into view
+  const statNumbers = document.querySelectorAll(".stat-number");
+  statNumbers.forEach((el) => {
+    const raw = el.textContent.trim();
+    const match = raw.match(/^(\d+)(.*)$/);
+    if (!match) return;
+
+    const target = parseInt(match[1], 10);
+    const suffix = match[2] || "";
+    const counter = { val: 0 };
+
+    gsap.to(counter, {
+      val: target,
+      duration: 1.4,
+      ease: "power1.out",
+      onUpdate: () => {
+        el.textContent = Math.floor(counter.val) + suffix;
+      },
+      onComplete: () => {
+        el.textContent = target + suffix;
+      },
+      scrollTrigger: {
+        trigger: el,
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+        onLeaveBack: () => {
+          el.textContent = "0" + suffix;
+        },
+      },
+    });
+  });
 });
 
 window.addEventListener("DOMContentLoaded", function () {
