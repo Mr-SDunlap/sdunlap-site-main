@@ -17,10 +17,13 @@ export async function onRequestPost(context) {
   const name = clean(body.name, 120);
   const email = clean(body.email, 200);
   const message = clean(body.message, 5000);
+  const plan = clean(body.plan, 120);
+  const timeline = clean(body.timeline, 120);
+  const meeting = clean(body.meeting, 200);
 
-  if (!name || !email || !message) {
+  if (!name || !email) {
     return Response.json(
-      { error: "Name, email, and message are required." },
+      { error: "Name and email are required." },
       { status: 400 },
     );
   }
@@ -51,8 +54,18 @@ export async function onRequestPost(context) {
   const mailgunBody = new URLSearchParams({
     from: fromEmail,
     to: toEmail,
-    subject: `Portfolio contact from ${name}`,
-    text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
+    subject: `Portfolio contact from ${name}${plan ? ` — ${plan}` : ""}`,
+    text: [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      plan ? `Preferred plan: ${plan}` : "",
+      timeline ? `Timeline: ${timeline}` : "",
+      meeting ? `Best time for a call: ${meeting}` : "",
+      "",
+      message || "(No additional message.)",
+    ]
+      .filter((line) => line !== "")
+      .join("\n"),
     "h:Reply-To": email,
   });
 

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Flat — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf6ee;
+  --white:#ffffff;
+  --ink:#22243a;
+  --muted:#5c5f79;
+  --red:#e5484d;
+  --red-soft:#ffdedf;
+  --yellow:#ffd23f;
+  --yellow-soft:#fff3c9;
+  --blue:#2f6fed;
+  --blue-soft:#dce8ff;
+  --green:#12a594;
+  --bw:2.5px;
+  --snap:cubic-bezier(.2,.9,.3,1);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 'Public Sans',system-ui,sans-serif;}
+h1,h2,h3{font-family:'Poppins',system-ui,sans-serif;font-weight:700;margin:0;letter-spacing:-.01em;}
+a{color:var(--red);}
+::selection{background:var(--yellow);color:var(--ink);}
+
+/* ---------- masthead ---------- */
+.masthead{max-width:1400px;margin:0 auto;padding:88px 56px 64px;}
+.kicker{display:inline-flex;font:700 11px/1 'Public Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--white);background:var(--ink);padding:7px 13px;}
+.masthead h1{font-size:clamp(52px,7.5vw,92px);line-height:.98;font-weight:800;margin:24px 0 8px;}
+.masthead h1 .hl{background:var(--yellow);padding:0 10px;box-decoration-break:clone;}
+.masthead h1 .rd{color:var(--red);}
+.masthead .sub{font-size:17px;color:var(--muted);max-width:540px;margin:18px 0 52px;}
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px;max-width:860px;margin-bottom:44px;}
+.swatch{border:var(--bw) solid var(--ink);}
+.swatch>div{height:64px;transition:transform .15s var(--snap);}
+.swatch:hover>div{transform:scaleY(1.12);transform-origin:top;}
+.swatch span{display:block;font:700 10.5px/1 'Public Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);padding:9px 10px;border-top:var(--bw) solid var(--ink);background:var(--white);}
+.typerow{display:flex;gap:52px;flex-wrap:wrap;align-items:baseline;}
+.typerow .big{font-family:'Poppins',sans-serif;font-weight:800;font-size:30px;}
+.typerow .lbl{font:600 11px/1 'Public Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:9px;}
+
+/* ---------- sticky nav ---------- */
+.topnav{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:var(--bw) solid var(--ink);}
+.topnav-in{max-width:1400px;margin:0 auto;padding:14px 56px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.topnav .brand{font-family:'Poppins',sans-serif;font-weight:800;font-size:16px;display:flex;align-items:center;gap:9px;}
+.mark{width:20px;height:20px;background:var(--red);flex:none;}
+.topnav nav{display:flex;gap:2px 18px;flex-wrap:wrap;flex:1;}
+.topnav nav a{font:600 12.5px/1 'Public Sans',sans-serif;color:var(--muted);text-decoration:none;padding:5px 7px;transition:background .12s var(--snap),color .12s var(--snap);}
+.topnav nav a:hover{background:var(--ink);color:var(--white);}
+
+/* ---------- sections ---------- */
+section{padding:76px 56px 26px;scroll-margin-top:66px;}
+.sec-in{max-width:1400px;margin:0 auto;}
+.sec-head{margin-bottom:38px;max-width:640px;}
+.sec-head .idx{display:inline-block;font:700 11px/1 'Public Sans',sans-serif;letter-spacing:.08em;color:var(--white);background:var(--red);padding:5px 10px;margin-bottom:14px;}
+.sec-head h2{font-size:32px;font-weight:800;}
+.sec-head p{color:var(--muted);margin:12px 0 0;font-size:15px;}
+.variants{display:flex;flex-direction:column;gap:54px;}
+.vlabel{display:flex;align-items:center;gap:11px;margin-bottom:15px;}
+.vtag{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:var(--ink);color:var(--white);font:800 12px/1 'Poppins',sans-serif;}
+.vname{font:700 13.5px/1.2 'Public Sans',sans-serif;}
+.frames{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start;}
+.flabel{font:700 10.5px/1 'Public Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:9px;}
+.d{width:760px;flex:none;}
+.m{width:300px;flex:none;}
+.shell{background:var(--white);border:var(--bw) solid var(--ink);overflow:hidden;transition:outline .12s var(--snap);outline:0 solid var(--yellow);}
+.shell:hover{outline:4px solid var(--yellow);}
+
+/* ---------- components ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;background:var(--red);color:var(--white);
+  font:700 13px/1 'Public Sans',sans-serif;border:var(--bw) solid var(--ink);white-space:nowrap;cursor:pointer;text-decoration:none;
+  transition:background .12s var(--snap),color .12s var(--snap),transform .12s var(--snap);}
+.btn:hover{background:var(--ink);}
+.btn:active{transform:scale(.96);}
+.btn.yel{background:var(--yellow);color:var(--ink);}
+.btn.yel:hover{background:var(--ink);color:var(--white);}
+.btn.blu{background:var(--blue);}
+.btn.ghost{background:var(--white);color:var(--ink);}
+.btn.ghost:hover{background:var(--ink);color:var(--white);}
+.btn.sm{padding:8px 14px;font-size:12px;}
+.chip{display:inline-flex;align-items:center;gap:6px;font:700 10.5px/1 'Public Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink);background:var(--yellow-soft);border:2px solid var(--ink);padding:5px 10px;}
+.chip.red{background:var(--red);color:var(--white);}
+.chip.rs{background:var(--red-soft);}
+.chip.bl{background:var(--blue-soft);}
+.chip.gr{background:var(--green);color:var(--white);}
+.chip.inv{background:var(--ink);color:var(--yellow);}
+.avatar{width:34px;height:34px;border-radius:50%;border:2px solid var(--ink);background:linear-gradient(135deg,var(--yellow),var(--red));flex:none;}
+.avatar.sm{width:26px;height:26px;}
+.ph{border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;
+  background:repeating-linear-gradient(45deg,var(--bg) 0 12px,transparent 12px 24px),var(--blue-soft);}
+.ph span{font:700 10.5px/1 'Public Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;background:var(--white);border:2px solid var(--ink);padding:4px 8px;color:var(--ink);}
+.inp{display:flex;align-items:center;gap:8px;background:var(--white);border:var(--bw) solid var(--ink);padding:10px 14px;
+  font:400 13.5px/1.3 'Public Sans',sans-serif;color:var(--muted);transition:box-shadow .12s var(--snap);}
+.inp:hover{box-shadow:inset 0 -4px 0 var(--yellow);}
+
+/* progress */
+.bar{height:18px;border:var(--bw) solid var(--ink);background:var(--white);overflow:hidden;}
+.bar>i{display:block;height:100%;background:var(--red);border-right:var(--bw) solid var(--ink);width:0;transition:width .7s var(--snap) .1s;}
+.bar>i.y{background:var(--yellow);}
+.in-view .bar>i{width:var(--w,60%);}
+.seg{display:flex;gap:5px;}
+.seg>span{flex:1;height:14px;border:2px solid var(--ink);background:var(--white);}
+.seg>span.on{background:var(--blue);}
+
+/* reveal — quick pop */
+.rv{opacity:0;transform:translateY(14px) scale(.985);transition:opacity .3s var(--snap),transform .32s var(--snap);}
+.rv.in-view,.in-view .rv{opacity:1;transform:none;}
+
+footer.site{padding:56px;text-align:center;}
+footer.site span{font:700 11px/1 'Public Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;background:var(--ink);color:var(--white);padding:8px 16px;}
+@media (max-width:860px){
+  .masthead,section,.topnav-in{padding-left:22px;padding-right:22px;}
+  .d{width:100%;max-width:760px;}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <span class="kicker">Design system · Flat</span>
+  <h1>Bold blocks.<br><span class="hl">Zero</span> <span class="rd">shadows.</span></h1>
+  <p class="sub">A high-contrast flat module library: solid color blocks, thick outlines, punchy Poppins headlines and snappy, instant interactions. Every module ships in desktop and mobile widths.</p>
+  <div class="swatches">
+    <div class="swatch"><div style="background:var(--ink)"></div><span>ink</span></div>
+    <div class="swatch"><div style="background:var(--red)"></div><span>red</span></div>
+    <div class="swatch"><div style="background:var(--yellow)"></div><span>yellow</span></div>
+    <div class="swatch"><div style="background:var(--blue)"></div><span>blue</span></div>
+    <div class="swatch"><div style="background:var(--green)"></div><span>green</span></div>
+    <div class="swatch"><div style="background:var(--bg)"></div><span>cream</span></div>
+  </div>
+  <div class="typerow">
+    <div><div class="big">Poppins</div><div class="lbl">Headings</div></div>
+    <div><div class="big" style="font-family:'Public Sans',sans-serif;font-weight:400;">Public Sans</div><div class="lbl">Body</div></div>
+  </div>
+</header>
+
+<div class="topnav">
+  <div class="topnav-in">
+    <span class="brand"><span class="mark"></span>Flat</span>
+    <nav>
+      <a href="#nav">Navigation</a><a href="#header">Page headers</a><a href="#hero">Heroes</a><a href="#sidebar">Sidebars</a><a href="#testimonials">Testimonials</a><a href="#cta">CTAs</a><a href="#footer">Footers</a><a href="#forms">Forms</a><a href="#blog">Blog</a><a href="#search">Search</a><a href="#breadcrumbs">Breadcrumbs</a><a href="#sliders">Carousels</a><a href="#tags">Tags</a><a href="#progress">Progress</a><a href="#copyblocks">Copy</a>
+    </nav>
+  </div>
+</div>
+
+<main>
+
+<!-- ================= NAVIGATION ================= -->
+<section id="nav">
+  <div class="sec-in">
+    <div class="sec-head rv"><span class="idx">01 / 15</span><h2>Navigation</h2><p>Loud, legible nav bars — thick rules, block hovers, no ambiguity about where to click.</p></div>
+    <div class="variants">
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Standard — links + CTA</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="display:flex;align-items:center;justify-content:space-between;padding:15px 26px;">
+              <span style="font-family:'Poppins',sans-serif;font-weight:800;font-size:17px;display:flex;align-items:center;gap:8px;"><span class="mark"></span>Nova</span>
+              <div style="display:flex;gap:24px;font:600 13px/1 'Public Sans',sans-serif;color:var(--ink);">
+                <span style="box-shadow:inset 0 -4px 0 var(--yellow);">Product</span><span>Solutions</span><span>Pricing</span><span style="color:var(--muted);">Docs</span>
+              </div>
+              <span class="btn sm">Get started</span>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;">
+              <span style="font-family:'Poppins',sans-serif;font-weight:800;font-size:15px;display:flex;align-items:center;gap:7px;"><span class="mark" style="width:16px;height:16px;"></span>Nova</span>
+              <div style="width:22px;display:flex;flex-direction:column;gap:4px;"><span style="height:3px;background:var(--ink);"></span><span style="height:3px;background:var(--ink);"></span><span style="height:3px;background:var(--ink);"></span></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">B</span><span class="vname">Commerce — utility bar + cart</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div>
+              <div style="background:var(--ink);color:var(--yellow);font:700 11px/1 'Public Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:7px 26px;text-align:center;">Free shipping on orders over $75 →</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 26px;border-top:var(--bw) solid var(--ink);">
+                <span style="font-family:'Poppins',sans-serif;font-weight:800;font-size:17px;">Nova</span>
+                <div style="display:flex;gap:24px;font:600 13px/1 'Public Sans',sans-serif;align-items:center;">
+                  <span>Shop <span style="color:var(--red);">▾</span></span><span>Collections</span><span>Journal</span>
+                </div>
+                <span class="btn ghost sm">Cart · 2</span>
+              </div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div>
+              <div style="background:var(--ink);color:var(--yellow);font:700 9.5px/1 'Public Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:6px;text-align:center;">Free shipping $75+</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-top:var(--bw) solid var(--ink);">
+                <span style="font-family:'Poppins',sans-serif;font-weight:800;font-size:15px;">Nova</span>
+                <div style="display:flex;gap:12px;align-items:center;">
+                  <span class="chip red" style="padding:3px 8px;">2</span>
+                  <div style="width:20px;display:flex;flex-direction:column;gap:4px;"><span style="height:3px;background:var(--ink);"></span><span style="height:3px;background:var(--ink);"></span></div>
+                </div>
+              </div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= PAGE HEADERS ================= -->
+<section id="header">
+  <div class="sec-in">
+    <div class="sec-head rv"><span class="idx">02 / 15</span><h2>Page headers</h2><p>Dashboard and article headers with unmissable hierarchy.</p></div>
+    <div class="variants">
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Dashboard header</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:24px 26px;">
+              <div style="font:600 12px/1 'Public Sans',sans-serif;color:var(--muted);margin-bottom:10px;">Projects / <span style="color:var(--ink);box-shadow:inset 0 -3px 0 var(--yellow);">Falcon redesign</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <h3 style="font-size:22px;font-weight:800;">Falcon redesign</h3>
+                <div style="display:flex;gap:10px;">
+                  <span class="btn ghost sm">Share</span>
+                  <span class="btn sm">New task</span>
+                </div>
+              </div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="padding:16px;">
+              <div style="font:600 11px/1 'Public Sans',sans-serif;color:var(--muted);margin-bottom:8px;">Projects / Falcon</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <h3 style="font-size:16px;font-weight:800;">Falcon redesign</h3>
+                <span class="btn sm">+</span>
+              </div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">B</span><span class="vname">Article masthead — highlight title</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:44px 30px;text-align:center;">
+              <span class="chip rs">Design</span>
+              <h3 style="font-size:26px;line-height:1.35;margin:16px auto 12px;max-width:520px;font-weight:800;"><span style="background:var(--yellow);padding:0 8px;box-decoration-break:clone;">Rethinking spacing systems</span><br>for dense UI</h3>
+              <div style="display:flex;gap:9px;align-items:center;justify-content:center;font:600 12.5px/1 'Public Sans',sans-serif;color:var(--muted);">
+                <span class="avatar sm"></span><span>Priya Shah</span><span>·</span><span>8 min read</span>
+              </div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="padding:28px 18px;text-align:center;">
+              <span class="chip rs">Design</span>
+              <h3 style="font-size:18px;line-height:1.4;margin:12px 0 9px;font-weight:800;"><span style="background:var(--yellow);padding:0 6px;box-decoration-break:clone;">Rethinking spacing</span> systems</h3>
+              <div style="font:600 11.5px/1 'Public Sans',sans-serif;color:var(--muted);">Priya Shah · 8 min</div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= HEROES ================= -->
+<section id="hero">
+  <div class="sec-in">
+    <div class="sec-head rv"><span class="idx">03 / 15</span><h2>Hero sections</h2><p>Value statements in poster form — color fields, highlight strokes, one obvious button.</p></div>
+    <div class="variants">
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Split — text left, image right</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="display:flex;align-items:center;gap:30px;padding:44px 30px;">
+              <div style="flex:1;">
+                <span class="chip">New · v2.4</span>
+                <h3 style="font-size:32px;line-height:1.1;margin:15px 0 12px;font-weight:800;">Plan work that <span style="background:var(--yellow);padding:0 6px;">actually ships</span></h3>
+                <p style="font-size:14.5px;color:var(--muted);margin:0 0 22px;max-width:360px;">A calmer way to track projects, sprints and roadmaps for small teams.</p>
+                <div style="display:flex;gap:12px;"><span class="btn">Start free trial</span><span class="btn ghost">Watch demo</span></div>
+              </div>
+              <div class="ph" style="width:250px;height:210px;flex:none;"><span>product shot</span></div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="padding:26px 18px;display:flex;flex-direction:column;gap:14px;">
+              <span class="chip" style="align-self:flex-start;">New · v2.4</span>
+              <h3 style="font-size:23px;line-height:1.12;font-weight:800;">Plan work that <span style="background:var(--yellow);padding:0 5px;">ships</span></h3>
+              <p style="font-size:13px;color:var(--muted);margin:0;">A calmer way to track projects.</p>
+              <div class="ph" style="width:100%;height:130px;"><span>product shot</span></div>
+              <span class="btn" style="justify-content:center;">Start free trial</span>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">B</span><span class="vname">Poster — full color field</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell" style="background:var(--blue);"><div style="padding:54px 36px;text-align:center;">
+              <h3 style="font-size:38px;line-height:1.05;color:var(--white);font-weight:800;max-width:520px;margin:0 auto 14px;">Big ideas deserve<br><span style="background:var(--yellow);color:var(--ink);padding:0 10px;">big blocks.</span></h3>
+              <p style="font-size:14px;color:rgba(255,255,255,.85);max-width:380px;margin:0 auto 24px;">Nova is the design tool for teams who mean it. No gradients were harmed.</p>
+              <div style="display:flex;gap:12px;justify-content:center;"><span class="btn yel">Try it free</span><span class="btn" style="background:transparent;color:var(--white);">See pricing</span></div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell" style="background:var(--blue);"><div style="padding:34px 20px;text-align:center;">
+              <h3 style="font-size:25px;line-height:1.1;color:var(--white);font-weight:800;margin-bottom:10px;">Big ideas,<br><span style="background:var(--yellow);color:var(--ink);padding:0 7px;">big blocks.</span></h3>
+              <p style="font-size:12.5px;color:rgba(255,255,255,.85);margin:0 0 18px;">The design tool for teams who mean it.</p>
+              <span class="btn yel" style="width:100%;justify-content:center;">Try it free</span>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= SIDEBARS ================= -->
+<section id="sidebar">
+  <div class="sec-in">
+    <div class="sec-head rv"><span class="idx">04 / 15</span><h2>Sidebars</h2><p>Blocky vertical navigation — the active item is a full color bar, not a hint.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">App sidebar + docs sidebar</span></div>
+        <div class="frames">
+          <div><div class="flabel">App</div>
+            <div class="shell" style="width:250px;"><div style="padding:16px 12px;display:flex;flex-direction:column;gap:4px;">
+              <div style="display:flex;align-items:center;gap:8px;padding:4px 10px 14px;"><span class="mark"></span><span style="font-family:'Poppins',sans-serif;font-weight:800;font-size:15px;">Nova</span></div>
+              <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;background:var(--red);color:var(--white);border:2px solid var(--ink);font:700 13px/1 'Public Sans',sans-serif;">■ Dashboard</div>
+              <div style="padding:9px 11px;font:600 13px/1 'Public Sans',sans-serif;color:var(--muted);">□ Projects</div>
+              <div style="padding:9px 11px;font:600 13px/1 'Public Sans',sans-serif;color:var(--muted);display:flex;justify-content:space-between;">□ Inbox <span class="chip" style="padding:2px 7px;">3</span></div>
+              <div style="padding:9px 11px;font:600 13px/1 'Public Sans',sans-serif;color:var(--muted);">□ Reports</div>
+              <div style="padding:9px 11px;font:600 13px/1 'Public Sans',sans-serif;color:var(--muted);">□ Settings</div>
+              <div style="border-top:2px solid var(--ink);margin:10px 0 8px;"></div>
+              <div style="display:flex;align-items:center;gap:9px;padding:4px 10px;"><span class="avatar sm"></span><span style="font:700 12px/1.35 'Public Sans',sans-serif;">Amelia Ross<br><span style="color:var(--muted);font-weight:400;font-size:11px;">Admin</span></span></div>
+            </div></div>
+          </div>
+          <div><div class="flabel">Docs</div>
+            <div class="shell" style="width:250px;"><div style="padding:18px 16px;display:flex;flex-direction:column;gap:9px;font:600 13px/1.4 'Public Sans',sans-serif;">
+              <div style="font:700 10.5px/1 'Public Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--white);background:var(--ink);padding:5px 9px;align-self:flex-start;">Getting started</div>
+              <div style="color:var(--red);border-left:4px solid var(--red);padding-left:10px;">Quick start</div>
+              <div style="color:var(--muted);padding-left:14px;">Installation</div>
+              <div style="color:var(--muted);padding-left:14px;">Configuration</div>
+              <div style="font:700 10.5px/1 'Public Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--white);background:var(--ink);padding:5px 9px;align-self:flex-start;margin-top:8px;">Guides</div>
+              <div style="color:var(--muted);padding-left:14px;">Components</div>
+              <div style="color:var(--muted);padding-left:14px;">Theming</div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section id="testimonials">
+  <div class="sec-in">
+    <div class="sec-head rv"><span class="idx">05 / 15</span><h2>Testimonials</h2><p>Quotes as flat cards — alternating color blocks keep the wall scannable.</p></div>
+    <div class="variants">
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Color-block trio</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div style="display:flex;gap:16px;">
+              <div class="shell" style="flex:1;"><div style="padding:22px;">
+                <div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:26px;color:var(--red);line-height:1;">“</div>
+                <p style="font:400 13.5px/1.6 'Public Sans',sans-serif;margin:6px 0 16px;">Nova replaced three tools in a week. The team actually opens it voluntarily.</p>
+                <div style="display:flex;gap:10px;align-items:center;"><span class="avatar sm"></span><div style="font:700 12px/1.35 'Public Sans',sans-serif;">Dana Krueger<br><span style="color:var(--muted);font-weight:400;">Corelab</span></div></div>
+              </div></div>
+              <div class="shell" style="flex:1;background:var(--yellow);"><div style="padding:22px;">
+                <div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:26px;line-height:1;">“</div>
+                <p style="font:400 13.5px/1.6 'Public Sans',sans-serif;margin:6px 0 16px;">Setup took eleven minutes. Sprint reviews went from an hour to fifteen.</p>
+                <div style="display:flex;gap:10px;align-items:center;"><span class="avatar sm"></span><div style="font:700 12px/1.35 'Public Sans',sans-serif;">Leo Martins<br><span style="font-weight:400;">Hatch</span></div></div>
+              </div></div>
+              <div class="shell" style="flex:1;background:var(--ink);"><div style="padding:22px;color:var(--white);">
+                <div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:26px;color:var(--yellow);line-height:1;">“</div>
+                <p style="font:400 13.5px/1.6 'Public Sans',sans-serif;margin:6px 0 16px;">Stakeholders stopped emailing me for status. Worth it for that alone.</p>
+                <div style="display:flex;gap:10px;align-items:center;"><span class="avatar sm"></span><div style="font:700 12px/1.35 'Public Sans',sans-serif;">Amelia Ross<br><span style="color:#9ea1c0;font-weight:400;">Northwind</span></div></div>
+              </div></div>
+            </div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell" style="background:var(--yellow);"><div style="padding:20px;">
+              <div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:24px;line-height:1;">“</div>
+              <p style="font:400 13px/1.6 'Public Sans',sans-serif;margin:6px 0 14px;">Nova replaced three tools in a week.</p>
+              <div style="display:flex;gap:9px;align-items:center;"><span class="avatar sm"></span><div style="font:700 11.5px/1.35 'Public Sans',sans-serif;">Dana Krueger<br><span style="font-weight:400;">Corelab</span></div></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">B</span><span class="vname">Stat banner</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="display:flex;">
+              <div style="flex:1;padding:26px;border-right:var(--bw) solid var(--ink);text-align:center;"><div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:30px;color:var(--red);">12k+</div><div style="font:600 12px/1.4 'Public Sans',sans-serif;color:var(--muted);">teams on Nova</div></div>
+              <div style="flex:1;padding:26px;border-right:var(--bw) solid var(--ink);text-align:center;background:var(--yellow-soft);"><div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:30px;">4.9★</div><div style="font:600 12px/1.4 'Public Sans',sans-serif;color:var(--muted);">average review</div></div>
+              <div style="flex:1;padding:26px;text-align:center;"><div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:30px;color:var(--blue);">−41%</div><div style="font:600 12px/1.4 'Public Sans',sans-serif;color:var(--muted);">status meetings</div></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section id="cta">
+  <div class="sec-in">
+    <div class="sec-head rv"><span class="idx">06 / 15</span><h2>Calls to action</h2><p>Poster-loud conversion blocks. The button is the design.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Banner — red field</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell" style="background:var(--red);"><div style="padding:38px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+              <div>
+                <h3 style="font-size:25px;color:var(--white);font-weight:800;">Stop planning in five tabs.</h3>
+                <p style="margin:6px 0 0;font-size:13.5px;color:rgba(255,255,255,.85);">Free for teams up to 10. No credit card.</p>
+              </div>
+              <span class="btn yel" style="flex:none;">Start free →</span>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell" style="background:var(--red);"><div style="padding:26px 20px;text-align:center;">
+              <h3 style="font-size:20px;color:var(--white);font-weight:800;">Stop planning in five tabs.</h3>
+              <p style="margin:6px 0 16px;font-size:12.5px;color:rgba(255,255,255,.85);">Free for teams up to 10.</p>
+              <span class="btn yel" style="width:100%;justify-content:center;">Start free →</span>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">B</span><span class="vname">Checkerboard split</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="display:flex;">
+              <div style="flex:1;background:var(--yellow);padding:30px;border-right:var(--bw) solid var(--ink);">
+                <h3 style="font-size:19px;font-weight:800;">For teams</h3>
+                <p style="font:400 13px/1.55 'Public Sans',sans-serif;margin:6px 0 16px;">Shared boards, roles and reports.</p>
+                <span class="btn sm">Start team trial</span>
+              </div>
+              <div style="flex:1;background:var(--white);padding:30px;">
+                <h3 style="font-size:19px;font-weight:800;">For solo makers</h3>
+                <p style="font:400 13px/1.55 'Public Sans',sans-serif;color:var(--muted);margin:6px 0 16px;">Free forever. All the core tools.</p>
+                <span class="btn ghost sm">Create account</span>
+              </div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTERS ================= -->
+<section id="footer">
+  <div class="sec-in">
+    <div class="sec-head rv"><span class="idx">07 / 15</span><h2>Footers</h2><p>A solid ink slab with yellow accents — the classic flat sign-off.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Product footer</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell" style="background:var(--ink);border-color:var(--ink);"><div style="padding:34px 30px 20px;color:var(--white);">
+              <div style="display:flex;gap:40px;flex-wrap:wrap;">
+                <div style="flex:1.5;min-width:200px;">
+                  <span style="font-family:'Poppins',sans-serif;font-weight:800;font-size:17px;display:flex;align-items:center;gap:8px;"><span class="mark" style="background:var(--yellow);"></span>Nova</span>
+                  <p style="font:400 12.5px/1.6 'Public Sans',sans-serif;color:#9ea1c0;margin:10px 0 16px;max-width:240px;">Plan work that actually ships. Built loud, built to last.</p>
+                  <div style="display:flex;gap:0;">
+                    <div class="inp" style="flex:1;border-color:var(--yellow);background:transparent;color:#9ea1c0;font-size:12.5px;">you@team.com</div>
+                    <span class="btn yel sm" style="border-left:none;">Join</span>
+                  </div>
+                </div>
+                <div style="font:400 12.5px/2.1 'Public Sans',sans-serif;color:#9ea1c0;"><div style="font:700 11px/1 'Public Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px;">Product</div>Features<br>Pricing<br>Changelog</div>
+                <div style="font:400 12.5px/2.1 'Public Sans',sans-serif;color:#9ea1c0;"><div style="font:700 11px/1 'Public Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px;">Company</div>About<br>Blog<br>Careers</div>
+                <div style="font:400 12.5px/2.1 'Public Sans',sans-serif;color:#9ea1c0;"><div style="font:700 11px/1 'Public Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px;">Help</div>Docs<br>Support<br>Status</div>
+              </div>
+              <div style="border-top:2px solid #3a3d5c;margin-top:26px;padding-top:14px;display:flex;justify-content:space-between;font:600 11px/1 'Public Sans',sans-serif;color:#9ea1c0;">
+                <span>© 2026 Nova Inc.</span><span style="display:flex;gap:16px;"><span>Privacy</span><span>Terms</span></span>
+              </div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell" style="background:var(--ink);border-color:var(--ink);"><div style="padding:24px 18px 16px;color:var(--white);">
+              <span style="font-family:'Poppins',sans-serif;font-weight:800;font-size:15px;display:flex;align-items:center;gap:7px;"><span class="mark" style="background:var(--yellow);width:16px;height:16px;"></span>Nova</span>
+              <div style="display:flex;gap:0;margin:14px 0 18px;">
+                <div class="inp" style="flex:1;border-color:var(--yellow);background:transparent;color:#9ea1c0;font-size:12px;padding:9px 12px;">you@team.com</div>
+                <span class="btn yel sm" style="border-left:none;">Join</span>
+              </div>
+              <div style="display:flex;gap:30px;font:400 12px/2 'Public Sans',sans-serif;color:#9ea1c0;">
+                <div><div style="font:700 10px/1 'Public Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--yellow);margin-bottom:8px;">Product</div>Features<br>Pricing</div>
+                <div><div style="font:700 10px/1 'Public Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--yellow);margin-bottom:8px;">Company</div>About<br>Blog</div>
+              </div>
+              <div style="border-top:2px solid #3a3d5c;margin-top:16px;padding-top:11px;font:600 10px/1 'Public Sans',sans-serif;color:#9ea1c0;">© 2026 Nova Inc.</div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FORMS ================= -->
+<section id="forms">
+  <div class="sec-in">
+    <div class="sec-head rv"><span class="idx">08 / 15</span><h2>Forms</h2><p>Thick-bordered fields with a yellow underline on focus. You always know where you are.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Contact form</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:30px;display:flex;gap:30px;">
+              <div style="flex:1;">
+                <h3 style="font-size:20px;font-weight:800;margin-bottom:8px;">Say hello</h3>
+                <p style="font:400 13.5px/1.6 'Public Sans',sans-serif;color:var(--muted);margin:0 0 18px;">Questions, feedback, wild ideas — we read everything and reply fast.</p>
+                <span class="chip gr">Avg. reply: 4 hours</span>
+              </div>
+              <div style="flex:1.2;display:flex;flex-direction:column;gap:12px;">
+                <div style="display:flex;gap:12px;">
+                  <div style="flex:1;"><div style="font:700 12px/1 'Public Sans',sans-serif;margin-bottom:6px;">Name</div><div class="inp">Ada Lovelace</div></div>
+                  <div style="flex:1;"><div style="font:700 12px/1 'Public Sans',sans-serif;margin-bottom:6px;">Email</div><div class="inp" style="box-shadow:inset 0 -4px 0 var(--yellow);color:var(--ink);">ada@corelab.io</div></div>
+                </div>
+                <div><div style="font:700 12px/1 'Public Sans',sans-serif;margin-bottom:6px;">Message</div><div class="inp" style="align-items:flex-start;height:76px;">What's on your mind?</div></div>
+                <span class="btn" style="align-self:flex-start;">Send message</span>
+              </div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="padding:22px 18px;display:flex;flex-direction:column;gap:11px;">
+              <h3 style="font-size:17px;font-weight:800;">Say hello</h3>
+              <div class="inp">Name</div>
+              <div class="inp">Email</div>
+              <div class="inp" style="align-items:flex-start;height:64px;">Message</div>
+              <span class="btn" style="justify-content:center;">Send message</span>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BLOG ================= -->
+<section id="blog">
+  <div class="sec-in">
+    <div class="sec-head rv"><span class="idx">09 / 15</span><h2>Blog / content listing</h2><p>Flat cards with color-coded categories — scan by hue, click by headline.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Card grid</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div style="display:flex;gap:16px;">
+              <div class="shell" style="flex:1;"><div>
+                <div style="height:10px;background:var(--red);border-bottom:var(--bw) solid var(--ink);"></div>
+                <div style="padding:18px;">
+                  <span class="chip rs">Design</span>
+                  <h3 style="font-size:15.5px;line-height:1.35;margin:10px 0 8px;font-weight:700;">Color systems that survive dark mode</h3>
+                  <div style="font:600 11.5px/1 'Public Sans',sans-serif;color:var(--muted);">Mar 12 · 7 min</div>
+                </div>
+              </div></div>
+              <div class="shell" style="flex:1;"><div>
+                <div style="height:10px;background:var(--yellow);border-bottom:var(--bw) solid var(--ink);"></div>
+                <div style="padding:18px;">
+                  <span class="chip">Process</span>
+                  <h3 style="font-size:15.5px;line-height:1.35;margin:10px 0 8px;font-weight:700;">Our design reviews are 20 minutes, max</h3>
+                  <div style="font:600 11.5px/1 'Public Sans',sans-serif;color:var(--muted);">Mar 8 · 5 min</div>
+                </div>
+              </div></div>
+              <div class="shell" style="flex:1;"><div>
+                <div style="height:10px;background:var(--blue);border-bottom:var(--bw) solid var(--ink);"></div>
+                <div style="padding:18px;">
+                  <span class="chip bl">Engineering</span>
+                  <h3 style="font-size:15.5px;line-height:1.35;margin:10px 0 8px;font-weight:700;">Shipping a component library in public</h3>
+                  <div style="font:600 11.5px/1 'Public Sans',sans-serif;color:var(--muted);">Feb 27 · 9 min</div>
+                </div>
+              </div></div>
+            </div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div>
+              <div style="height:8px;background:var(--red);border-bottom:var(--bw) solid var(--ink);"></div>
+              <div style="padding:16px;">
+                <span class="chip rs">Design</span>
+                <h3 style="font-size:14.5px;line-height:1.35;margin:9px 0 7px;font-weight:700;">Color systems that survive dark mode</h3>
+                <div style="font:600 11px/1 'Public Sans',sans-serif;color:var(--muted);">Mar 12 · 7 min</div>
+              </div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SEARCH ================= -->
+<section id="search">
+  <div class="sec-in">
+    <div class="sec-head rv"><span class="idx">10 / 15</span><h2>Search bars</h2><p>A box you cannot miss, with filter chips that toggle like switches.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Search + filters</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:28px 30px;">
+              <div style="display:flex;gap:0;max-width:520px;">
+                <div class="inp" style="flex:1;font-size:14px;">Search components…</div>
+                <span class="btn" style="border-left:none;">Search</span>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+                <span class="chip inv">All</span><span class="chip">Buttons</span><span class="chip">Forms</span><span class="chip">Cards</span><span class="chip">Charts</span>
+              </div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="padding:18px 16px;">
+              <div class="inp" style="font-size:13px;">Search…</div>
+              <div style="display:flex;gap:7px;margin-top:11px;flex-wrap:wrap;"><span class="chip inv">All</span><span class="chip">Buttons</span><span class="chip">Forms</span></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BREADCRUMBS ================= -->
+<section id="breadcrumbs">
+  <div class="sec-in">
+    <div class="sec-head rv"><span class="idx">11 / 15</span><h2>Breadcrumbs</h2><p>Two takes: an inline trail and stacked block steps.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Two styles</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Styles</div>
+            <div class="shell"><div style="padding:22px 26px;display:flex;flex-direction:column;gap:18px;">
+              <div style="font:600 13px/1 'Public Sans',sans-serif;color:var(--muted);display:flex;gap:8px;align-items:center;">
+                <span style="box-shadow:inset 0 -3px 0 var(--yellow);color:var(--ink);">Home</span><span style="color:var(--red);font-weight:800;">/</span><span style="box-shadow:inset 0 -3px 0 var(--yellow);color:var(--ink);">Components</span><span style="color:var(--red);font-weight:800;">/</span><span style="color:var(--ink);font-weight:700;">Buttons</span>
+              </div>
+              <div style="display:flex;">
+                <span class="chip" style="border-right:none;">Home</span><span class="chip" style="border-right:none;">Components</span><span class="chip inv">Buttons</span>
+              </div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SLIDERS ================= -->
+<section id="sliders">
+  <div class="sec-in">
+    <div class="sec-head rv"><span class="idx">12 / 15</span><h2>Sliders / carousels</h2><p>Square cards, square buttons, square dots. Position is always obvious.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Product rail</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:24px 26px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                <h3 style="font-size:17px;font-weight:800;">Featured components</h3>
+                <div style="display:flex;">
+                  <span class="btn ghost sm" style="padding:6px 12px;border-right:none;">←</span><span class="btn sm" style="padding:6px 12px;">→</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:14px;">
+                <div style="flex:1;"><div class="ph" style="height:96px;"><span>Buttons</span></div><div style="font:700 12.5px/1.5 'Public Sans',sans-serif;margin-top:8px;">Button kit <span class="chip" style="padding:2px 7px;margin-left:4px;">24</span></div></div>
+                <div style="flex:1;"><div class="ph" style="height:96px;background:repeating-linear-gradient(45deg,var(--bg) 0 12px,transparent 12px 24px),var(--red-soft);"><span>Forms</span></div><div style="font:700 12.5px/1.5 'Public Sans',sans-serif;margin-top:8px;">Form kit <span class="chip rs" style="padding:2px 7px;margin-left:4px;">18</span></div></div>
+                <div style="flex:1;"><div class="ph" style="height:96px;background:repeating-linear-gradient(45deg,var(--bg) 0 12px,transparent 12px 24px),var(--yellow-soft);"><span>Cards</span></div><div style="font:700 12.5px/1.5 'Public Sans',sans-serif;margin-top:8px;">Card kit <span class="chip" style="padding:2px 7px;margin-left:4px;">31</span></div></div>
+                <div style="flex:1;"><div class="ph" style="height:96px;"><span>Charts</span></div><div style="font:700 12.5px/1.5 'Public Sans',sans-serif;margin-top:8px;">Chart kit <span class="chip bl" style="padding:2px 7px;margin-left:4px;">12</span></div></div>
+              </div>
+              <div style="display:flex;gap:6px;justify-content:center;margin-top:18px;">
+                <span style="width:18px;height:10px;background:var(--red);border:2px solid var(--ink);"></span>
+                <span style="width:10px;height:10px;background:var(--white);border:2px solid var(--ink);"></span>
+                <span style="width:10px;height:10px;background:var(--white);border:2px solid var(--ink);"></span>
+              </div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="padding:18px 16px;">
+              <h3 style="font-size:15px;font-weight:800;margin-bottom:12px;">Featured components</h3>
+              <div style="display:flex;gap:10px;overflow:hidden;">
+                <div style="flex:none;width:58%;"><div class="ph" style="height:80px;"><span>Buttons</span></div><div style="font:700 12px/1.4 'Public Sans',sans-serif;margin-top:7px;">Button kit</div></div>
+                <div style="flex:none;width:58%;"><div class="ph" style="height:80px;background:repeating-linear-gradient(45deg,var(--bg) 0 12px,transparent 12px 24px),var(--red-soft);"><span>Forms</span></div><div style="font:700 12px/1.4 'Public Sans',sans-serif;margin-top:7px;">Form kit</div></div>
+              </div>
+              <div style="display:flex;gap:5px;justify-content:center;margin-top:14px;">
+                <span style="width:16px;height:8px;background:var(--red);border:2px solid var(--ink);"></span>
+                <span style="width:8px;height:8px;background:var(--white);border:2px solid var(--ink);"></span>
+              </div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TAGS ================= -->
+<section id="tags">
+  <div class="sec-in">
+    <div class="sec-head rv"><span class="idx">13 / 15</span><h2>Tags / badges</h2><p>Square-cornered, thick-bordered, color-coded. A label should look like a label.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Full set</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">All variants</div>
+            <div class="shell"><div style="padding:26px;display:flex;gap:11px;flex-wrap:wrap;align-items:center;">
+              <span class="chip">Default</span>
+              <span class="chip red">Urgent</span>
+              <span class="chip rs">Design</span>
+              <span class="chip bl">Engineering</span>
+              <span class="chip gr">Shipped</span>
+              <span class="chip inv">v2.4.0</span>
+              <span class="chip" style="background:var(--white);border-style:dashed;">+ Add tag</span>
+              <span class="chip" style="background:var(--blue);color:var(--white);">Beta</span>
+              <span class="chip" style="background:var(--yellow);">★ Featured</span>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROGRESS ================= -->
+<section id="progress">
+  <div class="sec-in">
+    <div class="sec-head rv"><span class="idx">14 / 15</span><h2>Progress indicators</h2><p>Chunky bars that snap to their value, segmented meters, and block steppers.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Bars + segments + steps</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:28px 30px;display:flex;flex-direction:column;gap:22px;">
+              <div>
+                <div style="display:flex;justify-content:space-between;font:700 12px/1 'Public Sans',sans-serif;margin-bottom:8px;"><span>Sprint 24</span><span style="color:var(--red);">68%</span></div>
+                <div class="bar"><i style="--w:68%"></i></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font:700 12px/1 'Public Sans',sans-serif;margin-bottom:8px;"><span>Onboarding checklist</span><span>4 / 10</span></div>
+                <div class="seg"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              </div>
+              <div style="display:flex;align-items:center;margin-top:2px;">
+                <span class="vtag" style="background:var(--green);">✓</span><span style="flex:1;height:4px;background:var(--green);"></span>
+                <span class="vtag" style="background:var(--green);">✓</span><span style="flex:1;height:4px;background:linear-gradient(90deg,var(--green) 50%,var(--ink) 50%);opacity:.9;"></span>
+                <span class="vtag" style="background:var(--yellow);color:var(--ink);">3</span><span style="flex:1;height:4px;background:var(--ink);opacity:.15;"></span>
+                <span class="vtag" style="background:var(--white);color:var(--muted);border:2px solid var(--ink);">4</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font:700 11.5px/1 'Public Sans',sans-serif;color:var(--muted);margin-top:-12px;"><span>Plan</span><span>Build</span><span>Review</span><span>Ship</span></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COPY BLOCKS ================= -->
+<section id="copyblocks">
+  <div class="sec-in">
+    <div class="sec-head rv"><span class="idx">15 / 15</span><h2>Copy blocks</h2><p>Long-form text with highlight strokes, block quotes and loud callouts.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Article body</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:36px 44px;max-width:640px;">
+              <h3 style="font-size:22px;font-weight:800;margin-bottom:14px;">Design loud, edit ruthlessly</h3>
+              <p style="font:400 14.5px/1.75 'Public Sans',sans-serif;margin:0 0 14px;">Flat design gets called simple, but it's the opposite of easy. With no shadows or gradients to hide behind, <span style="background:var(--yellow);padding:0 4px;font-weight:600;">every decision is visible</span> — spacing, color, and type carry the whole interface.</p>
+              <div style="border:var(--bw) solid var(--ink);background:var(--red-soft);padding:14px 18px;margin:0 0 14px;font:600 13.5px/1.6 'Public Sans',sans-serif;"><span class="chip red" style="margin-right:8px;">Rule</span>If removing an element changes nothing, it was decoration. Remove it.</div>
+              <p style="font:400 14.5px/1.75 'Public Sans',sans-serif;margin:0;">That's the whole system: a few honest colors, thick lines, and the confidence to leave everything else out.</p>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site"><span>Flat design system · bold blocks · zero shadows</span></footer>
+
+<script src="/design-systems/reveal.js" defer></script>
+</body>
+</html>

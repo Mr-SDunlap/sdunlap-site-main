@@ -4,3 +4,6 @@
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+/design-systems/*
+  X-Robots-Tag: noindex, nofollow

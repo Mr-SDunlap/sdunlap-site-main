@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Modern Minimal — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fafafa;
+  --surface:#ffffff;
+  --surface-2:#f4f4f5;
+  --ink:#18181b;
+  --muted:#71717a;
+  --faint:#a1a1aa;
+  --line:#e4e4e7;
+  --accent:#4f46e5;
+  --accent-soft:#eef2ff;
+  --r:14px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --shadow-sm:0 1px 2px rgba(24,24,27,.05);
+  --shadow-md:0 6px 24px -8px rgba(24,24,27,.12);
+  --shadow-lg:0 16px 40px -12px rgba(24,24,27,.16);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-weight:600;margin:0;letter-spacing:-.02em;}
+a{color:var(--accent);}
+::selection{background:var(--accent-soft);color:var(--accent);}
+
+.mono{font-family:'JetBrains Mono',monospace;}
+
+/* ---------- masthead ---------- */
+.masthead{max-width:1400px;margin:0 auto;padding:104px 56px 72px;}
+.kicker{display:inline-flex;align-items:center;gap:8px;font:500 12px/1 'Inter',sans-serif;color:var(--muted);background:var(--surface);border:1px solid var(--line);padding:7px 14px;border-radius:999px;box-shadow:var(--shadow-sm);}
+.kicker .pip{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2.4s var(--ease) infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(79,70,229,.35);}50%{box-shadow:0 0 0 6px rgba(79,70,229,0);}}
+.masthead h1{font-size:clamp(48px,6.5vw,80px);line-height:1.02;letter-spacing:-.04em;font-weight:700;margin:26px 0 10px;}
+.masthead h1 .lt{color:var(--faint);font-weight:500;}
+.masthead .sub{font-size:17px;color:var(--muted);max-width:540px;margin:16px 0 56px;}
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:14px;max-width:860px;margin-bottom:44px;}
+.swatch{display:flex;flex-direction:column;gap:9px;}
+.swatch>div{height:56px;border-radius:var(--r);border:1px solid var(--line);box-shadow:var(--shadow-sm);transition:transform .5s var(--ease),box-shadow .5s var(--ease);}
+.swatch:hover>div{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.swatch span{font:500 11px/1 'JetBrains Mono',monospace;color:var(--muted);}
+.typerow{display:flex;gap:52px;flex-wrap:wrap;align-items:baseline;}
+.typerow .big{font-size:29px;font-weight:600;letter-spacing:-.03em;}
+.typerow .lbl{font:400 12px/1 'Inter',sans-serif;color:var(--faint);margin-top:9px;}
+
+/* ---------- sticky nav ---------- */
+.topnav{position:sticky;top:0;z-index:50;background:rgba(250,250,250,.8);backdrop-filter:blur(14px) saturate(1.4);border-bottom:1px solid var(--line);}
+.topnav-in{max-width:1400px;margin:0 auto;padding:15px 56px;display:flex;align-items:center;gap:30px;flex-wrap:wrap;}
+.topnav .brand{font-weight:600;font-size:15px;letter-spacing:-.02em;display:flex;align-items:center;gap:9px;}
+.mark{width:20px;height:20px;border-radius:6px;background:var(--ink);position:relative;flex:none;}
+.mark::after{content:"";position:absolute;inset:6px 6px 6px 10px;border-radius:2px;background:var(--accent);}
+.topnav nav{display:flex;gap:4px 20px;flex-wrap:wrap;flex:1;}
+.topnav nav a{font:500 12.5px/1 'Inter',sans-serif;color:var(--muted);text-decoration:none;padding:4px 0;position:relative;transition:color .4s var(--ease);}
+.topnav nav a::after{content:"";position:absolute;left:0;bottom:-1px;width:100%;height:1.5px;border-radius:2px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease);}
+.topnav nav a:hover{color:var(--ink);}
+.topnav nav a:hover::after{transform:scaleX(1);}
+
+/* ---------- sections ---------- */
+section{padding:84px 56px 28px;scroll-margin-top:66px;}
+.sec-in{max-width:1400px;margin:0 auto;}
+.sec-head{margin-bottom:40px;max-width:620px;}
+.sec-head .idx{font:500 12px/1 'JetBrains Mono',monospace;color:var(--accent);margin-bottom:12px;}
+.sec-head h2{font-size:30px;letter-spacing:-.03em;}
+.sec-head p{color:var(--muted);margin:12px 0 0;font-size:15px;}
+.variants{display:flex;flex-direction:column;gap:56px;}
+.vlabel{display:flex;align-items:center;gap:11px;margin-bottom:16px;}
+.vtag{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:8px;background:var(--surface);border:1px solid var(--line);color:var(--muted);font:500 11px/1 'JetBrains Mono',monospace;box-shadow:var(--shadow-sm);}
+.vname{font:500 13.5px/1.2 'Inter',sans-serif;color:var(--ink);}
+.frames{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start;}
+.flabel{font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:9px;}
+.d{width:760px;flex:none;}
+.m{width:300px;flex:none;}
+.shell{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-sm);overflow:hidden;transition:transform .55s var(--ease),box-shadow .55s var(--ease),border-color .55s var(--ease);}
+.shell:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:#d4d4d8;}
+
+/* ---------- components ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;background:var(--ink);color:#fff;
+  font:500 13px/1 'Inter',sans-serif;letter-spacing:-.01em;border:1px solid var(--ink);border-radius:10px;
+  white-space:nowrap;cursor:pointer;text-decoration:none;transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s var(--ease);}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px -6px rgba(24,24,27,.35);}
+.btn:active{transform:translateY(0);}
+.btn.acc{background:var(--accent);border-color:var(--accent);}
+.btn.acc:hover{box-shadow:0 8px 20px -6px rgba(79,70,229,.45);}
+.btn.ghost{background:var(--surface);color:var(--ink);border-color:var(--line);box-shadow:var(--shadow-sm);}
+.btn.sm{padding:7px 13px;font-size:12px;border-radius:8px;}
+.chip{display:inline-flex;align-items:center;gap:6px;font:500 11.5px/1 'Inter',sans-serif;color:var(--muted);background:var(--surface-2);padding:5px 11px;border-radius:999px;}
+.chip.acc{background:var(--accent-soft);color:var(--accent);}
+.chip.ok{background:#ecfdf5;color:#059669;}
+.chip.warn{background:#fffbeb;color:#b45309;}
+.chip.dot::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;}
+.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#c7d2fe,#4f46e5);flex:none;}
+.avatar.sm{width:26px;height:26px;}
+.ph{border-radius:10px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:var(--surface-2);}
+.ph::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.9) 50%,transparent 70%);background-size:220% 100%;animation:sheen 2.6s var(--ease) infinite;}
+@keyframes sheen{from{background-position:180% 0;}to{background-position:-80% 0;}}
+.ph span{font:500 11px/1 'JetBrains Mono',monospace;color:var(--faint);position:relative;z-index:1;}
+.inp{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;
+  font:400 13.5px/1.3 'Inter',sans-serif;color:var(--faint);box-shadow:var(--shadow-sm);transition:border-color .35s var(--ease),box-shadow .35s var(--ease);}
+.inp:hover{border-color:#c7d2fe;box-shadow:0 0 0 3px var(--accent-soft);}
+.kbd{font:500 10.5px/1 'JetBrains Mono',monospace;color:var(--muted);background:var(--surface-2);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:3px 6px;}
+
+/* progress */
+.bar{height:8px;border-radius:999px;background:var(--surface-2);overflow:hidden;}
+.bar>i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#818cf8,var(--accent));width:0;transition:width 1.3s var(--ease) .15s;}
+.in-view .bar>i{width:var(--w,60%);}
+.ring{width:52px;height:52px;border-radius:50%;background:conic-gradient(var(--accent) calc(var(--p,66)*1%),var(--surface-2) 0);display:flex;align-items:center;justify-content:center;}
+.ring>span{width:40px;height:40px;border-radius:50%;background:var(--surface);display:flex;align-items:center;justify-content:center;font:600 11px/1 'JetBrains Mono',monospace;color:var(--ink);}
+
+/* reveal — smooth, staggered */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .8s var(--ease);}
+.rv.in-view,.in-view .rv{opacity:1;transform:none;}
+.in-view .rv:nth-child(2){transition-delay:.08s;}
+.in-view .rv:nth-child(3){transition-delay:.16s;}
+
+footer.site{padding:64px 56px;text-align:center;color:var(--faint);font:500 12px/1 'JetBrains Mono',monospace;}
+@media (max-width:860px){
+  .masthead,section,.topnav-in{padding-left:22px;padding-right:22px;}
+  .d{width:100%;max-width:760px;}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <span class="kicker"><span class="pip"></span>Design system · Modern Minimal</span>
+  <h1>Nothing extra.<br><span class="lt">Everything considered.</span></h1>
+  <p class="sub">A modern minimal module library: a near-white canvas, one decisive accent, soft depth and motion that never gets in the way. Every module ships in desktop and mobile widths.</p>
+  <div class="swatches">
+    <div class="swatch"><div style="background:var(--ink)"></div><span>ink</span></div>
+    <div class="swatch"><div style="background:var(--accent)"></div><span>indigo</span></div>
+    <div class="swatch"><div style="background:var(--accent-soft)"></div><span>indigo-soft</span></div>
+    <div class="swatch"><div style="background:var(--surface-2)"></div><span>surface-2</span></div>
+    <div class="swatch"><div style="background:var(--surface)"></div><span>surface</span></div>
+    <div class="swatch"><div style="background:var(--bg)"></div><span>canvas</span></div>
+  </div>
+  <div class="typerow">
+    <div><div class="big">Inter</div><div class="lbl">Headings &amp; body</div></div>
+    <div><div class="big mono" style="font-size:22px;font-weight:500;">JetBrains Mono</div><div class="lbl">Data &amp; labels</div></div>
+  </div>
+</header>
+
+<div class="topnav">
+  <div class="topnav-in">
+    <span class="brand"><span class="mark"></span>Modern Minimal</span>
+    <nav>
+      <a href="#nav">Navigation</a><a href="#header">Page headers</a><a href="#hero">Heroes</a><a href="#sidebar">Sidebars</a><a href="#testimonials">Testimonials</a><a href="#cta">CTAs</a><a href="#footer">Footers</a><a href="#forms">Forms</a><a href="#blog">Blog</a><a href="#search">Search</a><a href="#breadcrumbs">Breadcrumbs</a><a href="#sliders">Carousels</a><a href="#tags">Tags</a><a href="#progress">Progress</a><a href="#copyblocks">Copy</a>
+    </nav>
+  </div>
+</div>
+
+<main>
+
+<!-- ================= NAVIGATION ================= -->
+<section id="nav">
+  <div class="sec-in">
+    <div class="sec-head rv"><div class="idx">01 / 15</div><h2>Navigation</h2><p>Quiet nav bars that stay out of the content's way — glassy, precise, keyboard-friendly.</p></div>
+    <div class="variants">
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Standard — links + CTA</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="display:flex;align-items:center;justify-content:space-between;padding:15px 26px;">
+              <span style="font-weight:600;font-size:15px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px;"><span class="mark"></span>Meridian</span>
+              <div style="display:flex;gap:26px;font:500 13px/1 'Inter',sans-serif;color:var(--muted);">
+                <span style="color:var(--ink);">Product</span><span>Docs</span><span>Pricing</span><span>Changelog</span>
+              </div>
+              <div style="display:flex;gap:10px;align-items:center;">
+                <span style="font:500 13px/1 'Inter',sans-serif;color:var(--muted);">Sign in</span>
+                <span class="btn sm">Get started</span>
+              </div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;">
+              <span style="font-weight:600;font-size:14px;display:flex;align-items:center;gap:7px;"><span class="mark" style="width:18px;height:18px;"></span>Meridian</span>
+              <div style="display:flex;gap:12px;align-items:center;">
+                <span class="btn sm">Start</span>
+                <div style="width:18px;display:flex;flex-direction:column;gap:5px;"><span style="height:1.5px;background:var(--ink);border-radius:2px;"></span><span style="height:1.5px;background:var(--ink);border-radius:2px;"></span></div>
+              </div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">B</span><span class="vname">App shell — search + command</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="display:flex;align-items:center;gap:20px;padding:13px 22px;">
+              <span style="font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;flex:none;"><span class="mark"></span>Meridian</span>
+              <div class="inp" style="flex:1;max-width:340px;justify-content:space-between;padding:8px 12px;">
+                <span style="display:flex;gap:8px;align-items:center;">⌕ Search anything…</span><span class="kbd">⌘K</span>
+              </div>
+              <div style="margin-left:auto;display:flex;gap:14px;align-items:center;">
+                <span class="chip acc dot">3 running</span>
+                <span class="avatar sm"></span>
+              </div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="display:flex;align-items:center;gap:10px;padding:12px 14px;">
+              <span class="mark" style="width:18px;height:18px;flex:none;"></span>
+              <div class="inp" style="flex:1;padding:8px 12px;font-size:12.5px;">⌕ Search…</div>
+              <span class="avatar sm" style="flex:none;"></span>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= PAGE HEADERS ================= -->
+<section id="header">
+  <div class="sec-in">
+    <div class="sec-head rv"><div class="idx">02 / 15</div><h2>Page headers</h2><p>Context without clutter — breadcrumb, title, actions. Done.</p></div>
+    <div class="variants">
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Dashboard header</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:24px 26px;">
+              <div style="font:500 12px/1 'Inter',sans-serif;color:var(--faint);margin-bottom:10px;">Projects <span style="margin:0 4px;">/</span> <span style="color:var(--ink);">Falcon redesign</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <h3 style="font-size:21px;">Falcon redesign</h3>
+                  <span class="chip ok dot">On track</span>
+                </div>
+                <div style="display:flex;gap:10px;">
+                  <span class="btn ghost sm">Share</span>
+                  <span class="btn acc sm">New task</span>
+                </div>
+              </div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="padding:16px;">
+              <div style="font:500 11px/1 'Inter',sans-serif;color:var(--faint);margin-bottom:8px;">Projects / Falcon</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <h3 style="font-size:16px;">Falcon redesign</h3>
+                <span class="btn acc sm">+</span>
+              </div>
+              <span class="chip ok dot" style="margin-top:10px;">On track</span>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">B</span><span class="vname">Article masthead</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:44px 30px;text-align:center;">
+              <span class="chip acc">Engineering</span>
+              <h3 style="font-size:26px;line-height:1.25;margin:16px auto 12px;max-width:480px;letter-spacing:-.03em;">Rethinking spacing systems for dense UI</h3>
+              <div style="display:flex;gap:9px;align-items:center;justify-content:center;font:500 12.5px/1 'Inter',sans-serif;color:var(--muted);">
+                <span class="avatar sm"></span><span>Priya Shah</span><span style="color:var(--line);">|</span><span>8 min read</span>
+              </div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="padding:28px 18px;text-align:center;">
+              <span class="chip acc">Engineering</span>
+              <h3 style="font-size:18px;line-height:1.3;margin:12px 0 9px;letter-spacing:-.02em;">Rethinking spacing systems</h3>
+              <div style="display:flex;gap:7px;align-items:center;justify-content:center;font:500 11.5px/1 'Inter',sans-serif;color:var(--muted);">
+                <span class="avatar sm" style="width:20px;height:20px;"></span><span>Priya Shah · 8 min</span>
+              </div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= HEROES ================= -->
+<section id="hero">
+  <div class="sec-in">
+    <div class="sec-head rv"><div class="idx">03 / 15</div><h2>Hero sections</h2><p>One clear promise, one primary action, generous air.</p></div>
+    <div class="variants">
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Centered — product launch</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:56px 40px 44px;text-align:center;">
+              <span class="chip acc dot">Meridian 2.0 is here</span>
+              <h3 style="font-size:36px;line-height:1.1;letter-spacing:-.04em;margin:18px auto 12px;max-width:460px;">Plan work that actually ships</h3>
+              <p style="font-size:15px;color:var(--muted);max-width:400px;margin:0 auto 26px;">A calmer way to track projects, sprints and roadmaps for small teams.</p>
+              <div style="display:flex;gap:12px;justify-content:center;">
+                <span class="btn acc">Start free trial</span>
+                <span class="btn ghost">Watch demo · 2 min</span>
+              </div>
+              <div class="ph" style="height:150px;margin-top:34px;border-radius:12px;"><span>app screenshot</span></div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="padding:32px 20px 26px;text-align:center;">
+              <span class="chip acc dot">Meridian 2.0</span>
+              <h3 style="font-size:24px;line-height:1.12;letter-spacing:-.03em;margin:14px 0 9px;">Plan work that actually ships</h3>
+              <p style="font-size:13px;color:var(--muted);margin:0 0 18px;">A calmer way to track projects.</p>
+              <span class="btn acc" style="width:100%;">Start free trial</span>
+              <div class="ph" style="height:110px;margin-top:22px;"><span>app screenshot</span></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">B</span><span class="vname">Split — with stat proof</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="display:flex;align-items:center;gap:34px;padding:46px 32px;">
+              <div style="flex:1;">
+                <h3 style="font-size:29px;line-height:1.15;letter-spacing:-.03em;margin:0 0 12px;">The single source of truth for your roadmap</h3>
+                <p style="font-size:14px;color:var(--muted);margin:0 0 22px;max-width:340px;">Meridian syncs issues, docs and goals so nobody asks "where are we?" again.</p>
+                <div style="display:flex;gap:12px;margin-bottom:26px;"><span class="btn">Get started</span><span class="btn ghost">Talk to us</span></div>
+                <div style="display:flex;gap:28px;">
+                  <div><div class="mono" style="font-weight:600;font-size:19px;">12k+</div><div style="font:400 11.5px/1.3 'Inter',sans-serif;color:var(--faint);">teams</div></div>
+                  <div><div class="mono" style="font-weight:600;font-size:19px;">99.98%</div><div style="font:400 11.5px/1.3 'Inter',sans-serif;color:var(--faint);">uptime</div></div>
+                  <div><div class="mono" style="font-weight:600;font-size:19px;">4.9</div><div style="font:400 11.5px/1.3 'Inter',sans-serif;color:var(--faint);">avg. rating</div></div>
+                </div>
+              </div>
+              <div class="ph" style="width:270px;height:230px;flex:none;"><span>product ui</span></div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="padding:26px 20px;display:flex;flex-direction:column;gap:14px;">
+              <h3 style="font-size:21px;line-height:1.2;letter-spacing:-.03em;">The single source of truth</h3>
+              <p style="font-size:13px;color:var(--muted);margin:0;">Issues, docs and goals — synced.</p>
+              <div class="ph" style="height:130px;"><span>product ui</span></div>
+              <span class="btn" style="justify-content:center;">Get started</span>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= SIDEBARS ================= -->
+<section id="sidebar">
+  <div class="sec-in">
+    <div class="sec-head rv"><div class="idx">04 / 15</div><h2>Sidebars</h2><p>App and docs navigation with clear hierarchy and calm active states.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">App sidebar + docs sidebar</span></div>
+        <div class="frames">
+          <div><div class="flabel">App</div>
+            <div class="shell" style="width:250px;"><div style="padding:16px 12px;display:flex;flex-direction:column;gap:2px;">
+              <div style="display:flex;align-items:center;gap:8px;padding:4px 10px 14px;"><span class="mark"></span><span style="font-weight:600;font-size:14px;">Meridian</span></div>
+              <div style="display:flex;align-items:center;gap:9px;padding:8px 10px;background:var(--accent-soft);color:var(--accent);border-radius:9px;font:500 13px/1 'Inter',sans-serif;">▦ Dashboard</div>
+              <div style="padding:8px 10px;font:500 13px/1 'Inter',sans-serif;color:var(--muted);">◇ Issues</div>
+              <div style="padding:8px 10px;font:500 13px/1 'Inter',sans-serif;color:var(--muted);display:flex;justify-content:space-between;">◈ Inbox <span class="chip acc" style="padding:2px 8px;font-size:10.5px;">3</span></div>
+              <div style="padding:8px 10px;font:500 13px/1 'Inter',sans-serif;color:var(--muted);">▤ Docs</div>
+              <div style="padding:8px 10px;font:500 13px/1 'Inter',sans-serif;color:var(--muted);">⚙ Settings</div>
+              <div style="border-top:1px solid var(--line);margin:10px 0 8px;"></div>
+              <div style="display:flex;align-items:center;gap:9px;padding:4px 10px;"><span class="avatar sm"></span><span style="font:500 12px/1.35 'Inter',sans-serif;">Priya Shah<br><span style="color:var(--faint);font-weight:400;font-size:11px;">Pro plan</span></span></div>
+            </div></div>
+          </div>
+          <div><div class="flabel">Docs</div>
+            <div class="shell" style="width:250px;"><div style="padding:18px 16px;display:flex;flex-direction:column;gap:9px;font:500 13px/1.4 'Inter',sans-serif;">
+              <div style="font:600 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);">Getting started</div>
+              <div style="color:var(--accent);border-left:2px solid var(--accent);padding-left:11px;">Quick start</div>
+              <div style="color:var(--muted);padding-left:13px;">Installation</div>
+              <div style="color:var(--muted);padding-left:13px;">Authentication</div>
+              <div style="font:600 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:8px;">Core concepts</div>
+              <div style="color:var(--muted);padding-left:13px;">Projects</div>
+              <div style="color:var(--muted);padding-left:13px;">Sync engine</div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section id="testimonials">
+  <div class="sec-in">
+    <div class="sec-head rv"><div class="idx">05 / 15</div><h2>Testimonials</h2><p>Proof, presented plainly — real names, real teams, no theatrics.</p></div>
+    <div class="variants">
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Card trio</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div style="display:flex;gap:16px;">
+              <div class="shell" style="flex:1;"><div style="padding:22px;">
+                <p style="font:400 13.5px/1.6 'Inter',sans-serif;margin:0 0 16px;">"We replaced three tools with Meridian. The team actually opens it voluntarily, which has never happened before."</p>
+                <div style="display:flex;gap:10px;align-items:center;"><span class="avatar sm"></span><div style="font:500 12px/1.35 'Inter',sans-serif;">Dana Krueger<br><span style="color:var(--faint);font-weight:400;">Eng lead, Corelab</span></div></div>
+              </div></div>
+              <div class="shell" style="flex:1;"><div style="padding:22px;">
+                <p style="font:400 13.5px/1.6 'Inter',sans-serif;margin:0 0 16px;">"Setup took eleven minutes. Our sprint reviews went from an hour to fifteen minutes."</p>
+                <div style="display:flex;gap:10px;align-items:center;"><span class="avatar sm" style="background:linear-gradient(135deg,#a7f3d0,#059669);"></span><div style="font:500 12px/1.35 'Inter',sans-serif;">Leo Martins<br><span style="color:var(--faint);font-weight:400;">CTO, Hatch</span></div></div>
+              </div></div>
+              <div class="shell" style="flex:1;"><div style="padding:22px;">
+                <p style="font:400 13.5px/1.6 'Inter',sans-serif;margin:0 0 16px;">"The roadmap view alone is worth it. Stakeholders stopped emailing me for status."</p>
+                <div style="display:flex;gap:10px;align-items:center;"><span class="avatar sm" style="background:linear-gradient(135deg,#fde68a,#d97706);"></span><div style="font:500 12px/1.35 'Inter',sans-serif;">Amelia Ross<br><span style="color:var(--faint);font-weight:400;">PM, Northwind</span></div></div>
+              </div></div>
+            </div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="padding:20px;">
+              <p style="font:400 13px/1.6 'Inter',sans-serif;margin:0 0 14px;">"We replaced three tools with Meridian. The team actually opens it voluntarily."</p>
+              <div style="display:flex;gap:9px;align-items:center;"><span class="avatar sm"></span><div style="font:500 11.5px/1.35 'Inter',sans-serif;">Dana Krueger<br><span style="color:var(--faint);font-weight:400;">Eng lead, Corelab</span></div></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">B</span><span class="vname">Featured quote + metric</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:40px 44px;display:flex;gap:40px;align-items:center;">
+              <div style="flex:1.6;">
+                <p style="font-size:19px;line-height:1.55;font-weight:500;letter-spacing:-.02em;margin:0 0 18px;">"Meridian is the first tool that shows the whole company one truthful picture of what's shipping and when."</p>
+                <div style="display:flex;gap:10px;align-items:center;"><span class="avatar sm"></span><div style="font:500 12.5px/1.35 'Inter',sans-serif;">Marcus Chen · <span style="color:var(--muted);font-weight:400;">VP Product, Attio</span></div></div>
+              </div>
+              <div style="flex:none;border-left:1px solid var(--line);padding-left:36px;">
+                <div class="mono" style="font-weight:600;font-size:34px;letter-spacing:-.03em;">−41%</div>
+                <div style="font:400 12px/1.5 'Inter',sans-serif;color:var(--muted);max-width:130px;">time spent in status meetings</div>
+              </div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section id="cta">
+  <div class="sec-in">
+    <div class="sec-head rv"><div class="idx">06 / 15</div><h2>Calls to action</h2><p>Direct asks with zero noise — one dark panel, one inline strip.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Dark panel</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell" style="background:var(--ink);border-color:var(--ink);"><div style="padding:40px 36px;display:flex;align-items:center;justify-content:space-between;gap:26px;">
+              <div>
+                <h3 style="font-size:23px;color:#fff;letter-spacing:-.03em;">Ship your next sprint with Meridian</h3>
+                <p style="margin:7px 0 0;font-size:13.5px;color:#a1a1aa;">Free for teams up to 10. No credit card.</p>
+              </div>
+              <div style="display:flex;gap:10px;flex:none;">
+                <span class="btn" style="background:#fff;color:var(--ink);border-color:#fff;">Start free</span>
+                <span class="btn" style="background:transparent;border-color:#3f3f46;color:#d4d4d8;">Book a demo</span>
+              </div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell" style="background:var(--ink);border-color:var(--ink);"><div style="padding:26px 20px;text-align:center;">
+              <h3 style="font-size:19px;color:#fff;letter-spacing:-.02em;">Ship your next sprint</h3>
+              <p style="margin:7px 0 16px;font-size:12.5px;color:#a1a1aa;">Free for teams up to 10.</p>
+              <span class="btn" style="background:#fff;color:var(--ink);border-color:#fff;width:100%;">Start free</span>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">B</span><span class="vname">Inline strip</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:20px 26px;display:flex;align-items:center;gap:18px;">
+              <span class="chip acc dot" style="flex:none;">New</span>
+              <span style="font:500 13.5px/1.4 'Inter',sans-serif;flex:1;">Meridian for GitHub is out — sync PRs to issues automatically.</span>
+              <span class="btn ghost sm" style="flex:none;">Read the changelog →</span>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTERS ================= -->
+<section id="footer">
+  <div class="sec-in">
+    <div class="sec-head rv"><div class="idx">07 / 15</div><h2>Footers</h2><p>Organized exits — columns, status, and the small print, neatly gridded.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Product footer</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:34px 30px 20px;">
+              <div style="display:flex;gap:40px;flex-wrap:wrap;">
+                <div style="flex:1.5;min-width:200px;">
+                  <span style="font-weight:600;font-size:15px;display:flex;align-items:center;gap:8px;"><span class="mark"></span>Meridian</span>
+                  <p style="font:400 12.5px/1.6 'Inter',sans-serif;color:var(--muted);margin:10px 0 16px;max-width:240px;">The single source of truth for product teams.</p>
+                  <span class="chip ok dot">All systems operational</span>
+                </div>
+                <div style="font:400 12.5px/2.1 'Inter',sans-serif;color:var(--muted);"><div style="font:600 11px/1 'Inter',sans-serif;color:var(--ink);margin-bottom:10px;">Product</div>Features<br>Pricing<br>Changelog<br>Roadmap</div>
+                <div style="font:400 12.5px/2.1 'Inter',sans-serif;color:var(--muted);"><div style="font:600 11px/1 'Inter',sans-serif;color:var(--ink);margin-bottom:10px;">Company</div>About<br>Blog<br>Careers<br>Contact</div>
+                <div style="font:400 12.5px/2.1 'Inter',sans-serif;color:var(--muted);"><div style="font:600 11px/1 'Inter',sans-serif;color:var(--ink);margin-bottom:10px;">Resources</div>Docs<br>API<br>Community</div>
+              </div>
+              <div style="border-top:1px solid var(--line);margin-top:26px;padding-top:14px;display:flex;justify-content:space-between;font:400 11.5px/1 'Inter',sans-serif;color:var(--faint);">
+                <span>© 2026 Meridian Labs, Inc.</span>
+                <span style="display:flex;gap:16px;"><span>Privacy</span><span>Terms</span><span>Security</span></span>
+              </div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="padding:24px 18px 16px;">
+              <span style="font-weight:600;font-size:14px;display:flex;align-items:center;gap:7px;"><span class="mark" style="width:18px;height:18px;"></span>Meridian</span>
+              <div style="display:flex;gap:32px;margin-top:18px;font:400 12px/2 'Inter',sans-serif;color:var(--muted);">
+                <div><div style="font:600 10.5px/1 'Inter',sans-serif;color:var(--ink);margin-bottom:8px;">Product</div>Features<br>Pricing<br>Changelog</div>
+                <div><div style="font:600 10.5px/1 'Inter',sans-serif;color:var(--ink);margin-bottom:8px;">Company</div>About<br>Blog<br>Contact</div>
+              </div>
+              <div style="border-top:1px solid var(--line);margin-top:18px;padding-top:12px;font:400 10.5px/1 'Inter',sans-serif;color:var(--faint);">© 2026 Meridian Labs, Inc.</div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FORMS ================= -->
+<section id="forms">
+  <div class="sec-in">
+    <div class="sec-head rv"><div class="idx">08 / 15</div><h2>Forms</h2><p>Low-friction inputs with visible focus, helpful hints and honest validation.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Contact / signup form</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:30px;display:flex;gap:34px;">
+              <div style="flex:1;">
+                <h3 style="font-size:20px;margin-bottom:8px;">Talk to the team</h3>
+                <p style="font:400 13.5px/1.6 'Inter',sans-serif;color:var(--muted);margin:0 0 18px;">Tell us a little about your setup — we reply within one business day.</p>
+                <div style="display:flex;flex-direction:column;gap:9px;font:500 12.5px/1 'Inter',sans-serif;color:var(--muted);">
+                  <span>✓ No sales scripts</span><span>✓ Demo with your data</span><span>✓ Migration help included</span>
+                </div>
+              </div>
+              <div style="flex:1.2;display:flex;flex-direction:column;gap:12px;">
+                <div style="display:flex;gap:12px;">
+                  <div style="flex:1;"><div style="font:500 12px/1 'Inter',sans-serif;margin-bottom:6px;">Name</div><div class="inp">Ada Lovelace</div></div>
+                  <div style="flex:1;"><div style="font:500 12px/1 'Inter',sans-serif;margin-bottom:6px;">Work email</div><div class="inp" style="border-color:#c7d2fe;box-shadow:0 0 0 3px var(--accent-soft);color:var(--ink);">ada@corelab.io</div></div>
+                </div>
+                <div><div style="font:500 12px/1 'Inter',sans-serif;margin-bottom:6px;">Team size</div><div class="inp" style="justify-content:space-between;">11 – 50 <span style="color:var(--faint);">▾</span></div></div>
+                <div><div style="font:500 12px/1 'Inter',sans-serif;margin-bottom:6px;">Message</div><div class="inp" style="align-items:flex-start;height:72px;">What are you hoping to improve?</div></div>
+                <span class="btn acc" style="align-self:flex-start;">Send message</span>
+              </div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="padding:22px 18px;display:flex;flex-direction:column;gap:11px;">
+              <h3 style="font-size:17px;">Talk to the team</h3>
+              <div class="inp">Name</div>
+              <div class="inp">Work email</div>
+              <div class="inp" style="align-items:flex-start;height:64px;">Message</div>
+              <span class="btn acc" style="justify-content:center;">Send message</span>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BLOG ================= -->
+<section id="blog">
+  <div class="sec-in">
+    <div class="sec-head rv"><div class="idx">09 / 15</div><h2>Blog / content listing</h2><p>Content cards that respect the reader — clear meta, quiet imagery, honest reading times.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Card grid</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div style="display:flex;gap:16px;">
+              <div class="shell" style="flex:1;"><div>
+                <div class="ph" style="height:110px;border-radius:0;"><span>cover</span></div>
+                <div style="padding:16px 18px 18px;">
+                  <span class="chip acc">Engineering</span>
+                  <h3 style="font-size:15.5px;line-height:1.35;margin:10px 0 8px;letter-spacing:-.01em;">How our sync engine handles 40k concurrent edits</h3>
+                  <div style="font:400 11.5px/1 'Inter',sans-serif;color:var(--faint);">Mar 12 · 9 min</div>
+                </div>
+              </div></div>
+              <div class="shell" style="flex:1;"><div>
+                <div class="ph" style="height:110px;border-radius:0;"><span>cover</span></div>
+                <div style="padding:16px 18px 18px;">
+                  <span class="chip">Design</span>
+                  <h3 style="font-size:15.5px;line-height:1.35;margin:10px 0 8px;letter-spacing:-.01em;">Designing empty states people don't skip</h3>
+                  <div style="font:400 11.5px/1 'Inter',sans-serif;color:var(--faint);">Mar 8 · 5 min</div>
+                </div>
+              </div></div>
+              <div class="shell" style="flex:1;"><div>
+                <div class="ph" style="height:110px;border-radius:0;"><span>cover</span></div>
+                <div style="padding:16px 18px 18px;">
+                  <span class="chip ok">Changelog</span>
+                  <h3 style="font-size:15.5px;line-height:1.35;margin:10px 0 8px;letter-spacing:-.01em;">Meridian 2.0: the calm release</h3>
+                  <div style="font:400 11.5px/1 'Inter',sans-serif;color:var(--faint);">Feb 27 · 3 min</div>
+                </div>
+              </div></div>
+            </div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div>
+              <div class="ph" style="height:100px;border-radius:0;"><span>cover</span></div>
+              <div style="padding:14px 16px 16px;">
+                <span class="chip acc">Engineering</span>
+                <h3 style="font-size:14.5px;line-height:1.35;margin:9px 0 7px;">How our sync engine handles 40k edits</h3>
+                <div style="font:400 11px/1 'Inter',sans-serif;color:var(--faint);">Mar 12 · 9 min</div>
+              </div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SEARCH ================= -->
+<section id="search">
+  <div class="sec-in">
+    <div class="sec-head rv"><div class="idx">10 / 15</div><h2>Search bars</h2><p>Command-palette first — keyboard hints and recent queries built in.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Command palette</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:28px 30px;">
+              <div style="max-width:480px;margin:0 auto;">
+                <div class="inp" style="justify-content:space-between;padding:12px 16px;font-size:14px;box-shadow:var(--shadow-md);border-color:#c7d2fe;">
+                  <span>⌕ Jump to anything…</span><span class="kbd">⌘K</span>
+                </div>
+                <div style="border:1px solid var(--line);border-radius:10px;margin-top:8px;overflow:hidden;box-shadow:var(--shadow-sm);">
+                  <div style="padding:10px 14px;font:500 12.5px/1 'Inter',sans-serif;background:var(--accent-soft);color:var(--accent);display:flex;justify-content:space-between;"><span>→ Falcon redesign</span><span style="opacity:.6;">Project</span></div>
+                  <div style="padding:10px 14px;font:500 12.5px/1 'Inter',sans-serif;color:var(--muted);display:flex;justify-content:space-between;"><span>→ Fix onboarding flow</span><span style="opacity:.6;">Issue</span></div>
+                  <div style="padding:10px 14px;font:500 12.5px/1 'Inter',sans-serif;color:var(--muted);display:flex;justify-content:space-between;"><span>→ Q3 roadmap</span><span style="opacity:.6;">Doc</span></div>
+                </div>
+              </div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="padding:18px 16px;">
+              <div class="inp" style="font-size:13px;">⌕ Jump to anything…</div>
+              <div style="display:flex;gap:7px;margin-top:11px;flex-wrap:wrap;"><span class="chip">Recent: Falcon</span><span class="chip">roadmap</span></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BREADCRUMBS ================= -->
+<section id="breadcrumbs">
+  <div class="sec-in">
+    <div class="sec-head rv"><div class="idx">11 / 15</div><h2>Breadcrumbs</h2><p>Location, stated once, quietly.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Two styles</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Styles</div>
+            <div class="shell"><div style="padding:22px 26px;display:flex;flex-direction:column;gap:18px;">
+              <div style="font:500 13px/1 'Inter',sans-serif;color:var(--faint);display:flex;gap:8px;align-items:center;">
+                <span style="color:var(--muted);">Workspace</span><span>/</span><span style="color:var(--muted);">Projects</span><span>/</span><span style="color:var(--ink);">Falcon redesign</span>
+              </div>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <span class="chip">Workspace</span><span style="color:var(--faint);font-size:11px;">›</span><span class="chip">Projects</span><span style="color:var(--faint);font-size:11px;">›</span><span class="chip acc">Falcon redesign</span>
+              </div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SLIDERS ================= -->
+<section id="sliders">
+  <div class="sec-in">
+    <div class="sec-head rv"><div class="idx">12 / 15</div><h2>Sliders / carousels</h2><p>Horizontal browsing with visible position and restrained controls.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Template gallery rail</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:24px 26px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                <h3 style="font-size:17px;">Start from a template</h3>
+                <div style="display:flex;gap:8px;">
+                  <span class="btn ghost sm" style="padding:6px 11px;">←</span><span class="btn ghost sm" style="padding:6px 11px;">→</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:14px;">
+                <div style="flex:1;"><div class="ph" style="height:96px;"><span>Sprint board</span></div><div style="font:500 12.5px/1.5 'Inter',sans-serif;margin-top:8px;">Sprint board<br><span style="color:var(--faint);font-weight:400;font-size:11px;">2.1k teams use this</span></div></div>
+                <div style="flex:1;"><div class="ph" style="height:96px;"><span>Roadmap</span></div><div style="font:500 12.5px/1.5 'Inter',sans-serif;margin-top:8px;">Quarterly roadmap<br><span style="color:var(--faint);font-weight:400;font-size:11px;">1.4k teams use this</span></div></div>
+                <div style="flex:1;"><div class="ph" style="height:96px;"><span>OKRs</span></div><div style="font:500 12.5px/1.5 'Inter',sans-serif;margin-top:8px;">OKR tracker<br><span style="color:var(--faint);font-weight:400;font-size:11px;">980 teams use this</span></div></div>
+                <div style="flex:1;"><div class="ph" style="height:96px;"><span>Launch</span></div><div style="font:500 12.5px/1.5 'Inter',sans-serif;margin-top:8px;">Launch checklist<br><span style="color:var(--faint);font-weight:400;font-size:11px;">760 teams use this</span></div></div>
+              </div>
+              <div style="height:3px;background:var(--surface-2);border-radius:99px;margin-top:20px;overflow:hidden;"><div style="width:32%;height:100%;border-radius:99px;background:var(--ink);"></div></div>
+            </div></div>
+          </div>
+          <div class="m"><div class="flabel">Mobile</div>
+            <div class="shell"><div style="padding:18px 16px;">
+              <h3 style="font-size:15px;margin-bottom:12px;">Start from a template</h3>
+              <div style="display:flex;gap:10px;overflow:hidden;">
+                <div style="flex:none;width:58%;"><div class="ph" style="height:80px;"><span>Sprint board</span></div><div style="font:500 12px/1.4 'Inter',sans-serif;margin-top:7px;">Sprint board</div></div>
+                <div style="flex:none;width:58%;"><div class="ph" style="height:80px;"><span>Roadmap</span></div><div style="font:500 12px/1.4 'Inter',sans-serif;margin-top:7px;">Roadmap</div></div>
+              </div>
+              <div style="height:3px;background:var(--surface-2);border-radius:99px;margin-top:14px;overflow:hidden;"><div style="width:40%;height:100%;border-radius:99px;background:var(--ink);"></div></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TAGS ================= -->
+<section id="tags">
+  <div class="sec-in">
+    <div class="sec-head rv"><div class="idx">13 / 15</div><h2>Tags / badges</h2><p>Semantic color, small type, zero decoration.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Status set</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">All variants</div>
+            <div class="shell"><div style="padding:26px;display:flex;gap:11px;flex-wrap:wrap;align-items:center;">
+              <span class="chip">Default</span>
+              <span class="chip acc">Accent</span>
+              <span class="chip acc dot">In progress</span>
+              <span class="chip ok dot">Done</span>
+              <span class="chip warn dot">Blocked</span>
+              <span class="chip" style="background:#fef2f2;color:#dc2626;">Urgent</span>
+              <span class="chip" style="border:1px dashed var(--line);background:transparent;">+ Add tag</span>
+              <span class="chip" style="background:var(--ink);color:#fff;">v2.0.4</span>
+              <span class="chip mono" style="font-size:10.5px;">feat/sync-engine</span>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROGRESS ================= -->
+<section id="progress">
+  <div class="sec-in">
+    <div class="sec-head rv"><div class="idx">14 / 15</div><h2>Progress indicators</h2><p>Bars, rings and steps that animate once, on entry — then stay out of the way.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Bars + ring + steps</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:28px 30px;display:flex;flex-direction:column;gap:24px;">
+              <div style="display:flex;gap:34px;align-items:center;">
+                <div style="flex:1;display:flex;flex-direction:column;gap:20px;">
+                  <div>
+                    <div style="display:flex;justify-content:space-between;font:500 12px/1 'Inter',sans-serif;margin-bottom:8px;"><span>Sprint 24 · burn-down</span><span class="mono" style="color:var(--muted);">68%</span></div>
+                    <div class="bar"><i style="--w:68%"></i></div>
+                  </div>
+                  <div>
+                    <div style="display:flex;justify-content:space-between;font:500 12px/1 'Inter',sans-serif;margin-bottom:8px;"><span>Storage used</span><span class="mono" style="color:var(--muted);">31%</span></div>
+                    <div class="bar"><i style="--w:31%"></i></div>
+                  </div>
+                </div>
+                <div style="display:flex;gap:14px;align-items:center;flex:none;">
+                  <div class="ring" style="--p:66;"><span>66%</span></div>
+                  <div style="font:400 12px/1.5 'Inter',sans-serif;color:var(--muted);max-width:110px;">Q3 goals<br>completed</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;">
+                <span class="vtag" style="background:var(--accent);border-color:var(--accent);color:#fff;">✓</span><span style="flex:1;height:2px;background:var(--accent);"></span>
+                <span class="vtag" style="background:var(--accent);border-color:var(--accent);color:#fff;">✓</span><span style="flex:1;height:2px;background:linear-gradient(90deg,var(--accent) 50%,var(--line) 50%);"></span>
+                <span class="vtag" style="border-color:var(--accent);color:var(--accent);">3</span><span style="flex:1;height:2px;background:var(--line);"></span>
+                <span class="vtag">4</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font:500 11.5px/1 'Inter',sans-serif;color:var(--muted);margin-top:-14px;"><span>Plan</span><span>Build</span><span>Review</span><span>Ship</span></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COPY BLOCKS ================= -->
+<section id="copyblocks">
+  <div class="sec-in">
+    <div class="sec-head rv"><div class="idx">15 / 15</div><h2>Copy blocks</h2><p>Reading-first typography — measured line lengths, callouts and inline code.</p></div>
+    <div class="variants">
+      <div class="variant rv">
+        <div class="vlabel"><span class="vtag">A</span><span class="vname">Article body</span></div>
+        <div class="frames">
+          <div class="d"><div class="flabel">Desktop</div>
+            <div class="shell"><div style="padding:36px 44px;max-width:640px;">
+              <h3 style="font-size:22px;margin-bottom:14px;letter-spacing:-.02em;">Why we throttle our own release notes</h3>
+              <p style="font:400 14.5px/1.75 'Inter',sans-serif;margin:0 0 14px;color:#3f3f46;">Every feature we ship competes for the same resource: your attention. So we made a rule — one announcement per week, no matter how much we shipped. The rest lands quietly in the <span class="mono" style="font-size:12px;background:var(--surface-2);padding:2px 6px;border-radius:5px;">changelog</span>.</p>
+              <div style="border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;background:var(--accent-soft);padding:14px 18px;margin:0 0 14px;font:400 13.5px/1.6 'Inter',sans-serif;color:#3730a3;"><strong style="font-weight:600;">Note</strong> — this policy applies to emails too. You will never get two in one week.</div>
+              <p style="font:400 14.5px/1.75 'Inter',sans-serif;margin:0;color:#3f3f46;">It turns out restraint compounds. Open rates doubled, and support tickets about "what changed?" fell by a third.</p>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">MODERN MINIMAL DESIGN SYSTEM — nothing extra, everything considered</footer>
+
+<script src="/design-systems/reveal.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>SDUNLAP | Design Systems</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/ouros-logo_black.svg" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Space+Grotesk:wght@300..700&family=Inter:wght@600&family=Playfair+Display:ital@1&family=Fraunces:opsz,wght@9..144,900&family=Poppins:wght@800&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+      defer
+    ></script>
+    <script src="/design-systems/catalog.js" defer></script>
+    <style>
+      :root {
+        --dark-coffee: #13191e;
+        --orange: #ff611a;
+        --grey: #8a9396;
+        --platinum: #d9dfe1;
+        --diamond: #f0f0f0;
+        --white: #ffffff;
+        --hairline: rgba(255, 255, 255, 0.08);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--dark-coffee);
+        color: var(--platinum);
+        font-family: "Outfit", sans-serif;
+        font-weight: 300;
+        line-height: 1.6;
+        overflow-x: clip;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ::selection {
+        background: var(--orange);
+        color: var(--white);
+      }
+
+      /* === Top bar ===================================================== */
+      .ds-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 22px 60px;
+        border-bottom: 1px solid var(--hairline);
+      }
+      .ds-nav .home-logo {
+        font-family: "Space Grotesk", sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        color: var(--white);
+        letter-spacing: 0.04em;
+      }
+      .ds-nav .ds-nav-meta {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 11px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--grey);
+      }
+      .ds-nav .ds-nav-meta a {
+        color: var(--platinum);
+        transition: color 200ms ease;
+      }
+      .ds-nav .ds-nav-meta a:hover {
+        color: var(--orange);
+      }
+
+      /* === Header ====================================================== */
+      .ds-header {
+        padding: 96px 60px 48px;
+        max-width: 1500px;
+        margin: 0 auto;
+        width: 100%;
+      }
+      .ds-status {
+        display: flex;
+        gap: 8px;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--grey);
+        margin-bottom: 28px;
+      }
+      .ds-status .ds-status-online {
+        color: var(--orange);
+      }
+      .ds-module-label {
+        display: block;
+        font-size: 12px;
+        font-family: "Space Grotesk", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--orange);
+        padding-bottom: 8px;
+      }
+      .ds-title {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: clamp(2.2rem, 5vw, 3.6rem);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--white);
+        line-height: 1.05;
+        margin: 0 0 24px;
+      }
+      .ds-intro {
+        max-width: 560px;
+        font-size: 17px;
+        color: var(--grey);
+        margin: 0;
+      }
+      .ds-intro strong {
+        color: var(--platinum);
+        font-weight: 500;
+      }
+
+      /* === Toolbar: filters + search =================================== */
+      .ds-toolbar {
+        padding: 24px 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+        border-top: 1px solid var(--hairline);
+        border-bottom: 1px solid var(--hairline);
+        position: sticky;
+        top: 0;
+        background: rgba(19, 25, 30, 0.92);
+        backdrop-filter: blur(8px);
+        z-index: 40;
+      }
+      .ds-toolbar-in {
+        max-width: 1380px;
+        margin: 0 auto;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      .ds-filters {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .ds-filters-label {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 10px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--grey);
+        margin-right: 8px;
+      }
+      .ds-filter {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--grey);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--hairline);
+        padding: 8px 16px;
+        cursor: pointer;
+        transition:
+          color 200ms ease,
+          background 200ms ease,
+          border-color 200ms ease;
+      }
+      .ds-filter:hover {
+        color: var(--white);
+        border-color: rgba(255, 255, 255, 0.25);
+      }
+      .ds-filter.active {
+        color: var(--white);
+        background: var(--orange);
+        border-color: var(--orange);
+      }
+      .ds-search {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border: 1px solid var(--hairline);
+        background: rgba(255, 255, 255, 0.03);
+        padding: 10px 16px;
+        min-width: 280px;
+        position: relative;
+      }
+      .ds-search input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--platinum);
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 12px;
+        letter-spacing: 0.06em;
+      }
+      .ds-search input::placeholder {
+        color: rgba(138, 147, 150, 0.6);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+      .ds-search input:disabled {
+        cursor: not-allowed;
+      }
+      .ds-search-status {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--grey);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+      }
+      .ds-search-status::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--grey);
+        opacity: 0.5;
+        animation: ds-blink 2.4s steps(1) infinite;
+      }
+      @keyframes ds-blink {
+        50% {
+          opacity: 0.15;
+        }
+      }
+      .ds-search:hover::after {
+        content: "// SEARCH COMES ONLINE AS THE CATALOG GROWS";
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 9px;
+        letter-spacing: 0.15em;
+        color: var(--grey);
+        background: var(--dark-coffee);
+        border: 1px solid var(--hairline);
+        padding: 6px 10px;
+        white-space: nowrap;
+        z-index: 5;
+      }
+
+      /* === Catalog grid ================================================ */
+      .ds-catalog {
+        max-width: 1500px;
+        margin: 0 auto;
+        width: 100%;
+        padding: 56px 60px 96px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+        gap: 32px;
+      }
+      .ds-card {
+        border: 1px solid var(--hairline);
+        background: rgba(255, 255, 255, 0.02);
+        display: flex;
+        flex-direction: column;
+        transition: border-color 300ms ease;
+      }
+      /* transform/opacity transitions only engage once GSAP entrance is done,
+         so CSS never fights the JS-driven tweens */
+      .ds-card.anim-done {
+        transition:
+          border-color 300ms ease,
+          transform 400ms cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 300ms ease;
+      }
+      .ds-card:hover {
+        border-color: rgba(255, 97, 26, 0.5);
+        transform: translateY(-4px);
+      }
+      .ds-card.is-filtered {
+        display: none;
+      }
+      .ds-tile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 180px;
+        font-size: 27px;
+        border-bottom: 1px solid var(--hairline);
+        overflow: hidden;
+        position: relative;
+      }
+      .ds-tile > span {
+        transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .ds-card:hover .ds-tile > span {
+        transform: scale(1.06);
+      }
+      .t-min {
+        background: #fafafa;
+        color: #18181b;
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+      }
+      .t-min > span {
+        border-bottom: 2px solid #4f46e5;
+        padding-bottom: 2px;
+      }
+      .t-lux {
+        background: #0d0c0b;
+        color: #c9a86a;
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+      }
+      .t-flat {
+        background: #faf6ee;
+        color: #22243a;
+        font-family: "Poppins", sans-serif;
+        font-weight: 800;
+      }
+      .t-flat > span {
+        background: #ffd23f;
+        padding: 2px 10px;
+        border: 2.5px solid #22243a;
+      }
+      .t-retro {
+        background: #f7ecd9;
+        color: #e0592a;
+        font-family: "Fraunces", serif;
+        font-weight: 900;
+      }
+      .t-retro > span {
+        transform: rotate(-2deg);
+      }
+      .ds-card:hover .t-retro > span {
+        transform: rotate(-2deg) scale(1.06);
+      }
+
+      .ds-info {
+        padding: 28px 28px 26px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .ds-module {
+        display: block;
+        font-size: 11px;
+        font-family: "Space Grotesk", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        color: var(--orange);
+        margin-bottom: 14px;
+      }
+      .ds-name {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--white);
+        margin: 0 0 12px;
+      }
+      .ds-desc {
+        font-size: 14.5px;
+        color: var(--grey);
+        margin: 0 0 20px;
+        flex: 1;
+      }
+      .ds-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 26px;
+      }
+      .ds-tags span {
+        font-size: 10px;
+        font-family: "Space Grotesk", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 4px 10px;
+        background-color: rgba(255, 255, 255, 0.07);
+        color: var(--grey);
+      }
+
+      /* link-out button w/ site arrow */
+      .link-out-btn {
+        background-color: var(--diamond);
+        color: var(--dark-coffee);
+        padding: 16px 32px;
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: "Outfit", sans-serif;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+        justify-content: center;
+        transition: background-color 200ms ease;
+      }
+      .link-out-btn:hover {
+        background-color: var(--white);
+      }
+      .link-out-btn:hover > .arrow {
+        transform: rotate(0deg);
+      }
+      .arrow {
+        position: relative;
+        width: 30px;
+        aspect-ratio: 1/1;
+        transform: rotate(-45deg);
+        transition: transform 250ms ease;
+      }
+      .arrow .tic {
+        display: inline-block;
+        width: 2px;
+        height: 10px;
+        background-color: var(--dark-coffee);
+      }
+      .arrow .left-tic {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(100%, -80%) rotate(-45deg);
+      }
+      .arrow .right-tic {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(100%, -20%) rotate(45deg);
+      }
+      .arrow .line {
+        display: inline-block;
+        width: 2px;
+        height: 12px;
+        background-color: var(--dark-coffee);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) rotate(90deg);
+      }
+      .ds-ref {
+        padding-top: 18px;
+        font-size: 9px;
+        font-family: "Space Grotesk", sans-serif;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(138, 147, 150, 0.65);
+      }
+
+      /* empty state (all filtered out) */
+      .ds-empty {
+        display: none;
+        grid-column: 1 / -1;
+        border: 1px dashed var(--hairline);
+        padding: 64px 32px;
+        text-align: center;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 12px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--grey);
+      }
+      .ds-empty.visible {
+        display: block;
+      }
+
+      /* === Footer ====================================================== */
+      .ds-footer {
+        border-top: 1px solid var(--hairline);
+        padding: 40px 60px;
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(138, 147, 150, 0.65);
+      }
+      .ds-footer a {
+        color: var(--grey);
+        transition: color 200ms ease;
+      }
+      .ds-footer a:hover {
+        color: var(--orange);
+      }
+
+      @media (max-width: 900px) {
+        .ds-nav,
+        .ds-header,
+        .ds-toolbar,
+        .ds-catalog,
+        .ds-footer {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+        .ds-catalog {
+          grid-template-columns: 1fr;
+        }
+        .ds-search {
+          min-width: 100%;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="ds-nav">
+      <a href="https://www.sdunlap.com" class="home-logo">S_</a>
+      <span class="ds-nav-meta"
+        >SYS // Client_Preview&nbsp;&nbsp;·&nbsp;&nbsp;<a
+          href="https://www.sdunlap.com"
+          >sdunlap.com ↗</a
+        ></span
+      >
+    </nav>
+
+    <header class="ds-header">
+      <div class="ds-status">
+        <p style="margin: 0">SYS // Catalog:</p>
+        <p style="margin: 0" class="ds-status-online">
+          <span id="ds-count">04</span> directions online
+        </p>
+      </div>
+      <span class="ds-module-label">Client_Preview_Module</span>
+      <h1 class="ds-title" id="ds-scramble-title">DESIGN_SYSTEMS</h1>
+      <p class="ds-intro">
+        Four complete design directions — each a full module library of
+        navigation, heroes, forms, footers and more, at desktop and mobile
+        widths. <strong>Browse each one and note its direction ID.</strong>
+        When we talk scope, that ID tells me exactly what you're drawn to.
+      </p>
+    </header>
+
+    <div class="ds-toolbar">
+      <div class="ds-toolbar-in">
+        <div
+          class="ds-filters"
+          role="group"
+          aria-label="Filter design directions"
+        >
+          <span class="ds-filters-label">Filter //</span>
+          <button class="ds-filter active" data-filter="all">All</button>
+          <button class="ds-filter" data-filter="light">Light</button>
+          <button class="ds-filter" data-filter="dark">Dark</button>
+          <button class="ds-filter" data-filter="bold">Bold</button>
+          <button class="ds-filter" data-filter="playful">Playful</button>
+          <button class="ds-filter" data-filter="premium">Premium</button>
+        </div>
+        <div class="ds-search">
+          <input
+            type="search"
+            placeholder="Search directions…"
+            disabled
+            aria-label="Search design directions (coming soon)"
+          />
+          <span class="ds-search-status">Offline</span>
+        </div>
+      </div>
+    </div>
+
+    <main class="ds-catalog" id="ds-catalog">
+      <article class="ds-card" data-tags="light premium">
+        <a class="ds-tile t-min" href="/design-systems/modern-minimal/"
+          ><span>Modern Minimal</span></a
+        >
+        <div class="ds-info">
+          <span class="ds-module">01 / Direction</span>
+          <h2 class="ds-name">Modern_Minimal</h2>
+          <p class="ds-desc">
+            Near-white canvas, one indigo accent, soft depth and smooth, quiet
+            motion. For products and services that want to feel effortless and
+            considered.
+          </p>
+          <div class="ds-tags">
+            <span>Light</span><span>SaaS / Product</span
+            ><span>Smooth Motion</span>
+          </div>
+          <a class="link-out-btn" href="/design-systems/modern-minimal/">
+            View System
+            <div class="arrow">
+              <span class="left-tic tic"></span>
+              <span class="right-tic tic"></span>
+              <span class="line"></span>
+            </div>
+          </a>
+          <div class="ds-ref">ID: DS-001-MIN // STATUS: ONLINE</div>
+        </div>
+      </article>
+
+      <article class="ds-card" data-tags="dark premium">
+        <a class="ds-tile t-lux" href="/design-systems/luxury/"
+          ><span>Luxury</span></a
+        >
+        <div class="ds-info">
+          <span class="ds-module">02 / Direction</span>
+          <h2 class="ds-name">Luxury</h2>
+          <p class="ds-desc">
+            Ink black, champagne hairlines, serif headlines and slow,
+            choreographed reveals. For brands selling rarity — where the site
+            itself should feel like an invitation.
+          </p>
+          <div class="ds-tags">
+            <span>Dark</span><span>High-End Brand</span><span>Editorial</span>
+          </div>
+          <a class="link-out-btn" href="/design-systems/luxury/">
+            View System
+            <div class="arrow">
+              <span class="left-tic tic"></span>
+              <span class="right-tic tic"></span>
+              <span class="line"></span>
+            </div>
+          </a>
+          <div class="ds-ref">ID: DS-002-LUX // STATUS: ONLINE</div>
+        </div>
+      </article>
+
+      <article class="ds-card" data-tags="light bold">
+        <a class="ds-tile t-flat" href="/design-systems/flat/"
+          ><span>Flat</span></a
+        >
+        <div class="ds-info">
+          <span class="ds-module">03 / Direction</span>
+          <h2 class="ds-name">Flat</h2>
+          <p class="ds-desc">
+            Bold color blocks, thick outlines, zero shadows and snappy, instant
+            interactions. For brands with something to say — loud, legible and
+            unmistakable.
+          </p>
+          <div class="ds-tags">
+            <span>Light</span><span>Bold</span><span>Marketing</span>
+          </div>
+          <a class="link-out-btn" href="/design-systems/flat/">
+            View System
+            <div class="arrow">
+              <span class="left-tic tic"></span>
+              <span class="right-tic tic"></span>
+              <span class="line"></span>
+            </div>
+          </a>
+          <div class="ds-ref">ID: DS-003-FLT // STATUS: ONLINE</div>
+        </div>
+      </article>
+
+      <article class="ds-card" data-tags="light playful bold">
+        <a class="ds-tile t-retro" href="/design-systems/retro/"
+          ><span>Retro</span></a
+        >
+        <div class="ds-info">
+          <span class="ds-module">04 / Direction</span>
+          <h2 class="ds-name">Retro</h2>
+          <p class="ds-desc">
+            Seventies sunset palette, chunky serif type, sticker badges and
+            playful, bouncy motion. For brands with warmth and wit — nostalgia
+            done deliberately.
+          </p>
+          <div class="ds-tags">
+            <span>Light</span><span>Playful</span><span>Commerce</span>
+          </div>
+          <a class="link-out-btn" href="/design-systems/retro/">
+            View System
+            <div class="arrow">
+              <span class="left-tic tic"></span>
+              <span class="right-tic tic"></span>
+              <span class="line"></span>
+            </div>
+          </a>
+          <div class="ds-ref">ID: DS-004-RET // STATUS: ONLINE</div>
+        </div>
+      </article>
+
+      <div class="ds-empty" id="ds-empty">
+        // No directions match — more systems in development
+      </div>
+    </main>
+
+    <footer class="ds-footer">
+      <span>© 2026 SDUNLAP // Internal preview — shared by link only</span>
+      <span
+        >Found a direction you like?
+        <a href="https://www.sdunlap.com/#section_services"
+          >Let's scope it ↗</a
+        ></span
+      >
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="S monogram" style="color:#14120f">
+  <g fill="currentColor">
+    <!-- single calligraphic S stroke: thin tips, thick diagonal -->
+    <path d="M124 18
+             C 86 26, 60 46, 62 70
+             C 64 92, 84 104, 102 114
+             C 118 122, 126 134, 122 148
+             C 118 162, 104 172, 80 180
+             C 112 176, 136 158, 138 132
+             C 140 110, 122 98, 104 88
+             C 88 80, 78 68, 82 54
+             C 86 40, 100 26, 124 18 Z"/>
+    <!-- dots nested in the bowls -->
+    <circle cx="130" cy="52" r="13"/>
+    <circle cx="70" cy="146" r="13"/>
+  </g>
+</svg>

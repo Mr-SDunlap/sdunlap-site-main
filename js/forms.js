@@ -22,7 +22,13 @@
       if (btn) btn.disabled = true;
       try {
         const a = (f.getAttribute("action") || "/api/contact").trim();
-        const payload = Object.fromEntries(new FormData(f).entries());
+        // Aggregate duplicate keys (e.g. meeting-time checkboxes) into one value
+        const fd = new FormData(f);
+        const payload = {};
+        for (const key of new Set(fd.keys())) {
+          const vals = fd.getAll(key).filter(Boolean);
+          payload[key] = vals.join(", ");
+        }
         const res = await fetch(a, {
           method: (f.method || "POST").toUpperCase(),
           headers: {
@@ -76,6 +82,26 @@
         if (btn) btn.disabled = false;
       }
     });
+    // Pre-select plan + timeline when a pricing CTA opens the modal.
+    // Runs on a timeout so it lands after the modal open + form restore.
+    document.addEventListener("click", (e) => {
+      const t = e.target.closest(".connect-btn[data-plan]");
+      if (!t) return;
+      const { plan, timeline } = t.dataset;
+      setTimeout(() => {
+        [
+          ["plan", plan],
+          ["timeline", timeline],
+        ].forEach(([name, value]) => {
+          if (!value) return;
+          const input = f.querySelector(
+            `input[name="${name}"][value="${value}"]`,
+          );
+          if (input) input.checked = true;
+        });
+      }, 0);
+    });
+
     if (m)
       new MutationObserver(() => {
         if (m.getAttribute("aria-hidden") !== "false") return;

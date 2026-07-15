@@ -84,6 +84,42 @@ window.addEventListener("DOMContentLoaded", function () {
       },
     });
   });
+
+  // Services section: staggered reveals for tiers, recurring plans, add-ons
+  const tierCards = gsap.utils.toArray("#section_services .tier-card");
+  if (tierCards.length) {
+    gsap.from(tierCards, {
+      opacity: 0,
+      y: 36,
+      duration: 0.8,
+      ease: "power2.out",
+      stagger: 0.12,
+      scrollTrigger: {
+        trigger: ".services-tiers",
+        start: "top 75%",
+        toggleActions: "play none none reverse",
+      },
+    });
+  }
+
+  const recurringItems = gsap.utils.toArray(
+    "#section_services .recurring-item",
+  );
+  if (recurringItems.length) {
+    gsap.from(recurringItems, {
+      opacity: 0,
+      y: 24,
+      duration: 0.7,
+      ease: "power2.out",
+      stagger: 0.1,
+      scrollTrigger: {
+        trigger: ".services-recurring",
+        start: "top 78%",
+        toggleActions: "play none none reverse",
+      },
+    });
+  }
+
 });
 
 window.addEventListener("DOMContentLoaded", function () {
