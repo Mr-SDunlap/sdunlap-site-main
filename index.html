@@ -7,23 +7,112 @@
       http-equiv="Content-Security-Policy"
       content="
   default-src 'self';
-  script-src 'self' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE=' 'unsafe-eval';
+  script-src 'self' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com https://www.googletagmanager.com 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE=' 'unsafe-eval';
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   font-src 'self' https://fonts.gstatic.com data:;
   img-src 'self' data: https:;
-  connect-src 'self';
+  connect-src 'self' https://cloudflareinsights.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com;
   object-src 'none';
   base-uri 'self';
   form-action 'self';
 "
     />
     <link rel="stylesheet" href="style.css" />
-    <title>SDUNLAP | Stephen Dunlap</title>
+    <title>Stephen Dunlap — Web Designer & Developer | Custom Websites</title>
+    <meta
+      name="description"
+      content="I design and engineer digital products — custom websites, marketing sites, and product interfaces — from the first system diagram to the last deploy. Flat-rate builds from $500, live in days."
+    />
+    <link rel="canonical" href="https://sdunlap.com/" />
+    <meta name="author" content="Stephen Dunlap" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sdunlap.com/" />
+    <meta
+      property="og:title"
+      content="Stephen Dunlap — Web Designer & Developer"
+    />
+    <meta
+      property="og:description"
+      content="Custom websites, marketing sites, and product interfaces — designed and engineered end to end. Flat-rate builds from $500, live in days."
+    />
+    <meta property="og:image" content="https://sdunlap.com/assets/og-image.jpg" />
+    <meta property="og:image:width" content="990" />
+    <meta property="og:image:height" content="990" />
+    <meta property="og:site_name" content="Stephen Dunlap" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="Stephen Dunlap — Web Designer & Developer"
+    />
+    <meta
+      name="twitter:description"
+      content="Custom websites, marketing sites, and product interfaces — designed and engineered end to end. Flat-rate builds from $500, live in days."
+    />
+    <meta name="twitter:image" content="https://sdunlap.com/assets/og-image.jpg" />
+
     <link
       rel="icon"
       type="image/svg+xml"
       href="./assets/ouros-logo_black.svg"
     />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://sdunlap.com/#person",
+            "name": "Stephen Dunlap",
+            "url": "https://sdunlap.com/",
+            "image": "https://sdunlap.com/assets/og-image.jpg",
+            "jobTitle": "Web Designer & Developer",
+            "sameAs": [
+              "https://www.linkedin.com/in/stephendunlap0001/"
+            ]
+          },
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://sdunlap.com/#service",
+            "name": "Stephen Dunlap — Web Design & Development",
+            "url": "https://sdunlap.com/",
+            "founder": { "@id": "https://sdunlap.com/#person" },
+            "description": "Custom website design and development: one-time flat-rate builds, static marketing sites, CMS integration, client portals, and ongoing site partnership plans.",
+            "priceRange": "$500-$6,000+",
+            "makesOffer": [
+              {
+                "@type": "Offer",
+                "name": "Launch — one-page static site",
+                "price": "500",
+                "priceCurrency": "USD"
+              },
+              {
+                "@type": "Offer",
+                "name": "Starter — static marketing site, 4–6 pages",
+                "price": "1200",
+                "priceCurrency": "USD"
+              },
+              {
+                "@type": "Offer",
+                "name": "Growth — CMS integration, lead routing, SEO baseline",
+                "price": "3000",
+                "priceCurrency": "USD"
+              },
+              {
+                "@type": "Offer",
+                "name": "Pro Custom — custom design system, portals, payments",
+                "price": "6000",
+                "priceCurrency": "USD"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
@@ -43,6 +132,16 @@
     <script src="./js/app.js" defer></script>
 
     <script src="./js/smooth-scroll.js" defer></script>
+
+    <!-- Google Analytics 4 -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-K6NF26037G"
+    ></script>
+    <script src="./js/analytics.js"></script>
+
+    <!-- Cloudflare Web Analytics is auto-injected by Cloudflare (RUM enabled
+         in the dashboard) — no manual beacon needed. -->
   </head>
 
   <body>
@@ -200,14 +299,14 @@
         <div class="about-sticky-col">
           <div class="about-sticky-inner">
             <span class="about-module-label">Identity_Verification</span>
-            <h1 class="about-title">The_Profile</h1>
+            <h2 class="about-title">The_Profile</h2>
             <p class="about-bio">
               I design and engineer digital products — marketing systems,
               product interfaces, interactive experiences — and I use AI in my
               workflow without pretending otherwise. It's a tool like any other
               and the judgment about when and how still has to come from
               somewhere. Outside the work, I'm into anime, smoothies, and
-              conversations where I'm mostly listening. I'm a firm beleiver that
+              conversations where I'm mostly listening. I'm a firm believer that
               the most interesting take in the room isn't always the loudest
               one. If that sounds like someone you'd want building your thing,
               let's talk.
@@ -314,7 +413,7 @@
       <!-- Archive header -->
       <div class="archive-header">
         <span class="archive-module-label">Collection_of_Work</span>
-        <h1 class="archive-title">The_Archive</h1>
+        <h2 class="archive-title">The_Archive</h2>
       </div>
 
       <!-- Project 01: Ouros Designs (media left, info right) -->
@@ -412,7 +511,7 @@
     <section id="section_services">
       <div class="services-header">
         <span class="services-module-label">Engagement_Terms</span>
-        <h1 class="services-title">The_Services</h1>
+        <h2 class="services-title">The_Services</h2>
         <p class="services-intro">
           One cost to launch. One plan to keep it running, updated, and secure.
           And room to add features whenever your business calls for them.

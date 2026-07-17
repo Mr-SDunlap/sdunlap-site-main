@@ -55,6 +55,12 @@
           }
           throw new Error(message);
         }
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "generate_lead", {
+            form_id: "contact-form",
+            plan: payload.plan || "(none)",
+          });
+        }
         f.reset();
         f.innerHTML = "";
         if (s) {
