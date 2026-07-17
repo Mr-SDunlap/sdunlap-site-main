@@ -77,10 +77,7 @@ window.addEventListener("DOMContentLoaded", function () {
       scrollTrigger: {
         trigger: el,
         start: "top 85%",
-        toggleActions: "play none none reverse",
-        onLeaveBack: () => {
-          el.textContent = "0" + suffix;
-        },
+        toggleActions: "restart none restart none",
       },
     });
   });

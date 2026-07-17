@@ -41,7 +41,26 @@
       a.dataset.navReady = "1";
 
       const s = a.querySelector("span");
-      if (!s) return;
+      if (!s) {
+        // Label-less anchors (the S_ logo → #section_landing) still need a
+        // trigger so re-entering their section closes the open nav item.
+        const bareHref = a.getAttribute("href");
+        if (bareHref && bareHref.startsWith("#")) {
+          const bareTarget = document.getElementById(bareHref.slice(1));
+          if (bareTarget) {
+            const cfg = triggerSettingsFor(bareHref.slice(1));
+            ScrollTrigger.create({
+              trigger: bareTarget,
+              start: cfg.start,
+              end: cfg.end,
+              invalidateOnRefresh: true,
+              onEnter: () => setActiveNav(null),
+              onEnterBack: () => setActiveNav(null),
+            });
+          }
+        }
+        return;
+      }
 
       a.style.boxSizing = "border-box";
       a.style.overflow = "hidden";
