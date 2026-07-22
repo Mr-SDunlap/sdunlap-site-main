@@ -319,6 +319,17 @@ body {
   font-size: 24px;
 }
 
+.home-logo-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.home-logo:hover .home-logo-img {
+  transform: scale(1.15);
+}
+
 #site-nav ul li a {
   writing-mode: vertical-lr;
   color: var(--grey);
