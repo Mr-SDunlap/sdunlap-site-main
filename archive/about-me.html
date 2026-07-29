@@ -14,7 +14,10 @@
       name="description"
       content="More on Stephen Dunlap — a web designer and developer who builds custom websites, marketing sites, and product interfaces end to end."
     />
-    <link rel="canonical" href="https://www.sdunlap.com/archive/about-me.html" />
+    <link
+      rel="canonical"
+      href="https://www.sdunlap.com/archive/about-me.html"
+    />
     <link
       rel="icon"
       type="image/png"
@@ -27,10 +30,7 @@
       sizes="512x512"
       href="../assets/icons/sdnlp_logo-512.png"
     />
-    <link
-      rel="apple-touch-icon"
-      href="../assets/icons/sdnlp_logo-180.png"
-    />
+    <link rel="apple-touch-icon" href="../assets/icons/sdnlp_logo-180.png" />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
       defer
@@ -70,10 +70,7 @@
     <nav id="site-nav">
       <ul>
         <li>
-          <a
-            href="../index.html"
-            class="home-logo split-text"
-            aria-label="Home"
+          <a href="../index.html" class="home-logo split-text" aria-label="Home"
             ><img
               src="../assets/icons/sdnlp_logo-white-nav.png"
               alt="Stephen Dunlap logo"
@@ -112,15 +109,12 @@
     </nav>
 
     <nav id="mobile-nav">
-      <a
-            href="../index.html"
-            class="home-logo split-text"
-            aria-label="Home"
-            ><img
-              src="../assets/icons/sdnlp_logo-white-nav.png"
-              alt="Stephen Dunlap logo"
-              class="home-logo-img"
-          /></a>
+      <a href="../index.html" class="home-logo split-text" aria-label="Home"
+        ><img
+          src="../assets/icons/sdnlp_logo-white-nav.png"
+          alt="Stephen Dunlap logo"
+          class="home-logo-img"
+      /></a>
       <button
         class="burger-menu"
         aria-expanded="false"
@@ -181,11 +175,11 @@
     <section class="am-hero">
       <div class="ambient-bg" data-ambient="dark" aria-hidden="true"></div>
       <div class="am-hero-content">
-        <span class="am-hero-label">SYS // ORIGIN_LOG</span>
+        <span class="am-hero-label">SYS // SNAPSHOT</span>
         <h1 class="am-hero-title">Beyond_<br />The_Work</h1>
         <p class="am-hero-sub">
-          How a kid who liked taking things apart in Milwaukee ended up
-          designing and building software.
+          A quick look at where the design instinct comes from, and what fills
+          the time when I'm not building.
         </p>
       </div>
       <a href="#am-journey" class="scroll-indicator" aria-label="Scroll down">
@@ -197,123 +191,358 @@
     </section>
 
     <!-- ============================================================
-         JOURNEY (pinned identity panel + scrolling chapters)
+         SNAPSHOT — architecture-to-web-design overlap
     ============================================================ -->
-    <section id="am-journey">
-      <div class="about-narrative">
-        <!-- Left: sticky identity panel -->
-        <div class="about-sticky-col">
-          <div class="about-sticky-inner">
-            <span class="about-module-label">Origin_Trace</span>
-            <h1 class="about-title">The_Journey</h1>
-            <div class="about-nav-dots" aria-hidden="true">
-              <span class="about-dot" data-dot="0"></span>
-              <span class="about-dot" data-dot="1"></span>
-              <span class="about-dot" data-dot="2"></span>
-              <span class="about-dot" data-dot="3"></span>
-              <span class="about-dot" data-dot="4"></span>
-              <span class="about-dot" data-dot="5"></span>
-            </div>
-          </div>
+    <section id="am-snapshot">
+      <div class="snap-inner">
+        <div class="snap-head">
+          <span class="snap-module-label">Snapshot</span>
+          <h2 class="snap-title">The_Overlap</h2>
+          <p class="snap-lead">
+            My interest in architecture was never really about buildings — it
+            was about how people move through and occupy space, and how much you
+            can do by working smart within real constraints: local materials,
+            non-destructive methods, a plan that holds up under pressure. Those
+            are the same questions I ask now, just pointed at screens instead of
+            structures.
+          </p>
         </div>
 
-        <!-- Right: scrolling narrative blocks -->
-        <div class="about-scroll-col">
-          <div class="about-narrative-block" data-block="0">
-            <div class="block-inner">
-              <p class="comp-num">01</p>
-              <h4>Origins</h4>
-              <p>
-                I split my childhood between school years in Milwaukee and
-                summers in Chicago. Long before I had any technical vocabulary
-                for it, I was taking things apart — radios, toys, anything with
-                screws — just to see how the pieces fit and what they could
-                become if I rebuilt them smaller, or into something else
-                entirely. I wasn't especially skilled at it. I just couldn't
-                leave a closed system alone.
-              </p>
-            </div>
+        <div class="snap-grid">
+          <div class="snap-card">
+            <span class="snap-card-num">01</span>
+            <h3 class="snap-card-title">
+              Floor Plans <span class="snap-arrow">&rarr;</span> Wireframes
+            </h3>
+            <p class="snap-card-text">
+              A floor plan is a constraint diagram before it's anything else —
+              circulation, sightlines, load-bearing walls. A wireframe does the
+              same job for a screen: what has to be reachable in one move,
+              what's structural, what can flex.
+            </p>
+            <p class="snap-card-cite">
+              Richard Saul Wurman, trained as an architect, coined the term
+              "Information Architecture" in 1976 — the field wireframing grew
+              out of.
+            </p>
           </div>
 
-          <div class="about-narrative-block" data-block="1">
-            <div class="block-inner">
-              <p class="comp-num">02</p>
-              <h4>Skateboarding</h4>
-              <p>
-                Skateboarding took over by middle school and didn't let go for
-                years. The trick I'm proudest of is a laser flip; the biggest
-                set I ever cleared was seven stairs. It wasn't really about the
-                tricks — it was hundreds of failed attempts in a row, in public,
-                until one of them landed. That tolerance for repetition stuck
-                with me longer than the board did.
-              </p>
-            </div>
+          <div class="snap-card">
+            <span class="snap-card-num">02</span>
+            <h3 class="snap-card-title">
+              Pattern Language <span class="snap-arrow">&rarr;</span> Design
+              Systems
+            </h3>
+            <p class="snap-card-text">
+              Reusable, named solutions to recurring problems — a stair detail
+              that works across a hundred houses, a card component that works
+              across a hundred screens.
+            </p>
+            <p class="snap-card-cite">
+              Christopher Alexander's "A Pattern Language" (1977) directly
+              inspired "Design Patterns: Elements of Reusable Object-Oriented
+              Software" (1994) — the book that gave software design systems
+              their vocabulary.
+            </p>
           </div>
 
-          <div class="about-narrative-block" data-block="2">
-            <div class="block-inner">
-              <p class="comp-num">03</p>
-              <h4>South Division</h4>
-              <p>
-                South Division wasn't the strongest school in Milwaukee, but I
-                went looking for whatever would keep my brain occupied — chess
-                club, art club, Upward Bound, College Possible, Sponsor a
-                Scholar. Upward Bound in particular changed the trajectory of my
-                life. Those programs didn't just prep me for college; they were
-                the first systems I trusted enough to actually rely on.
-              </p>
-            </div>
+          <div class="snap-card">
+            <span class="snap-card-num">03</span>
+            <h3 class="snap-card-title">
+              Wayfinding <span class="snap-arrow">&rarr;</span> UX Flows
+            </h3>
+            <p class="snap-card-text">
+              Legible paths, edges, and landmarks that let a stranger navigate
+              without a map.
+            </p>
+            <p class="snap-card-cite">
+              Kevin Lynch's wayfinding research in "The Image of the City"
+              (1960) — the same problem site navigation and user flows solve in
+              a browser.
+            </p>
           </div>
 
-          <div class="about-narrative-block" data-block="3">
-            <div class="block-inner">
-              <p class="comp-num">04</p>
-              <h4>Colorado College</h4>
-              <p>
-                I studied math and statistics at Colorado College on the Block
-                Plan — one class at a time, at a pace that left no room to
-                coast. I failed a few classes before I understood how the system
-                actually worked, then adapted, and my grades caught up to my
-                comfort. Math wasn't quite it for me, so I paired it with the
-                technical drawing and art courses I was already drawn to and
-                helped establish a new major at the school: Innovative Design
-                and Architecture.
-              </p>
-            </div>
-          </div>
-
-          <div class="about-narrative-block" data-block="4">
-            <div class="block-inner">
-              <p class="comp-num">05</p>
-              <h4>The Pivot</h4>
-              <p>
-                I graduated in 2019 thinking architecture was the plan. COVID
-                hit in 2020, sent me back to Milwaukee, and the architecture
-                jobs I was applying for just weren't biting. Grad school wasn't
-                something I wanted to go back for, so instead of waiting it out,
-                I pivoted — locked in and taught myself to code, starting with
-                HTML, then CSS, then Python until I needed real DOM manipulation
-                and landed on JavaScript.
-              </p>
-            </div>
-          </div>
-
-          <div class="about-narrative-block" data-block="5">
-            <div class="block-inner">
-              <p class="comp-num">06</p>
-              <h4>Now</h4>
-              <p>
-                Since 2020 I've been building for the web — mostly front end,
-                increasingly comfortable on the back end. I use AI to move
-                faster while teaching myself the parts I don't yet know, but the
-                judgment about what to build and why still has to be mine. The
-                same instinct that had me taking things apart as a kid is still
-                the one running the show: learn how it actually works, then put
-                it back together better.
-              </p>
-            </div>
+          <div class="snap-card">
+            <span class="snap-card-num">04</span>
+            <h3 class="snap-card-title">
+              Material Constraints <span class="snap-arrow">&rarr;</span> Tech
+              Stack
+            </h3>
+            <p class="snap-card-text">
+              Deciding what a building is made of, and why, before drawing
+              continues. Picking a stack is the same discipline poured into
+              different material.
+            </p>
+            <p class="snap-card-cite">
+              The Bauhaus (founded 1919 under Walter Gropius) built its entire
+              curriculum on merging architectural and material discipline with
+              design — the same integration this is describing.
+            </p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PHOTOGRAPHY — street photography gallery + lightbox
+    ============================================================ -->
+    <section class="photo-section">
+      <div class="photo-inner">
+        <div class="photo-head">
+          <div>
+            <span class="photo-label">Off The Grid</span>
+            <h2 class="photo-title">Photography</h2>
+          </div>
+          <p class="photo-sub">
+            Whatever's around — Milwaukee, Chicago, wherever the light's doing
+            something. The other habit that never quite left.
+          </p>
+        </div>
+
+        <div class="pcar" data-pcar>
+          <button
+            type="button"
+            class="pcar-nav pcar-nav-prev"
+            data-pcar-prev
+            aria-label="Previous photo"
+          >
+            <svg viewBox="0 0 24 24"><polyline points="15 6 9 12 15 18" /></svg>
+          </button>
+          <div class="pcar-viewport" data-pcar-viewport>
+            <div class="pcar-track" data-pcar-track>
+              <button
+                type="button"
+                class="pcar-tile"
+                data-frame-index="0"
+                data-caption="MKE — Frame 01"
+              >
+                <img
+                  src="../assets/photo-placeholders/frame-01.svg"
+                  alt="Placeholder — street photography frame 1"
+                  loading="lazy"
+                />
+                <span class="photo-tile-icon" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" /></svg
+                ></span>
+                <span class="photo-tile-cap">MKE — Frame 01</span>
+              </button>
+
+              <button
+                type="button"
+                class="pcar-tile"
+                data-frame-index="1"
+                data-caption="CHI — Frame 02"
+              >
+                <img
+                  src="../assets/photo-placeholders/frame-02.svg"
+                  alt="Placeholder — street photography frame 2"
+                  loading="lazy"
+                />
+                <span class="photo-tile-icon" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" /></svg
+                ></span>
+                <span class="photo-tile-cap">CHI — Frame 02</span>
+              </button>
+
+              <button
+                type="button"
+                class="pcar-tile"
+                data-frame-index="2"
+                data-caption="MKE — Frame 03"
+              >
+                <img
+                  src="../assets/photo-placeholders/frame-03.svg"
+                  alt="Placeholder — street photography frame 3"
+                  loading="lazy"
+                />
+                <span class="photo-tile-icon" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" /></svg
+                ></span>
+                <span class="photo-tile-cap">MKE — Frame 03</span>
+              </button>
+
+              <button
+                type="button"
+                class="pcar-tile"
+                data-frame-index="3"
+                data-caption="CHI — Frame 04"
+              >
+                <img
+                  src="../assets/photo-placeholders/frame-04.svg"
+                  alt="Placeholder — street photography frame 4"
+                  loading="lazy"
+                />
+                <span class="photo-tile-icon" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" /></svg
+                ></span>
+                <span class="photo-tile-cap">CHI — Frame 04</span>
+              </button>
+
+              <button
+                type="button"
+                class="pcar-tile"
+                data-frame-index="4"
+                data-caption="MKE — Frame 05"
+              >
+                <img
+                  src="../assets/photo-placeholders/frame-05.svg"
+                  alt="Placeholder — street photography frame 5"
+                  loading="lazy"
+                />
+                <span class="photo-tile-icon" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" /></svg
+                ></span>
+                <span class="photo-tile-cap">MKE — Frame 05</span>
+              </button>
+
+              <button
+                type="button"
+                class="pcar-tile"
+                data-frame-index="5"
+                data-caption="MKE — Frame 06"
+              >
+                <img
+                  src="../assets/photo-placeholders/frame-06.svg"
+                  alt="Placeholder — street photography frame 6"
+                  loading="lazy"
+                />
+                <span class="photo-tile-icon" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" /></svg
+                ></span>
+                <span class="photo-tile-cap">MKE — Frame 06</span>
+              </button>
+
+              <button
+                type="button"
+                class="pcar-tile"
+                data-frame-index="6"
+                data-caption="CHI — Frame 07"
+              >
+                <img
+                  src="../assets/photo-placeholders/frame-07.svg"
+                  alt="Placeholder — street photography frame 7"
+                  loading="lazy"
+                />
+                <span class="photo-tile-icon" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" /></svg
+                ></span>
+                <span class="photo-tile-cap">CHI — Frame 07</span>
+              </button>
+
+              <button
+                type="button"
+                class="pcar-tile"
+                data-frame-index="7"
+                data-caption="MKE — Frame 08"
+              >
+                <img
+                  src="../assets/photo-placeholders/frame-08.svg"
+                  alt="Placeholder — street photography frame 8"
+                  loading="lazy"
+                />
+                <span class="photo-tile-icon" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" /></svg
+                ></span>
+                <span class="photo-tile-cap">MKE — Frame 08</span>
+              </button>
+
+              <button
+                type="button"
+                class="pcar-tile"
+                data-frame-index="8"
+                data-caption="CHI — Frame 09"
+              >
+                <img
+                  src="../assets/photo-placeholders/frame-09.svg"
+                  alt="Placeholder — street photography frame 9"
+                  loading="lazy"
+                />
+                <span class="photo-tile-icon" aria-hidden="true"
+                  ><svg viewBox="0 0 24 24">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" /></svg
+                ></span>
+                <span class="photo-tile-cap">CHI — Frame 09</span>
+              </button>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="pcar-nav pcar-nav-next"
+            data-pcar-next
+            aria-label="Next photo"
+          >
+            <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18" /></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Gallery lightbox (built into markup, JS drives state) -->
+      <div
+        class="pg-lightbox"
+        data-pg-lightbox
+        role="dialog"
+        aria-modal="true"
+        aria-label="Photo lightbox"
+      >
+        <button class="pg-lightbox-close" data-pg-close aria-label="Close">
+          <svg viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+        <button
+          class="pg-lightbox-nav pg-lightbox-prev"
+          data-pg-prev
+          aria-label="Previous photo"
+        >
+          <svg viewBox="0 0 24 24"><polyline points="15 6 9 12 15 18" /></svg>
+        </button>
+        <div class="pg-lightbox-img-wrap" data-pg-img-wrap>
+          <img data-pg-img src="" alt="" />
+        </div>
+        <button
+          class="pg-lightbox-nav pg-lightbox-next"
+          data-pg-next
+          aria-label="Next photo"
+        >
+          <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18" /></svg>
+        </button>
+        <span class="pg-lightbox-caption" data-pg-caption></span>
       </div>
     </section>
 
@@ -562,10 +791,10 @@
         <span class="lp-outcome-num">07</span>
         <h2 class="lp-outcome-heading">The Throughline</h2>
         <p class="lp-outcome-text">
-          Systems thinking didn't start with software — it started with
-          skateboards, scholarship programs, and a major I had to invent because
-          the one I wanted didn't exist yet. The work I do now is the same
-          instinct, just with better tools.
+          Systems thinking didn't start with software — it started with floor
+          plans, pattern languages, and asking how people move through space.
+          The work I do now is the same instinct, just with a different
+          material.
         </p>
       </div>
     </section>
@@ -683,8 +912,8 @@
           </div>
           <h2 id="modal-title" class="modal-title">Let's_Connect</h2>
           <p class="modal-sub">
-            Name and email is all I need — everything else is pre-set. Adjust
-            if you like.
+            Name and email is all I need — everything else is pre-set. Adjust if
+            you like.
           </p>
         </div>
         <div class="modal-success" hidden>
@@ -760,12 +989,7 @@
           <fieldset class="modal-chips" data-chip-group="timeline">
             <legend>Timeline</legend>
             <div class="chip-row">
-              <input
-                type="radio"
-                name="timeline"
-                id="tl-asap"
-                value="ASAP"
-              />
+              <input type="radio" name="timeline" id="tl-asap" value="ASAP" />
               <label class="chip" for="tl-asap">ASAP</label>
               <input
                 type="radio"

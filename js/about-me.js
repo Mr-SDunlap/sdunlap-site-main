@@ -12,7 +12,8 @@
 
     animateProgress();
     animateHero();
-    animateJourney();
+    animateSnapshot();
+    animatePhotoHead();
     animateCarousels();
     animateOutcome();
     animateExplore();
@@ -68,47 +69,59 @@
     });
   }
 
-  /* Journey: narrative block reveals + sticky-panel dot sync */
-  function animateJourney() {
-    var blocks = document.querySelectorAll("#am-journey .about-narrative-block");
-    var dots = document.querySelectorAll("#am-journey .about-dot");
-    if (!blocks.length) return;
+  /* Snapshot: lead paragraph + card grid fade in on scroll */
+  function animateSnapshot() {
+    var section = document.querySelector("#am-snapshot");
+    if (!section) return;
 
-    function syncDots(index) {
-      dots.forEach(function (d, i) {
-        d.classList.toggle("active", i === index);
+    var head = section.querySelector(".snap-head");
+    if (head) {
+      gsap.from(head.children, {
+        y: 24,
+        opacity: 0,
+        duration: 0.75,
+        stagger: 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: head,
+          start: "top 78%",
+          toggleActions: "play none none reverse",
+        },
       });
     }
 
-    blocks.forEach(function (block, i) {
-      var inner = block.querySelector(".block-inner");
-      if (inner) {
-        gsap.from(inner, {
-          opacity: 0,
-          y: 30,
-          duration: 0.85,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: block,
-            start: "top 68%",
-            toggleActions: "play none none reverse",
-          },
-        });
-      }
+    var cards = section.querySelectorAll(".snap-card");
+    if (cards.length) {
+      gsap.from(cards, {
+        y: 30,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: section.querySelector(".snap-grid"),
+          start: "top 82%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }
+  }
 
-      if (dots.length) {
-        ScrollTrigger.create({
-          trigger: block,
-          start: "top 52%",
-          end: "bottom 52%",
-          onEnter: function () {
-            syncDots(i);
-          },
-          onEnterBack: function () {
-            syncDots(i);
-          },
-        });
-      }
+  /* Photo section: heading reveal on scroll (carousel animates itself via CSS) */
+  function animatePhotoHead() {
+    var head = document.querySelector(".photo-head");
+    if (!head) return;
+    gsap.from(head.children, {
+      y: 24,
+      opacity: 0,
+      duration: 0.7,
+      stagger: 0.1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: head,
+        start: "top 82%",
+        toggleActions: "play none none reverse",
+      },
     });
   }
 
@@ -237,10 +250,322 @@
   }
 
   /* ============================================================
+     Photo carousel:
+     - duplicate the track once for a seamless loop
+     - desktop: cursor position drives direction (left third = scrub
+       left, right third = scrub right, middle third = stop); idle
+       ambient drift when the cursor isn't over the carousel
+     - tablet/mobile: native scroll-snap + prev/next buttons instead
+       (touch scrolling is the primary interaction there, not hover)
+  ============================================================ */
+  function initPhotoCarousel() {
+    var pcar = document.querySelector("[data-pcar]");
+    var viewport = document.querySelector("[data-pcar-viewport]");
+    var track = document.querySelector("[data-pcar-track]");
+    if (!pcar || !viewport || !track) return;
+
+    if (!track.dataset.duplicated) {
+      Array.prototype.slice.call(track.children).forEach(function (tile) {
+        var clone = tile.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        clone.setAttribute("tabindex", "-1");
+        track.appendChild(clone);
+      });
+      track.dataset.duplicated = "true";
+    }
+
+    var prevBtn = pcar.querySelector("[data-pcar-prev]");
+    var nextBtn = pcar.querySelector("[data-pcar-next]");
+
+    /* --- Desktop: cursor-zone scrub --- */
+    var AMBIENT_SPEED = 0.5; // px/frame drift when the cursor is away
+    var SCRUB_SPEED = 3; // px/frame while hovering the left/right zone
+    var DEAD_ZONE = 1 / 3; // middle fraction of the viewport that halts it
+    var reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    var pos = 0;
+    var halfWidth = 0;
+    var zone = "idle"; // "idle" | "left" | "right" | "mid"
+    var rafId = null;
+
+    function measure() {
+      halfWidth = track.scrollWidth / 2;
+    }
+
+    function frame() {
+      var frozen = viewport.classList.contains("pcar-frozen");
+      var speed = 0;
+      if (!frozen) {
+        if (zone === "left") speed = SCRUB_SPEED;
+        else if (zone === "right") speed = -SCRUB_SPEED;
+        else if (zone === "idle") speed = reduceMotion ? 0 : -AMBIENT_SPEED;
+      }
+      if (speed !== 0 && halfWidth > 0) {
+        pos += speed;
+        if (pos <= -halfWidth) pos += halfWidth;
+        if (pos > 0) pos -= halfWidth;
+        track.style.transform = "translateX(" + pos + "px)";
+      }
+      rafId = requestAnimationFrame(frame);
+    }
+
+    function handleMove(e) {
+      var rect = viewport.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var mid = rect.width / 2;
+      var deadHalf = (rect.width * DEAD_ZONE) / 2;
+      if (x < mid - deadHalf) zone = "left";
+      else if (x > mid + deadHalf) zone = "right";
+      else zone = "mid";
+    }
+
+    function handleLeave() {
+      zone = "idle";
+    }
+
+    function startDesktop() {
+      measure();
+      window.addEventListener("resize", measure);
+      viewport.addEventListener("mousemove", handleMove);
+      viewport.addEventListener("mouseleave", handleLeave);
+      if (!rafId) rafId = requestAnimationFrame(frame);
+    }
+
+    function stopDesktop() {
+      window.removeEventListener("resize", measure);
+      viewport.removeEventListener("mousemove", handleMove);
+      viewport.removeEventListener("mouseleave", handleLeave);
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      zone = "idle";
+      pos = 0;
+      track.style.transform = "";
+    }
+
+    /* --- Tablet / mobile: native scroll-snap + prev/next buttons --- */
+    function tileStep() {
+      var tile = track.querySelector(".pcar-tile");
+      if (!tile) return viewport.clientWidth * 0.8;
+      var gap = parseFloat(getComputedStyle(track).gap) || 0;
+      return tile.getBoundingClientRect().width + gap;
+    }
+
+    function updateNavButtons() {
+      var max = viewport.scrollWidth - viewport.clientWidth - 1;
+      if (prevBtn) prevBtn.disabled = viewport.scrollLeft <= 0;
+      if (nextBtn) nextBtn.disabled = viewport.scrollLeft >= max;
+    }
+
+    function onPrevClick() {
+      viewport.scrollBy({ left: -tileStep(), behavior: "smooth" });
+    }
+
+    function onNextClick() {
+      viewport.scrollBy({ left: tileStep(), behavior: "smooth" });
+    }
+
+    function startMobile() {
+      if (prevBtn) prevBtn.addEventListener("click", onPrevClick);
+      if (nextBtn) nextBtn.addEventListener("click", onNextClick);
+      viewport.addEventListener("scroll", updateNavButtons, {
+        passive: true,
+      });
+      updateNavButtons();
+    }
+
+    function stopMobile() {
+      if (prevBtn) prevBtn.removeEventListener("click", onPrevClick);
+      if (nextBtn) nextBtn.removeEventListener("click", onNextClick);
+      viewport.removeEventListener("scroll", updateNavButtons);
+      viewport.scrollLeft = 0;
+    }
+
+    /* --- Mode switch: matches the 769px breakpoint used elsewhere --- */
+    var mql = window.matchMedia("(min-width: 769px)");
+    var isDesktop = null;
+
+    function applyMode(desktop) {
+      if (desktop === isDesktop) return;
+      isDesktop = desktop;
+      if (desktop) {
+        stopMobile();
+        startDesktop();
+      } else {
+        stopDesktop();
+        startMobile();
+      }
+    }
+
+    applyMode(mql.matches);
+    if (mql.addEventListener) {
+      mql.addEventListener("change", function (e) {
+        applyMode(e.matches);
+      });
+    } else if (mql.addListener) {
+      mql.addListener(function (e) {
+        applyMode(e.matches);
+      });
+    }
+  }
+
+  /* ============================================================
+     Photo gallery lightbox: zoom, pan, prev/next
+  ============================================================ */
+  function initPhotoGallery() {
+    var frameEls = Array.prototype.slice.call(
+      document.querySelectorAll(".pcar-tile[data-frame-index]")
+    );
+    var lightbox = document.querySelector("[data-pg-lightbox]");
+    if (!frameEls.length || !lightbox) return;
+
+    // Unique frame data keyed by data-frame-index — duplicated tiles
+    // (added for the seamless loop) share the same index and are skipped.
+    var frames = [];
+    frameEls.forEach(function (tile) {
+      var idx = parseInt(tile.getAttribute("data-frame-index"), 10);
+      if (frames[idx]) return;
+      var tileImg = tile.querySelector("img");
+      frames[idx] = {
+        src: tileImg.src,
+        alt: tileImg.alt || "",
+        caption: tile.getAttribute("data-caption") || "",
+      };
+    });
+
+    var viewport = document.querySelector("[data-pcar-viewport]");
+    var imgWrap = lightbox.querySelector("[data-pg-img-wrap]");
+    var img = lightbox.querySelector("[data-pg-img]");
+    var caption = lightbox.querySelector("[data-pg-caption]");
+    var closeBtn = lightbox.querySelector("[data-pg-close]");
+    var prevBtn = lightbox.querySelector("[data-pg-prev]");
+    var nextBtn = lightbox.querySelector("[data-pg-next]");
+
+    var current = 0;
+    var zoomed = false;
+
+    function resetZoom() {
+      img.style.width = "";
+      img.style.height = "";
+      img.style.maxWidth = "";
+      img.style.maxHeight = "";
+      imgWrap.style.cursor = "";
+      imgWrap.style.overflow = "";
+      imgWrap.scrollTop = 0;
+      imgWrap.scrollLeft = 0;
+      zoomed = false;
+    }
+
+    function render(index) {
+      var frame = frames[index];
+      img.src = frame.src;
+      img.alt = frame.alt;
+      caption.textContent =
+        "Frame " + (index + 1) + " / " + frames.length + " — " + frame.caption;
+      resetZoom();
+    }
+
+    function open(index) {
+      current = index;
+      render(current);
+      lightbox.classList.add("pg-lightbox-open");
+      if (viewport) viewport.classList.add("pcar-frozen");
+      document.body.style.overflow = "hidden";
+      closeBtn.focus();
+    }
+
+    function close() {
+      lightbox.classList.remove("pg-lightbox-open");
+      if (viewport) viewport.classList.remove("pcar-frozen");
+      document.body.style.overflow = "";
+    }
+
+    function next() {
+      current = (current + 1) % frames.length;
+      render(current);
+    }
+
+    function prev() {
+      current = (current - 1 + frames.length) % frames.length;
+      render(current);
+    }
+
+    frameEls.forEach(function (tile) {
+      tile.addEventListener("click", function () {
+        open(parseInt(tile.getAttribute("data-frame-index"), 10));
+      });
+    });
+
+    closeBtn.addEventListener("click", close);
+    nextBtn.addEventListener("click", next);
+    prevBtn.addEventListener("click", prev);
+
+    lightbox.addEventListener("click", function (e) {
+      if (e.target === lightbox || e.target === imgWrap) close();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (!lightbox.classList.contains("pg-lightbox-open")) return;
+      if (e.key === "Escape") close();
+      else if (e.key === "ArrowRight") next();
+      else if (e.key === "ArrowLeft") prev();
+    });
+
+    img.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (!zoomed) {
+        var natW = Math.max(img.naturalWidth, img.offsetWidth * 1.6);
+        var natH = Math.max(img.naturalHeight, img.offsetHeight * 1.6);
+        img.style.width = natW + "px";
+        img.style.height = natH + "px";
+        img.style.maxWidth = "none";
+        img.style.maxHeight = "none";
+        imgWrap.style.cursor = "grab";
+        imgWrap.style.overflow = "auto";
+        zoomed = true;
+      } else {
+        resetZoom();
+      }
+    });
+
+    var dragging = false,
+      startX,
+      startY,
+      scrollL,
+      scrollT;
+    imgWrap.addEventListener("mousedown", function (e) {
+      if (e.target !== img || !zoomed) return;
+      dragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      scrollL = imgWrap.scrollLeft;
+      scrollT = imgWrap.scrollTop;
+      imgWrap.style.cursor = "grabbing";
+      e.preventDefault();
+    });
+    window.addEventListener("mousemove", function (e) {
+      if (!dragging) return;
+      imgWrap.scrollLeft = scrollL - (e.clientX - startX);
+      imgWrap.scrollTop = scrollT - (e.clientY - startY);
+    });
+    window.addEventListener("mouseup", function () {
+      if (dragging) {
+        dragging = false;
+        imgWrap.style.cursor = zoomed ? "grab" : "";
+      }
+    });
+  }
+
+  /* ============================================================
      Boot
   ============================================================ */
   function init() {
     initCarousels();
+    initPhotoCarousel();
+    initPhotoGallery();
     if (typeof gsap !== "undefined") {
       initGSAP();
     } else {
