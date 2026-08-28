@@ -8,7 +8,7 @@
       "client": "Ouros Designs",
       "status": "Active",
       "toolsUsed": ["Astro JS", "Supabase", "Stripe", "Resend"],
-      "description": "A fully custom e-commerce storefront designed and built end-to-end for Ouros Designs — from brand identity to deployed code.",
+      "description": "A fully custom e-commerce storefront designed and built end-to-end for Ouros Designs, from brand identity to deployed code.",
       "summary": "End-to-end ownership of a Shopify storefront, including custom Liquid templating, responsive UI, and performance-first frontend architecture.",
       "image": "./assets/project-images/ouros-designs/hero-homepage.png",
       "heroImage": "./assets/project-images/ouros-designs/ouros-designs-mobile.jpg",
@@ -33,7 +33,7 @@
             {
               "section-title": "Constraints",
               "button": "Constraints",
-              "description": "The goal was full ownership — no platform lock-in, no recurring SaaS fees eating into margins. Every architectural decision had to balance cost-efficiency with scalability: Astro for static-first performance, Supabase for auth and storage, Stripe for payments, and Resend for transactional email. All self-managed, all under one roof.",
+              "description": "The goal was full ownership, with the client controlling the platform outright and paying no recurring SaaS fees against margin. Every architectural decision had to balance cost-efficiency with scalability: Astro for static-first performance, Supabase for auth and storage, Stripe for payments, and Resend for transactional email. All self-managed, all under one roof.",
               "img": "./assets/project-images/ouros-designs/stack-architecture.svg",
               "img-title": "System Architecture"
             }
@@ -44,7 +44,7 @@
             {
               "section-title": "Approach",
               "button": "Approach",
-              "description": "I approached this as a product problem first — mapping the customer journey before touching the visual layer. Astro's component architecture gave full control over the UI while keeping the build maintainable. The result is a storefront that feels bespoke without sacrificing performance or developer ergonomics.",
+              "description": "I approached this as a product problem first, mapping the customer journey before touching the visual layer. Astro's component architecture gave full control over the UI while keeping the build maintainable. The result is a storefront that feels bespoke without sacrificing performance or developer ergonomics.",
               "img": "./assets/project-images/ouros-designs/philosophy-section.png",
               "img-title": "Design Philosophy"
             }
@@ -57,7 +57,7 @@
             {
               "section-title": "Visual Design",
               "copy-one": "The visual language centers on minimal, high-contrast layouts that let the product photography breathe. Typography and spacing carry most of the brand weight, reducing reliance on decorative elements.",
-              "copy-two": "Every interactive state — hover, focus, cart, checkout — was designed as part of the same system, ensuring a coherent experience from first page load to purchase completion."
+              "copy-two": "Every interactive state (hover, focus, cart, checkout) was designed as part of the same system, ensuring a coherent experience from first page load to purchase completion."
             }
           ]
         },
@@ -80,7 +80,7 @@
       "projectName": "Lumen Technologies",
       "slug": "lumen-technologies",
       "number": "Project 02",
-      "role": "Visual Designer — Developer",
+      "role": "Visual Designer & Developer",
       "client": "Lumen Technologies",
       "status": "Archived",
       "toolsUsed": [
@@ -91,14 +91,14 @@
         "After Effects",
         "ION Interactive"
       ],
-      "description": "A curated archive of interactive digital experiences produced for Lumen Technologies — spanning campaign systems, product tools, and infographic frameworks.",
-      "summary": "Three years of enterprise-scale digital production: interactive infographics, guided product tools, and AI framework visualizations — each built under real deadlines and cross-functional constraints.",
+      "description": "A curated archive of interactive digital experiences produced for Lumen Technologies, spanning campaign systems, product tools, and infographic frameworks.",
+      "summary": "Three years of enterprise-scale digital production: interactive infographics, guided product tools, and AI framework visualizations, each built under real deadlines and cross-functional constraints.",
       "image": "./assets/project-images/cloud-infographic/iMac-mock_cloud-2.jpg",
       "heroImage": "./assets/project-images/cloud-infographic/iMac-mock_cloud-2.jpg",
       "heroImage-alt": "Lumen Technologies Cloud 2.0 Infographic on display.",
       "video": "./assets/project-images/cloud-infographic/visual-id/infographic-scroll.mp4",
       "info": [
-        { "role": "Visual Designer — Developer" },
+        { "role": "Visual Designer & Developer" },
         { "client": "Lumen Technologies" },
         { "tools": ["Figma", "HTML", "CSS", "JavaScript", "After Effects"] },
         { "status": "Archived" },
@@ -118,7 +118,7 @@
             {
               "section-title": "Constraints",
               "button": "Constraints",
-              "description": "Enterprise-scale work means operating under access restrictions, multi-stakeholder reviews, and CMS constraints — all while maintaining output quality and momentum. Each project required extracting enough context from limited information to move decisively.",
+              "description": "Enterprise-scale work means operating under access restrictions, multi-stakeholder reviews, and CMS constraints, all while maintaining output quality and momentum. Each project required extracting enough context from limited information to move decisively.",
               "img": "./assets/project-images/cloud-infographic/infographic-wire.jpg",
               "img-title": "Planning"
             }
@@ -142,7 +142,7 @@
             {
               "section-title": "Visual Design",
               "copy-one": "Each piece in the Lumen archive follows Lumen's brand system while pushing the boundaries of what's achievable within enterprise CMS constraints. Strong hierarchy, motion, and structured layouts communicate technical depth without overwhelming.",
-              "copy-two": "Motion design played a central role across all pieces — reinforcing narrative flow, guiding user attention, and making abstract infrastructure concepts tangible and engaging."
+              "copy-two": "Motion design played a central role across all pieces, reinforcing narrative flow, guiding user attention, and making abstract infrastructure concepts tangible and engaging."
             }
           ]
         },
@@ -155,9 +155,9 @@
           ]
         }
       ],
-      "color-theory": "Lumen's palette balances warm, high-energy tones like coral and orange with cooler hues — teal and aqua — to express both innovation and reliability. The system is designed to feel technically authoritative while remaining visually accessible.",
+      "color-theory": "Lumen's palette balances warm, high-energy tones like coral and orange with cooler hues like teal and aqua to express both innovation and reliability. The system is designed to feel technically authoritative while remaining visually accessible.",
       "color-list": ["lmn-red", "lmn-light-teal", "lmn-teal", "lmn-orange"],
-      "outcome": "Three years of production across campaign systems, product tools, and AI frameworks — each piece positioning Lumen as a technically credible, design-forward enterprise brand.",
+      "outcome": "Three years of production across campaign systems, product tools, and AI frameworks, each piece positioning Lumen as a technically credible, design-forward enterprise brand.",
       "pageUrl": "lumen-project-page.html",
       "liveLink": "https://interact.lumen.com/cloud2-network-evolution",
       "ux-title": "The Approach",

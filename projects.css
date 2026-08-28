@@ -2009,7 +2009,7 @@ body {
 .photo-section {
   position: relative;
   background-color: var(--dark-coffee);
-  padding: 120px 60px;
+  padding: 40px 60px 0px;
 }
 
 .photo-inner {
@@ -2256,7 +2256,7 @@ body {
 
 @media (max-width: 560px) {
   .photo-section {
-    padding: 72px 20px;
+    padding: 72px 20px 0px;
   }
 
   .pcar-track {
@@ -2568,7 +2568,11 @@ body {
 }
 
 .am-carousel-section--dark .am-card-art {
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
 }
 
 .am-card-initial {

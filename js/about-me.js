@@ -464,7 +464,7 @@
       img.src = frame.src;
       img.alt = frame.alt;
       caption.textContent =
-        "Frame " + (index + 1) + " / " + frames.length + " — " + frame.caption;
+        "Frame " + (index + 1) + " / " + frames.length + " \u00b7 " + frame.caption;
       resetZoom();
     }
 

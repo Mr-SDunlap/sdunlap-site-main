@@ -126,8 +126,8 @@
 
   function populatePage(project, allProjects) {
     document.title = project.projectName
-      ? project.projectName + " — SDUNLAP"
-      : "Project — SDUNLAP";
+      ? project.projectName + " | SDUNLAP"
+      : "Project | SDUNLAP";
 
     var infoMap = {};
     if (Array.isArray(project.info)) {
@@ -350,7 +350,7 @@
         inlineWrap.className = "dp-design-inline-img";
         var inlineImg = document.createElement("img");
         inlineImg.src = resolveAsset(vd.images[i]);
-        inlineImg.alt = designTitle + " — visual " + (i + 1);
+        inlineImg.alt = designTitle + " visual " + (i + 1);
         inlineImg.loading = "lazy";
         inlineWrap.appendChild(inlineImg);
         if (lightbox) addLightboxTrigger(inlineWrap, inlineImg, lightbox);
@@ -377,7 +377,7 @@
         imgWrap.className = "dp-design-img-wrap";
         var img = document.createElement("img");
         img.src = resolveAsset(src);
-        img.alt = designTitle + " — visual " + (i + 1);
+        img.alt = designTitle + " visual " + (i + 1);
         img.loading = "lazy";
         if (i === 0) imgWrap.classList.add("dp-img-active");
         imgWrap.appendChild(img);
