@@ -1,0 +1,984 @@
+/* ============================================================
+   OUROS.CSS / Ouros Designs case study
+   Loaded after style.css + projects.css.
+   Shares the site chrome (nav, footer, modal, .dp-explore) and
+   adds the scroll-driven case-study layout under the oc- prefix.
+   ============================================================ */
+
+.oc-eyebrow,
+.oc-num,
+.oc-hero-label,
+.oc-stack-tag,
+.oc-stack-cost,
+.oc-stack-count,
+.oc-scrub-index,
+.oc-decision-tag,
+.oc-rail-hint,
+.oc-frame-url,
+.oc-status-grid span {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/* --- Shared section head ------------------------------------ */
+.oc-num {
+  display: block;
+  font-size: clamp(3.5rem, 7vw, 5.5rem);
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.06);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.oc-num--light {
+  color: rgba(19, 25, 30, 0.07);
+}
+
+.oc-section-head {
+  max-width: 780px;
+  padding: 110px 60px 56px;
+}
+
+.oc-section-head h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--dark-coffee);
+  margin: 0 0 20px;
+  padding-bottom: 0;
+}
+
+.oc-section-head p {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-black);
+  margin: 0;
+}
+
+.oc-section-head--dark h2 {
+  color: var(--white);
+}
+
+.oc-section-head--dark p {
+  color: var(--grey);
+}
+
+/* --- Hero --------------------------------------------------- */
+.oc-hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  background: radial-gradient(
+    120% 95% at 50% 0%,
+    #1c252e 0%,
+    #13191e 50%,
+    #0c1116 100%
+  );
+}
+
+.oc-hero .ambient-bg {
+  z-index: 1;
+}
+
+/* The hero art is a screenshot of the storefront, so it is blurred back
+   into texture, otherwise its own headline competes with this one. */
+.oc-hero-bg {
+  position: absolute;
+  inset: -12%;
+  background-size: cover;
+  background-position: center 60%;
+  opacity: 0.4;
+  filter: blur(7px) saturate(0.75);
+  z-index: 0;
+  will-change: transform;
+}
+
+.oc-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(12, 17, 22, 0.35) 0%,
+    rgba(12, 17, 22, 0.55) 45%,
+    rgba(12, 17, 22, 0.95) 100%
+  );
+}
+
+.oc-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 80px 60px 120px;
+  max-width: 900px;
+}
+
+.oc-hero-label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 20px;
+}
+
+.oc-hero-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(3rem, 9vw, 7.5rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  margin: 0 0 28px;
+  padding-bottom: 0;
+}
+
+.oc-hero-sub {
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--platinum);
+  max-width: 560px;
+  margin: 0 0 32px;
+}
+
+.oc-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 13px;
+  color: var(--grey);
+  letter-spacing: 0.04em;
+}
+
+.oc-hero-meta .oc-dot {
+  opacity: 0.35;
+}
+
+.oc-hero-scroll {
+  position: absolute;
+  right: 60px;
+  bottom: 60px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.oc-hero-scroll-line {
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(to bottom, var(--orange), transparent);
+}
+
+/* --- Premise ------------------------------------------------ */
+.oc-premise {
+  padding: 120px 60px;
+  background-color: var(--glass);
+}
+
+.oc-premise-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.oc-eyebrow {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 28px;
+}
+
+.oc-lede {
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--dark-coffee);
+  margin: 0 0 80px;
+}
+
+.oc-premise-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  border-top: 1px solid var(--platinum);
+  padding-top: 40px;
+}
+
+.oc-premise-num {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--orange);
+  margin-bottom: 14px;
+}
+
+.oc-premise-item h3 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dark-coffee);
+  margin: 0 0 10px;
+  padding-bottom: 0;
+}
+
+.oc-premise-item p {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-black);
+  margin: 0;
+}
+
+/* --- Stack (pinned split) ----------------------------------- */
+.oc-stack {
+  display: flex;
+  align-items: flex-start;
+  background-color: var(--dark-coffee);
+  color: var(--white);
+}
+
+.oc-stack-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 42%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.oc-stack-sticky-inner {
+  padding: 60px 48px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.oc-stack-heading {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin: 0 0 24px;
+  padding-bottom: 0;
+}
+
+.oc-stack-note {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--grey);
+  max-width: 420px;
+  margin: 0;
+}
+
+.oc-stack-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 56px;
+}
+
+.oc-stack-track {
+  width: 100%;
+  max-width: 320px;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.oc-stack-fill {
+  height: 100%;
+  width: 25%;
+  background-color: var(--orange);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.oc-stack-count {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--grey);
+}
+
+.oc-stack-scroll {
+  flex: 1;
+  min-width: 0;
+}
+
+.oc-stack-block {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  padding: 72px 56px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.oc-stack-block-inner {
+  max-width: 520px;
+}
+
+.oc-stack-tag {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 18px;
+}
+
+.oc-stack-block h3 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin: 0 0 20px;
+  padding-bottom: 0;
+}
+
+.oc-stack-block p {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--platinum);
+  margin: 0 0 28px;
+}
+
+.oc-stack-cost {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 9px 16px;
+}
+
+.oc-stack-summary {
+  padding: 96px 56px 120px;
+}
+
+.oc-stack-summary p {
+  max-width: 560px;
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--white);
+  margin: 0;
+}
+
+.oc-stack-summary strong {
+  font-weight: 400;
+  color: var(--orange);
+}
+
+/* --- Foundations -------------------------------------------- */
+.oc-foundations {
+  background-color: var(--glass);
+  padding-bottom: 120px;
+}
+
+.oc-figure {
+  margin: 0;
+}
+
+.oc-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: var(--diamond);
+}
+
+.oc-figure figcaption {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--grey);
+  padding: 16px 60px 0;
+  max-width: 620px;
+}
+
+.oc-figure--wide {
+  padding: 0 60px;
+}
+
+.oc-figure--wide figcaption {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.oc-rules {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  padding: 72px 60px 0;
+  max-width: 1400px;
+}
+
+.oc-rule {
+  border-top: 1px solid var(--platinum);
+  padding-top: 18px;
+}
+
+.oc-rule span {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--orange);
+  margin-bottom: 12px;
+}
+
+.oc-rule p {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-black);
+  margin: 0;
+}
+
+/* --- Screens: pinned scrub frames --------------------------- */
+.oc-screens {
+  background-color: var(--dark-coffee);
+  padding-bottom: 120px;
+}
+
+/* Extra height gives the sticky frame room to scrub its page through. */
+.oc-scrub {
+  position: relative;
+  height: 300vh;
+}
+
+.oc-scrub-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.oc-scrub-layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 56px;
+  align-items: center;
+  width: 100%;
+  padding: 0 60px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.oc-scrub-layout--flip .oc-scrub-caption {
+  order: 2;
+}
+
+.oc-scrub-index {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 16px;
+}
+
+.oc-scrub-caption h3 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin: 0 0 20px;
+  padding-bottom: 0;
+}
+
+.oc-scrub-caption p {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--platinum);
+  margin: 0;
+  max-width: 460px;
+}
+
+.oc-scrub-frame {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: #0c1116;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.oc-frame-chrome {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.oc-frame-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.oc-frame-dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.oc-frame-url {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--grey);
+}
+
+.oc-frame-window {
+  height: 62vh;
+  min-height: 320px;
+  overflow: hidden;
+  position: relative;
+  background-color: #faf9f7;
+}
+
+.oc-frame-window img {
+  display: block;
+  width: 100%;
+  height: auto;
+  will-change: transform;
+}
+
+.oc-states {
+  padding-top: 40px;
+}
+
+.oc-states .oc-figure {
+  padding: 0 60px;
+}
+
+.oc-states figcaption {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* --- Two decisions ------------------------------------------ */
+.oc-decisions {
+  background-color: var(--glass);
+  padding-bottom: 40px;
+}
+
+.oc-decision {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 56px;
+  align-items: center;
+  padding: 60px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.oc-decision--flip .oc-decision-copy {
+  order: 2;
+}
+
+.oc-decision-tag {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 20px;
+}
+
+.oc-decision-copy p {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-black);
+  margin: 0;
+}
+
+.oc-decision .oc-figure figcaption {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* --- Mobile rail (horizontal) ------------------------------- */
+/* Fills the viewport while pinned, so nothing below can creep into view
+   behind the filmstrip. */
+.oc-rail {
+  background-color: var(--dark-coffee);
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.oc-rail-viewport {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.oc-rail-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+/* While GSAP drives the track, native horizontal scrolling is off. */
+.oc-rail-viewport.oc-rail-pinned {
+  overflow-x: hidden;
+}
+
+.oc-rail-track {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding: 110px 60px;
+  width: max-content;
+}
+
+.oc-rail-intro {
+  width: 360px;
+  flex: none;
+  align-self: center;
+}
+
+.oc-rail-intro h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin: 0 0 20px;
+  padding-bottom: 0;
+}
+
+.oc-rail-intro p {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--platinum);
+  margin: 0 0 28px;
+}
+
+.oc-rail-hint {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.oc-rail-item {
+  flex: none;
+  width: 300px;
+  margin: 0;
+}
+
+.oc-phone {
+  height: 58vh;
+  min-height: 380px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: #faf9f7;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+
+.oc-phone img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.oc-rail-item figcaption {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12px;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  color: var(--grey);
+  padding-top: 16px;
+}
+
+.oc-rail-item figcaption b {
+  font-weight: 700;
+  color: var(--white);
+}
+
+/* --- Status ------------------------------------------------- */
+/* Lands straight out of the pinned rail, so it holds a full screen on its
+   own. No pinning, no reveal, nothing that can be scrolled past. */
+.oc-status {
+  background-color: var(--dark-coffee);
+  color: var(--white);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.oc-status-inner {
+  padding: 120px 60px;
+  max-width: 860px;
+}
+
+.oc-status-heading {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin: 0 0 24px;
+  padding-bottom: 0;
+}
+
+.oc-status-text {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--platinum);
+  margin: 0 0 48px;
+}
+
+.oc-status-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 32px;
+  margin-bottom: 48px;
+}
+
+.oc-status-grid span {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 10px;
+}
+
+.oc-status-grid p {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--platinum);
+  margin: 0;
+}
+
+.oc-status-cta {
+  background-color: var(--white);
+  color: var(--dark-coffee);
+  display: inline-flex;
+  width: auto;
+}
+
+.oc-status-cta .arrow .tic,
+.oc-status-cta .arrow .line {
+  background-color: var(--dark-coffee);
+}
+
+/* --- Reveal (progressively enhanced by GSAP) ---------------- */
+.oc-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.oc-no-gsap .oc-reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 1100px) {
+  .oc-scrub-layout,
+  .oc-decision {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .oc-scrub-layout--flip .oc-scrub-caption,
+  .oc-decision--flip .oc-decision-copy {
+    order: 0;
+  }
+
+  .oc-frame-window {
+    height: 46vh;
+  }
+
+  .oc-rules {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .oc-section-head,
+  .oc-premise,
+  .oc-status-inner {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .oc-status {
+    min-height: 0;
+    display: block;
+  }
+
+  .oc-status-inner {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .oc-hero-content {
+    padding: 60px 24px 100px;
+  }
+
+  .oc-hero-scroll {
+    display: none;
+  }
+
+  .oc-premise-grid,
+  .oc-status-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .oc-lede {
+    margin-bottom: 48px;
+  }
+
+  /* Stack: stop pinning, stack vertically */
+  .oc-stack {
+    flex-direction: column;
+  }
+
+  .oc-stack-sticky {
+    position: relative;
+    height: auto;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .oc-stack-sticky-inner {
+    padding: 80px 24px 56px;
+  }
+
+  .oc-stack-indicator {
+    display: none;
+  }
+
+  .oc-stack-block {
+    min-height: 0;
+    padding: 48px 24px;
+  }
+
+  .oc-stack-summary {
+    padding: 56px 24px 80px;
+  }
+
+  /* Screens: unpin the frames, show them whole */
+  .oc-scrub {
+    height: auto;
+  }
+
+  .oc-scrub-sticky {
+    position: relative;
+    height: auto;
+    display: block;
+    padding: 56px 0;
+  }
+
+  .oc-scrub-layout {
+    padding: 0 24px;
+  }
+
+  .oc-frame-window {
+    height: 60vh;
+    min-height: 300px;
+    overflow-y: auto;
+  }
+
+  .oc-figure--wide,
+  .oc-states .oc-figure,
+  .oc-decision {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .oc-figure figcaption {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .oc-rules {
+    padding: 56px 24px 0;
+  }
+
+  .oc-rail {
+    min-height: 0;
+    display: block;
+  }
+
+  .oc-rail-track {
+    padding: 80px 24px;
+    gap: 32px;
+  }
+
+  .oc-rail-intro {
+    width: 280px;
+  }
+
+  .oc-rail-item {
+    width: 240px;
+  }
+
+  .oc-phone {
+    height: 50vh;
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 600px) {
+  .oc-rules {
+    grid-template-columns: 1fr;
+  }
+
+  .oc-rail-intro {
+    width: 260px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oc-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .oc-hero-bg {
+    inset: 0;
+  }
+}
