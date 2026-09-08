@@ -9,7 +9,7 @@
       "status": "Active",
       "toolsUsed": ["Astro JS", "Supabase", "Stripe", "Resend"],
       "description": "A fully custom e-commerce storefront designed and built end-to-end for Ouros Designs, from brand identity to deployed code.",
-      "summary": "End-to-end ownership of a Shopify storefront, including custom Liquid templating, responsive UI, and performance-first frontend architecture.",
+      "summary": "End-to-end ownership of a custom storefront built on Astro and Supabase, with Stripe payments and Resend transactional email, deliberately free of platform lock-in and recurring SaaS fees.",
       "image": "./assets/project-images/ouros-designs/hero-homepage.png",
       "heroImage": "./assets/project-images/ouros-designs/ouros-designs-mobile.jpg",
       "heroDevice": "./assets/project-images/ouros-designs/hero-homepage.png",
@@ -22,8 +22,10 @@
       ],
       "tool-kit": {
         "Figma": ["Visual Prototyping", ".s-figma"],
-        "Shopify": ["E-commerce Platform", ".s-shopify"],
-        "Liquid": ["Templating Language", ".s-html"],
+        "Astro": ["Static-First Framework", ".s-astro"],
+        "Supabase": ["Auth, Database & Storage", ".s-supabase"],
+        "Stripe": ["Payments", ".s-stripe"],
+        "Resend": ["Transactional Email", ".s-resend"],
         "CSS": ["Styling Language", ".s-css"],
         "JavaScript": ["Interactivity", ".s-js"]
       },
@@ -70,7 +72,7 @@
           ]
         }
       ],
-      "outcome": "A deployed, production-ready storefront that reflects the brand's identity while delivering a fast, conversion-optimized shopping experience.",
+      "outcome": "A deployed storefront with brand identity, checkout, and delivery in place and the initial catalog of downloadable assets designed and produced. Currently pre-launch.",
       "ux-title": "The Task",
       "design-title": "The Design",
       "outcome-title": "The Outcome",
@@ -80,7 +82,7 @@
       "projectName": "Lumen Technologies",
       "slug": "lumen-technologies",
       "number": "Project 02",
-      "role": "Visual Designer & Developer",
+      "role": "Web Designer",
       "client": "Lumen Technologies",
       "status": "Archived",
       "toolsUsed": [
@@ -92,13 +94,13 @@
         "ION Interactive"
       ],
       "description": "A curated archive of interactive digital experiences produced for Lumen Technologies, spanning campaign systems, product tools, and infographic frameworks.",
-      "summary": "Three years of enterprise-scale digital production: interactive infographics, guided product tools, and AI framework visualizations, each built under real deadlines and cross-functional constraints.",
+      "summary": "Three and a half years of enterprise-scale digital production: interactive infographics, guided product tools, and AI framework visualizations, each built under real deadlines and cross-functional constraints.",
       "image": "./assets/project-images/cloud-infographic/iMac-mock_cloud-2.jpg",
       "heroImage": "./assets/project-images/cloud-infographic/iMac-mock_cloud-2.jpg",
       "heroImage-alt": "Lumen Technologies Cloud 2.0 Infographic on display.",
       "video": "./assets/project-images/cloud-infographic/visual-id/infographic-scroll.mp4",
       "info": [
-        { "role": "Visual Designer & Developer" },
+        { "role": "Web Designer" },
         { "client": "Lumen Technologies" },
         { "tools": ["Figma", "HTML", "CSS", "JavaScript", "After Effects"] },
         { "status": "Archived" },
@@ -157,7 +159,7 @@
       ],
       "color-theory": "Lumen's palette balances warm, high-energy tones like coral and orange with cooler hues like teal and aqua to express both innovation and reliability. The system is designed to feel technically authoritative while remaining visually accessible.",
       "color-list": ["lmn-red", "lmn-light-teal", "lmn-teal", "lmn-orange"],
-      "outcome": "Three years of production across campaign systems, product tools, and AI frameworks, each piece positioning Lumen as a technically credible, design-forward enterprise brand.",
+      "outcome": "Three and a half years of production across campaign systems, product tools, and AI frameworks, each piece positioning Lumen as a technically credible, design-forward enterprise brand.",
       "pageUrl": "lumen-project-page.html",
       "liveLink": "https://interact.lumen.com/cloud2-network-evolution",
       "ux-title": "The Approach",

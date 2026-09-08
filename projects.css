@@ -2629,3 +2629,363 @@ body {
     width: clamp(140px, 42vw, 180px);
   }
 }
+
+/* ============================================================
+   PROJECT 01 — SOLUTION FINDER (light, process-led)
+   ============================================================ */
+.lp-project-solution {
+  background-color: var(--white);
+}
+
+.lp-project-solution .lp-project-num {
+  color: rgba(0, 0, 0, 0.09);
+}
+
+.lp-project-solution .lp-project-title {
+  color: var(--dark-coffee);
+}
+
+.lp-project-solution .lp-project-desc {
+  color: var(--text-black);
+}
+
+.lp-project-solution .lp-tag {
+  color: var(--dark-coffee);
+  border-color: var(--platinum);
+  background: transparent;
+}
+
+.lp-project-solution .lp-tag--accent {
+  color: var(--white);
+  background-color: var(--dark-coffee);
+  border-color: var(--dark-coffee);
+}
+
+/* Intro block runs full width rather than the two-column project grid */
+.lp-project-inner--stacked {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.lp-project-solution .lp-project-desc {
+  max-width: 62ch;
+}
+
+/* ---------- Process steps ---------- */
+.sf-process {
+  max-width: 1200px;
+  margin: 72px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.sf-step {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 40px;
+  align-items: start;
+  padding-top: 32px;
+  border-top: 1px solid var(--platinum);
+}
+
+.sf-step--full {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.sf-step-num {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--orange);
+  padding-top: 6px;
+}
+
+.sf-step--full .sf-step-num {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.sf-step-body {
+  max-width: 68ch;
+}
+
+.sf-step-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--dark-coffee);
+  margin-bottom: 18px;
+}
+
+.sf-step-body p {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-black);
+}
+
+.sf-step-body p + p {
+  margin-top: 16px;
+}
+
+.sf-step-body em {
+  font-style: italic;
+  color: var(--dark-coffee);
+}
+
+/* ---------- Three directions ---------- */
+.sf-directions {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.sf-direction {
+  display: flex;
+  flex-direction: column;
+  background: var(--glass);
+  border: 1px solid var(--platinum);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 0;
+}
+
+/* Override the collage crop: these are mockups, not photography */
+.sf-direction img {
+  width: 100%;
+  height: auto;
+  max-height: 340px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  border-bottom: 1px solid var(--platinum);
+  background: var(--white);
+}
+
+.sf-direction:hover img {
+  transform: none;
+}
+
+.sf-direction figcaption {
+  padding: 20px 22px 24px;
+}
+
+.sf-direction-label {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dark-coffee);
+  margin-bottom: 10px;
+}
+
+.sf-direction figcaption p {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-black);
+}
+
+/* ---------- Aside note ---------- */
+.sf-note {
+  margin-top: 32px;
+  padding: 18px 22px;
+  border-left: 2px solid var(--orange);
+  background: var(--glass);
+  max-width: 68ch;
+}
+
+.sf-note-label {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+
+.sf-note p {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-black);
+}
+
+/* ---------- Shipped ---------- */
+.sf-shipped {
+  max-width: 1200px;
+  margin: 64px auto 0;
+  border: 1px solid var(--platinum);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.sf-shipped img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.sf-shipped figcaption {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--grey);
+  padding: 14px 20px;
+  border-top: 1px solid var(--platinum);
+  background: var(--glass);
+}
+
+.sf-cta-row {
+  max-width: 1200px;
+  margin: 36px auto 0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .sf-directions {
+    grid-template-columns: 1fr;
+  }
+  .sf-direction img {
+    max-height: 420px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sf-process {
+    margin-top: 48px;
+    gap: 48px;
+  }
+  .sf-step {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .sf-step-num {
+    padding-top: 0;
+  }
+  .sf-step-body p {
+    font-size: 16px;
+  }
+  .sf-direction img {
+    max-height: 300px;
+  }
+}
+
+/* Full-size links + responsive note media */
+.sf-fullsize {
+  display: inline-block;
+  margin-top: 14px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dark-coffee);
+  text-decoration: none;
+  border-bottom: 1px solid var(--platinum);
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.sf-fullsize:hover {
+  color: var(--orange);
+  border-color: var(--orange);
+}
+
+.sf-note--media {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 28px;
+  align-items: start;
+  max-width: 860px;
+}
+
+.sf-note-img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  border: 1px solid var(--platinum);
+  border-radius: 4px;
+  background: var(--white);
+}
+
+@media (max-width: 768px) {
+  .sf-note--media {
+    grid-template-columns: 1fr;
+  }
+  .sf-note-img {
+    max-width: 260px;
+  }
+}
+
+.sf-cta-note {
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--grey);
+  max-width: 56ch;
+}
+
+.lp-project-solution code {
+  font-family: "Space Grotesk", ui-monospace, monospace;
+  font-size: 0.9em;
+  background: var(--glass);
+  border: 1px solid var(--platinum);
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
+/* Product Finder — spec sheet sits on a light ground, not cropped */
+.sf-spec img {
+  max-height: none;
+  background: var(--white);
+}
+
+.lp-project-finder .sf-step {
+  border-top-color: var(--platinum);
+}
+
+.lp-project-finder .sf-step-title,
+.lp-project-finder .sf-direction-label {
+  color: var(--dark-coffee);
+}
+
+.lp-project-finder .sf-step-body p,
+.lp-project-finder .sf-direction figcaption p,
+.lp-project-finder .sf-note p {
+  color: var(--text-black);
+}
+
+.lp-project-finder .sf-direction {
+  background: var(--white);
+}
+
+.lp-project-finder .sf-note,
+.lp-project-finder .sf-shipped figcaption {
+  background: var(--white);
+}
+
+.lp-project-finder code {
+  font-family: "Space Grotesk", ui-monospace, monospace;
+  font-size: 0.9em;
+  background: var(--white);
+  border: 1px solid var(--platinum);
+  border-radius: 3px;
+  padding: 1px 5px;
+}
