@@ -7,3 +7,7 @@
 
 /design-systems/*
   X-Robots-Tag: noindex, nofollow
+
+/assets/email/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
