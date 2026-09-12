@@ -8,6 +8,15 @@
 /design-systems/*
   X-Robots-Tag: noindex, nofollow
 
-/assets/email/*
+# Listed one file at a time, NOT /assets/email/*. A wildcard also matches paths
+# that do not exist yet, and this site answers those with its HTML catch-all at
+# HTTP 200 - so a request for a not-yet-deployed mark gets that HTML cached at
+# the edge under `immutable`, i.e. stuck for a year. Add a line here when you
+# publish a new mark; these URLs are permanent, so the list only ever grows.
+/assets/email/mark-v1.png
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+/assets/email/mark-v2.png
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
